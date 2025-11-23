@@ -65,11 +65,11 @@ export default async function ArticlePage({ params }: PageProps) {
 
         {/* Article Header */}
         <header className="mb-12">
-          <h1 className="font-serif text-4xl font-bold text-primary md:text-5xl lg:text-6xl mb-6">
+          <h1 className="font-serif text-4xl font-bold text-primary md:text-5xl lg:text-6xl mb-4">
             {article.metadata.title}
           </h1>
           
-          <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground font-sans">
+          <div className="flex flex-wrap items-center gap-2 text-base text-foreground font-sans mb-8">
             <span>By {article.metadata.author}</span>
             <span>•</span>
             <time dateTime={article.metadata.date}>
@@ -80,6 +80,10 @@ export default async function ArticlePage({ params }: PageProps) {
               })}
             </time>
           </div>
+          
+          <h1 className="font-serif text-4xl font-bold text-primary md:text-5xl lg:text-6xl mb-8">
+            {article.metadata.title}
+          </h1>
         </header>
 
         {/* Article Content */}

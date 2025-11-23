@@ -65,6 +65,12 @@ export function ArticleContent({ content }: ArticleContentProps) {
               {children}
             </blockquote>
           ),
+          em: ({ children }) => (
+            <em className="italic text-foreground">{children}</em>
+          ),
+          strong: ({ children }) => (
+            <strong className="font-bold text-foreground">{children}</strong>
+          ),
           h2: ({ children }) => (
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary mt-12 mb-6">
               {children}

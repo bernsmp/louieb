@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isVideosOpen, setIsVideosOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -81,54 +80,17 @@ export function Header() {
             Articles
           </Link>
 
-          {/* Videos Dropdown - Better styling */}
-          <div className="relative">
-            <button
-              onClick={() => setIsVideosOpen(!isVideosOpen)}
-              className={cn(
-                "rounded-lg px-4 py-2 text-sm font-medium transition-colors",
-                scrolled 
-                  ? "text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900"
-                  : "text-neutral-200 hover:bg-white/10 hover:text-white"
-              )}
-            >
-              Videos
-              <svg
-                className={cn(
-                  "ml-1 inline-block h-4 w-4 transition-transform",
-                  isVideosOpen && "rotate-180"
-                )}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </button>
-            {isVideosOpen && (
-              <div className="absolute left-0 top-full mt-1 w-48 rounded-lg border border-neutral-200 bg-white py-1 shadow-lg">
-                <Link
-                  href="/videos"
-                  className="block px-4 py-2 text-sm text-neutral-700 transition-colors hover:bg-neutral-100"
-                  onClick={() => setIsVideosOpen(false)}
-                >
-                  All Videos
-                </Link>
-                <Link
-                  href="/featured-videos"
-                  className="block px-4 py-2 text-sm text-neutral-700 transition-colors hover:bg-neutral-100"
-                  onClick={() => setIsVideosOpen(false)}
-                >
-                  Featured Videos
-                </Link>
-              </div>
+          <Link
+            href="/videos"
+            className={cn(
+              "rounded-lg px-4 py-2 text-sm font-medium transition-colors",
+              scrolled 
+                ? "text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900"
+                : "text-neutral-200 hover:bg-white/10 hover:text-white"
             )}
-          </div>
+          >
+            Videos
+          </Link>
 
           <Link
             href="/newsletter"
@@ -207,14 +169,7 @@ export function Header() {
               className="rounded-lg px-4 py-3 text-base font-medium text-neutral-700 transition-colors hover:bg-neutral-100"
               onClick={() => setIsMenuOpen(false)}
             >
-              All Videos
-            </Link>
-            <Link
-              href="/featured-videos"
-              className="rounded-lg px-4 py-3 text-base font-medium text-neutral-700 transition-colors hover:bg-neutral-100"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Featured Videos
+              Videos
             </Link>
             <Link
               href="/newsletter"
