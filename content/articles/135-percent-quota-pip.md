@@ -6,12 +6,6 @@ author: "Louie Bernstein"
 date: "2025-01-23"
 ---
 
-# **135% of Quota and Put on a PIP: Why Written Accountabilities Save Sales Teams**
-
-By Louie Bernstein•November 23rd, 2025
-
-# **135% of Quota and Put on a PIP: Why Written Accountabilities Save Sales Teams**
-
 ### **Key Takeaways:**
 
 * 80% of $1M-$10M ARR companies skip documentation when hiring or promoting sales reps  
