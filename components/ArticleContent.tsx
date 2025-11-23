@@ -10,7 +10,7 @@ interface ArticleContentProps {
 
 export function ArticleContent({ content }: ArticleContentProps) {
   return (
-    <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-primary prose-h1:text-4xl prose-h1:md:text-5xl prose-h1:lg:text-6xl prose-h2:text-3xl prose-h2:md:text-4xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-2xl prose-h3:md:text-3xl prose-p:text-base prose-p:md:text-lg prose-p:leading-relaxed prose-a:text-[#0966c2] prose-a:no-underline hover:prose-a:underline prose-strong:font-bold prose-strong:text-foreground prose-ul:list-disc prose-ol:list-decimal prose-li:my-2 prose-blockquote:border-l-4 prose-blockquote:border-[#0966c2] prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground prose-img:rounded-lg prose-img:shadow-lg prose-img:my-8">
+    <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-foreground prose-h1:text-4xl prose-h1:md:text-5xl prose-h1:lg:text-6xl prose-h2:text-3xl prose-h2:md:text-4xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-2xl prose-h3:md:text-3xl prose-p:text-base prose-p:md:text-lg prose-p:leading-relaxed prose-p:my-6 prose-a:text-[#0966c2] prose-a:no-underline hover:prose-a:underline prose-strong:font-bold prose-strong:text-foreground prose-ul:list-disc prose-ol:list-decimal prose-li:my-2 prose-blockquote:border-l-4 prose-blockquote:border-[#0966c2] prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground prose-blockquote:my-8 prose-img:rounded-lg prose-img:shadow-lg prose-img:my-8">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
@@ -61,7 +61,7 @@ export function ArticleContent({ content }: ArticleContentProps) {
             );
           },
           blockquote: ({ children }) => (
-            <blockquote className="border-l-4 border-[#0966c2] pl-4 italic text-muted-foreground my-6">
+            <blockquote className="border-l-4 border-[#0966c2] pl-4 italic text-muted-foreground my-8">
               {children}
             </blockquote>
           ),
@@ -71,13 +71,16 @@ export function ArticleContent({ content }: ArticleContentProps) {
           strong: ({ children }) => (
             <strong className="font-bold text-foreground">{children}</strong>
           ),
+          p: ({ children }) => (
+            <p className="my-6 text-base md:text-lg leading-relaxed">{children}</p>
+          ),
           h2: ({ children }) => (
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary mt-12 mb-6">
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mt-12 mb-6">
               {children}
             </h2>
           ),
           h3: ({ children }) => (
-            <h3 className="font-serif text-2xl md:text-3xl font-bold text-primary mt-8 mb-4">
+            <h3 className="font-serif text-2xl md:text-3xl font-bold text-foreground mt-8 mb-4">
               {children}
             </h3>
           ),
