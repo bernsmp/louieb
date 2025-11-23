@@ -3,7 +3,7 @@ title: "135% of Quota and Put on a PIP: Why Written Accountabilities Save Sales 
 description: "A salesperson hits 135% of quota, then gets put on a PIP after a role change. Learn why written Position Contracts prevent this management failure and save sales teams from costly turnover and legal issues."
 keywords: "position contract, sales accountability, job descriptions, performance improvement plan, sales team management, fractional sales leader, sales documentation"
 author: "Louie Bernstein"
-date: "2025-01-23"
+date: "2025-11-23"
 ---
 
 ### **Key Takeaways:**
