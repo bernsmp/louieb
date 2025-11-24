@@ -32,27 +32,36 @@ export default function ArticlesPage() {
                 href={`/articles/${article.metadata.slug}`}
                 className="group rounded-2xl border-2 border-border bg-card p-8 transition-all hover:border-[#0966c2] hover:shadow-lg"
               >
-                <div className="mb-4 flex h-48 items-center justify-center rounded-lg bg-gradient-to-br from-[#0966c2]/10 to-[#0855a3]/10">
-                  <div className="text-center p-4">
-                    <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-[#0966c2] flex items-center justify-center">
-                      <svg
-                        className="w-8 h-8 text-white"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                        />
-                      </svg>
+                <div className="mb-4 flex h-48 items-center justify-center rounded-lg bg-gradient-to-br from-[#0966c2]/10 to-[#0855a3]/10 overflow-hidden relative">
+                  {article.metadata.image ? (
+                    <Image
+                      src={article.metadata.image}
+                      alt={article.metadata.title}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="text-center p-4">
+                      <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-[#0966c2] flex items-center justify-center">
+                        <svg
+                          className="w-8 h-8 text-white"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                          />
+                        </svg>
+                      </div>
+                      <p className="font-sans text-xs text-muted-foreground uppercase tracking-wide">
+                        Article
+                      </p>
                     </div>
-                    <p className="font-sans text-xs text-muted-foreground uppercase tracking-wide">
-                      Article
-                    </p>
-                  </div>
+                  )}
                 </div>
                 <h2 className="mt-6 font-sans text-2xl font-bold text-foreground group-hover:text-[#0966c2] transition-colors">
                   {article.metadata.title}
