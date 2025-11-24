@@ -77,7 +77,7 @@ Before you promote someone internally. Before you restructure your team. I've se
 ![Position Contract ROI Infographic: 2 Hours Now Saves 20+ Hours Later](/images/position-contract-roi-infographic.png)
 *The ROI of Position Contracts: Upfront investment vs. long-term cost of skipping role documentation.*
 
-Related Reading: [How to Build a Sales Process That Scales](https://www.louiebernstein.com/articles) | [The Founder's Sales System Course](https://www.louiebernstein.com/course)
+
 
 **A Position Contract includes:**
 
@@ -265,12 +265,7 @@ When you work with me, you'll learn how to document what you expect so your team
 
 ---
 
-## **Related Articles**
 
-*   [How to Build a Sales Process That Scales](https://www.louiebernstein.com/articles)
-*   [The One-on-One Meeting Framework Every Sales Manager Needs](https://www.louiebernstein.com/articles)
-*   [Why Your Sales Team Needs Clear Job Descriptions](https://www.louiebernstein.com/articles)
-*   [The TSP Feedback Model: Truthful, Specific, Positive](https://www.louiebernstein.com/articles)
 
 ## **Download the Position Contract Template**
 
