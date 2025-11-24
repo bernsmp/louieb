@@ -30,4 +30,4 @@ User-agent: Googlebot
 Allow: /
 
 # Sitemap
-Sitemap: http://louiebernstein.com/sitemap.xml
+Sitemap: https://louiebernstein.com/sitemap.xml
