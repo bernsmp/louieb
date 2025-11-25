@@ -7,7 +7,7 @@ This document outlines the SEO and AEO (Answer Engine Optimization) metadata imp
 1. `https://youtube.com/shorts/ScygjngNNY4` - Build This Before Hiring Salespeople
 2. `https://youtube.com/shorts/LgaJZ4R6Y-4` - My 1st Sales Hire Mistake
 3. `https://youtube.com/shorts/40BopNISisE` - Build The System Before The Team
-4. `https://youtube.com/shorts/Mc7TZt_YW2E` - The Secret Email Step That Gets Replies
+4. `https://youtube.com/shorts/epPZ4qZBo5I` - The Secret Email Step That Gets Replies
 
 ## SEO/AEO Metadata Implemented
 

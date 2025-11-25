@@ -36,7 +36,7 @@ const featuredVideos = [
     isShort: true,
   },
   {
-    id: "Mc7TZt_YW2E",
+    id: "epPZ4qZBo5I",
     title: "The Secret Email Step That Gets Replies",
     description:
       "A tactical email outreach tip to increase your response rates immediately. Simple but effective.",
