@@ -285,7 +285,7 @@ const defaultSettings: SiteSettings = {
   newsletterPage: {
     headline: 'The Sunday Starter',
     tagline: 'Delivered to Accelerate Your Success',
-    description: 'Every Sunday, get actionable sales insights, strategies, and tips delivered straight to your LinkedIn inbox. Join thousands of sales professionals who start their week right with The Sunday Starter.',
+    description: 'Every Sunday, get actionable Business-Life insights, strategies, and tips delivered straight to your LinkedIn inbox. Join thousands of professionals who start their week right with The Sunday Starter.',
     ctaText: 'Subscribe on LinkedIn',
     benefitsHeadline: "What You'll Get",
     benefits: [
