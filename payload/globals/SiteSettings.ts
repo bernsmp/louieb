@@ -258,6 +258,362 @@ export const SiteSettings: GlobalConfig = {
         },
       ],
     },
+    // Services Section
+    {
+      name: 'services',
+      type: 'group',
+      label: 'Services Section',
+      fields: [
+        {
+          name: 'headline',
+          type: 'text',
+          defaultValue: 'What I Offer',
+        },
+        {
+          name: 'subheadline',
+          type: 'text',
+          defaultValue: 'Comprehensive sales leadership services designed to transform your team',
+        },
+        {
+          name: 'items',
+          type: 'array',
+          label: 'Service Items',
+          minRows: 1,
+          maxRows: 8,
+          fields: [
+            { name: 'title', type: 'text', required: true },
+            { name: 'description', type: 'textarea', required: true },
+            { name: 'icon', type: 'text', admin: { description: 'Icon path (e.g., /icons/business-team.svg)' } },
+            { name: 'highlight', type: 'checkbox', defaultValue: false },
+          ],
+        },
+      ],
+    },
+    // Process Section
+    {
+      name: 'process',
+      type: 'group',
+      label: 'Process Section (How It Works)',
+      fields: [
+        {
+          name: 'headline',
+          type: 'text',
+          defaultValue: 'How It Works',
+        },
+        {
+          name: 'subheadline',
+          type: 'text',
+          defaultValue: 'A proven process that delivers measurable results',
+        },
+        {
+          name: 'steps',
+          type: 'array',
+          label: 'Process Steps',
+          minRows: 1,
+          maxRows: 6,
+          fields: [
+            { name: 'number', type: 'text', required: true, admin: { description: 'Step number (e.g., 01, 02)' } },
+            { name: 'title', type: 'text', required: true },
+            { name: 'description', type: 'textarea', required: true },
+          ],
+        },
+      ],
+    },
+    // FAQ Section
+    {
+      name: 'faq',
+      type: 'group',
+      label: 'FAQ Section',
+      fields: [
+        {
+          name: 'headline',
+          type: 'text',
+          defaultValue: 'Frequently Asked Questions',
+        },
+        {
+          name: 'subheadline',
+          type: 'text',
+          defaultValue: 'Everything you need to know about fractional sales leadership',
+        },
+        {
+          name: 'items',
+          type: 'array',
+          label: 'FAQ Items',
+          minRows: 1,
+          maxRows: 15,
+          fields: [
+            { name: 'question', type: 'text', required: true },
+            { name: 'answer', type: 'textarea', required: true },
+          ],
+        },
+      ],
+    },
+    // Awards Section
+    {
+      name: 'awards',
+      type: 'group',
+      label: 'Awards Section',
+      fields: [
+        {
+          name: 'headline',
+          type: 'text',
+          defaultValue: 'Recognized Excellence',
+        },
+        {
+          name: 'subheadline',
+          type: 'text',
+          defaultValue: 'Award-winning sales consulting and leadership',
+        },
+        {
+          name: 'imageUrl',
+          type: 'text',
+          label: 'Awards Image URL',
+          defaultValue: 'https://d1yei2z3i6k35z.cloudfront.net/1671832/64e3c2e5505e3_fourawards.png',
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+          defaultValue: 'Louie Bernstein has received four prestigious awards for excellence in sales consulting and leadership.',
+        },
+      ],
+    },
+    // Testimonials Section (header only - items managed in Testimonials collection)
+    {
+      name: 'testimonialsSection',
+      type: 'group',
+      label: 'Testimonials Section Header',
+      fields: [
+        {
+          name: 'headline',
+          type: 'text',
+          defaultValue: 'What Clients Say',
+        },
+        {
+          name: 'subheadline',
+          type: 'text',
+          defaultValue: 'Real results from real businesses',
+        },
+      ],
+    },
+    // Footer
+    {
+      name: 'footer',
+      type: 'group',
+      label: 'Footer',
+      fields: [
+        {
+          name: 'tagline',
+          type: 'text',
+          defaultValue: 'Fractional Sales Leader',
+        },
+        {
+          name: 'slogan',
+          type: 'text',
+          defaultValue: 'Less Spend. More Sales.',
+        },
+        {
+          name: 'copyrightName',
+          type: 'text',
+          defaultValue: 'Louie Bernstein',
+        },
+      ],
+    },
+    // Videos Page
+    {
+      name: 'videosPage',
+      type: 'group',
+      label: 'Videos Page',
+      fields: [
+        {
+          name: 'headline',
+          type: 'text',
+          defaultValue: 'Sales Videos',
+        },
+        {
+          name: 'subheadline',
+          type: 'text',
+          defaultValue: 'The most popular sales training content, handpicked for you',
+        },
+        {
+          name: 'playlistId',
+          type: 'text',
+          defaultValue: 'PL7HfhnqHyzRmGDUMDhcSgZW8pR7DhW_Hl',
+          admin: { description: 'Main YouTube playlist ID' },
+        },
+        {
+          name: 'featuredVideos',
+          type: 'array',
+          label: 'Featured Videos',
+          minRows: 1,
+          maxRows: 8,
+          fields: [
+            { name: 'videoId', type: 'text', required: true, admin: { description: 'YouTube video ID' } },
+            { name: 'title', type: 'text', required: true },
+            { name: 'description', type: 'textarea' },
+          ],
+        },
+      ],
+    },
+    // Newsletter Page
+    {
+      name: 'newsletterPage',
+      type: 'group',
+      label: 'Newsletter Page',
+      fields: [
+        {
+          name: 'headline',
+          type: 'text',
+          defaultValue: 'The Sunday Starter',
+        },
+        {
+          name: 'tagline',
+          type: 'text',
+          defaultValue: 'Delivered to Accelerate Your Success',
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+          defaultValue: 'Every Sunday, get actionable sales insights, strategies, and tips delivered straight to your LinkedIn inbox. Join thousands of sales professionals who start their week right with The Sunday Starter.',
+        },
+        {
+          name: 'ctaText',
+          type: 'text',
+          defaultValue: 'Subscribe on LinkedIn',
+        },
+        {
+          name: 'benefitsHeadline',
+          type: 'text',
+          defaultValue: "What You'll Get",
+        },
+        {
+          name: 'benefits',
+          type: 'array',
+          label: 'Benefit Cards',
+          minRows: 1,
+          maxRows: 6,
+          fields: [
+            { name: 'title', type: 'text', required: true },
+            { name: 'description', type: 'textarea', required: true },
+            { name: 'icon', type: 'text' },
+          ],
+        },
+        {
+          name: 'finalCtaHeadline',
+          type: 'text',
+          defaultValue: 'Ready to Start Your Week Right?',
+        },
+        {
+          name: 'finalCtaDescription',
+          type: 'text',
+          defaultValue: 'Join thousands of sales professionals who get The Sunday Starter every week',
+        },
+      ],
+    },
+    // Course Page
+    {
+      name: 'coursePage',
+      type: 'group',
+      label: 'Course Page',
+      fields: [
+        {
+          name: 'headline',
+          type: 'text',
+          defaultValue: "The Founder's and CEO's Sales System",
+        },
+        {
+          name: 'tagline',
+          type: 'text',
+          defaultValue: 'Build, optimize, and scale your sales team—without the full-time cost',
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+          defaultValue: "A complete 20-step system created by a Fractional Sales Leader who's been where you are. Decades of experience, distilled into actionable frameworks that work.",
+        },
+        {
+          name: 'resultsBadge',
+          type: 'text',
+          defaultValue: '61% sales increase • 120+ hiring questions • 20-step system',
+        },
+        {
+          name: 'modulesHeadline',
+          type: 'text',
+          defaultValue: 'What You Get With This Course',
+        },
+        {
+          name: 'modulesSubheadline',
+          type: 'text',
+          defaultValue: 'A complete 20-step sales system with everything you need to build, optimize, and scale',
+        },
+        {
+          name: 'modules',
+          type: 'array',
+          label: 'Course Modules',
+          minRows: 1,
+          maxRows: 20,
+          fields: [
+            { name: 'title', type: 'text', required: true },
+            { name: 'description', type: 'textarea', required: true },
+            { name: 'benefit', type: 'textarea' },
+            { name: 'icon', type: 'text' },
+          ],
+        },
+        {
+          name: 'previewHeadline',
+          type: 'text',
+          defaultValue: 'Preview the Course',
+        },
+        {
+          name: 'previewVideos',
+          type: 'array',
+          label: 'Preview Videos',
+          minRows: 1,
+          maxRows: 10,
+          fields: [
+            { name: 'videoId', type: 'text', required: true },
+            { name: 'title', type: 'text', required: true },
+            { name: 'description', type: 'textarea' },
+          ],
+        },
+        {
+          name: 'resultsHeadline',
+          type: 'text',
+          defaultValue: 'Real Results From Real Businesses',
+        },
+        {
+          name: 'results',
+          type: 'array',
+          label: 'Result Stats',
+          minRows: 1,
+          maxRows: 6,
+          fields: [
+            { name: 'metric', type: 'text', required: true },
+            { name: 'description', type: 'text', required: true },
+            { name: 'source', type: 'text' },
+          ],
+        },
+        {
+          name: 'caseStudyQuote',
+          type: 'textarea',
+          defaultValue: 'Louie helped us increase sales 61% year-over-year working on a part-time arrangement as a fractional sales manager.',
+        },
+        {
+          name: 'caseStudyAttribution',
+          type: 'text',
+          defaultValue: 'Client Case Study',
+        },
+        {
+          name: 'finalCtaHeadline',
+          type: 'text',
+          defaultValue: 'Start Building Your Sales System Today',
+        },
+        {
+          name: 'finalCtaDescription',
+          type: 'text',
+          defaultValue: 'Get instant access to all 20 modules, templates, scripts, and resources',
+        },
+      ],
+    },
     // SEO
     {
       name: 'seo',

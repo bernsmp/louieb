@@ -3,7 +3,15 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export function Testimonials() {
+interface TestimonialsProps {
+  headline?: string;
+  subheadline?: string;
+}
+
+export function Testimonials({
+  headline = "What Clients Say",
+  subheadline = "Real results from real businesses",
+}: TestimonialsProps) {
   const testimonials = [
     {
       quote:
@@ -121,10 +129,10 @@ export function Testimonials() {
       <div className="container mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-5xl font-bold text-neutral-900 md:text-6xl lg:text-7xl">
-            What Clients Say
+            {headline}
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-xl text-neutral-600">
-            Real results from real businesses
+            {subheadline}
           </p>
         </div>
 

@@ -40,22 +40,42 @@ export default async function Home() {
         stat3Value={settings.about.stat3Value}
         stat3Label={settings.about.stat3Label}
       />
-      <Services />
+      <Services 
+        headline={settings.services.headline}
+        subheadline={settings.services.subheadline}
+        items={settings.services.items}
+      />
       <ValueProposition 
         headline={settings.valueProposition.headline}
         subheadline={settings.valueProposition.subheadline}
         description={settings.valueProposition.description}
         ctaText={settings.valueProposition.ctaText}
       />
-      <Testimonials />
-      <Process />
-      <FAQ />
+      <Testimonials 
+        headline={settings.testimonialsSection.headline}
+        subheadline={settings.testimonialsSection.subheadline}
+      />
+      <Process 
+        headline={settings.process.headline}
+        subheadline={settings.process.subheadline}
+        steps={settings.process.steps}
+      />
+      <FAQ 
+        headline={settings.faq.headline}
+        subheadline={settings.faq.subheadline}
+        items={settings.faq.items}
+      />
       <Contact 
         email={settings.contact.email}
         phone={settings.contact.phone}
         calendlyUrl={settings.social.calendly}
       />
-      <Awards />
+      <Awards 
+        headline={settings.awards.headline}
+        subheadline={settings.awards.subheadline}
+        imageUrl={settings.awards.imageUrl}
+        description={settings.awards.description}
+      />
     </main>
   );
 }

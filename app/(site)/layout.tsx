@@ -3,6 +3,7 @@ import { Playfair_Display, Outfit } from "next/font/google";
 import "../globals.css";
 import { FloatingNavWrapper } from "@/components/FloatingNavWrapper";
 import { Footer } from "@/components/Footer";
+import { getSiteSettings } from "@/lib/payload";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -57,11 +58,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function SiteLayout({
+export default async function SiteLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const settings = await getSiteSettings();
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -179,7 +181,15 @@ export default function SiteLayout({
       >
         <FloatingNavWrapper />
         {children}
-        <Footer />
+        <Footer 
+          tagline={settings.footer.tagline}
+          slogan={settings.footer.slogan}
+          copyrightName={settings.footer.copyrightName}
+          email={settings.contact.email}
+          phone={settings.contact.phone}
+          linkedin={settings.social.linkedin}
+          youtube={settings.social.youtube}
+        />
       </body>
     </html>
   );
