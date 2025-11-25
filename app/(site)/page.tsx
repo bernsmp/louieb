@@ -1,0 +1,48 @@
+import { Hero } from "@/components/Hero";
+import { About } from "@/components/sections/About";
+import { Services } from "@/components/sections/Services";
+import { ValueProposition } from "@/components/sections/ValueProposition";
+import { Testimonials } from "@/components/sections/Testimonials";
+import { Process } from "@/components/sections/Process";
+import { FAQ } from "@/components/sections/FAQ";
+import { Contact } from "@/components/sections/Contact";
+import { Awards } from "@/components/sections/Awards";
+import { getSiteSettings } from "@/lib/payload";
+
+export default async function Home() {
+  const settings = await getSiteSettings();
+
+  return (
+    <main>
+      <Hero 
+        headline={settings.hero.headline}
+        tagline={settings.hero.tagline}
+        description={settings.hero.description}
+        videoId={settings.hero.videoId}
+        credentialPrimary={settings.credentials.primary}
+        credentialSecondary={settings.credentials.secondary}
+        ctaPrimaryText={settings.hero.ctaPrimary.text}
+        ctaPrimaryUrl={settings.hero.ctaPrimary.url}
+        ctaSecondaryText={settings.hero.ctaSecondary.text}
+        ctaSecondaryUrl={settings.hero.ctaSecondary.url}
+      />
+      <About />
+      <Services />
+      <ValueProposition 
+        headline={settings.valueProposition.headline}
+        subheadline={settings.valueProposition.subheadline}
+        description={settings.valueProposition.description}
+        ctaText={settings.valueProposition.ctaText}
+      />
+      <Testimonials />
+      <Process />
+      <FAQ />
+      <Contact 
+        email={settings.contact.email}
+        phone={settings.contact.phone}
+        calendlyUrl={settings.social.calendly}
+      />
+      <Awards />
+    </main>
+  );
+}

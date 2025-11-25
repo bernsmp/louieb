@@ -1,6 +1,19 @@
 import Link from "next/link";
 
-export function Contact() {
+interface ContactProps {
+  email?: string;
+  phone?: string;
+  calendlyUrl?: string;
+}
+
+export function Contact({
+  email = "Louie@LouieBernstein.com",
+  phone = "(404) 808-5326",
+  calendlyUrl = "https://calendly.com/louiebernstein/30minutes",
+}: ContactProps) {
+  // Format phone for tel: link
+  const phoneLink = `tel:+1${phone.replace(/\D/g, '')}`;
+  
   return (
     <section id="contact" className="bg-white py-32">
       <div className="container mx-auto max-w-5xl px-6 lg:px-8">
@@ -35,10 +48,10 @@ export function Contact() {
               Email
             </h3>
             <a
-              href="mailto:Louie@LouieBernstein.com"
+              href={`mailto:${email}`}
               className="mt-4 inline-block text-lg font-medium text-neutral-600 transition-colors hover:text-neutral-900"
             >
-              Louie@LouieBernstein.com
+              {email}
             </a>
           </div>
 
@@ -63,10 +76,10 @@ export function Contact() {
               Phone
             </h3>
             <a
-              href="tel:+14048085326"
+              href={phoneLink}
               className="mt-4 inline-block text-lg font-medium text-neutral-600 transition-colors hover:text-neutral-900"
             >
-              (404) 808-5326
+              {phone}
             </a>
           </div>
         </div>
@@ -74,7 +87,7 @@ export function Contact() {
         {/* CTA */}
         <div className="mt-16 text-center">
           <Link
-            href="https://calendly.com/louiebernstein/30minutes"
+            href={calendlyUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block rounded-lg bg-neutral-900 px-12 py-5 text-lg font-bold text-white shadow-xl transition-all hover:bg-neutral-800 hover:scale-105 hover:shadow-2xl"
