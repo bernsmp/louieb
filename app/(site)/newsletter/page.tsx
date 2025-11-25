@@ -56,57 +56,19 @@ export default async function NewsletterPage() {
             {data.benefitsHeadline}
           </h2>
           <div className="mt-12 grid gap-8 md:grid-cols-3">
-            {data.benefits && data.benefits.length > 0 ? (
-              data.benefits.map((benefit, index) => (
-                <div key={index} className="rounded-2xl border-2 border-[#0966c2] bg-card p-8 text-center transition-all hover:border-[#0966c2] hover:shadow-lg">
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#0966c2] bg-white">
-                    <Icon src={benefit.icon || "/icons/analytics-11962812.svg"} alt={benefit.title} size={40} />
-                  </div>
-                  <h3 className="mt-6 font-sans text-2xl font-bold text-foreground">
-                    {benefit.title}
-                  </h3>
-                  <p className="mt-4 font-sans text-base text-muted-foreground">
-                    {benefit.description}
-                  </p>
+            {data.benefits.map((benefit, index) => (
+              <div key={index} className="rounded-2xl border-2 border-[#0966c2] bg-card p-8 text-center transition-all hover:border-[#0966c2] hover:shadow-lg">
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#0966c2] bg-white">
+                  <Icon src={benefit.icon || "/icons/analytics-11962812.svg"} alt={benefit.title} size={40} />
                 </div>
-              ))
-            ) : (
-              <>
-                <div className="rounded-2xl border-2 border-[#0966c2] bg-card p-8 text-center transition-all hover:border-[#0966c2] hover:shadow-lg">
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#0966c2] bg-white">
-                    <Icon src="/icons/analytics-11962812.svg" alt="Weekly Insights" size={40} />
-                  </div>
-                  <h3 className="mt-6 font-sans text-2xl font-bold text-foreground">
-                    Weekly Insights
-                  </h3>
-                  <p className="mt-4 font-sans text-base text-muted-foreground">
-                    Actionable sales strategies and tactics you can implement immediately
-                  </p>
-                </div>
-                <div className="rounded-2xl border-2 border-[#0966c2] bg-card p-8 text-center transition-all hover:border-[#0966c2] hover:shadow-lg">
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#0966c2] bg-white">
-                    <Icon src="/icons/business-goal-11962851.svg" alt="Real-World Examples" size={40} />
-                  </div>
-                  <h3 className="mt-6 font-sans text-2xl font-bold text-foreground">
-                    Real-World Examples
-                  </h3>
-                  <p className="mt-4 font-sans text-base text-muted-foreground">
-                    Case studies and lessons from actual client engagements
-                  </p>
-                </div>
-                <div className="rounded-2xl border-2 border-[#0966c2] bg-card p-8 text-center transition-all hover:border-[#0966c2] hover:shadow-lg">
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#0966c2] bg-white">
-                    <Icon src="/icons/growth-6621994.svg" alt="Growth Tips" size={40} />
-                  </div>
-                  <h3 className="mt-6 font-sans text-2xl font-bold text-foreground">
-                    Growth Tips
-                  </h3>
-                  <p className="mt-4 font-sans text-base text-muted-foreground">
-                    Proven techniques to scale your sales and improve team performance
-                  </p>
-                </div>
-              </>
-            )}
+                <h3 className="mt-6 font-sans text-2xl font-bold text-foreground">
+                  {benefit.title}
+                </h3>
+                <p className="mt-4 font-sans text-base text-muted-foreground">
+                  {benefit.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
 
