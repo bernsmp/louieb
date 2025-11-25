@@ -1,4 +1,32 @@
-export function About() {
+interface AboutProps {
+  headline?: string;
+  headlineAccent?: string;
+  paragraph1?: string;
+  paragraph2?: string;
+  paragraph3?: string;
+  calloutText?: string;
+  stat1Value?: string;
+  stat1Label?: string;
+  stat2Value?: string;
+  stat2Label?: string;
+  stat3Value?: string;
+  stat3Label?: string;
+}
+
+export function About({
+  headline = "Fractional Sales Leadership",
+  headlineAccent = "for $1M–$10M ARR Companies",
+  paragraph1 = "With over 9 years of experience as a Fractional Sales Leader, I specialize in helping technical and operational founders of companies with $1M–$10M ARR build repeatable sales systems and transition from leading sales themselves to managing high-performing sales teams.",
+  paragraph2 = "My focus is on delivering systematic frameworks tailored for the critical growth stage where founders must document sales processes, onboard their first sales reps, and scale effectively without becoming a bottleneck.",
+  paragraph3 = "I bring extensive expertise in sales leadership, sales and marketing alignment, and sales team development. My mission is to empower founders to optimize their time and resources while building scalable sales teams capable of generating predictable revenue.",
+  calloutText = "With a proven approach, I collaborate with businesses to develop actionable sales pipelines, implement effective scorecards for hiring, and establish reliable sales processes that drive sustainable growth.",
+  stat1Value = "9+",
+  stat1Label = "Years as Fractional Sales Leader",
+  stat2Value = "$1M–$10M",
+  stat2Label = "ARR Companies Served",
+  stat3Value = "INC 500",
+  stat3Label = "Scaled from Zero",
+}: AboutProps) {
   return (
     <section id="about" className="relative overflow-hidden bg-white py-32">
       {/* Subtle background pattern */}
@@ -11,23 +39,17 @@ export function About() {
           {/* Left: Content */}
           <div>
             <h2 className="text-5xl font-bold leading-tight text-neutral-900 md:text-6xl lg:text-7xl">
-              Fractional Sales Leadership{" "}
-              <span className="text-neutral-500">for $1M–$10M ARR Companies</span>
+              {headline}{" "}
+              <span className="text-neutral-500">{headlineAccent}</span>
             </h2>
             <div className="mt-8 space-y-6 text-lg leading-relaxed text-neutral-600 md:text-xl">
-              <p>
-                With over 9 years of experience as a <strong>Fractional Sales Leader</strong>, I specialize in helping technical and operational founders of companies with $1M–$10M ARR build repeatable sales systems and transition from leading sales themselves to managing high-performing sales teams.
-              </p>
-              <p>
-                My focus is on delivering systematic frameworks tailored for the critical growth stage where founders must document sales processes, onboard their first sales reps, and scale effectively without becoming a bottleneck.
-              </p>
-              <p>
-                I bring extensive expertise in sales leadership, sales and marketing alignment, and sales team development. My mission is to empower founders to optimize their time and resources while building scalable sales teams capable of generating predictable revenue.
-              </p>
+              <p>{paragraph1}</p>
+              <p>{paragraph2}</p>
+              <p>{paragraph3}</p>
             </div>
             <div className="mt-10 rounded-2xl border-l-4 border-neutral-900 bg-neutral-50 p-6">
               <p className="text-lg font-semibold leading-relaxed text-neutral-900 md:text-xl">
-                With a proven approach, I collaborate with businesses to develop actionable sales pipelines, implement effective scorecards for hiring, and establish reliable sales processes that drive sustainable growth.
+                {calloutText}
               </p>
             </div>
           </div>
@@ -38,16 +60,16 @@ export function About() {
               {/* Stats or visual elements */}
               <div className="space-y-8">
                 <div>
-                  <div className="text-5xl font-bold text-neutral-900">9+</div>
-                  <div className="mt-2 text-lg text-neutral-600">Years as Fractional Sales Leader</div>
+                  <div className="text-5xl font-bold text-neutral-900">{stat1Value}</div>
+                  <div className="mt-2 text-lg text-neutral-600">{stat1Label}</div>
                 </div>
                 <div>
-                  <div className="text-5xl font-bold text-neutral-900">$1M–$10M</div>
-                  <div className="mt-2 text-lg text-neutral-600">ARR Companies Served</div>
+                  <div className="text-5xl font-bold text-neutral-900">{stat2Value}</div>
+                  <div className="mt-2 text-lg text-neutral-600">{stat2Label}</div>
                 </div>
                 <div>
-                  <div className="text-5xl font-bold text-neutral-900">INC 500</div>
-                  <div className="mt-2 text-lg text-neutral-600">Scaled from Zero</div>
+                  <div className="text-5xl font-bold text-neutral-900">{stat3Value}</div>
+                  <div className="mt-2 text-lg text-neutral-600">{stat3Label}</div>
                 </div>
               </div>
             </div>

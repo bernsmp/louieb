@@ -26,7 +26,20 @@ export default async function Home() {
         ctaSecondaryText={settings.hero.ctaSecondary.text}
         ctaSecondaryUrl={settings.hero.ctaSecondary.url}
       />
-      <About />
+      <About 
+        headline={settings.about.headline}
+        headlineAccent={settings.about.headlineAccent}
+        paragraph1={settings.about.paragraph1}
+        paragraph2={settings.about.paragraph2}
+        paragraph3={settings.about.paragraph3}
+        calloutText={settings.about.calloutText}
+        stat1Value={settings.about.stat1Value}
+        stat1Label={settings.about.stat1Label}
+        stat2Value={settings.about.stat2Value}
+        stat2Label={settings.about.stat2Label}
+        stat3Value={settings.about.stat3Value}
+        stat3Label={settings.about.stat3Label}
+      />
       <Services />
       <ValueProposition 
         headline={settings.valueProposition.headline}

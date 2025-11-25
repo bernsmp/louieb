@@ -41,6 +41,20 @@ interface SiteSettings {
     ctaText: string;
     ctaUrl: string;
   };
+  about: {
+    headline: string;
+    headlineAccent: string;
+    paragraph1: string;
+    paragraph2: string;
+    paragraph3: string;
+    calloutText: string;
+    stat1Value: string;
+    stat1Label: string;
+    stat2Value: string;
+    stat2Label: string;
+    stat3Value: string;
+    stat3Label: string;
+  };
   social: {
     linkedin: string;
     youtube: string;
@@ -109,6 +123,20 @@ const defaultSettings: SiteSettings = {
     email: 'Louie@LouieBernstein.com',
     phone: '(404)808-5326',
   },
+  about: {
+    headline: 'Fractional Sales Leadership',
+    headlineAccent: 'for $1M–$10M ARR Companies',
+    paragraph1: 'With over 9 years of experience as a Fractional Sales Leader, I specialize in helping technical and operational founders of companies with $1M–$10M ARR build repeatable sales systems and transition from leading sales themselves to managing high-performing sales teams.',
+    paragraph2: 'My focus is on delivering systematic frameworks tailored for the critical growth stage where founders must document sales processes, onboard their first sales reps, and scale effectively without becoming a bottleneck.',
+    paragraph3: 'I bring extensive expertise in sales leadership, sales and marketing alignment, and sales team development. My mission is to empower founders to optimize their time and resources while building scalable sales teams capable of generating predictable revenue.',
+    calloutText: 'With a proven approach, I collaborate with businesses to develop actionable sales pipelines, implement effective scorecards for hiring, and establish reliable sales processes that drive sustainable growth.',
+    stat1Value: '9+',
+    stat1Label: 'Years as Fractional Sales Leader',
+    stat2Value: '$1M–$10M',
+    stat2Label: 'ARR Companies Served',
+    stat3Value: 'INC 500',
+    stat3Label: 'Scaled from Zero',
+  },
   seo: {
     siteTitle: 'Louie Bernstein - Fractional Sales Leader',
     siteDescription: 'LinkedIn Top Voice | Fractional Sales Leader helping $1M–$10M ARR companies build repeatable sales systems.',
@@ -154,12 +182,21 @@ function mergeSettings(defaults: SiteSettings, data: Partial<SiteSettings>): Sit
     hero: { ...defaults.hero, ...data.hero },
     credentials: { ...defaults.credentials, ...data.credentials },
     valueProposition: { ...defaults.valueProposition, ...data.valueProposition },
+    about: { ...defaults.about, ...data.about },
     social: { ...defaults.social, ...data.social },
     newsletter: { ...defaults.newsletter, ...data.newsletter },
     course: { ...defaults.course, ...data.course },
     contact: { ...defaults.contact, ...data.contact },
     seo: { ...defaults.seo, ...data.seo },
   };
+}
+
+/**
+ * Get about section data
+ */
+export async function getAboutData() {
+  const settings = await getSiteSettings();
+  return settings.about;
 }
 
 /**

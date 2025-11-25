@@ -180,6 +180,84 @@ export const SiteSettings: GlobalConfig = {
         },
       ],
     },
+    // About Section
+    {
+      name: 'about',
+      type: 'group',
+      label: 'About Section',
+      fields: [
+        {
+          name: 'headline',
+          type: 'text',
+          defaultValue: 'Fractional Sales Leadership',
+        },
+        {
+          name: 'headlineAccent',
+          type: 'text',
+          defaultValue: 'for $1M–$10M ARR Companies',
+        },
+        {
+          name: 'paragraph1',
+          type: 'textarea',
+          label: 'First Paragraph',
+          defaultValue: 'With over 9 years of experience as a Fractional Sales Leader, I specialize in helping technical and operational founders of companies with $1M–$10M ARR build repeatable sales systems and transition from leading sales themselves to managing high-performing sales teams.',
+        },
+        {
+          name: 'paragraph2',
+          type: 'textarea',
+          label: 'Second Paragraph',
+          defaultValue: 'My focus is on delivering systematic frameworks tailored for the critical growth stage where founders must document sales processes, onboard their first sales reps, and scale effectively without becoming a bottleneck.',
+        },
+        {
+          name: 'paragraph3',
+          type: 'textarea',
+          label: 'Third Paragraph',
+          defaultValue: 'I bring extensive expertise in sales leadership, sales and marketing alignment, and sales team development. My mission is to empower founders to optimize their time and resources while building scalable sales teams capable of generating predictable revenue.',
+        },
+        {
+          name: 'calloutText',
+          type: 'textarea',
+          label: 'Highlighted Callout Box',
+          defaultValue: 'With a proven approach, I collaborate with businesses to develop actionable sales pipelines, implement effective scorecards for hiring, and establish reliable sales processes that drive sustainable growth.',
+        },
+        {
+          name: 'stat1Value',
+          type: 'text',
+          label: 'Stat 1 - Value',
+          defaultValue: '9+',
+        },
+        {
+          name: 'stat1Label',
+          type: 'text',
+          label: 'Stat 1 - Label',
+          defaultValue: 'Years as Fractional Sales Leader',
+        },
+        {
+          name: 'stat2Value',
+          type: 'text',
+          label: 'Stat 2 - Value',
+          defaultValue: '$1M–$10M',
+        },
+        {
+          name: 'stat2Label',
+          type: 'text',
+          label: 'Stat 2 - Label',
+          defaultValue: 'ARR Companies Served',
+        },
+        {
+          name: 'stat3Value',
+          type: 'text',
+          label: 'Stat 3 - Value',
+          defaultValue: 'INC 500',
+        },
+        {
+          name: 'stat3Label',
+          type: 'text',
+          label: 'Stat 3 - Label',
+          defaultValue: 'Scaled from Zero',
+        },
+      ],
+    },
     // SEO
     {
       name: 'seo',
