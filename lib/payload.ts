@@ -6,7 +6,12 @@
 
 import { cache } from 'react';
 
+// Use production URL or empty (falls back to defaults)
+// Set NEXT_PUBLIC_PAYLOAD_URL=https://louiebernstein.com in Vercel when ready
 const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || '';
+
+// Disable CMS fetching until Payload is fully configured
+const CMS_ENABLED = false;
 
 interface SiteSettings {
   hero: {
@@ -114,8 +119,8 @@ const defaultSettings: SiteSettings = {
  * Uses React cache for deduplication during SSR
  */
 export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
-  // If no Payload URL configured, use defaults
-  if (!PAYLOAD_URL) {
+  // If CMS is disabled or no URL configured, use defaults
+  if (!CMS_ENABLED || !PAYLOAD_URL) {
     return defaultSettings;
   }
 
