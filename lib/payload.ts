@@ -6,12 +6,14 @@
 
 import { cache } from 'react';
 
-// Use production URL or empty (falls back to defaults)
-// Set NEXT_PUBLIC_PAYLOAD_URL=https://louiebernstein.com in Vercel when ready
-const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || '';
+// Use the site's own API for Payload data
+// In production, use relative URL; in dev, use localhost
+const PAYLOAD_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://louiebernstein.com' 
+  : 'http://localhost:3000';
 
-// Disable CMS fetching until Payload is fully configured
-const CMS_ENABLED = false;
+// Enable CMS fetching - Payload is now configured!
+const CMS_ENABLED = true;
 
 interface SiteSettings {
   hero: {
