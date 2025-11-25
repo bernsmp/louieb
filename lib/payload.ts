@@ -137,7 +137,7 @@ export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
     const data = await response.json();
     
     // Merge with defaults to ensure all fields exist
-    return deepMerge(defaultSettings, data);
+    return mergeSettings(defaultSettings, data);
   } catch (error) {
     console.warn('Error fetching site settings:', error);
     return defaultSettings;
@@ -145,33 +145,19 @@ export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
 });
 
 /**
- * Deep merge two objects
+ * Merge CMS data with default settings
  */
-function deepMerge<T extends Record<string, unknown>>(target: T, source: Partial<T>): T {
-  const result = { ...target };
-  
-  for (const key in source) {
-    const sourceValue = source[key];
-    const targetValue = result[key];
-    
-    if (
-      sourceValue !== null &&
-      sourceValue !== undefined &&
-      typeof sourceValue === 'object' &&
-      !Array.isArray(sourceValue) &&
-      typeof targetValue === 'object' &&
-      !Array.isArray(targetValue)
-    ) {
-      result[key] = deepMerge(
-        targetValue as Record<string, unknown>,
-        sourceValue as Record<string, unknown>
-      ) as T[typeof key];
-    } else if (sourceValue !== null && sourceValue !== undefined) {
-      result[key] = sourceValue as T[typeof key];
-    }
-  }
-  
-  return result;
+function mergeSettings(defaults: SiteSettings, data: Partial<SiteSettings>): SiteSettings {
+  return {
+    hero: { ...defaults.hero, ...data.hero },
+    credentials: { ...defaults.credentials, ...data.credentials },
+    valueProposition: { ...defaults.valueProposition, ...data.valueProposition },
+    social: { ...defaults.social, ...data.social },
+    newsletter: { ...defaults.newsletter, ...data.newsletter },
+    course: { ...defaults.course, ...data.course },
+    contact: { ...defaults.contact, ...data.contact },
+    seo: { ...defaults.seo, ...data.seo },
+  };
 }
 
 /**
