@@ -1,9 +1,51 @@
 import type { GlobalConfig } from 'payload'
 
+const CMS_DEPLOY_WEBHOOK_URL =
+  process.env.CMS_DEPLOY_WEBHOOK_URL ||
+  process.env.SLACK_BOT_CMS_WEBHOOK_URL ||
+  'https://louie-slack-bot.onrender.com/webhooks/cms-update'
+
 export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
   admin: {
     group: 'Settings',
+  },
+  hooks: {
+    afterChange: [
+      async ({ doc, req }) => {
+        if (!CMS_DEPLOY_WEBHOOK_URL) {
+          req.payload.logger?.warn(
+            '[SiteSettings] CMS_DEPLOY_WEBHOOK_URL not set; skipping deploy webhook trigger.'
+          )
+          return
+        }
+
+        try {
+          const response = await fetch(CMS_DEPLOY_WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              collection: 'site-settings',
+              doc,
+            }),
+          })
+
+          if (!response.ok) {
+            req.payload.logger?.error(
+              `[SiteSettings] Deploy webhook responded with ${response.status}: ${await response
+                .text()
+                .catch(() => 'no body')}`
+            )
+          } else {
+            req.payload.logger?.info('[SiteSettings] Deploy webhook triggered successfully.')
+          }
+        } catch (error) {
+          req.payload.logger?.error(
+            `[SiteSettings] Failed to call deploy webhook: ${(error as Error)?.message}`
+          )
+        }
+      },
+    ],
   },
   access: {
     read: () => true,
