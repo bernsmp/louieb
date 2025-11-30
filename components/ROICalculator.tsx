@@ -19,47 +19,7 @@ const inputFields: InputField[] = [
     key: "revenue",
     defaultValue: 1000000,
     prefix: "$",
-    tooltip: "Your company's total annual sales revenue",
-  },
-  {
-    label: "First Year Customer Revenue",
-    key: "firstYearCustomerRevenue",
-    defaultValue: 5000,
-    prefix: "$",
-    tooltip: "Average revenue from a new customer in their first year",
-  },
-  {
-    label: "Number of Customers",
-    key: "numberOfCustomers",
-    defaultValue: 200,
-    tooltip: "Total number of active customers (does not account for churn)",
-  },
-  {
-    label: "Average Customer LTV",
-    key: "avgLTV",
-    defaultValue: 20000,
-    prefix: "$",
-    tooltip: "Average lifetime value per customer (4-year average)",
-  },
-  {
-    label: "Number of Salespeople",
-    key: "numberOfSalespeople",
-    defaultValue: 5,
-    tooltip: "Total salespeople on your team",
-  },
-  {
-    label: "Annual Cost per Salesperson",
-    key: "annualCostPerSalesperson",
-    defaultValue: 91000,
-    prefix: "$",
-    tooltip: "$50k base + 10% commissions + 30% overhead",
-  },
-  {
-    label: "Founder's Hourly Rate",
-    key: "founderHourlyRate",
-    defaultValue: 481,
-    prefix: "$",
-    tooltip: "Based on revenue divided by 2080 work hours",
+    tooltip: "Your company's total annual sales revenue - used to calculate founder's hourly value",
   },
   {
     label: "Hours Founder Spends Selling (Weekly)",
@@ -69,17 +29,24 @@ const inputFields: InputField[] = [
     tooltip: "Hours per week the founder spends on sales activities",
   },
   {
-    label: "VP Salary + Bonus + Overhead",
-    key: "vpSalary",
-    defaultValue: 200000,
+    label: "First Year Customer Revenue",
+    key: "firstYearCustomerRevenue",
+    defaultValue: 5000,
     prefix: "$",
-    tooltip: "Average low-end for SaaS VP Sales compensation",
+    tooltip: "Average revenue from a new customer in their first year",
   },
   {
     label: "Monthly Missed Opportunities",
     key: "monthlyMissedOpportunities",
     defaultValue: 8,
     tooltip: "Deals lost due to poor training, lack of accountability, or weak management",
+  },
+  {
+    label: "VP Salary + Bonus + Overhead",
+    key: "vpSalary",
+    defaultValue: 200000,
+    prefix: "$",
+    tooltip: "Average low-end for SaaS VP Sales compensation",
   },
 ];
 
@@ -113,8 +80,11 @@ export function ROICalculator() {
 
   // Calculations based on Excel logic
 
+  // Founder's hourly rate = Revenue / 2080 work hours per year
+  const founderHourlyRate = inputs.revenue / 2080;
+
   // Cost of Founder-Led Sales (6 months)
-  const founderWeeklyCost = inputs.founderHourlyRate * inputs.founderSellingHours;
+  const founderWeeklyCost = founderHourlyRate * inputs.founderSellingHours;
   const founderAnnualCost = founderWeeklyCost * 50; // 50 weeks (2 week vacation)
   const founderSixMonthCost = founderAnnualCost * 0.9; // ~6 months adjusted
 
@@ -122,7 +92,7 @@ export function ROICalculator() {
   const vpSixMonthSalary = inputs.vpSalary / 2;
   const salespersonReplacementCost = 136500; // Two reps leave - 3 month search + 6 month ramp
   const vpReplacementCost = 150000; // 3 month search + 6 month ramp
-  const badVPSixMonthCost = vpSixMonthSalary + (salespersonReplacementCost / 2) + (vpReplacementCost / 2);
+  const badVPSixMonthCost = vpSixMonthSalary + salespersonReplacementCost + vpReplacementCost;
 
   // Cost of Missed Opportunities (6 months)
   const monthlyUnrealizedRevenue = inputs.monthlyMissedOpportunities * inputs.firstYearCustomerRevenue;
@@ -207,7 +177,7 @@ export function ROICalculator() {
               {formatCurrency(founderSixMonthCost)}
             </p>
             <p className="text-xs text-muted-foreground mt-2">
-              Based on {inputs.founderSellingHours} hrs/week at {formatCurrency(inputs.founderHourlyRate)}/hr
+              {inputs.founderSellingHours} hrs/week × {formatCurrency(founderHourlyRate)}/hr (from revenue)
             </p>
           </div>
 
