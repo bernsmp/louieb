@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Info } from "lucide-react";
+import Link from "next/link";
 
 type InputField = {
   label: string;
@@ -111,7 +112,6 @@ export function ROICalculator() {
   };
 
   // Calculations based on Excel logic
-  const revenuePerSalesperson = inputs.revenue / inputs.numberOfSalespeople;
 
   // Cost of Founder-Led Sales (6 months)
   const founderWeeklyCost = inputs.founderHourlyRate * inputs.founderSellingHours;
@@ -276,12 +276,12 @@ export function ROICalculator() {
         <p className="text-muted-foreground mb-4">
           Ready to see what a Fractional Sales Leader can do for your business?
         </p>
-        <a
+        <Link
           href="/#contact"
           className="inline-flex items-center justify-center rounded-full bg-[#0966c2] px-8 py-3 text-white font-medium hover:bg-[#0855a3] transition-colors"
         >
-          Let's Talk
-        </a>
+          Let&apos;s Talk
+        </Link>
       </div>
 
       {/* Disclaimer */}
