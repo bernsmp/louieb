@@ -1,0 +1,295 @@
+"use client";
+
+import { useState } from "react";
+import { Info } from "lucide-react";
+
+type InputField = {
+  label: string;
+  key: string;
+  defaultValue: number;
+  tooltip?: string;
+  prefix?: string;
+  suffix?: string;
+};
+
+const inputFields: InputField[] = [
+  {
+    label: "Annual Revenue",
+    key: "revenue",
+    defaultValue: 1000000,
+    prefix: "$",
+    tooltip: "Your company's total annual sales revenue",
+  },
+  {
+    label: "First Year Customer Revenue",
+    key: "firstYearCustomerRevenue",
+    defaultValue: 5000,
+    prefix: "$",
+    tooltip: "Average revenue from a new customer in their first year",
+  },
+  {
+    label: "Number of Customers",
+    key: "numberOfCustomers",
+    defaultValue: 200,
+    tooltip: "Total number of active customers (does not account for churn)",
+  },
+  {
+    label: "Average Customer LTV",
+    key: "avgLTV",
+    defaultValue: 20000,
+    prefix: "$",
+    tooltip: "Average lifetime value per customer (4-year average)",
+  },
+  {
+    label: "Number of Salespeople",
+    key: "numberOfSalespeople",
+    defaultValue: 5,
+    tooltip: "Total salespeople on your team",
+  },
+  {
+    label: "Annual Cost per Salesperson",
+    key: "annualCostPerSalesperson",
+    defaultValue: 91000,
+    prefix: "$",
+    tooltip: "$50k base + 10% commissions + 30% overhead",
+  },
+  {
+    label: "Founder's Hourly Rate",
+    key: "founderHourlyRate",
+    defaultValue: 481,
+    prefix: "$",
+    tooltip: "Based on revenue divided by 2080 work hours",
+  },
+  {
+    label: "Hours Founder Spends Selling (Weekly)",
+    key: "founderSellingHours",
+    defaultValue: 25,
+    suffix: "hrs",
+    tooltip: "Hours per week the founder spends on sales activities",
+  },
+  {
+    label: "VP Salary + Bonus + Overhead",
+    key: "vpSalary",
+    defaultValue: 200000,
+    prefix: "$",
+    tooltip: "Average low-end for SaaS VP Sales compensation",
+  },
+  {
+    label: "Monthly Missed Opportunities",
+    key: "monthlyMissedOpportunities",
+    defaultValue: 8,
+    tooltip: "Deals lost due to poor training, lack of accountability, or weak management",
+  },
+];
+
+function formatCurrency(value: number): string {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(value);
+}
+
+function formatNumber(value: number): string {
+  return new Intl.NumberFormat("en-US").format(Math.round(value));
+}
+
+export function ROICalculator() {
+  const [inputs, setInputs] = useState<Record<string, number>>(() => {
+    const defaults: Record<string, number> = {};
+    inputFields.forEach((field) => {
+      defaults[field.key] = field.defaultValue;
+    });
+    return defaults;
+  });
+
+  const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
+
+  const handleInputChange = (key: string, value: string) => {
+    const numValue = parseFloat(value.replace(/[^0-9.-]/g, "")) || 0;
+    setInputs((prev) => ({ ...prev, [key]: numValue }));
+  };
+
+  // Calculations based on Excel logic
+  const revenuePerSalesperson = inputs.revenue / inputs.numberOfSalespeople;
+
+  // Cost of Founder-Led Sales (6 months)
+  const founderWeeklyCost = inputs.founderHourlyRate * inputs.founderSellingHours;
+  const founderAnnualCost = founderWeeklyCost * 50; // 50 weeks (2 week vacation)
+  const founderSixMonthCost = founderAnnualCost * 0.9; // ~6 months adjusted
+
+  // Cost of Bad VP Hire (6 months)
+  const vpSixMonthSalary = inputs.vpSalary / 2;
+  const salespersonReplacementCost = 136500; // Two reps leave - 3 month search + 6 month ramp
+  const vpReplacementCost = 150000; // 3 month search + 6 month ramp
+  const badVPSixMonthCost = vpSixMonthSalary + (salespersonReplacementCost / 2) + (vpReplacementCost / 2);
+
+  // Cost of Missed Opportunities (6 months)
+  const monthlyUnrealizedRevenue = inputs.monthlyMissedOpportunities * inputs.firstYearCustomerRevenue;
+  const sixMonthUnrealizedRevenue = monthlyUnrealizedRevenue * 6;
+
+  // Fractional Sales Exec Cost (6 months)
+  const fractionalSixMonthCost = 65000; // 20 hours per week, 26 weeks
+
+  // Savings
+  const savingsOverFounder = founderSixMonthCost - fractionalSixMonthCost;
+  const savingsOverBadVP = badVPSixMonthCost - fractionalSixMonthCost;
+
+  return (
+    <div className="space-y-8">
+      {/* Input Section */}
+      <div className="rounded-2xl border-2 border-border bg-card p-6 md:p-8">
+        <h2 className="text-xl font-bold text-foreground mb-6">Your Numbers</h2>
+        <p className="text-sm text-muted-foreground mb-6">
+          Adjust these values to match your company
+        </p>
+
+        <div className="grid gap-4 md:grid-cols-2">
+          {inputFields.map((field) => (
+            <div key={field.key} className="relative">
+              <label className="flex items-center gap-2 text-sm font-medium text-foreground mb-2">
+                {field.label}
+                {field.tooltip && (
+                  <button
+                    type="button"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    onMouseEnter={() => setActiveTooltip(field.key)}
+                    onMouseLeave={() => setActiveTooltip(null)}
+                    onClick={() => setActiveTooltip(activeTooltip === field.key ? null : field.key)}
+                  >
+                    <Info className="h-4 w-4" />
+                  </button>
+                )}
+              </label>
+
+              {activeTooltip === field.key && field.tooltip && (
+                <div className="absolute z-10 bottom-full left-0 mb-2 p-2 bg-foreground text-background text-xs rounded-lg max-w-xs shadow-lg">
+                  {field.tooltip}
+                </div>
+              )}
+
+              <div className="relative">
+                {field.prefix && (
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+                    {field.prefix}
+                  </span>
+                )}
+                <input
+                  type="text"
+                  value={formatNumber(inputs[field.key])}
+                  onChange={(e) => handleInputChange(field.key, e.target.value)}
+                  className={`w-full rounded-lg border border-border bg-background px-3 py-2 text-foreground focus:border-[#0966c2] focus:outline-none focus:ring-1 focus:ring-[#0966c2] ${
+                    field.prefix ? "pl-7" : ""
+                  } ${field.suffix ? "pr-12" : ""}`}
+                />
+                {field.suffix && (
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+                    {field.suffix}
+                  </span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Results Section */}
+      <div className="rounded-2xl border-2 border-[#0966c2] bg-gradient-to-br from-[#0966c2]/5 to-[#0855a3]/5 p-6 md:p-8">
+        <h2 className="text-xl font-bold text-foreground mb-6">6-Month Cost Comparison</h2>
+
+        <div className="grid gap-6 md:grid-cols-3">
+          {/* Founder-Led Sales */}
+          <div className="rounded-xl bg-white dark:bg-neutral-900 p-6 shadow-sm">
+            <h3 className="text-sm font-medium text-muted-foreground mb-2">
+              Founder-Led Sales
+            </h3>
+            <p className="text-3xl font-bold text-foreground">
+              {formatCurrency(founderSixMonthCost)}
+            </p>
+            <p className="text-xs text-muted-foreground mt-2">
+              Based on {inputs.founderSellingHours} hrs/week at {formatCurrency(inputs.founderHourlyRate)}/hr
+            </p>
+          </div>
+
+          {/* Bad VP Hire */}
+          <div className="rounded-xl bg-white dark:bg-neutral-900 p-6 shadow-sm">
+            <h3 className="text-sm font-medium text-muted-foreground mb-2">
+              Bad VP Hire
+            </h3>
+            <p className="text-3xl font-bold text-foreground">
+              {formatCurrency(badVPSixMonthCost)}
+            </p>
+            <p className="text-xs text-muted-foreground mt-2">
+              Includes salary + turnover costs
+            </p>
+          </div>
+
+          {/* Fractional Sales Leader */}
+          <div className="rounded-xl bg-[#0966c2] p-6 shadow-sm">
+            <h3 className="text-sm font-medium text-white/80 mb-2">
+              Fractional Sales Leader
+            </h3>
+            <p className="text-3xl font-bold text-white">
+              {formatCurrency(fractionalSixMonthCost)}
+            </p>
+            <p className="text-xs text-white/80 mt-2">
+              20 hours/week for 26 weeks
+            </p>
+          </div>
+        </div>
+
+        {/* Savings */}
+        <div className="mt-8 pt-6 border-t border-border">
+          <h3 className="text-lg font-bold text-foreground mb-4">Your Potential Savings</h3>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="flex items-center justify-between rounded-xl bg-green-50 dark:bg-green-950/30 p-4">
+              <span className="text-sm font-medium text-foreground">
+                vs. Founder-Led Sales
+              </span>
+              <span className="text-xl font-bold text-green-600 dark:text-green-400">
+                {formatCurrency(savingsOverFounder)}
+              </span>
+            </div>
+            <div className="flex items-center justify-between rounded-xl bg-green-50 dark:bg-green-950/30 p-4">
+              <span className="text-sm font-medium text-foreground">
+                vs. Bad VP Hire
+              </span>
+              <span className="text-xl font-bold text-green-600 dark:text-green-400">
+                {formatCurrency(savingsOverBadVP)}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Missed Revenue */}
+        <div className="mt-6 p-4 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800">
+          <p className="text-sm text-amber-800 dark:text-amber-200">
+            <strong>Plus:</strong> Without proper sales leadership, you're leaving an estimated{" "}
+            <strong>{formatCurrency(sixMonthUnrealizedRevenue)}</strong> on the table over 6 months
+            from missed opportunities.
+          </p>
+        </div>
+      </div>
+
+      {/* CTA */}
+      <div className="text-center">
+        <p className="text-muted-foreground mb-4">
+          Ready to see what a Fractional Sales Leader can do for your business?
+        </p>
+        <a
+          href="/#contact"
+          className="inline-flex items-center justify-center rounded-full bg-[#0966c2] px-8 py-3 text-white font-medium hover:bg-[#0855a3] transition-colors"
+        >
+          Let's Talk
+        </a>
+      </div>
+
+      {/* Disclaimer */}
+      <p className="text-xs text-center text-muted-foreground">
+        Note: This calculator shows top-line impact only. Gross and net profit are not calculated.
+        <br />
+        © Louie Bernstein - Fractional Sales Leader
+      </p>
+    </div>
+  );
+}
