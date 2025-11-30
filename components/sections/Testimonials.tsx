@@ -3,86 +3,34 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+interface TestimonialItem {
+  quote: string;
+  author: string;
+  role?: string;
+  company?: string;
+}
+
 interface TestimonialsProps {
   headline?: string;
   subheadline?: string;
+  testimonials: TestimonialItem[];
 }
 
 export function Testimonials({
   headline = "What Clients Say",
   subheadline = "Real results from real businesses",
+  testimonials,
 }: TestimonialsProps) {
-  const testimonials = [
-    {
-      quote:
-        "When Louie came on board he wrote and organized our outbound scripts and emails. We now had everyone working off the same playbook, and it gave us consistency.",
-      author: "Neal Reynolds",
-      title: "CEO - BankMarketingCenter.com",
-    },
-    {
-      quote:
-        "Thank you Louie for what you have done in the past year. I believe our sales are far better than where they were a year ago, great job.",
-      author: "Kevin Zhao",
-      title: "CEO - ZBS POS",
-    },
-    {
-      quote:
-        "You taught me a great deal, the lessons will always stick with me. Your teachings have contributed to me being a better sales professional.",
-      author: "Laura H.",
-      title: "Sales Tech Strategist",
-    },
-    {
-      quote:
-        "I worked for Louie for over four years. During that time our team had constant sales growth. Louie's leadership and sales processes were key to that growth. Most importantly, our team knew we could always count on Louie to get on the phone and help close deals when needed. Personally, I owe a lot of my success to the coaching and mentoring I received during Louie's time at Izenda.",
-      author: "David Yasson",
-      title: "Group Manager, Strategic Accounts at Intuit",
-    },
-    {
-      quote:
-        "In the thirty years I have had the privilege to know and work with Louie, I have observed him to be organized, efficient, extremely competent, and have an excellent rapport with people of all ages, gender, and ethnicity. He is a brilliant thought leader in the sales and marketing with a strong sense of duty in which he applies to all aspects of his job, family, and community.",
-      author: "Jim Nelms",
-      title: "Chief Information Security Officer",
-    },
-    {
-      quote:
-        "If you needed help closing a deal, Louie was your man. I had never worked in a true sales role before, but Louie was willing to teach me. He helped me to improve my social skills and learn how to speak to people in a way that would get them to like and trust me. Louie has spent many years as a sales professional, and I have never met someone so committed to spreading his knowledge.",
-      author: "Richard Adrian, CEM",
-      title: "Building Automation Systems Sales Engineer",
-    },
-    {
-      quote:
-        "Louie is a highly effective and very successful sales leader. He developed processes that allow him to be on top of all details, making him extremely efficient in managing a large number of employees. Most importantly, he has produced admirable year over year increases in sales results and would be a valuable sales executive in any organization.",
-      author: "Stephen W.",
-      title: "CEO, Active Angel Investor and Member of multiple Boards",
-    },
-    {
-      quote:
-        "I have had the privilege to work and know Louie Bernstein for many years, he gave a young computer professional a chance many years ago to grow and expand his knowledge and skills. I learned an incredible amount from working with and being friends with Louie over the years. His professionalism, his great desire to succeed, his professional ethics, as well as leadership gave me confidence to do many things in my own career.",
-      author: "Christopher H. Short",
-      title: "Software Engineering, CIO, CTO",
-    },
-    {
-      quote:
-        "During his tenure at New Horizons of Atlanta, I had the pleasure of working with Louie on daily basis. He was extremely responsive to the needs of the organization and personally saw to the resolution of several problems that my department had been having. He is one of the best general managers that I have worked with and is a great leader.",
-      author: "Victor Hodges - CISSP",
-      title: "Information Systems Specialist - Infosec",
-    },
-    {
-      quote:
-        "Louie is a great leader. His energy and positive business strategies are infectious. I learned a great deal working for Louie, and see him going far in the business world.",
-      author: "Laura Diem",
-      title: "Operations and Customer Experience",
-    },
-    {
-      quote:
-        "Not to be cliché, but Louie has forgotten more about sales and marketing than most people know. He is a tenacious, hard-working competitor and I recommend him without reservation!",
-      author: "Dan McDade",
-      title: "Managing Partner @ Prospect-Experience | B2B Marketing Expert",
-    },
-  ];
-
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+
+  // Format the title from role and company
+  const formatTitle = (testimonial: TestimonialItem) => {
+    if (testimonial.role && testimonial.company) {
+      return `${testimonial.role} - ${testimonial.company}`;
+    }
+    return testimonial.role || testimonial.company || "";
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -123,6 +71,10 @@ export function Testimonials({
       setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
     }
   };
+
+  if (testimonials.length === 0) {
+    return null;
+  }
 
   return (
     <section id="testimonials" className="bg-white py-32">
@@ -178,7 +130,7 @@ export function Testimonials({
                   </div>
 
                   <blockquote className="text-lg leading-relaxed text-neutral-700 lg:text-xl xl:text-2xl flex-1">
-                    "{testimonials[currentIndex].quote}"
+                    &ldquo;{testimonials[currentIndex].quote}&rdquo;
                   </blockquote>
 
                   <div className="mt-8 border-t border-neutral-200 pt-6">
@@ -186,7 +138,7 @@ export function Testimonials({
                       {testimonials[currentIndex].author}
                     </p>
                     <p className="mt-1 text-sm text-neutral-600 lg:text-base">
-                      {testimonials[currentIndex].title}
+                      {formatTitle(testimonials[currentIndex])}
                     </p>
                   </div>
                 </div>

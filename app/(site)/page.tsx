@@ -7,10 +7,13 @@ import { Process } from "@/components/sections/Process";
 import { FAQ } from "@/components/sections/FAQ";
 import { Contact } from "@/components/sections/Contact";
 import { Awards } from "@/components/sections/Awards";
-import { getSiteSettings } from "@/lib/payload";
+import { getSiteSettings, getTestimonials } from "@/lib/payload";
 
 export default async function Home() {
-  const settings = await getSiteSettings();
+  const [settings, testimonials] = await Promise.all([
+    getSiteSettings(),
+    getTestimonials(),
+  ]);
 
   return (
     <main>
@@ -51,9 +54,10 @@ export default async function Home() {
         description={settings.valueProposition.description}
         ctaText={settings.valueProposition.ctaText}
       />
-      <Testimonials 
+      <Testimonials
         headline={settings.testimonialsSection.headline}
         subheadline={settings.testimonialsSection.subheadline}
+        testimonials={testimonials}
       />
       <Process 
         headline={settings.process.headline}

@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { getVideosPageData } from "@/lib/payload";
 
 export const metadata: Metadata = {
   title: "Sales Training Videos | Louie Bernstein - Top Sales Insights",
@@ -12,49 +13,17 @@ export const metadata: Metadata = {
   },
 };
 
-// Video data structure with SEO metadata
-const featuredVideos = [
-  {
-    id: "ScygjngNNY4",
-    title: "Build This Before Hiring Salespeople",
-    description:
-      "Don't hire sales reps until you have a playbook. Learn why building the system first is crucial for scaling revenue.",
-    isShort: true,
-  },
-  {
-    id: "LgaJZ4R6Y-4",
-    title: "My 1st Sales Hire Mistake",
-    description:
-      "Avoid common hiring pitfalls. Louie shares his personal experience with early sales hires and what he learned.",
-    isShort: true,
-  },
-  {
-    id: "40BopNISisE",
-    title: "Build The System Before The Team",
-    description:
-      "Why you need a sales system before a sales team. A fractional sales leader's perspective on sustainable growth.",
-    isShort: true,
-  },
-  {
-    id: "epPZ4qZBo5I",
-    title: "The Secret Email Step That Gets Replies",
-    description:
-      "A tactical email outreach tip to increase your response rates immediately. Simple but effective.",
-    isShort: true,
-  },
-];
-
 // Generate VideoObject schema for SEO/AEO
-function generateVideoSchema() {
-  const videoObjects = featuredVideos.map((video) => ({
+function generateVideoSchema(videos: Array<{ videoId: string; title: string; description?: string }>) {
+  const videoObjects = videos.map((video) => ({
     "@type": "VideoObject",
-    "@id": `https://louiebernstein.com/videos#video-${video.id}`,
+    "@id": `https://louiebernstein.com/videos#video-${video.videoId}`,
     name: video.title,
-    description: video.description,
-    thumbnailUrl: `https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`,
+    description: video.description || "",
+    thumbnailUrl: `https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`,
     uploadDate: "2025-11-23",
-    contentUrl: `https://www.youtube.com/watch?v=${video.id}`,
-    embedUrl: `https://www.youtube-nocookie.com/embed/${video.id}`,
+    contentUrl: `https://www.youtube.com/watch?v=${video.videoId}`,
+    embedUrl: `https://www.youtube-nocookie.com/embed/${video.videoId}`,
     publisher: {
       "@type": "Person",
       name: "Louie Bernstein",
@@ -80,8 +49,11 @@ function generateVideoSchema() {
   };
 }
 
-export default function VideosPage() {
-  const videoSchema = generateVideoSchema();
+export default async function VideosPage() {
+  // Fetch videos page data from CMS
+  const pageData = await getVideosPageData();
+  const featuredVideos = pageData.featuredVideos;
+  const videoSchema = generateVideoSchema(featuredVideos);
 
   return (
     <>
@@ -93,10 +65,10 @@ export default function VideosPage() {
         <div className="container mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center">
             <h1 className="font-serif text-5xl font-bold text-primary md:text-6xl lg:text-7xl">
-              Sales Videos
+              {pageData.headline}
             </h1>
             <p className="mx-auto mt-6 max-w-2xl font-sans text-lg text-muted-foreground md:text-xl">
-              The most popular sales training content, handpicked for you
+              {pageData.subheadline}
             </p>
           </div>
 
@@ -110,12 +82,12 @@ export default function VideosPage() {
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {featuredVideos.map((video) => (
                   <div
-                    key={video.id}
+                    key={video.videoId}
                     className="group rounded-2xl border-2 border-[#0966c2] bg-card p-4 shadow-lg transition-all hover:shadow-xl"
                   >
                     <div className="aspect-[9/16] w-full overflow-hidden rounded-lg">
                       <iframe
-                        src={`https://www.youtube-nocookie.com/embed/${video.id}`}
+                        src={`https://www.youtube-nocookie.com/embed/${video.videoId}`}
                         title={video.title}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
@@ -131,7 +103,7 @@ export default function VideosPage() {
                         {video.description}
                       </p>
                       <a
-                        href={`https://www.youtube.com/watch?v=${video.id}`}
+                        href={`https://www.youtube.com/watch?v=${video.videoId}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="mt-3 inline-block font-sans text-sm font-medium text-[#0966c2] hover:underline"
@@ -151,7 +123,7 @@ export default function VideosPage() {
               </h2>
               <div className="aspect-video w-full overflow-hidden rounded-lg">
                 <iframe
-                  src="https://www.youtube-nocookie.com/embed/videoseries?list=PL7HfhnqHyzRmGDUMDhcSgZW8pR7DhW_Hl"
+                  src={`https://www.youtube-nocookie.com/embed/videoseries?list=${pageData.playlistId}`}
                   title="Featured Sales Videos Playlist"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -164,7 +136,7 @@ export default function VideosPage() {
             {/* CTA Section */}
             <div className="mt-12 text-center">
               <a
-                href="https://www.youtube.com/playlist?list=PL7HfhnqHyzRmGDUMDhcSgZW8pR7DhW_Hl"
+                href={`https://www.youtube.com/playlist?list=${pageData.playlistId}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block rounded-lg bg-[#0966c2] px-8 py-4 font-sans text-lg font-semibold text-white shadow-lg transition-all hover:bg-[#0855a3] hover:shadow-xl"

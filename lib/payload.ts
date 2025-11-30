@@ -358,7 +358,7 @@ export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
 
   try {
     const response = await fetch(`${PAYLOAD_URL}/api/globals/site-settings`, {
-      next: { revalidate: 60 },
+      next: { revalidate: 10 },
     });
 
     if (!response.ok) {
@@ -491,3 +491,106 @@ export async function getCoursePageData() {
   const settings = await getSiteSettings();
   return { ...settings.coursePage, playlistId: settings.course.playlistId };
 }
+
+// ============================================================================
+// TESTIMONIALS COLLECTION
+// ============================================================================
+
+interface Testimonial {
+  quote: string;
+  author: string;
+  role?: string;
+  company?: string;
+  image?: { url: string } | null;
+  featured?: boolean;
+  displayOrder?: number;
+}
+
+// Default testimonials (fallback if CMS is empty)
+const defaultTestimonials: Testimonial[] = [
+  {
+    quote: "When Louie came on board he wrote and organized our outbound scripts and emails. We now had everyone working off the same playbook, and it gave us consistency.",
+    author: "Neal Reynolds",
+    role: "CEO",
+    company: "BankMarketingCenter.com",
+  },
+  {
+    quote: "Thank you Louie for what you have done in the past year. I believe our sales are far better than where they were a year ago, great job.",
+    author: "Kevin Zhao",
+    role: "CEO",
+    company: "ZBS POS",
+  },
+  {
+    quote: "You taught me a great deal, the lessons will always stick with me. Your teachings have contributed to me being a better sales professional.",
+    author: "Laura H.",
+    role: "Sales Tech Strategist",
+  },
+  {
+    quote: "I worked for Louie for over four years. During that time our team had constant sales growth. Louie's leadership and sales processes were key to that growth.",
+    author: "David Yasson",
+    role: "Group Manager, Strategic Accounts",
+    company: "Intuit",
+  },
+  {
+    quote: "In the thirty years I have had the privilege to know and work with Louie, I have observed him to be organized, efficient, extremely competent, and have an excellent rapport with people.",
+    author: "Jim Nelms",
+    role: "Chief Information Security Officer",
+  },
+  {
+    quote: "If you needed help closing a deal, Louie was your man. He helped me to improve my social skills and learn how to speak to people in a way that would get them to like and trust me.",
+    author: "Richard Adrian, CEM",
+    role: "Building Automation Systems Sales Engineer",
+  },
+  {
+    quote: "Louie is a highly effective and very successful sales leader. He developed processes that allow him to be on top of all details, making him extremely efficient.",
+    author: "Stephen W.",
+    role: "CEO, Active Angel Investor",
+  },
+  {
+    quote: "His professionalism, his great desire to succeed, his professional ethics, as well as leadership gave me confidence to do many things in my own career.",
+    author: "Christopher H. Short",
+    role: "Software Engineering, CIO, CTO",
+  },
+  {
+    quote: "He is one of the best general managers that I have worked with and is a great leader.",
+    author: "Victor Hodges - CISSP",
+    role: "Information Systems Specialist - Infosec",
+  },
+  {
+    quote: "Louie is a great leader. His energy and positive business strategies are infectious. I learned a great deal working for Louie.",
+    author: "Laura Diem",
+    role: "Operations and Customer Experience",
+  },
+  {
+    quote: "Not to be cliché, but Louie has forgotten more about sales and marketing than most people know. He is a tenacious, hard-working competitor.",
+    author: "Dan McDade",
+    role: "Managing Partner @ Prospect-Experience | B2B Marketing Expert",
+  },
+];
+
+export const getTestimonials = cache(async (): Promise<Testimonial[]> => {
+  if (!CMS_ENABLED || !PAYLOAD_URL) {
+    return defaultTestimonials;
+  }
+
+  try {
+    const response = await fetch(
+      `${PAYLOAD_URL}/api/testimonials?limit=50&sort=displayOrder`,
+      { next: { revalidate: 10 } }
+    );
+
+    if (!response.ok) {
+      console.warn('Failed to fetch testimonials, using defaults');
+      return defaultTestimonials;
+    }
+
+    const data = await response.json();
+    const testimonials = data.docs as Testimonial[];
+
+    // Return CMS testimonials if we have them, otherwise defaults
+    return testimonials.length > 0 ? testimonials : defaultTestimonials;
+  } catch (error) {
+    console.warn('Error fetching testimonials:', error);
+    return defaultTestimonials;
+  }
+});

@@ -5,6 +5,11 @@ const CMS_DEPLOY_WEBHOOK_URL =
   process.env.SLACK_BOT_CMS_WEBHOOK_URL ||
   'https://louie-slack-bot.onrender.com/webhooks/cms-update'
 
+// Revalidation endpoint URL (same site)
+const REVALIDATE_URL = process.env.NODE_ENV === 'production'
+  ? 'https://louiebernstein.com/api/revalidate'
+  : 'http://localhost:3000/api/revalidate'
+
 export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
   admin: {
@@ -13,10 +18,34 @@ export const SiteSettings: GlobalConfig = {
   hooks: {
     afterChange: [
       async ({ doc, req }) => {
+        // 1. Trigger instant cache revalidation
+        const revalidateSecret = process.env.REVALIDATE_SECRET
+        if (revalidateSecret) {
+          try {
+            const revalidateResponse = await fetch(REVALIDATE_URL, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'x-revalidate-secret': revalidateSecret,
+              },
+            })
+
+            if (revalidateResponse.ok) {
+              req.payload.logger?.info('[SiteSettings] Cache revalidation triggered successfully.')
+            } else {
+              req.payload.logger?.warn(
+                `[SiteSettings] Cache revalidation failed: ${revalidateResponse.status}`
+              )
+            }
+          } catch (error) {
+            req.payload.logger?.warn(
+              `[SiteSettings] Cache revalidation error: ${(error as Error)?.message}`
+            )
+          }
+        }
+
+        // 2. Call external webhook (Slack notification, etc.)
         if (!CMS_DEPLOY_WEBHOOK_URL) {
-          req.payload.logger?.warn(
-            '[SiteSettings] CMS_DEPLOY_WEBHOOK_URL not set; skipping deploy webhook trigger.'
-          )
           return
         }
 
