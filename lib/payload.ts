@@ -40,6 +40,13 @@ interface BenefitItem {
   icon?: string;
 }
 
+interface ToolItem {
+  name: string;
+  description: string;
+  href: string;
+  icon?: string;
+}
+
 interface VideoItem {
   videoId: string;
   title: string;
@@ -117,6 +124,18 @@ interface SiteSettings {
     headline: string;
     subheadline: string;
   };
+  fractionalSalesLeader: {
+    headline: string;
+    headlineAccent: string;
+    hook: string;
+    paragraph1: string;
+    paragraph2: string;
+    paragraph3: string;
+    paragraph4: string;
+    calloutText: string;
+    ctaText: string;
+    ctaUrl: string;
+  };
   social: {
     linkedin: string;
     youtube: string;
@@ -126,10 +145,19 @@ interface SiteSettings {
     email: string;
     phone: string;
   };
+  contactSection: {
+    headline: string;
+    description: string;
+    emailLabel: string;
+    phoneLabel: string;
+    ctaButtonText: string;
+  };
   footer: {
     tagline: string;
     slogan: string;
     copyrightName: string;
+    quickLinksLabel: string;
+    getInTouchLabel: string;
   };
   newsletter: {
     name: string;
@@ -145,12 +173,28 @@ interface SiteSettings {
     benefits: BenefitItem[];
     finalCtaHeadline: string;
     finalCtaDescription: string;
+    featuredContentHeadline: string;
+    featuredContentDescription: string;
+    finalCtaButtonText: string;
+  };
+  toolsPage: {
+    headline: string;
+    description: string;
+    tools: ToolItem[];
+  };
+  roiCalculatorPage: {
+    headline: string;
+    subheadline: string;
   };
   videosPage: {
     headline: string;
     subheadline: string;
     playlistId: string;
     featuredVideos: VideoItem[];
+    featuredShortsHeadline: string;
+    playlistHeadline: string;
+    watchOnYoutubeText: string;
+    watchMoreButtonText: string;
   };
   course: {
     playlistId: string;
@@ -261,6 +305,18 @@ const defaultSettings: SiteSettings = {
     headline: 'What Clients Say',
     subheadline: 'Real results from real businesses',
   },
+  fractionalSalesLeader: {
+    headline: 'Fractional Sales Leader for the',
+    headlineAccent: 'Founder Trapped in Sales',
+    hook: "You built this. From nothing. Now you're stuck.",
+    paragraph1: "That brutal climb from $1M to $10M in revenue? It's a trap. You know you're the bottleneck, the one still running sales calls, but the thought of a $250k+ VP of Sales gamble makes your stomach churn. And those big consulting firms with their \"proprietary systems\"? They've never felt the grind of scaling from zero. They don't get it.",
+    paragraph2: 'I do.',
+    paragraph3: "A Fractional Sales Leader isn't just another line item on your P&L. It's your path to freedom. It's for the technical or operational founder who needs more than just a manager; you need a partner who has walked this exact path and scaled a company from the ground up to the INC 500.",
+    paragraph4: "Forget the corporate jargon. This is about building a repeatable sales machine tailored for your business, so you can transition from being the Chief Salesperson back to being the CEO. We'll build your sales playbook, coach your team, and implement a pipeline you can actually trust.",
+    calloutText: "Stop letting sales management steal your time and kill your growth. Let's build the system that frees you.",
+    ctaText: "Let's Talk",
+    ctaUrl: 'https://calendly.com/louiebernstein/30minutes',
+  },
   social: {
     linkedin: 'https://www.linkedin.com/in/sales-processes/',
     youtube: 'https://www.youtube.com/playlist?list=PL7HfhnqHyzRmGDUMDhcSgZW8pR7DhW_Hl',
@@ -270,10 +326,19 @@ const defaultSettings: SiteSettings = {
     email: 'Louie@LouieBernstein.com',
     phone: '(404)808-5326',
   },
+  contactSection: {
+    headline: "Let's Talk",
+    description: 'Ready to transform your sales team? Get in touch today.',
+    emailLabel: 'Email',
+    phoneLabel: 'Phone',
+    ctaButtonText: 'Schedule a 30-Minute Call',
+  },
   footer: {
     tagline: 'Fractional Sales Leader',
     slogan: 'Less Spend. More Sales.',
     copyrightName: 'Louie Bernstein',
+    quickLinksLabel: 'Quick Links',
+    getInTouchLabel: 'Get In Touch',
   },
   newsletter: {
     name: 'The Sunday Starter',
@@ -293,11 +358,34 @@ const defaultSettings: SiteSettings = {
     ],
     finalCtaHeadline: 'Ready to Start Your Week Right?',
     finalCtaDescription: 'Join thousands of sales professionals who get The Sunday Starter every week',
+    featuredContentHeadline: 'Featured Newsletter Content',
+    featuredContentDescription: 'Watch exclusive videos and content from The Sunday Starter',
+    finalCtaButtonText: 'Subscribe Now',
+  },
+  toolsPage: {
+    headline: 'Tools',
+    description: 'Free tools to help you make smarter sales decisions',
+    tools: [
+      {
+        name: 'ROI Calculator',
+        description: 'Calculate the ROI of hiring a Fractional Sales Leader vs. founder-led sales or a full-time VP hire.',
+        href: '/tools/roi-calculator',
+        icon: 'Calculator',
+      },
+    ],
+  },
+  roiCalculatorPage: {
+    headline: 'Fractional Sales ROI Calculator',
+    subheadline: 'You be the judge if a Fractional Sales Leader makes financial sense',
   },
   videosPage: {
     headline: 'Sales Videos',
     subheadline: 'The most popular sales training content, handpicked for you',
     playlistId: 'PL7HfhnqHyzRmGDUMDhcSgZW8pR7DhW_Hl',
+    featuredShortsHeadline: 'Featured Shorts',
+    playlistHeadline: 'Complete Sales Leadership Playlist',
+    watchOnYoutubeText: 'Watch on YouTube →',
+    watchMoreButtonText: 'Watch More Videos on YouTube',
     featuredVideos: [
       { videoId: 'ScygjngNNY4', title: 'Build This Before Hiring Salespeople', description: "Don't hire sales reps until you have a playbook. Learn why building the system first is crucial for scaling revenue." },
       { videoId: 'LgaJZ4R6Y-4', title: 'My 1st Sales Hire Mistake', description: 'Avoid common hiring pitfalls. Louie shares his personal experience with early sales hires and what he learned.' },
@@ -397,8 +485,10 @@ function mergeSettings(defaults: SiteSettings, data: Partial<SiteSettings>): Sit
     },
     awards: { ...defaults.awards, ...data.awards },
     testimonialsSection: { ...defaults.testimonialsSection, ...data.testimonialsSection },
+    fractionalSalesLeader: { ...defaults.fractionalSalesLeader, ...data.fractionalSalesLeader },
     social: { ...defaults.social, ...data.social },
     contact: { ...defaults.contact, ...data.contact },
+    contactSection: { ...defaults.contactSection, ...data.contactSection },
     footer: { ...defaults.footer, ...data.footer },
     newsletter: { ...defaults.newsletter, ...data.newsletter },
     newsletterPage: {
@@ -406,6 +496,12 @@ function mergeSettings(defaults: SiteSettings, data: Partial<SiteSettings>): Sit
       ...data.newsletterPage,
       benefits: data.newsletterPage?.benefits?.length ? data.newsletterPage.benefits : defaults.newsletterPage.benefits,
     },
+    toolsPage: {
+      ...defaults.toolsPage,
+      ...data.toolsPage,
+      tools: data.toolsPage?.tools?.length ? data.toolsPage.tools : defaults.toolsPage.tools,
+    },
+    roiCalculatorPage: { ...defaults.roiCalculatorPage, ...data.roiCalculatorPage },
     videosPage: {
       ...defaults.videosPage,
       ...data.videosPage,
@@ -490,6 +586,16 @@ export async function getVideosPageData() {
 export async function getCoursePageData() {
   const settings = await getSiteSettings();
   return { ...settings.coursePage, playlistId: settings.course.playlistId };
+}
+
+export async function getToolsPageData() {
+  const settings = await getSiteSettings();
+  return settings.toolsPage;
+}
+
+export async function getROICalculatorPageData() {
+  const settings = await getSiteSettings();
+  return settings.roiCalculatorPage;
 }
 
 // ============================================================================

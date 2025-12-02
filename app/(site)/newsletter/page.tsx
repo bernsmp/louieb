@@ -75,10 +75,10 @@ export default async function NewsletterPage() {
         {/* Video Content Section */}
         <div className="mt-24">
           <h2 className="text-center font-serif text-4xl font-bold text-primary md:text-5xl">
-            Featured Newsletter Content
+            {data.featuredContentHeadline}
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-center font-sans text-lg text-muted-foreground md:text-xl">
-            Watch exclusive videos and content from The Sunday Starter
+            {data.featuredContentDescription}
           </p>
           <div className="mt-12 aspect-video w-full overflow-hidden rounded-2xl border-2 border-[#0966c2] shadow-lg">
             <iframe
@@ -105,7 +105,7 @@ export default async function NewsletterPage() {
             rel="noopener noreferrer"
             className="mt-8 inline-block rounded-lg bg-accent px-12 py-6 font-sans text-2xl font-bold text-accent-foreground shadow-2xl transition-all hover:bg-accent/90 hover:shadow-3xl"
           >
-            Subscribe Now
+            {data.finalCtaButtonText}
           </Link>
         </div>
       </div>

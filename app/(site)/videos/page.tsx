@@ -77,7 +77,7 @@ export default async function VideosPage() {
             {/* YouTube Shorts Gallery - Responsive Grid */}
             <div className="mb-12">
               <h2 className="mb-8 font-sans text-3xl font-bold text-foreground">
-                Featured Shorts
+                {pageData.featuredShortsHeadline}
               </h2>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {featuredVideos.map((video) => (
@@ -108,7 +108,7 @@ export default async function VideosPage() {
                         rel="noopener noreferrer"
                         className="mt-3 inline-block font-sans text-sm font-medium text-[#0966c2] hover:underline"
                       >
-                        Watch on YouTube →
+                        {pageData.watchOnYoutubeText}
                       </a>
                     </div>
                   </div>
@@ -119,7 +119,7 @@ export default async function VideosPage() {
             {/* Full Playlist Section */}
             <div className="rounded-2xl border-2 border-[#0966c2] bg-card p-8 shadow-lg">
               <h2 className="mb-6 font-sans text-2xl font-bold text-foreground">
-                Complete Sales Leadership Playlist
+                {pageData.playlistHeadline}
               </h2>
               <div className="aspect-video w-full overflow-hidden rounded-lg">
                 <iframe
@@ -141,7 +141,7 @@ export default async function VideosPage() {
                 rel="noopener noreferrer"
                 className="inline-block rounded-lg bg-[#0966c2] px-8 py-4 font-sans text-lg font-semibold text-white shadow-lg transition-all hover:bg-[#0855a3] hover:shadow-xl"
               >
-                Watch More Videos on YouTube
+                {pageData.watchMoreButtonText}
               </a>
             </div>
           </div>

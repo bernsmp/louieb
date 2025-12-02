@@ -8,6 +8,8 @@ interface FooterProps {
   phone?: string;
   linkedin?: string;
   youtube?: string;
+  quickLinksLabel?: string;
+  getInTouchLabel?: string;
 }
 
 export function Footer({
@@ -18,6 +20,8 @@ export function Footer({
   phone = "(404) 808-5326",
   linkedin = "https://www.linkedin.com/in/sales-processes/",
   youtube = "https://www.youtube.com/playlist?list=PL7HfhnqHyzRmGDUMDhcSgZW8pR7DhW_Hl",
+  quickLinksLabel = "Quick Links",
+  getInTouchLabel = "Get In Touch",
 }: FooterProps) {
   const phoneLink = `tel:+1${phone.replace(/\D/g, '')}`;
 
@@ -41,7 +45,7 @@ export function Footer({
           {/* Quick Links */}
           <div>
             <h4 className="font-sans text-sm font-semibold uppercase tracking-wider text-foreground">
-              Quick Links
+              {quickLinksLabel}
             </h4>
             <ul className="mt-4 space-y-3">
               <li>
@@ -70,7 +74,7 @@ export function Footer({
           {/* Contact & Social */}
           <div>
             <h4 className="font-sans text-sm font-semibold uppercase tracking-wider text-foreground">
-              Get In Touch
+              {getInTouchLabel}
             </h4>
             <ul className="mt-4 space-y-3">
               <li>

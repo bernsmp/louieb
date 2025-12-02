@@ -322,6 +322,97 @@ export const SiteSettings: GlobalConfig = {
                 { name: 'subheadline', type: 'text', label: 'Subheadline', defaultValue: 'Real results from real businesses' },
               ],
             },
+            // Fractional Sales Leader Section
+            {
+              name: 'fractionalSalesLeader',
+              type: 'group',
+              label: 'Fractional Sales Leader Section',
+              admin: {
+                description: 'The marketing section targeting founders stuck in sales',
+              },
+              fields: [
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'headline',
+                      type: 'text',
+                      label: 'Headline',
+                      admin: { width: '50%' },
+                      defaultValue: 'Fractional Sales Leader for the',
+                    },
+                    {
+                      name: 'headlineAccent',
+                      type: 'text',
+                      label: 'Headline Accent (colored)',
+                      admin: { width: '50%' },
+                      defaultValue: 'Founder Trapped in Sales',
+                    },
+                  ],
+                },
+                {
+                  name: 'hook',
+                  type: 'text',
+                  label: 'Hook Line',
+                  admin: { description: 'Bold text below the headline' },
+                  defaultValue: "You built this. From nothing. Now you're stuck.",
+                },
+                {
+                  name: 'paragraph1',
+                  type: 'textarea',
+                  label: 'Paragraph 1',
+                  admin: { description: 'The pain point paragraph about $1M-$10M trap' },
+                  defaultValue: "That brutal climb from $1M to $10M in revenue? It's a trap. You know you're the bottleneck, the one still running sales calls, but the thought of a $250k+ VP of Sales gamble makes your stomach churn. And those big consulting firms with their \"proprietary systems\"? They've never felt the grind of scaling from zero. They don't get it.",
+                },
+                {
+                  name: 'paragraph2',
+                  type: 'text',
+                  label: 'Paragraph 2 (Short)',
+                  admin: { description: 'The short emphatic response' },
+                  defaultValue: 'I do.',
+                },
+                {
+                  name: 'paragraph3',
+                  type: 'textarea',
+                  label: 'Paragraph 3',
+                  admin: { description: 'What a Fractional Sales Leader is' },
+                  defaultValue: "A Fractional Sales Leader isn't just another line item on your P&L. It's your path to freedom. It's for the technical or operational founder who needs more than just a manager; you need a partner who has walked this exact path and scaled a company from the ground up to the INC 500.",
+                },
+                {
+                  name: 'paragraph4',
+                  type: 'textarea',
+                  label: 'Paragraph 4',
+                  admin: { description: 'The value proposition' },
+                  defaultValue: "Forget the corporate jargon. This is about building a repeatable sales machine tailored for your business, so you can transition from being the Chief Salesperson back to being the CEO. We'll build your sales playbook, coach your team, and implement a pipeline you can actually trust.",
+                },
+                {
+                  name: 'calloutText',
+                  type: 'textarea',
+                  label: 'Callout Box Text',
+                  admin: { description: 'The highlighted text in the callout box' },
+                  defaultValue: "Stop letting sales management steal your time and kill your growth. Let's build the system that frees you.",
+                },
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'ctaText',
+                      type: 'text',
+                      label: 'CTA Button Text',
+                      admin: { width: '50%' },
+                      defaultValue: "Let's Talk",
+                    },
+                    {
+                      name: 'ctaUrl',
+                      type: 'text',
+                      label: 'CTA Button URL',
+                      admin: { width: '50%' },
+                      defaultValue: 'https://calendly.com/louiebernstein/30minutes',
+                    },
+                  ],
+                },
+              ],
+            },
           ],
         },
         // ==========================================
@@ -430,8 +521,51 @@ export const SiteSettings: GlobalConfig = {
         // ==========================================
         {
           label: 'Other Pages',
-          description: 'Content for Videos, Newsletter, and Course pages',
+          description: 'Content for Videos, Newsletter, Course, and Tools pages',
           fields: [
+            // Tools Page
+            {
+              name: 'toolsPage',
+              type: 'group',
+              label: 'Tools Page (/tools)',
+              admin: {
+                description: 'Content for the Tools landing page',
+              },
+              fields: [
+                { name: 'headline', type: 'text', label: 'Page Headline', defaultValue: 'Tools' },
+                { name: 'description', type: 'text', label: 'Page Description', defaultValue: 'Free tools to help you make smarter sales decisions' },
+                {
+                  name: 'tools',
+                  type: 'array',
+                  label: 'Tools',
+                  admin: {
+                    description: 'List of available tools',
+                    initCollapsed: true,
+                  },
+                  minRows: 1,
+                  maxRows: 10,
+                  fields: [
+                    { name: 'name', type: 'text', label: 'Tool Name', required: true },
+                    { name: 'description', type: 'textarea', label: 'Description', required: true },
+                    { name: 'href', type: 'text', label: 'Link URL', required: true, admin: { description: 'e.g., /tools/roi-calculator' } },
+                    { name: 'icon', type: 'text', label: 'Icon Name', admin: { description: 'Lucide icon name (e.g., Calculator, BarChart)' } },
+                  ],
+                },
+              ],
+            },
+            // ROI Calculator Page
+            {
+              name: 'roiCalculatorPage',
+              type: 'group',
+              label: 'ROI Calculator Page (/tools/roi-calculator)',
+              admin: {
+                description: 'Content for the ROI Calculator page',
+              },
+              fields: [
+                { name: 'headline', type: 'text', label: 'Page Headline', defaultValue: 'Fractional Sales ROI Calculator' },
+                { name: 'subheadline', type: 'text', label: 'Page Subheadline', defaultValue: 'You be the judge if a Fractional Sales Leader makes financial sense' },
+              ],
+            },
             // Videos Page
             {
               name: 'videosPage',
@@ -466,6 +600,10 @@ export const SiteSettings: GlobalConfig = {
                     { name: 'description', type: 'textarea', label: 'Description' },
                   ],
                 },
+                { name: 'featuredShortsHeadline', type: 'text', label: 'Featured Shorts Section Headline', defaultValue: 'Featured Shorts' },
+                { name: 'playlistHeadline', type: 'text', label: 'Playlist Section Headline', defaultValue: 'Complete Sales Leadership Playlist' },
+                { name: 'watchOnYoutubeText', type: 'text', label: 'Watch on YouTube Link Text', defaultValue: 'Watch on YouTube →' },
+                { name: 'watchMoreButtonText', type: 'text', label: 'Watch More Button Text', defaultValue: 'Watch More Videos on YouTube' },
               ],
             },
             // Newsletter Page
@@ -497,6 +635,9 @@ export const SiteSettings: GlobalConfig = {
                 },
                 { name: 'finalCtaHeadline', type: 'text', label: 'Final CTA Headline', defaultValue: 'Ready to Start Your Week Right?' },
                 { name: 'finalCtaDescription', type: 'text', label: 'Final CTA Description', defaultValue: 'Join thousands of sales professionals who get The Sunday Starter every week' },
+                { name: 'featuredContentHeadline', type: 'text', label: 'Featured Content Section Headline', defaultValue: 'Featured Newsletter Content' },
+                { name: 'featuredContentDescription', type: 'text', label: 'Featured Content Description', defaultValue: 'Watch exclusive videos and content from The Sunday Starter' },
+                { name: 'finalCtaButtonText', type: 'text', label: 'Final CTA Button Text', defaultValue: 'Subscribe Now' },
               ],
             },
             // Course Page
@@ -620,6 +761,22 @@ export const SiteSettings: GlobalConfig = {
                 { name: 'phone', type: 'text', label: 'Phone Number', defaultValue: '(404) 808-5326' },
               ],
             },
+            // Contact Section Labels (for homepage)
+            {
+              name: 'contactSection',
+              type: 'group',
+              label: 'Contact Section Labels',
+              admin: {
+                description: 'Labels and text for the Contact section on the homepage',
+              },
+              fields: [
+                { name: 'headline', type: 'text', label: 'Section Headline', defaultValue: "Let's Talk" },
+                { name: 'description', type: 'text', label: 'Section Description', defaultValue: 'Ready to transform your sales team? Get in touch today.' },
+                { name: 'emailLabel', type: 'text', label: 'Email Card Label', defaultValue: 'Email' },
+                { name: 'phoneLabel', type: 'text', label: 'Phone Card Label', defaultValue: 'Phone' },
+                { name: 'ctaButtonText', type: 'text', label: 'CTA Button Text', defaultValue: 'Schedule a 30-Minute Call' },
+              ],
+            },
             // Newsletter Settings
             {
               name: 'newsletter',
@@ -652,6 +809,8 @@ export const SiteSettings: GlobalConfig = {
                 { name: 'tagline', type: 'text', label: 'Footer Tagline', defaultValue: 'Fractional Sales Leader' },
                 { name: 'slogan', type: 'text', label: 'Footer Slogan', defaultValue: 'Less Spend. More Sales.' },
                 { name: 'copyrightName', type: 'text', label: 'Copyright Name', defaultValue: 'Louie Bernstein' },
+                { name: 'quickLinksLabel', type: 'text', label: 'Quick Links Section Label', defaultValue: 'Quick Links' },
+                { name: 'getInTouchLabel', type: 'text', label: 'Get In Touch Section Label', defaultValue: 'Get In Touch' },
               ],
             },
           ],

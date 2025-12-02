@@ -4,25 +4,35 @@ interface ContactProps {
   email?: string;
   phone?: string;
   calendlyUrl?: string;
+  headline?: string;
+  description?: string;
+  emailLabel?: string;
+  phoneLabel?: string;
+  ctaButtonText?: string;
 }
 
 export function Contact({
   email = "Louie@LouieBernstein.com",
   phone = "(404) 808-5326",
   calendlyUrl = "https://calendly.com/louiebernstein/30minutes",
+  headline = "Let's Talk",
+  description = "Ready to transform your sales team? Get in touch today.",
+  emailLabel = "Email",
+  phoneLabel = "Phone",
+  ctaButtonText = "Schedule a 30-Minute Call",
 }: ContactProps) {
   // Format phone for tel: link
   const phoneLink = `tel:+1${phone.replace(/\D/g, '')}`;
-  
+
   return (
     <section id="contact" className="bg-white py-32">
       <div className="container mx-auto max-w-5xl px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-5xl font-bold text-neutral-900 md:text-6xl lg:text-7xl">
-            Let's Talk
+            {headline}
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-xl text-neutral-600">
-            Ready to transform your sales team? Get in touch today.
+            {description}
           </p>
         </div>
 
@@ -45,7 +55,7 @@ export function Contact({
               </svg>
             </div>
             <h3 className="mt-8 text-2xl font-bold text-neutral-900">
-              Email
+              {emailLabel}
             </h3>
             <a
               href={`mailto:${email}`}
@@ -73,7 +83,7 @@ export function Contact({
               </svg>
             </div>
             <h3 className="mt-8 text-2xl font-bold text-neutral-900">
-              Phone
+              {phoneLabel}
             </h3>
             <a
               href={phoneLink}
@@ -92,7 +102,7 @@ export function Contact({
             rel="noopener noreferrer"
             className="inline-block rounded-lg bg-neutral-900 px-12 py-5 text-lg font-bold text-white shadow-xl transition-all hover:bg-neutral-800 hover:scale-105 hover:shadow-2xl"
           >
-            Schedule a 30-Minute Call
+            {ctaButtonText}
           </Link>
         </div>
       </div>

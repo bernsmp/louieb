@@ -60,7 +60,18 @@ export default async function Home() {
         subheadline={settings.testimonialsSection.subheadline}
         testimonials={testimonials}
       />
-      <FractionalSalesLeader />
+      <FractionalSalesLeader
+        headline={settings.fractionalSalesLeader.headline}
+        headlineAccent={settings.fractionalSalesLeader.headlineAccent}
+        hook={settings.fractionalSalesLeader.hook}
+        paragraph1={settings.fractionalSalesLeader.paragraph1}
+        paragraph2={settings.fractionalSalesLeader.paragraph2}
+        paragraph3={settings.fractionalSalesLeader.paragraph3}
+        paragraph4={settings.fractionalSalesLeader.paragraph4}
+        calloutText={settings.fractionalSalesLeader.calloutText}
+        ctaText={settings.fractionalSalesLeader.ctaText}
+        ctaUrl={settings.fractionalSalesLeader.ctaUrl}
+      />
       <Process 
         headline={settings.process.headline}
         subheadline={settings.process.subheadline}
@@ -71,10 +82,15 @@ export default async function Home() {
         subheadline={settings.faq.subheadline}
         items={settings.faq.items}
       />
-      <Contact 
+      <Contact
         email={settings.contact.email}
         phone={settings.contact.phone}
         calendlyUrl={settings.social.calendly}
+        headline={settings.contactSection.headline}
+        description={settings.contactSection.description}
+        emailLabel={settings.contactSection.emailLabel}
+        phoneLabel={settings.contactSection.phoneLabel}
+        ctaButtonText={settings.contactSection.ctaButtonText}
       />
       <Awards 
         headline={settings.awards.headline}
