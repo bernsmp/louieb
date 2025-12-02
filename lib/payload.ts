@@ -6,13 +6,11 @@
 
 import { cache } from 'react';
 
-// Use the site's own API for Payload data
-const PAYLOAD_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://louiebernstein.com' 
-  : 'http://localhost:3000';
+// Always fetch from production - CMS data lives there
+const PAYLOAD_URL = 'https://louiebernstein.com';
 
 // Enable CMS fetching
-const CMS_ENABLED = true;
+const CMS_ENABLED = false;
 
 // ============================================================================
 // TYPE DEFINITIONS
@@ -325,8 +323,10 @@ const defaultSettings: SiteSettings = {
     ],
     previewHeadline: 'Preview the Course',
     previewVideos: [
-      { videoId: 'sN8tuE_BXjs', title: "Introduction: The Founder's and CEO's Sales System", description: "Learn what you'll get from this complete sales system." },
-      { videoId: 'TlC353ew34o', title: 'Module 1: Hiring System That Saves Time', description: 'Discover the 120+ question hiring scorecard.' },
+      { videoId: 'TlC353ew34o', title: 'Step 1. Putting Together Your Sales Playbook' },
+      { videoId: 'RuC-3vjtl6s', title: 'Step 2. Defining Your Ideal Customer (ICP)' },
+      { videoId: 'Lh-iTnOT0kA', title: 'Step 3. Hiring Your First Salespeople - The Right Way' },
+      { videoId: 'WxyaNBgAzrE', title: 'Step 4. The Sales Hiring System - Phase 2' },
     ],
     resultsHeadline: 'Real Results From Real Businesses',
     results: [
