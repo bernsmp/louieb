@@ -3,6 +3,7 @@ import { About } from "@/components/sections/About";
 import { Services } from "@/components/sections/Services";
 import { ValueProposition } from "@/components/sections/ValueProposition";
 import { Testimonials } from "@/components/sections/Testimonials";
+import { FractionalSalesLeader } from "@/components/sections/FractionalSalesLeader";
 import { Process } from "@/components/sections/Process";
 import { FAQ } from "@/components/sections/FAQ";
 import { Contact } from "@/components/sections/Contact";
@@ -59,6 +60,7 @@ export default async function Home() {
         subheadline={settings.testimonialsSection.subheadline}
         testimonials={testimonials}
       />
+      <FractionalSalesLeader />
       <Process 
         headline={settings.process.headline}
         subheadline={settings.process.subheadline}

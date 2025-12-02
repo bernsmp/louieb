@@ -129,9 +129,11 @@ export default async function CoursePage() {
                     <h3 className="text-3xl font-bold text-neutral-900">
                       {video.title}
                     </h3>
-                    <p className="mt-4 text-lg leading-relaxed text-neutral-600">
-                      {video.description}
-                    </p>
+                    {video.description && (
+                      <p className="mt-4 text-lg leading-relaxed text-neutral-600">
+                        {video.description}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
