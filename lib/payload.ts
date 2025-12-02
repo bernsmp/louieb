@@ -10,7 +10,7 @@ import { cache } from 'react';
 const PAYLOAD_URL = 'https://louiebernstein.com';
 
 // Enable CMS fetching
-const CMS_ENABLED = false;
+const CMS_ENABLED = true;
 
 // ============================================================================
 // TYPE DEFINITIONS
