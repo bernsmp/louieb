@@ -80,24 +80,31 @@ export const SiteSettings: GlobalConfig = {
     read: () => true,
   },
   fields: [
+    // ==========================================
+    // SECTION 1: HOMEPAGE
+    // All content that appears on the homepage
+    // ==========================================
     {
-      type: 'tabs',
-      tabs: [
-        // ==========================================
-        // TAB 1: HOMEPAGE
-        // ==========================================
+      type: 'collapsible',
+      label: 'Homepage',
+      admin: {
+        initCollapsed: true,
+        description: 'All content sections that appear on the main landing page',
+      },
+      fields: [
+        // Hero Section
         {
-          label: 'Homepage',
-          description: 'Content for the main landing page',
+          type: 'collapsible',
+          label: 'Hero Section',
+          admin: {
+            initCollapsed: true,
+            description: 'The main banner at the top of the homepage',
+          },
           fields: [
-            // Hero Section
             {
               name: 'hero',
               type: 'group',
-              label: 'Hero Section',
-              admin: {
-                description: 'The main banner at the top of the homepage',
-              },
+              label: false,
               fields: [
                 {
                   name: 'headline',
@@ -162,14 +169,21 @@ export const SiteSettings: GlobalConfig = {
                 },
               ],
             },
-            // Credentials Badge
+          ],
+        },
+        // Credentials Badge
+        {
+          type: 'collapsible',
+          label: 'Credentials Badge',
+          admin: {
+            initCollapsed: true,
+            description: 'The badge shown near the hero (LinkedIn Top Voice, etc.)',
+          },
+          fields: [
             {
               name: 'credentials',
               type: 'group',
-              label: 'Credentials Badge',
-              admin: {
-                description: 'The badge shown near the hero (LinkedIn Top Voice, etc.)',
-              },
+              label: false,
               fields: [
                 {
                   name: 'primary',
@@ -187,14 +201,21 @@ export const SiteSettings: GlobalConfig = {
                 },
               ],
             },
-            // About Section
+          ],
+        },
+        // About Section
+        {
+          type: 'collapsible',
+          label: 'About Section',
+          admin: {
+            initCollapsed: true,
+            description: 'The "About Louie" section on the homepage',
+          },
+          fields: [
             {
               name: 'about',
               type: 'group',
-              label: 'About Section',
-              admin: {
-                description: 'The "About Louie" section on the homepage',
-              },
+              label: false,
               fields: [
                 {
                   type: 'row',
@@ -273,14 +294,21 @@ export const SiteSettings: GlobalConfig = {
                 },
               ],
             },
-            // Value Proposition Section
+          ],
+        },
+        // Value Proposition Section
+        {
+          type: 'collapsible',
+          label: 'Value Proposition Section',
+          admin: {
+            initCollapsed: true,
+            description: 'The "It\'s not how much you sell" section',
+          },
+          fields: [
             {
               name: 'valueProposition',
               type: 'group',
-              label: 'Value Proposition Section',
-              admin: {
-                description: 'The "It\'s not how much you sell" section',
-              },
+              label: false,
               fields: [
                 { name: 'headline', type: 'text', label: 'Headline', defaultValue: "It's not how much you sell." },
                 { name: 'subheadline', type: 'text', label: 'Subheadline', defaultValue: "It's how much you take home." },
@@ -288,48 +316,21 @@ export const SiteSettings: GlobalConfig = {
                 { name: 'ctaText', type: 'text', label: 'Button Text', defaultValue: "Let's Get Going!" },
               ],
             },
-            // Awards Section
-            {
-              name: 'awards',
-              type: 'group',
-              label: 'Awards Section',
-              admin: {
-                description: 'The awards/recognition section',
-              },
-              fields: [
-                { name: 'headline', type: 'text', label: 'Headline', defaultValue: 'Recognized Excellence' },
-                { name: 'subheadline', type: 'text', label: 'Subheadline', defaultValue: 'Award-winning sales consulting and leadership' },
-                {
-                  name: 'imageUrl',
-                  type: 'text',
-                  label: 'Awards Image URL',
-                  admin: { description: 'URL to the awards image' },
-                  defaultValue: 'https://d1yei2z3i6k35z.cloudfront.net/1671832/64e3c2e5505e3_fourawards.png',
-                },
-                { name: 'description', type: 'textarea', label: 'Description', defaultValue: 'Louie Bernstein has received four prestigious awards for excellence in sales consulting and leadership.' },
-              ],
-            },
-            // Testimonials Section Header
-            {
-              name: 'testimonialsSection',
-              type: 'group',
-              label: 'Testimonials Section Header',
-              admin: {
-                description: 'Header text only - testimonials are managed in the Testimonials collection',
-              },
-              fields: [
-                { name: 'headline', type: 'text', label: 'Headline', defaultValue: 'What Clients Say' },
-                { name: 'subheadline', type: 'text', label: 'Subheadline', defaultValue: 'Real results from real businesses' },
-              ],
-            },
-            // Fractional Sales Leader Section
+          ],
+        },
+        // Fractional Sales Leader Section
+        {
+          type: 'collapsible',
+          label: 'Fractional Sales Leader Section',
+          admin: {
+            initCollapsed: true,
+            description: 'The marketing section targeting founders stuck in sales',
+          },
+          fields: [
             {
               name: 'fractionalSalesLeader',
               type: 'group',
-              label: 'Fractional Sales Leader Section',
-              admin: {
-                description: 'The marketing section targeting founders stuck in sales',
-              },
+              label: false,
               fields: [
                 {
                   type: 'row',
@@ -415,21 +416,19 @@ export const SiteSettings: GlobalConfig = {
             },
           ],
         },
-        // ==========================================
-        // TAB 2: SERVICES & PROCESS
-        // ==========================================
+        // Services Section
         {
-          label: 'Services & Process',
-          description: 'What you offer and how it works',
+          type: 'collapsible',
+          label: 'Services Section',
+          admin: {
+            initCollapsed: true,
+            description: 'The "What I Offer" section with service cards',
+          },
           fields: [
-            // Services Section
             {
               name: 'services',
               type: 'group',
-              label: 'Services Section',
-              admin: {
-                description: 'The "What I Offer" section with service cards',
-              },
+              label: false,
               fields: [
                 { name: 'headline', type: 'text', label: 'Headline', defaultValue: 'What I Offer' },
                 { name: 'subheadline', type: 'text', label: 'Subheadline', defaultValue: 'Comprehensive sales leadership services designed to transform your team' },
@@ -452,14 +451,21 @@ export const SiteSettings: GlobalConfig = {
                 },
               ],
             },
-            // Process Section
+          ],
+        },
+        // Process Section
+        {
+          type: 'collapsible',
+          label: 'Process Section (How It Works)',
+          admin: {
+            initCollapsed: true,
+            description: 'The step-by-step process section',
+          },
+          fields: [
             {
               name: 'process',
               type: 'group',
-              label: 'Process Section (How It Works)',
-              admin: {
-                description: 'The step-by-step process section',
-              },
+              label: false,
               fields: [
                 { name: 'headline', type: 'text', label: 'Headline', defaultValue: 'How It Works' },
                 { name: 'subheadline', type: 'text', label: 'Subheadline', defaultValue: 'A proven process that delivers measurable results' },
@@ -483,17 +489,19 @@ export const SiteSettings: GlobalConfig = {
             },
           ],
         },
-        // ==========================================
-        // TAB 3: FAQ
-        // ==========================================
+        // FAQ Section
         {
-          label: 'FAQ',
-          description: 'Frequently Asked Questions',
+          type: 'collapsible',
+          label: 'FAQ Section',
+          admin: {
+            initCollapsed: true,
+            description: 'Frequently Asked Questions',
+          },
           fields: [
             {
               name: 'faq',
               type: 'group',
-              label: 'FAQ Section',
+              label: false,
               fields: [
                 { name: 'headline', type: 'text', label: 'Headline', defaultValue: 'Frequently Asked Questions' },
                 { name: 'subheadline', type: 'text', label: 'Subheadline', defaultValue: 'Everything you need to know about fractional sales leadership' },
@@ -516,21 +524,296 @@ export const SiteSettings: GlobalConfig = {
             },
           ],
         },
-        // ==========================================
-        // TAB 4: OTHER PAGES
-        // ==========================================
+        // Testimonials Section Header
         {
-          label: 'Other Pages',
-          description: 'Content for Videos, Newsletter, Course, and Tools pages',
+          type: 'collapsible',
+          label: 'Testimonials Section Header',
+          admin: {
+            initCollapsed: true,
+            description: 'Header text only - testimonials are managed in the Testimonials collection',
+          },
           fields: [
-            // Tools Page
+            {
+              name: 'testimonialsSection',
+              type: 'group',
+              label: false,
+              fields: [
+                { name: 'headline', type: 'text', label: 'Headline', defaultValue: 'What Clients Say' },
+                { name: 'subheadline', type: 'text', label: 'Subheadline', defaultValue: 'Real results from real businesses' },
+              ],
+            },
+          ],
+        },
+        // Awards Section
+        {
+          type: 'collapsible',
+          label: 'Awards Section',
+          admin: {
+            initCollapsed: true,
+            description: 'The awards/recognition section',
+          },
+          fields: [
+            {
+              name: 'awards',
+              type: 'group',
+              label: false,
+              fields: [
+                { name: 'headline', type: 'text', label: 'Headline', defaultValue: 'Recognized Excellence' },
+                { name: 'subheadline', type: 'text', label: 'Subheadline', defaultValue: 'Award-winning sales consulting and leadership' },
+                {
+                  name: 'imageUrl',
+                  type: 'text',
+                  label: 'Awards Image URL',
+                  admin: { description: 'URL to the awards image' },
+                  defaultValue: 'https://d1yei2z3i6k35z.cloudfront.net/1671832/64e3c2e5505e3_fourawards.png',
+                },
+                { name: 'description', type: 'textarea', label: 'Description', defaultValue: 'Louie Bernstein has received four prestigious awards for excellence in sales consulting and leadership.' },
+              ],
+            },
+          ],
+        },
+        // Contact Section
+        {
+          type: 'collapsible',
+          label: 'Contact Section',
+          admin: {
+            initCollapsed: true,
+            description: 'Labels and text for the Contact section on the homepage',
+          },
+          fields: [
+            {
+              name: 'contactSection',
+              type: 'group',
+              label: false,
+              fields: [
+                { name: 'headline', type: 'text', label: 'Section Headline', defaultValue: "Let's Talk" },
+                { name: 'description', type: 'text', label: 'Section Description', defaultValue: 'Ready to transform your sales team? Get in touch today.' },
+                { name: 'emailLabel', type: 'text', label: 'Email Card Label', defaultValue: 'Email' },
+                { name: 'phoneLabel', type: 'text', label: 'Phone Card Label', defaultValue: 'Phone' },
+                { name: 'ctaButtonText', type: 'text', label: 'CTA Button Text', defaultValue: 'Schedule a 30-Minute Call' },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+
+    // ==========================================
+    // SECTION 2: VIDEOS PAGE
+    // ==========================================
+    {
+      type: 'collapsible',
+      label: 'Videos Page (/videos)',
+      admin: {
+        initCollapsed: true,
+        description: 'Content for the Videos page',
+      },
+      fields: [
+        {
+          name: 'videosPage',
+          type: 'group',
+          label: false,
+          fields: [
+            { name: 'headline', type: 'text', label: 'Page Headline', defaultValue: 'Sales Videos' },
+            { name: 'subheadline', type: 'text', label: 'Page Subheadline', defaultValue: 'The most popular sales training content, handpicked for you' },
+            {
+              name: 'playlistId',
+              type: 'text',
+              label: 'YouTube Playlist ID',
+              admin: { description: 'The playlist ID for the full playlist embed' },
+              defaultValue: 'PL7HfhnqHyzRmGDUMDhcSgZW8pR7DhW_Hl',
+            },
+            {
+              name: 'featuredVideos',
+              type: 'array',
+              label: 'Featured Videos',
+              admin: {
+                description: 'The highlighted videos shown at the top',
+                initCollapsed: true,
+              },
+              minRows: 1,
+              maxRows: 8,
+              fields: [
+                { name: 'videoId', type: 'text', label: 'YouTube Video ID', required: true, admin: { description: 'The ID from the YouTube URL' } },
+                { name: 'title', type: 'text', label: 'Video Title', required: true },
+                { name: 'description', type: 'textarea', label: 'Description' },
+              ],
+            },
+            { name: 'featuredShortsHeadline', type: 'text', label: 'Featured Shorts Section Headline', defaultValue: 'Featured Shorts' },
+            { name: 'playlistHeadline', type: 'text', label: 'Playlist Section Headline', defaultValue: 'Complete Sales Leadership Playlist' },
+            { name: 'watchOnYoutubeText', type: 'text', label: 'Watch on YouTube Link Text', defaultValue: 'Watch on YouTube →' },
+            { name: 'watchMoreButtonText', type: 'text', label: 'Watch More Button Text', defaultValue: 'Watch More Videos on YouTube' },
+          ],
+        },
+      ],
+    },
+
+    // ==========================================
+    // SECTION 3: NEWSLETTER PAGE
+    // ==========================================
+    {
+      type: 'collapsible',
+      label: 'Newsletter Page (/newsletter)',
+      admin: {
+        initCollapsed: true,
+        description: 'Content for the Newsletter page',
+      },
+      fields: [
+        {
+          name: 'newsletterPage',
+          type: 'group',
+          label: false,
+          fields: [
+            { name: 'headline', type: 'text', label: 'Page Headline', defaultValue: 'The Sunday Starter' },
+            { name: 'tagline', type: 'text', label: 'Tagline', defaultValue: 'Delivered to Accelerate Your Success' },
+            { name: 'description', type: 'textarea', label: 'Description', defaultValue: 'Every Sunday, get actionable sales insights, strategies, and tips delivered straight to your LinkedIn inbox. Join thousands of sales professionals who start their week right with The Sunday Starter.' },
+            { name: 'ctaText', type: 'text', label: 'CTA Button Text', defaultValue: 'Subscribe on LinkedIn' },
+            { name: 'benefitsHeadline', type: 'text', label: 'Benefits Section Headline', defaultValue: "What You'll Get" },
+            {
+              name: 'benefits',
+              type: 'array',
+              label: 'Benefit Cards',
+              admin: { initCollapsed: true },
+              minRows: 1,
+              maxRows: 6,
+              fields: [
+                { name: 'title', type: 'text', label: 'Title', required: true },
+                { name: 'description', type: 'textarea', label: 'Description', required: true },
+                { name: 'icon', type: 'text', label: 'Icon Path' },
+              ],
+            },
+            { name: 'finalCtaHeadline', type: 'text', label: 'Final CTA Headline', defaultValue: 'Ready to Start Your Week Right?' },
+            { name: 'finalCtaDescription', type: 'text', label: 'Final CTA Description', defaultValue: 'Join thousands of sales professionals who get The Sunday Starter every week' },
+            { name: 'featuredContentHeadline', type: 'text', label: 'Featured Content Section Headline', defaultValue: 'Featured Newsletter Content' },
+            { name: 'featuredContentDescription', type: 'text', label: 'Featured Content Description', defaultValue: 'Watch exclusive videos and content from The Sunday Starter' },
+            { name: 'finalCtaButtonText', type: 'text', label: 'Final CTA Button Text', defaultValue: 'Subscribe Now' },
+          ],
+        },
+      ],
+    },
+
+    // ==========================================
+    // SECTION 4: COURSE PAGE
+    // ==========================================
+    {
+      type: 'collapsible',
+      label: 'Course Page (/course)',
+      admin: {
+        initCollapsed: true,
+        description: 'Content for the Course page',
+      },
+      fields: [
+        {
+          name: 'coursePage',
+          type: 'group',
+          label: false,
+          fields: [
+            { name: 'headline', type: 'text', label: 'Page Headline', defaultValue: "The Founder's and CEO's Sales System" },
+            { name: 'tagline', type: 'text', label: 'Tagline', defaultValue: 'Build, optimize, and scale your sales team—without the full-time cost' },
+            { name: 'description', type: 'textarea', label: 'Description', defaultValue: "A complete 20-step system created by a Fractional Sales Leader who's been where you are. Decades of experience, distilled into actionable frameworks that work." },
+            { name: 'resultsBadge', type: 'text', label: 'Results Badge Text', defaultValue: '61% sales increase • 120+ hiring questions • 20-step system' },
+            {
+              type: 'collapsible',
+              label: 'Course Modules',
+              admin: { initCollapsed: true },
+              fields: [
+                { name: 'modulesHeadline', type: 'text', label: 'Modules Section Headline', defaultValue: 'What You Get With This Course' },
+                { name: 'modulesSubheadline', type: 'text', label: 'Modules Section Subheadline', defaultValue: 'A complete 20-step sales system with everything you need to build, optimize, and scale' },
+                {
+                  name: 'modules',
+                  type: 'array',
+                  label: 'Course Modules',
+                  minRows: 1,
+                  maxRows: 20,
+                  fields: [
+                    { name: 'title', type: 'text', label: 'Module Title', required: true },
+                    { name: 'description', type: 'textarea', label: 'Description', required: true },
+                    { name: 'benefit', type: 'textarea', label: 'Benefit' },
+                    { name: 'icon', type: 'text', label: 'Icon Path' },
+                  ],
+                },
+              ],
+            },
+            {
+              type: 'collapsible',
+              label: 'Preview Videos',
+              admin: { initCollapsed: true },
+              fields: [
+                { name: 'previewHeadline', type: 'text', label: 'Preview Section Headline', defaultValue: 'Preview the Course' },
+                {
+                  name: 'previewVideos',
+                  type: 'array',
+                  label: 'Preview Videos',
+                  minRows: 1,
+                  maxRows: 10,
+                  fields: [
+                    { name: 'videoId', type: 'text', label: 'YouTube Video ID', required: true },
+                    { name: 'title', type: 'text', label: 'Video Title', required: true },
+                    { name: 'description', type: 'textarea', label: 'Description' },
+                  ],
+                },
+              ],
+            },
+            {
+              type: 'collapsible',
+              label: 'Results Section',
+              admin: { initCollapsed: true },
+              fields: [
+                { name: 'resultsHeadline', type: 'text', label: 'Results Section Headline', defaultValue: 'Real Results From Real Businesses' },
+                {
+                  name: 'results',
+                  type: 'array',
+                  label: 'Result Stats',
+                  minRows: 1,
+                  maxRows: 6,
+                  fields: [
+                    { name: 'metric', type: 'text', label: 'Metric', required: true },
+                    { name: 'description', type: 'text', label: 'Description', required: true },
+                    { name: 'source', type: 'text', label: 'Source' },
+                  ],
+                },
+              ],
+            },
+            {
+              type: 'collapsible',
+              label: 'Case Study & CTA',
+              admin: { initCollapsed: true },
+              fields: [
+                { name: 'caseStudyQuote', type: 'textarea', label: 'Case Study Quote', defaultValue: 'Louie helped us increase sales 61% year-over-year working on a part-time arrangement as a fractional sales manager.' },
+                { name: 'caseStudyAttribution', type: 'text', label: 'Attribution', defaultValue: 'Client Case Study' },
+                { name: 'finalCtaHeadline', type: 'text', label: 'Final CTA Headline', defaultValue: 'Start Building Your Sales System Today' },
+                { name: 'finalCtaDescription', type: 'text', label: 'Final CTA Description', defaultValue: 'Get instant access to all 20 modules, templates, scripts, and resources' },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+
+    // ==========================================
+    // SECTION 5: TOOLS PAGES
+    // ==========================================
+    {
+      type: 'collapsible',
+      label: 'Tools Pages (/tools)',
+      admin: {
+        initCollapsed: true,
+        description: 'Content for Tools landing page and individual tools',
+      },
+      fields: [
+        // Tools Landing Page
+        {
+          type: 'collapsible',
+          label: 'Tools Landing Page',
+          admin: {
+            initCollapsed: true,
+            description: 'The main /tools page',
+          },
+          fields: [
             {
               name: 'toolsPage',
               type: 'group',
-              label: 'Tools Page (/tools)',
-              admin: {
-                description: 'Content for the Tools landing page',
-              },
+              label: false,
               fields: [
                 { name: 'headline', type: 'text', label: 'Page Headline', defaultValue: 'Tools' },
                 { name: 'description', type: 'text', label: 'Page Description', defaultValue: 'Free tools to help you make smarter sales decisions' },
@@ -553,258 +836,133 @@ export const SiteSettings: GlobalConfig = {
                 },
               ],
             },
-            // ROI Calculator Page
+          ],
+        },
+        // ROI Calculator Page
+        {
+          type: 'collapsible',
+          label: 'ROI Calculator Page',
+          admin: {
+            initCollapsed: true,
+            description: 'The /tools/roi-calculator page',
+          },
+          fields: [
             {
               name: 'roiCalculatorPage',
               type: 'group',
-              label: 'ROI Calculator Page (/tools/roi-calculator)',
-              admin: {
-                description: 'Content for the ROI Calculator page',
-              },
+              label: false,
               fields: [
                 { name: 'headline', type: 'text', label: 'Page Headline', defaultValue: 'Fractional Sales ROI Calculator' },
                 { name: 'subheadline', type: 'text', label: 'Page Subheadline', defaultValue: 'You be the judge if a Fractional Sales Leader makes financial sense' },
               ],
             },
-            // Videos Page
-            {
-              name: 'videosPage',
-              type: 'group',
-              label: 'Videos Page (/videos)',
-              admin: {
-                description: 'Content for the Videos page',
-              },
-              fields: [
-                { name: 'headline', type: 'text', label: 'Page Headline', defaultValue: 'Sales Videos' },
-                { name: 'subheadline', type: 'text', label: 'Page Subheadline', defaultValue: 'The most popular sales training content, handpicked for you' },
-                {
-                  name: 'playlistId',
-                  type: 'text',
-                  label: 'YouTube Playlist ID',
-                  admin: { description: 'The playlist ID for the full playlist embed' },
-                  defaultValue: 'PL7HfhnqHyzRmGDUMDhcSgZW8pR7DhW_Hl',
-                },
-                {
-                  name: 'featuredVideos',
-                  type: 'array',
-                  label: 'Featured Videos',
-                  admin: {
-                    description: 'The highlighted videos shown at the top',
-                    initCollapsed: true,
-                  },
-                  minRows: 1,
-                  maxRows: 8,
-                  fields: [
-                    { name: 'videoId', type: 'text', label: 'YouTube Video ID', required: true, admin: { description: 'The ID from the YouTube URL' } },
-                    { name: 'title', type: 'text', label: 'Video Title', required: true },
-                    { name: 'description', type: 'textarea', label: 'Description' },
-                  ],
-                },
-                { name: 'featuredShortsHeadline', type: 'text', label: 'Featured Shorts Section Headline', defaultValue: 'Featured Shorts' },
-                { name: 'playlistHeadline', type: 'text', label: 'Playlist Section Headline', defaultValue: 'Complete Sales Leadership Playlist' },
-                { name: 'watchOnYoutubeText', type: 'text', label: 'Watch on YouTube Link Text', defaultValue: 'Watch on YouTube →' },
-                { name: 'watchMoreButtonText', type: 'text', label: 'Watch More Button Text', defaultValue: 'Watch More Videos on YouTube' },
-              ],
-            },
-            // Newsletter Page
-            {
-              name: 'newsletterPage',
-              type: 'group',
-              label: 'Newsletter Page (/newsletter)',
-              admin: {
-                description: 'Content for the Newsletter page',
-              },
-              fields: [
-                { name: 'headline', type: 'text', label: 'Page Headline', defaultValue: 'The Sunday Starter' },
-                { name: 'tagline', type: 'text', label: 'Tagline', defaultValue: 'Delivered to Accelerate Your Success' },
-                { name: 'description', type: 'textarea', label: 'Description', defaultValue: 'Every Sunday, get actionable sales insights, strategies, and tips delivered straight to your LinkedIn inbox. Join thousands of sales professionals who start their week right with The Sunday Starter.' },
-                { name: 'ctaText', type: 'text', label: 'CTA Button Text', defaultValue: 'Subscribe on LinkedIn' },
-                { name: 'benefitsHeadline', type: 'text', label: 'Benefits Section Headline', defaultValue: "What You'll Get" },
-                {
-                  name: 'benefits',
-                  type: 'array',
-                  label: 'Benefit Cards',
-                  admin: { initCollapsed: true },
-                  minRows: 1,
-                  maxRows: 6,
-                  fields: [
-                    { name: 'title', type: 'text', label: 'Title', required: true },
-                    { name: 'description', type: 'textarea', label: 'Description', required: true },
-                    { name: 'icon', type: 'text', label: 'Icon Path' },
-                  ],
-                },
-                { name: 'finalCtaHeadline', type: 'text', label: 'Final CTA Headline', defaultValue: 'Ready to Start Your Week Right?' },
-                { name: 'finalCtaDescription', type: 'text', label: 'Final CTA Description', defaultValue: 'Join thousands of sales professionals who get The Sunday Starter every week' },
-                { name: 'featuredContentHeadline', type: 'text', label: 'Featured Content Section Headline', defaultValue: 'Featured Newsletter Content' },
-                { name: 'featuredContentDescription', type: 'text', label: 'Featured Content Description', defaultValue: 'Watch exclusive videos and content from The Sunday Starter' },
-                { name: 'finalCtaButtonText', type: 'text', label: 'Final CTA Button Text', defaultValue: 'Subscribe Now' },
-              ],
-            },
-            // Course Page
-            {
-              name: 'coursePage',
-              type: 'group',
-              label: 'Course Page (/course)',
-              admin: {
-                description: 'Content for the Course page',
-              },
-              fields: [
-                { name: 'headline', type: 'text', label: 'Page Headline', defaultValue: "The Founder's and CEO's Sales System" },
-                { name: 'tagline', type: 'text', label: 'Tagline', defaultValue: 'Build, optimize, and scale your sales team—without the full-time cost' },
-                { name: 'description', type: 'textarea', label: 'Description', defaultValue: "A complete 20-step system created by a Fractional Sales Leader who's been where you are. Decades of experience, distilled into actionable frameworks that work." },
-                { name: 'resultsBadge', type: 'text', label: 'Results Badge Text', defaultValue: '61% sales increase • 120+ hiring questions • 20-step system' },
-                {
-                  type: 'collapsible',
-                  label: 'Course Modules',
-                  admin: { initCollapsed: true },
-                  fields: [
-                    { name: 'modulesHeadline', type: 'text', label: 'Modules Section Headline', defaultValue: 'What You Get With This Course' },
-                    { name: 'modulesSubheadline', type: 'text', label: 'Modules Section Subheadline', defaultValue: 'A complete 20-step sales system with everything you need to build, optimize, and scale' },
-                    {
-                      name: 'modules',
-                      type: 'array',
-                      label: 'Course Modules',
-                      minRows: 1,
-                      maxRows: 20,
-                      fields: [
-                        { name: 'title', type: 'text', label: 'Module Title', required: true },
-                        { name: 'description', type: 'textarea', label: 'Description', required: true },
-                        { name: 'benefit', type: 'textarea', label: 'Benefit' },
-                        { name: 'icon', type: 'text', label: 'Icon Path' },
-                      ],
-                    },
-                  ],
-                },
-                {
-                  type: 'collapsible',
-                  label: 'Preview Videos',
-                  admin: { initCollapsed: true },
-                  fields: [
-                    { name: 'previewHeadline', type: 'text', label: 'Preview Section Headline', defaultValue: 'Preview the Course' },
-                    {
-                      name: 'previewVideos',
-                      type: 'array',
-                      label: 'Preview Videos',
-                      minRows: 1,
-                      maxRows: 10,
-                      fields: [
-                        { name: 'videoId', type: 'text', label: 'YouTube Video ID', required: true },
-                        { name: 'title', type: 'text', label: 'Video Title', required: true },
-                        { name: 'description', type: 'textarea', label: 'Description' },
-                      ],
-                    },
-                  ],
-                },
-                {
-                  type: 'collapsible',
-                  label: 'Results Section',
-                  admin: { initCollapsed: true },
-                  fields: [
-                    { name: 'resultsHeadline', type: 'text', label: 'Results Section Headline', defaultValue: 'Real Results From Real Businesses' },
-                    {
-                      name: 'results',
-                      type: 'array',
-                      label: 'Result Stats',
-                      minRows: 1,
-                      maxRows: 6,
-                      fields: [
-                        { name: 'metric', type: 'text', label: 'Metric', required: true },
-                        { name: 'description', type: 'text', label: 'Description', required: true },
-                        { name: 'source', type: 'text', label: 'Source' },
-                      ],
-                    },
-                  ],
-                },
-                {
-                  type: 'collapsible',
-                  label: 'Case Study & CTA',
-                  admin: { initCollapsed: true },
-                  fields: [
-                    { name: 'caseStudyQuote', type: 'textarea', label: 'Case Study Quote', defaultValue: 'Louie helped us increase sales 61% year-over-year working on a part-time arrangement as a fractional sales manager.' },
-                    { name: 'caseStudyAttribution', type: 'text', label: 'Attribution', defaultValue: 'Client Case Study' },
-                    { name: 'finalCtaHeadline', type: 'text', label: 'Final CTA Headline', defaultValue: 'Start Building Your Sales System Today' },
-                    { name: 'finalCtaDescription', type: 'text', label: 'Final CTA Description', defaultValue: 'Get instant access to all 20 modules, templates, scripts, and resources' },
-                  ],
-                },
-              ],
-            },
           ],
         },
-        // ==========================================
-        // TAB 5: BRAND & CONTACT
-        // ==========================================
+      ],
+    },
+
+    // ==========================================
+    // SECTION 6: SITE SETTINGS
+    // ==========================================
+    {
+      type: 'collapsible',
+      label: 'Site Settings',
+      admin: {
+        initCollapsed: true,
+        description: 'Global settings: social links, contact info, footer, and SEO',
+      },
+      fields: [
+        // Social Links
         {
-          label: 'Brand & Contact',
-          description: 'Social links, contact info, and footer settings',
+          type: 'collapsible',
+          label: 'Social Links',
+          admin: {
+            initCollapsed: true,
+            description: 'Links to social media profiles',
+          },
           fields: [
-            // Social Links
             {
               name: 'social',
               type: 'group',
-              label: 'Social Links',
-              admin: {
-                description: 'Links to social media profiles',
-              },
+              label: false,
               fields: [
                 { name: 'linkedin', type: 'text', label: 'LinkedIn URL', defaultValue: 'https://www.linkedin.com/in/louiebernstein/' },
                 { name: 'youtube', type: 'text', label: 'YouTube URL', defaultValue: 'https://www.youtube.com/@LouieBernstein' },
                 { name: 'calendly', type: 'text', label: 'Calendly URL', defaultValue: 'https://calendly.com/louiebernstein/30minutes' },
               ],
             },
-            // Contact Info
+          ],
+        },
+        // Contact Info
+        {
+          type: 'collapsible',
+          label: 'Contact Information',
+          admin: {
+            initCollapsed: true,
+          },
+          fields: [
             {
               name: 'contact',
               type: 'group',
-              label: 'Contact Information',
+              label: false,
               fields: [
                 { name: 'email', type: 'text', label: 'Email Address', defaultValue: 'Louie@LouieBernstein.com' },
                 { name: 'phone', type: 'text', label: 'Phone Number', defaultValue: '(404) 808-5326' },
               ],
             },
-            // Contact Section Labels (for homepage)
-            {
-              name: 'contactSection',
-              type: 'group',
-              label: 'Contact Section Labels',
-              admin: {
-                description: 'Labels and text for the Contact section on the homepage',
-              },
-              fields: [
-                { name: 'headline', type: 'text', label: 'Section Headline', defaultValue: "Let's Talk" },
-                { name: 'description', type: 'text', label: 'Section Description', defaultValue: 'Ready to transform your sales team? Get in touch today.' },
-                { name: 'emailLabel', type: 'text', label: 'Email Card Label', defaultValue: 'Email' },
-                { name: 'phoneLabel', type: 'text', label: 'Phone Card Label', defaultValue: 'Phone' },
-                { name: 'ctaButtonText', type: 'text', label: 'CTA Button Text', defaultValue: 'Schedule a 30-Minute Call' },
-              ],
-            },
-            // Newsletter Settings
+          ],
+        },
+        // Newsletter Settings
+        {
+          type: 'collapsible',
+          label: 'Newsletter Settings',
+          admin: {
+            initCollapsed: true,
+            description: 'General newsletter configuration',
+          },
+          fields: [
             {
               name: 'newsletter',
               type: 'group',
-              label: 'Newsletter Settings',
-              admin: {
-                description: 'General newsletter configuration',
-              },
+              label: false,
               fields: [
                 { name: 'name', type: 'text', label: 'Newsletter Name', defaultValue: 'The Sunday Starter' },
                 { name: 'playlistId', type: 'text', label: 'YouTube Playlist ID', defaultValue: 'PL7HfhnqHyzRmd7GWRKTBURlmcC7TsbdPz', admin: { description: 'Playlist for newsletter page videos' } },
                 { name: 'subscribeUrl', type: 'text', label: 'Subscribe URL', defaultValue: 'https://www.linkedin.com/newsletters/the-sunday-starter-6914239256987131904/' },
               ],
             },
-            // Course Settings
+          ],
+        },
+        // Course Settings
+        {
+          type: 'collapsible',
+          label: 'Course Settings',
+          admin: {
+            initCollapsed: true,
+          },
+          fields: [
             {
               name: 'course',
               type: 'group',
-              label: 'Course Settings',
+              label: false,
               fields: [
                 { name: 'playlistId', type: 'text', label: 'Course Playlist ID', defaultValue: 'PL7HfhnqHyzRmGDUMDhcSgZW8pR7DhW_Hl', admin: { description: 'Main YouTube playlist for course page' } },
               ],
             },
-            // Footer
+          ],
+        },
+        // Footer
+        {
+          type: 'collapsible',
+          label: 'Footer',
+          admin: {
+            initCollapsed: true,
+          },
+          fields: [
             {
               name: 'footer',
               type: 'group',
-              label: 'Footer',
+              label: false,
               fields: [
                 { name: 'tagline', type: 'text', label: 'Footer Tagline', defaultValue: 'Fractional Sales Leader' },
                 { name: 'slogan', type: 'text', label: 'Footer Slogan', defaultValue: 'Less Spend. More Sales.' },
@@ -815,20 +973,19 @@ export const SiteSettings: GlobalConfig = {
             },
           ],
         },
-        // ==========================================
-        // TAB 6: SEO
-        // ==========================================
+        // SEO
         {
-          label: 'SEO',
-          description: 'Search engine optimization settings',
+          type: 'collapsible',
+          label: 'SEO Settings',
+          admin: {
+            initCollapsed: true,
+            description: 'These settings affect how your site appears in search results',
+          },
           fields: [
             {
               name: 'seo',
               type: 'group',
-              label: 'SEO Settings',
-              admin: {
-                description: 'These settings affect how your site appears in search results',
-              },
+              label: false,
               fields: [
                 {
                   name: 'siteTitle',
