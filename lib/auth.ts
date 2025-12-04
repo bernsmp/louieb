@@ -5,13 +5,20 @@
 import { cookies } from 'next/headers'
 import { createServerClient as createSupabaseServerClient } from '@supabase/ssr'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+// Check if Supabase auth is configured
+export const isAuthConfigured = !!(supabaseUrl && supabaseAnonKey)
 
 /**
  * Create a Supabase client for server-side use with cookie handling
  */
 export async function createServerClient() {
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error('Supabase environment variables are not configured')
+  }
+  
   const cookieStore = await cookies()
 
   return createSupabaseServerClient(supabaseUrl, supabaseAnonKey, {
