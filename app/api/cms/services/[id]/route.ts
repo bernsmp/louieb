@@ -2,6 +2,33 @@ import { NextResponse } from 'next/server'
 import { getUser } from '@/lib/auth'
 import { supabaseAdmin } from '@/lib/supabase'
 
+// GET: Fetch a single service
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params
+
+  if (!supabaseAdmin) {
+    return NextResponse.json({ error: 'CMS not configured' }, { status: 503 })
+  }
+
+  try {
+    const { data, error } = await supabaseAdmin
+      .from('services')
+      .select('*')
+      .eq('id', id)
+      .single()
+
+    if (error) throw error
+
+    return NextResponse.json({ service: data })
+  } catch (error) {
+    console.error('[CMS API] Error fetching service:', error)
+    return NextResponse.json({ error: 'Failed to fetch service' }, { status: 500 })
+  }
+}
+
 // PUT: Update a service
 export async function PUT(
   request: Request,
