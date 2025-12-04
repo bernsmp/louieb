@@ -100,4 +100,3 @@ export async function DELETE(
     return NextResponse.json({ error: 'Failed to delete process step' }, { status: 500 })
   }
 }
-
