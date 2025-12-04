@@ -116,48 +116,6 @@ export default async function FractionalSalesLeaderPage() {
           </div>
         </section>
 
-        {/* Main Content - SEO Intro */}
-        <section className="py-16 md:py-24">
-          <div className="container mx-auto max-w-4xl px-6 lg:px-8">
-            <div className="prose prose-lg prose-neutral mx-auto max-w-none">
-              <p className="text-xl leading-relaxed text-neutral-700">
-                {pageData.introHook}
-              </p>
-
-              <p className="text-lg leading-relaxed text-neutral-600">
-                {pageData.introParagraph1}
-              </p>
-
-              <p className="text-lg leading-relaxed text-neutral-600">
-                {pageData.introParagraph2}
-              </p>
-
-              <p className="text-lg leading-relaxed text-neutral-600">
-                {pageData.introParagraph3}
-              </p>
-
-              <p className="text-lg leading-relaxed text-neutral-600">
-                {pageData.introParagraph4}
-              </p>
-            </div>
-
-            {/* CTA after intro */}
-            <div className="mt-12 text-center">
-              <Link
-                href="https://calendly.com/louiebernstein/30minutes"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block rounded-lg bg-[#0966c2] px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all hover:bg-[#0855a3] hover:shadow-xl"
-              >
-                {pageData.finalCtaButtonText}
-              </Link>
-              <p className="mt-3 text-sm text-neutral-500">
-                No pitch. Just a conversation about your sales challenges.
-              </p>
-            </div>
-          </div>
-        </section>
-
         {/* Video Section */}
         <section className="bg-neutral-50 py-16 md:py-24">
           <div className="container mx-auto max-w-6xl px-6 lg:px-8">
@@ -217,6 +175,48 @@ export default async function FractionalSalesLeaderPage() {
               >
                 Watch Full Playlist on YouTube
               </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Main Content - SEO Intro */}
+        <section className="py-16 md:py-24">
+          <div className="container mx-auto max-w-4xl px-6 lg:px-8">
+            <div className="prose prose-lg prose-neutral mx-auto max-w-none">
+              <p className="text-xl leading-relaxed text-neutral-700">
+                {pageData.introHook}
+              </p>
+
+              <p className="text-lg leading-relaxed text-neutral-600">
+                {pageData.introParagraph1}
+              </p>
+
+              <p className="text-lg leading-relaxed text-neutral-600">
+                {pageData.introParagraph2}
+              </p>
+
+              <p className="text-lg leading-relaxed text-neutral-600">
+                {pageData.introParagraph3}
+              </p>
+
+              <p className="text-lg leading-relaxed text-neutral-600">
+                {pageData.introParagraph4}
+              </p>
+            </div>
+
+            {/* CTA after intro */}
+            <div className="mt-12 text-center">
+              <Link
+                href="https://calendly.com/louiebernstein/30minutes"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block rounded-lg bg-[#0966c2] px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all hover:bg-[#0855a3] hover:shadow-xl"
+              >
+                {pageData.finalCtaButtonText}
+              </Link>
+              <p className="mt-3 text-sm text-neutral-500">
+                No pitch. Just a conversation about your sales challenges.
+              </p>
             </div>
           </div>
         </section>
