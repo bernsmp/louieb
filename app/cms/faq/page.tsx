@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
+import { SortableList } from '../components/SortableList'
 
 interface FAQItem {
   id: string
@@ -14,6 +15,8 @@ interface FAQItem {
 export default function FAQAdmin() {
   const [items, setItems] = useState<FAQItem[]>([])
   const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [showToast, setShowToast] = useState(false)
   const [filter, setFilter] = useState<string>('all')
 
   useEffect(() => {
@@ -43,6 +46,50 @@ export default function FAQAdmin() {
     }
   }
 
+  const handleReorder = useCallback(async (newItems: FAQItem[]) => {
+    // Update local state immediately (optimistic)
+    setItems((prev) => {
+      if (filter === 'all') {
+        return newItems
+      }
+      const updatedMap = new Map(newItems.map((v, i) => [v.id, i]))
+      return prev.map((v) => {
+        const newIndex = updatedMap.get(v.id)
+        if (newIndex !== undefined) {
+          return { ...v, display_order: newIndex }
+        }
+        return v
+      }).sort((a, b) => a.display_order - b.display_order)
+    })
+
+    // Save to API
+    setSaving(true)
+    try {
+      const orderItems = newItems.map((v, index) => ({
+        id: v.id,
+        display_order: index,
+      }))
+
+      const response = await fetch('/api/cms/order/blocks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'faq', items: orderItems }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to save order')
+      }
+
+      setShowToast(true)
+      setTimeout(() => setShowToast(false), 2000)
+    } catch (error) {
+      console.error('Failed to save FAQ order:', error)
+      fetchItems()
+    } finally {
+      setSaving(false)
+    }
+  }, [filter])
+
   const filteredItems = filter === 'all' ? items : items.filter((item) => item.page === filter)
 
   if (loading) {
@@ -59,7 +106,7 @@ export default function FAQAdmin() {
         <div>
           <Link href="/cms" className="edit-page__back">← Back to Dashboard</Link>
           <h1 className="edit-page__title">FAQ Items</h1>
-          <p className="edit-page__description">Manage frequently asked questions.</p>
+          <p className="edit-page__description">Manage frequently asked questions. Drag to reorder.</p>
         </div>
         <div className="edit-page__actions">
           <select
@@ -82,50 +129,51 @@ export default function FAQAdmin() {
           <Link href="/cms/faq/new" className="btn btn--primary">+ Add FAQ</Link>
         </div>
       ) : (
-        <div className="edit-form">
-          {filteredItems.map((item, index) => (
-            <div
-              key={item.id}
-              style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '1rem',
-                padding: '1rem',
-                borderBottom: index < filteredItems.length - 1 ? '1px solid #262626' : 'none',
-              }}
-            >
-              <div style={{ flex: 1 }}>
-                <p style={{ color: '#f5f5f5', fontWeight: 500, marginBottom: '0.25rem' }}>
-                  {item.question}
-                </p>
-                <p style={{ color: '#737373', fontSize: '0.875rem' }}>
-                  {item.answer.substring(0, 100)}...
-                </p>
-                <span style={{ fontSize: '0.75rem', color: '#525252', textTransform: 'uppercase' }}>
-                  {item.page}
-                </span>
+        <div className="edit-form" style={{ padding: '1rem' }}>
+          <SortableList
+            items={filteredItems}
+            getId={(item) => item.id}
+            disabled={saving}
+            onReorder={handleReorder}
+            renderItem={(item) => (
+              <div className="sortable-block-card">
+                <div className="sortable-block-card__info" style={{ flex: 1 }}>
+                  <p className="sortable-block-card__title">{item.question}</p>
+                  <p className="sortable-block-card__meta">
+                    {item.answer.substring(0, 80)}... • {item.page}
+                  </p>
+                </div>
+                <div className="sortable-block-card__actions">
+                  <Link
+                    href={`/cms/faq/${item.id}`}
+                    className="btn btn--secondary"
+                    style={{ padding: '0.4rem 0.6rem', fontSize: '0.7rem' }}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Edit
+                  </Link>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleDelete(item.id)
+                    }}
+                    className="btn btn--danger"
+                    style={{ padding: '0.4rem 0.6rem', fontSize: '0.7rem' }}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
-              <div style={{ display: 'flex', gap: '0.5rem' }}>
-                <Link
-                  href={`/cms/faq/${item.id}`}
-                  className="btn btn--secondary"
-                  style={{ padding: '0.5rem 0.75rem', fontSize: '0.75rem' }}
-                >
-                  Edit
-                </Link>
-                <button
-                  onClick={() => handleDelete(item.id)}
-                  className="btn btn--danger"
-                  style={{ padding: '0.5rem 0.75rem', fontSize: '0.75rem' }}
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          ))}
+            )}
+          />
+        </div>
+      )}
+
+      {showToast && (
+        <div className="order-toast">
+          ✓ Order saved
         </div>
       )}
     </div>
   )
 }
-

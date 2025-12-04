@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
+import { SortableList } from '../components/SortableList'
 
 interface Testimonial {
   id: string
@@ -16,6 +17,8 @@ interface Testimonial {
 export default function TestimonialsAdmin() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([])
   const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [showToast, setShowToast] = useState(false)
 
   useEffect(() => {
     fetchTestimonials()
@@ -44,6 +47,38 @@ export default function TestimonialsAdmin() {
     }
   }
 
+  const handleReorder = useCallback(async (newTestimonials: Testimonial[]) => {
+    // Update local state immediately (optimistic)
+    setTestimonials(newTestimonials)
+
+    // Save to API
+    setSaving(true)
+    try {
+      const items = newTestimonials.map((t, index) => ({
+        id: t.id,
+        display_order: index,
+      }))
+
+      const response = await fetch('/api/cms/order/blocks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'testimonials', items }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to save order')
+      }
+
+      setShowToast(true)
+      setTimeout(() => setShowToast(false), 2000)
+    } catch (error) {
+      console.error('Failed to save testimonial order:', error)
+      fetchTestimonials()
+    } finally {
+      setSaving(false)
+    }
+  }, [])
+
   if (loading) {
     return (
       <div className="edit-page">
@@ -63,7 +98,7 @@ export default function TestimonialsAdmin() {
           </Link>
           <h1 className="edit-page__title">Testimonials</h1>
           <p className="edit-page__description">
-            Manage customer testimonials shown across the site.
+            Manage customer testimonials. Drag to reorder.
           </p>
         </div>
         <div className="edit-page__actions">
@@ -83,49 +118,55 @@ export default function TestimonialsAdmin() {
           </Link>
         </div>
       ) : (
-        <div className="edit-form">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={testimonial.id}
-              style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '1rem',
-                padding: '1rem',
-                borderBottom: index < testimonials.length - 1 ? '1px solid #262626' : 'none',
-              }}
-            >
-              <div style={{ flex: 1 }}>
-                <p style={{ color: '#d4d4d4', marginBottom: '0.5rem', fontStyle: 'italic' }}>
-                  &ldquo;{testimonial.quote.substring(0, 120)}...&rdquo;
-                </p>
-                <p style={{ color: '#737373', fontSize: '0.875rem' }}>
-                  — {testimonial.author}
-                  {testimonial.role && `, ${testimonial.role}`}
-                  {testimonial.company && ` at ${testimonial.company}`}
-                </p>
+        <div className="edit-form" style={{ padding: '1rem' }}>
+          <SortableList
+            items={testimonials}
+            getId={(t) => t.id}
+            disabled={saving}
+            onReorder={handleReorder}
+            renderItem={(testimonial) => (
+              <div className="sortable-block-card">
+                <div className="sortable-block-card__info" style={{ flex: 1 }}>
+                  <p className="sortable-block-card__title" style={{ fontStyle: 'italic' }}>
+                    &ldquo;{testimonial.quote.substring(0, 80)}...&rdquo;
+                  </p>
+                  <p className="sortable-block-card__meta">
+                    — {testimonial.author}
+                    {testimonial.role && `, ${testimonial.role}`}
+                    {testimonial.company && ` at ${testimonial.company}`}
+                  </p>
+                </div>
+                <div className="sortable-block-card__actions">
+                  <Link
+                    href={`/cms/testimonials/${testimonial.id}`}
+                    className="btn btn--secondary"
+                    style={{ padding: '0.4rem 0.6rem', fontSize: '0.7rem' }}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Edit
+                  </Link>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleDelete(testimonial.id)
+                    }}
+                    className="btn btn--danger"
+                    style={{ padding: '0.4rem 0.6rem', fontSize: '0.7rem' }}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
-              <div style={{ display: 'flex', gap: '0.5rem' }}>
-                <Link
-                  href={`/cms/testimonials/${testimonial.id}`}
-                  className="btn btn--secondary"
-                  style={{ padding: '0.5rem 0.75rem', fontSize: '0.75rem' }}
-                >
-                  Edit
-                </Link>
-                <button
-                  onClick={() => handleDelete(testimonial.id)}
-                  className="btn btn--danger"
-                  style={{ padding: '0.5rem 0.75rem', fontSize: '0.75rem' }}
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          ))}
+            )}
+          />
+        </div>
+      )}
+
+      {showToast && (
+        <div className="order-toast">
+          ✓ Order saved
         </div>
       )}
     </div>
   )
 }
-

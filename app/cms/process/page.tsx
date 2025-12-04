@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
+import { SortableList } from '../components/SortableList'
 
 interface ProcessStep {
   id: string
@@ -14,6 +15,8 @@ interface ProcessStep {
 export default function ProcessAdmin() {
   const [steps, setSteps] = useState<ProcessStep[]>([])
   const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [showToast, setShowToast] = useState(false)
 
   useEffect(() => {
     fetchSteps()
@@ -42,6 +45,38 @@ export default function ProcessAdmin() {
     }
   }
 
+  const handleReorder = useCallback(async (newSteps: ProcessStep[]) => {
+    // Update local state immediately (optimistic)
+    setSteps(newSteps)
+
+    // Save to API
+    setSaving(true)
+    try {
+      const items = newSteps.map((s, index) => ({
+        id: s.id,
+        display_order: index,
+      }))
+
+      const response = await fetch('/api/cms/order/blocks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'process-steps', items }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to save order')
+      }
+
+      setShowToast(true)
+      setTimeout(() => setShowToast(false), 2000)
+    } catch (error) {
+      console.error('Failed to save step order:', error)
+      fetchSteps()
+    } finally {
+      setSaving(false)
+    }
+  }, [])
+
   if (loading) {
     return (
       <div className="edit-page">
@@ -56,7 +91,7 @@ export default function ProcessAdmin() {
         <div>
           <Link href="/cms" className="edit-page__back">← Back to Dashboard</Link>
           <h1 className="edit-page__title">Process Steps</h1>
-          <p className="edit-page__description">Manage the steps in the "How It Works" section.</p>
+          <p className="edit-page__description">Manage &quot;How It Works&quot; steps. Drag to reorder.</p>
         </div>
         <div className="edit-page__actions">
           <Link href="/cms/process/new" className="btn btn--primary">+ Add Step</Link>
@@ -69,34 +104,62 @@ export default function ProcessAdmin() {
           <Link href="/cms/process/new" className="btn btn--primary">+ Add Step</Link>
         </div>
       ) : (
-        <div className="edit-form">
-          {steps.map((step, index) => (
-            <div
-              key={step.id}
-              style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '1rem',
-                padding: '1rem',
-                borderBottom: index < steps.length - 1 ? '1px solid #262626' : 'none',
-              }}
-            >
-              <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#3b82f6', minWidth: '40px' }}>
-                {step.step_number}
+        <div className="edit-form" style={{ padding: '1rem' }}>
+          <SortableList
+            items={steps}
+            getId={(s) => s.id}
+            disabled={saving}
+            onReorder={handleReorder}
+            renderItem={(step) => (
+              <div className="sortable-block-card">
+                <div
+                  style={{
+                    fontSize: '1.25rem',
+                    fontWeight: 700,
+                    color: '#3b82f6',
+                    minWidth: '40px',
+                    textAlign: 'center',
+                  }}
+                >
+                  {step.step_number}
+                </div>
+                <div className="sortable-block-card__info" style={{ flex: 1 }}>
+                  <p className="sortable-block-card__title">{step.title}</p>
+                  <p className="sortable-block-card__meta">
+                    {step.description.substring(0, 80)}...
+                  </p>
+                </div>
+                <div className="sortable-block-card__actions">
+                  <Link
+                    href={`/cms/process/${step.id}`}
+                    className="btn btn--secondary"
+                    style={{ padding: '0.4rem 0.6rem', fontSize: '0.7rem' }}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Edit
+                  </Link>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleDelete(step.id)
+                    }}
+                    className="btn btn--danger"
+                    style={{ padding: '0.4rem 0.6rem', fontSize: '0.7rem' }}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
-              <div style={{ flex: 1 }}>
-                <p style={{ color: '#f5f5f5', fontWeight: 500, marginBottom: '0.25rem' }}>{step.title}</p>
-                <p style={{ color: '#737373', fontSize: '0.875rem' }}>{step.description.substring(0, 100)}...</p>
-              </div>
-              <div style={{ display: 'flex', gap: '0.5rem' }}>
-                <Link href={`/cms/process/${step.id}`} className="btn btn--secondary" style={{ padding: '0.5rem 0.75rem', fontSize: '0.75rem' }}>Edit</Link>
-                <button onClick={() => handleDelete(step.id)} className="btn btn--danger" style={{ padding: '0.5rem 0.75rem', fontSize: '0.75rem' }}>Delete</button>
-              </div>
-            </div>
-          ))}
+            )}
+          />
+        </div>
+      )}
+
+      {showToast && (
+        <div className="order-toast">
+          ✓ Order saved
         </div>
       )}
     </div>
   )
 }
-

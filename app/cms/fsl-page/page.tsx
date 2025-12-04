@@ -1,16 +1,42 @@
 'use client'
 
+import Link from 'next/link'
 import { SectionEditor } from '../components/SectionEditor'
 
 export default function EditFSLPage() {
   return (
-    <SectionEditor
-      section="fslPage"
-      title="Fractional Sales Leader Page"
-      description="SEO landing page content for the /fractional-sales-leader route."
-      backHref="/cms"
-      backLabel="Back to Dashboard"
-      fields={[
+    <>
+      {/* Layout Editor Link */}
+      <div style={{
+        background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.02) 100%)',
+        border: '1px solid rgba(59, 130, 246, 0.2)',
+        borderRadius: '0.75rem',
+        padding: '1rem 1.5rem',
+        marginBottom: '1.5rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      }}>
+        <div>
+          <h3 style={{ color: '#f5f5f5', fontSize: '1rem', fontWeight: 600, margin: 0 }}>
+            Section Layout
+          </h3>
+          <p style={{ color: '#a3a3a3', fontSize: '0.85rem', margin: '0.25rem 0 0' }}>
+            Drag and drop to reorder sections on this page
+          </p>
+        </div>
+        <Link href="/cms/fsl-page/layout" className="btn btn--primary">
+          Edit Layout
+        </Link>
+      </div>
+
+      <SectionEditor
+        section="fslPage"
+        title="Fractional Sales Leader Page"
+        description="SEO landing page content for the /fractional-sales-leader route."
+        backHref="/cms"
+        backLabel="Back to Dashboard"
+        fields={[
         {
           name: 'headline',
           label: 'Page Headline',
@@ -80,7 +106,8 @@ export default function EditFSLPage() {
           rows: 2,
         },
       ]}
-    />
+      />
+    </>
   )
 }
 

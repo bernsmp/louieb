@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
+import { SortableList } from '../components/SortableList'
 
 interface Service {
   id: string
@@ -15,6 +16,8 @@ interface Service {
 export default function ServicesAdmin() {
   const [services, setServices] = useState<Service[]>([])
   const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [showToast, setShowToast] = useState(false)
 
   useEffect(() => {
     fetchServices()
@@ -43,6 +46,38 @@ export default function ServicesAdmin() {
     }
   }
 
+  const handleReorder = useCallback(async (newServices: Service[]) => {
+    // Update local state immediately (optimistic)
+    setServices(newServices)
+
+    // Save to API
+    setSaving(true)
+    try {
+      const items = newServices.map((s, index) => ({
+        id: s.id,
+        display_order: index,
+      }))
+
+      const response = await fetch('/api/cms/order/blocks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'services', items }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to save order')
+      }
+
+      setShowToast(true)
+      setTimeout(() => setShowToast(false), 2000)
+    } catch (error) {
+      console.error('Failed to save service order:', error)
+      fetchServices()
+    } finally {
+      setSaving(false)
+    }
+  }, [])
+
   if (loading) {
     return (
       <div className="edit-page">
@@ -57,7 +92,7 @@ export default function ServicesAdmin() {
         <div>
           <Link href="/cms" className="edit-page__back">← Back to Dashboard</Link>
           <h1 className="edit-page__title">Services</h1>
-          <p className="edit-page__description">Manage the services shown in the "What I Offer" section.</p>
+          <p className="edit-page__description">Manage services in &quot;What I Offer&quot;. Drag to reorder.</p>
         </div>
         <div className="edit-page__actions">
           <Link href="/cms/services/new" className="btn btn--primary">+ Add Service</Link>
@@ -70,34 +105,56 @@ export default function ServicesAdmin() {
           <Link href="/cms/services/new" className="btn btn--primary">+ Add Service</Link>
         </div>
       ) : (
-        <div className="edit-form">
-          {services.map((service, index) => (
-            <div
-              key={service.id}
-              style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '1rem',
-                padding: '1rem',
-                borderBottom: index < services.length - 1 ? '1px solid #262626' : 'none',
-              }}
-            >
-              <div style={{ flex: 1 }}>
-                <p style={{ color: '#f5f5f5', fontWeight: 500, marginBottom: '0.25rem' }}>
-                  {service.title}
-                  {service.highlight && <span style={{ marginLeft: '0.5rem', fontSize: '0.75rem', color: '#3b82f6' }}>★ Highlighted</span>}
-                </p>
-                <p style={{ color: '#737373', fontSize: '0.875rem' }}>{service.description.substring(0, 100)}...</p>
+        <div className="edit-form" style={{ padding: '1rem' }}>
+          <SortableList
+            items={services}
+            getId={(s) => s.id}
+            disabled={saving}
+            onReorder={handleReorder}
+            renderItem={(service) => (
+              <div className="sortable-block-card">
+                <div className="sortable-block-card__info" style={{ flex: 1 }}>
+                  <p className="sortable-block-card__title">
+                    {service.title}
+                    {service.highlight && (
+                      <span style={{ marginLeft: '0.5rem', fontSize: '0.7rem', color: '#3b82f6' }}>★ Highlighted</span>
+                    )}
+                  </p>
+                  <p className="sortable-block-card__meta">
+                    {service.description.substring(0, 80)}...
+                  </p>
+                </div>
+                <div className="sortable-block-card__actions">
+                  <Link
+                    href={`/cms/services/${service.id}`}
+                    className="btn btn--secondary"
+                    style={{ padding: '0.4rem 0.6rem', fontSize: '0.7rem' }}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Edit
+                  </Link>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleDelete(service.id)
+                    }}
+                    className="btn btn--danger"
+                    style={{ padding: '0.4rem 0.6rem', fontSize: '0.7rem' }}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
-              <div style={{ display: 'flex', gap: '0.5rem' }}>
-                <Link href={`/cms/services/${service.id}`} className="btn btn--secondary" style={{ padding: '0.5rem 0.75rem', fontSize: '0.75rem' }}>Edit</Link>
-                <button onClick={() => handleDelete(service.id)} className="btn btn--danger" style={{ padding: '0.5rem 0.75rem', fontSize: '0.75rem' }}>Delete</button>
-              </div>
-            </div>
-          ))}
+            )}
+          />
+        </div>
+      )}
+
+      {showToast && (
+        <div className="order-toast">
+          ✓ Order saved
         </div>
       )}
     </div>
   )
 }
-

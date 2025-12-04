@@ -1007,6 +1007,88 @@ export async function getFSLPageData() {
   return settings.fslPage
 }
 
+// ============================================================================
+// PAGE LAYOUT ORDERING
+// ============================================================================
+
+/**
+ * Page layout configuration for section ordering
+ */
+interface PageLayout {
+  sections: string[]
+}
+
+// Default section orders for each page
+const defaultPageLayouts: Record<string, PageLayout> = {
+  'fractional-sales-leader': {
+    sections: ['hero', 'videos', 'intro', 'faq', 'finalCta'],
+  },
+  'homepage': {
+    sections: ['hero', 'credentials', 'about', 'valueProposition', 'services', 'process', 'testimonials', 'faq', 'contact'],
+  },
+}
+
+/**
+ * Fetch page layout from Supabase
+ */
+async function fetchPageLayoutFromSupabase(page: string): Promise<PageLayout | null> {
+  if (!supabaseAdmin) return null
+
+  try {
+    const { data, error } = await supabaseAdmin
+      .from('site_content')
+      .select('content')
+      .eq('section', `page_layout_${page}`)
+      .single()
+
+    if (error) {
+      if (error.code === 'PGRST116') {
+        // Not found - return null to use defaults
+        return null
+      }
+      console.warn('[CMS] Error fetching page layout:', error.message)
+      return null
+    }
+
+    const content = data?.content as Record<string, unknown>
+    if (content && Array.isArray(content.sections)) {
+      return { sections: content.sections as string[] }
+    }
+    return null
+  } catch (error) {
+    console.warn('[CMS] Failed to fetch page layout:', error)
+    return null
+  }
+}
+
+/**
+ * Get page layout (section order) for a specific page
+ */
+export const getPageLayout = cache(async (page: string): Promise<PageLayout> => {
+  const defaultLayout = defaultPageLayouts[page] || { sections: [] }
+
+  if (!USE_SUPABASE_CMS || !isSupabaseConfigured) {
+    return defaultLayout
+  }
+
+  const layout = await fetchPageLayoutFromSupabase(page)
+  return layout || defaultLayout
+})
+
+/**
+ * Get FSL page data with layout information
+ */
+export async function getFSLPageDataWithLayout() {
+  const [settings, layout] = await Promise.all([
+    getSiteSettings(),
+    getPageLayout('fractional-sales-leader'),
+  ])
+  return {
+    ...settings.fslPage,
+    layout,
+  }
+}
+
 // Re-export types for use in components
-export type { SiteSettings, Testimonial, FAQItem, VideoItem, ServiceItem, ProcessStep }
+export type { SiteSettings, Testimonial, FAQItem, VideoItem, ServiceItem, ProcessStep, PageLayout }
 

@@ -66,6 +66,30 @@ export default async function HomepageAdmin() {
         </div>
       </div>
 
+      {/* Layout Editor Link */}
+      <div style={{
+        background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.02) 100%)',
+        border: '1px solid rgba(59, 130, 246, 0.2)',
+        borderRadius: '0.75rem',
+        padding: '1rem 1.5rem',
+        marginBottom: '1.5rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      }}>
+        <div>
+          <h3 style={{ color: '#f5f5f5', fontSize: '1rem', fontWeight: 600, margin: 0 }}>
+            Section Layout
+          </h3>
+          <p style={{ color: '#a3a3a3', fontSize: '0.85rem', margin: '0.25rem 0 0' }}>
+            Drag and drop to reorder sections on the homepage
+          </p>
+        </div>
+        <Link href="/cms/homepage/layout" className="btn btn--primary">
+          Edit Layout
+        </Link>
+      </div>
+
       <div className="dashboard__grid">
         {sections.map((section) => (
           <Link
