@@ -8,7 +8,7 @@ import { Process } from "@/components/sections/Process";
 import { FAQ } from "@/components/sections/FAQ";
 import { Contact } from "@/components/sections/Contact";
 import { Awards } from "@/components/sections/Awards";
-import { getSiteSettings, getTestimonials } from "@/lib/payload";
+import { getSiteSettings, getTestimonials } from "@/lib/cms";
 
 export default async function Home() {
   const [settings, testimonials] = await Promise.all([

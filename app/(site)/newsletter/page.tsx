@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Icon } from "@/components/ui/Icon";
-import { getNewsletterPageData } from "@/lib/payload";
+import { getNewsletterPageData } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "The Sunday Starter Newsletter | Louie Bernstein",

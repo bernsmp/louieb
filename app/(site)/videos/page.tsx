@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getVideosPageData } from "@/lib/payload";
+import { getVideosPageData } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Sales Training Videos | Louie Bernstein - Top Sales Insights",

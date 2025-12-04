@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { Calculator, BarChart, PieChart, TrendingUp, Target, Users } from "lucide-react";
-import { getToolsPageData } from "@/lib/payload";
+import { getToolsPageData } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Tools | Louie Bernstein - Sales Leadership Tools",

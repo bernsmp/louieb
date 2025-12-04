@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { ROICalculator } from "@/components/ROICalculator";
-import { getROICalculatorPageData } from "@/lib/payload";
+import { getROICalculatorPageData } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Fractional Sales ROI Calculator | Louie Bernstein",

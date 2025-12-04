@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
-import { getCoursePageData } from "@/lib/payload";
+import { getCoursePageData } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "The Founder's and CEO's Sales System | Complete Sales Training Course",
