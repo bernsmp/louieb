@@ -599,7 +599,116 @@ export const SiteSettings: GlobalConfig = {
     },
 
     // ==========================================
-    // SECTION 2: VIDEOS PAGE
+    // SECTION 2: FRACTIONAL SALES LEADER PAGE (SEO)
+    // ==========================================
+    {
+      type: 'collapsible',
+      label: 'Fractional Sales Leader Page (/fractional-sales-leader)',
+      admin: {
+        initCollapsed: true,
+        description: 'SEO landing page for "Fractional Sales Leader" keyword',
+      },
+      fields: [
+        {
+          name: 'fslPage',
+          type: 'group',
+          label: false,
+          fields: [
+            { name: 'headline', type: 'text', label: 'Page Headline', defaultValue: 'Fractional Sales Leader' },
+            { name: 'tagline', type: 'text', label: 'Tagline', defaultValue: 'Experienced sales leadership. Fraction of the cost.' },
+            {
+              name: 'introHook',
+              type: 'textarea',
+              label: 'Intro Hook',
+              admin: { description: 'The attention-grabbing first line' },
+              defaultValue: "You built this company from nothing. Now you're stuck running sales calls when you should be running the business.",
+            },
+            {
+              name: 'introParagraph1',
+              type: 'textarea',
+              label: 'Intro Paragraph 1',
+              admin: { description: 'Pain point paragraph' },
+              defaultValue: "I get it. The jump from $1M to $10M in revenue is brutal. You know you need sales leadership, but the thought of gambling $250K+ on a VP of Sales makes your stomach turn. And those big consulting firms? They hand you a deck and disappear. That's not leadership—that's a transaction.",
+            },
+            {
+              name: 'introParagraph2',
+              type: 'textarea',
+              label: 'Intro Paragraph 2',
+              admin: { description: 'What is a Fractional Sales Leader' },
+              defaultValue: "A Fractional Sales Leader is the middle path. You get an experienced sales executive—someone who's built teams, closed deals, and scaled companies—working with you part-time at a fraction of the full-time cost. I've spent 9+ years as a Fractional Sales Leader helping 50+ companies in the $1M-$10M ARR range. I've scaled a company from zero to the INC 500. I've seen what works and what doesn't.",
+            },
+            {
+              name: 'introParagraph3',
+              type: 'textarea',
+              label: 'Intro Paragraph 3',
+              admin: { description: 'What I do' },
+              defaultValue: "What I do: build your sales playbook, hire your first reps, coach your team, and create the systems that turn chaos into predictable revenue. Not advice—action. I embed with your team until the machine runs without me.",
+            },
+            {
+              name: 'introParagraph4',
+              type: 'textarea',
+              label: 'Intro Paragraph 4',
+              admin: { description: 'CTA lead-in' },
+              defaultValue: "Below, I answer the five questions every founder asks before hiring a Fractional Sales Leader. Watch the videos or read the FAQs—then decide if this model fits your company.",
+            },
+            {
+              name: 'playlistId',
+              type: 'text',
+              label: 'YouTube Playlist ID',
+              admin: { description: 'The playlist containing the 5 FSL explainer videos' },
+              defaultValue: 'PL7HfhnqHyzRn0MoquOVlTgYAJPHN4_6wu',
+            },
+            {
+              name: 'videos',
+              type: 'array',
+              label: 'FSL Explainer Videos',
+              admin: {
+                description: 'The 5 videos explaining Fractional Sales Leadership',
+                initCollapsed: true,
+              },
+              minRows: 1,
+              maxRows: 10,
+              fields: [
+                { name: 'videoId', type: 'text', label: 'YouTube Video ID', required: true },
+                { name: 'title', type: 'text', label: 'Video Title', required: true },
+                { name: 'description', type: 'textarea', label: 'Description' },
+              ],
+            },
+            {
+              name: 'faqs',
+              type: 'array',
+              label: 'FAQ Items',
+              admin: {
+                description: 'FAQs for SEO (generates FAQ schema)',
+                initCollapsed: true,
+              },
+              minRows: 1,
+              maxRows: 15,
+              fields: [
+                { name: 'question', type: 'text', label: 'Question', required: true },
+                { name: 'answer', type: 'textarea', label: 'Answer', required: true },
+              ],
+            },
+            {
+              type: 'row',
+              fields: [
+                { name: 'finalCtaHeadline', type: 'text', label: 'Final CTA Headline', defaultValue: 'Ready to Stop Being the Bottleneck?', admin: { width: '50%' } },
+                { name: 'finalCtaButtonText', type: 'text', label: 'CTA Button Text', defaultValue: 'Schedule a 30-Minute Call', admin: { width: '50%' } },
+              ],
+            },
+            {
+              name: 'finalCtaDescription',
+              type: 'textarea',
+              label: 'Final CTA Description',
+              defaultValue: "Let's talk about your sales challenges. No pitch, no pressure—just a conversation about whether a Fractional Sales Leader makes sense for your company.",
+            },
+          ],
+        },
+      ],
+    },
+
+    // ==========================================
+    // SECTION 3: VIDEOS PAGE
     // ==========================================
     {
       type: 'collapsible',

@@ -1,247 +1,254 @@
 /**
- * Payload CMS API utilities
+ * Supabase CMS API utilities
  * 
- * Fetches content from the Payload CMS for the frontend.
+ * Fetches content from Supabase for the frontend.
+ * Falls back to defaults if Supabase is unavailable.
  */
 
-import { cache } from 'react';
+import { cache } from 'react'
+import { supabaseAdmin, isSupabaseConfigured } from './supabase'
+import type { 
+  SiteContentRow, 
+  TestimonialRow, 
+  FAQItemRow, 
+  VideoRow,
+  ServiceRow,
+  ProcessStepRow
+} from './supabase'
 
-// Always fetch from production - CMS data lives there
-const PAYLOAD_URL = 'https://louiebernstein.com';
-
-// Enable CMS fetching
-const CMS_ENABLED = true;
+// Feature flag to enable/disable Supabase CMS
+const USE_SUPABASE_CMS = process.env.USE_SUPABASE_CMS === 'true'
 
 // ============================================================================
-// TYPE DEFINITIONS
+// TYPE DEFINITIONS (matching existing payload.ts interfaces)
 // ============================================================================
 
 interface ServiceItem {
-  title: string;
-  description: string;
-  icon?: string;
-  highlight?: boolean;
+  title: string
+  description: string
+  icon?: string
+  highlight?: boolean
 }
 
 interface ProcessStep {
-  number: string;
-  title: string;
-  description: string;
+  number: string
+  title: string
+  description: string
 }
 
 interface FAQItem {
-  question: string;
-  answer: string;
+  question: string
+  answer: string
 }
 
 interface BenefitItem {
-  title: string;
-  description: string;
-  icon?: string;
+  title: string
+  description: string
+  icon?: string
 }
 
 interface ToolItem {
-  name: string;
-  description: string;
-  href: string;
-  icon?: string;
+  name: string
+  description: string
+  href: string
+  icon?: string
 }
 
 interface VideoItem {
-  videoId: string;
-  title: string;
-  description?: string;
+  videoId: string
+  title: string
+  description?: string
 }
 
 interface CourseModule {
-  title: string;
-  description: string;
-  benefit?: string;
-  icon?: string;
+  title: string
+  description: string
+  benefit?: string
+  icon?: string
 }
 
 interface ResultStat {
-  metric: string;
-  description: string;
-  source?: string;
+  metric: string
+  description: string
+  source?: string
 }
 
 interface FSLPageData {
-  headline: string;
-  tagline: string;
-  introHook: string;
-  introParagraph1: string;
-  introParagraph2: string;
-  introParagraph3: string;
-  introParagraph4: string;
-  playlistId: string;
-  videos: VideoItem[];
-  faqs: FAQItem[];
-  finalCtaHeadline: string;
-  finalCtaButtonText: string;
-  finalCtaDescription: string;
+  headline: string
+  tagline: string
+  introHook: string
+  introParagraph1: string
+  introParagraph2: string
+  introParagraph3: string
+  introParagraph4: string
+  playlistId: string
+  videos: VideoItem[]
+  faqs: FAQItem[]
+  finalCtaHeadline: string
+  finalCtaButtonText: string
+  finalCtaDescription: string
 }
 
 interface SiteSettings {
   hero: {
-    headline: string;
-    tagline: string;
-    description: string;
-    videoId: string;
-    ctaPrimary: { text: string; url: string };
-    ctaSecondary: { text: string; url: string };
-  };
+    headline: string
+    tagline: string
+    description: string
+    videoId: string
+    ctaPrimary: { text: string; url: string }
+    ctaSecondary: { text: string; url: string }
+  }
   credentials: {
-    primary: string;
-    secondary: string;
-  };
-  fslPage: FSLPageData;
+    primary: string
+    secondary: string
+  }
+  fslPage: FSLPageData
   about: {
-    headline: string;
-    headlineAccent: string;
-    paragraph1: string;
-    paragraph2: string;
-    paragraph3: string;
-    calloutText: string;
-    stat1Value: string;
-    stat1Label: string;
-    stat2Value: string;
-    stat2Label: string;
-    stat3Value: string;
-    stat3Label: string;
-  };
+    headline: string
+    headlineAccent: string
+    paragraph1: string
+    paragraph2: string
+    paragraph3: string
+    calloutText: string
+    stat1Value: string
+    stat1Label: string
+    stat2Value: string
+    stat2Label: string
+    stat3Value: string
+    stat3Label: string
+  }
   services: {
-    headline: string;
-    subheadline: string;
-    items: ServiceItem[];
-  };
+    headline: string
+    subheadline: string
+    items: ServiceItem[]
+  }
   process: {
-    headline: string;
-    subheadline: string;
-    steps: ProcessStep[];
-  };
+    headline: string
+    subheadline: string
+    steps: ProcessStep[]
+  }
   valueProposition: {
-    headline: string;
-    subheadline: string;
-    description: string;
-    ctaText: string;
-  };
+    headline: string
+    subheadline: string
+    description: string
+    ctaText: string
+  }
   faq: {
-    headline: string;
-    subheadline: string;
-    items: FAQItem[];
-  };
+    headline: string
+    subheadline: string
+    items: FAQItem[]
+  }
   awards: {
-    headline: string;
-    subheadline: string;
-    imageUrl: string;
-    description: string;
-  };
+    headline: string
+    subheadline: string
+    imageUrl: string
+    description: string
+  }
   testimonialsSection: {
-    headline: string;
-    subheadline: string;
-  };
+    headline: string
+    subheadline: string
+  }
   fractionalSalesLeader: {
-    headline: string;
-    headlineAccent: string;
-    hook: string;
-    paragraph1: string;
-    paragraph2: string;
-    paragraph3: string;
-    paragraph4: string;
-    calloutText: string;
-    ctaText: string;
-    ctaUrl: string;
-  };
+    headline: string
+    headlineAccent: string
+    hook: string
+    paragraph1: string
+    paragraph2: string
+    paragraph3: string
+    paragraph4: string
+    calloutText: string
+    ctaText: string
+    ctaUrl: string
+  }
   social: {
-    linkedin: string;
-    youtube: string;
-    calendly: string;
-  };
+    linkedin: string
+    youtube: string
+    calendly: string
+  }
   contact: {
-    email: string;
-    phone: string;
-  };
+    email: string
+    phone: string
+  }
   contactSection: {
-    headline: string;
-    description: string;
-    emailLabel: string;
-    phoneLabel: string;
-    ctaButtonText: string;
-  };
+    headline: string
+    description: string
+    emailLabel: string
+    phoneLabel: string
+    ctaButtonText: string
+  }
   footer: {
-    tagline: string;
-    slogan: string;
-    copyrightName: string;
-    quickLinksLabel: string;
-    getInTouchLabel: string;
-  };
+    tagline: string
+    slogan: string
+    copyrightName: string
+    quickLinksLabel: string
+    getInTouchLabel: string
+  }
   newsletter: {
-    name: string;
-    playlistId: string;
-    subscribeUrl: string;
-  };
+    name: string
+    playlistId: string
+    subscribeUrl: string
+  }
   newsletterPage: {
-    headline: string;
-    tagline: string;
-    description: string;
-    ctaText: string;
-    benefitsHeadline: string;
-    benefits: BenefitItem[];
-    finalCtaHeadline: string;
-    finalCtaDescription: string;
-    featuredContentHeadline: string;
-    featuredContentDescription: string;
-    finalCtaButtonText: string;
-  };
+    headline: string
+    tagline: string
+    description: string
+    ctaText: string
+    benefitsHeadline: string
+    benefits: BenefitItem[]
+    finalCtaHeadline: string
+    finalCtaDescription: string
+    featuredContentHeadline: string
+    featuredContentDescription: string
+    finalCtaButtonText: string
+  }
   toolsPage: {
-    headline: string;
-    description: string;
-    tools: ToolItem[];
-  };
+    headline: string
+    description: string
+    tools: ToolItem[]
+  }
   roiCalculatorPage: {
-    headline: string;
-    subheadline: string;
-  };
+    headline: string
+    subheadline: string
+  }
   videosPage: {
-    headline: string;
-    subheadline: string;
-    playlistId: string;
-    featuredVideos: VideoItem[];
-    featuredShortsHeadline: string;
-    playlistHeadline: string;
-    watchOnYoutubeText: string;
-    watchMoreButtonText: string;
-  };
+    headline: string
+    subheadline: string
+    playlistId: string
+    featuredVideos: VideoItem[]
+    featuredShortsHeadline: string
+    playlistHeadline: string
+    watchOnYoutubeText: string
+    watchMoreButtonText: string
+  }
   course: {
-    playlistId: string;
-  };
+    playlistId: string
+  }
   coursePage: {
-    headline: string;
-    tagline: string;
-    description: string;
-    resultsBadge: string;
-    modulesHeadline: string;
-    modulesSubheadline: string;
-    modules: CourseModule[];
-    previewHeadline: string;
-    previewVideos: VideoItem[];
-    resultsHeadline: string;
-    results: ResultStat[];
-    caseStudyQuote: string;
-    caseStudyAttribution: string;
-    finalCtaHeadline: string;
-    finalCtaDescription: string;
-  };
+    headline: string
+    tagline: string
+    description: string
+    resultsBadge: string
+    modulesHeadline: string
+    modulesSubheadline: string
+    modules: CourseModule[]
+    previewHeadline: string
+    previewVideos: VideoItem[]
+    resultsHeadline: string
+    results: ResultStat[]
+    caseStudyQuote: string
+    caseStudyAttribution: string
+    finalCtaHeadline: string
+    finalCtaDescription: string
+  }
   seo: {
-    siteTitle: string;
-    siteDescription: string;
-    keywords: string;
-  };
+    siteTitle: string
+    siteDescription: string
+    keywords: string
+  }
 }
 
 // ============================================================================
-// DEFAULT VALUES
+// DEFAULT VALUES (same as payload.ts)
 // ============================================================================
 
 const defaultSettings: SiteSettings = {
@@ -478,197 +485,23 @@ const defaultSettings: SiteSettings = {
     siteDescription: 'LinkedIn Top Voice | Fractional Sales Leader helping $1M–$10M ARR companies build repeatable sales systems.',
     keywords: 'fractional sales leader, sales consulting, sales team optimization',
   },
-};
-
-// ============================================================================
-// FETCH & MERGE
-// ============================================================================
-
-export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
-  if (!CMS_ENABLED || !PAYLOAD_URL) {
-    return defaultSettings;
-  }
-
-  try {
-    const response = await fetch(`${PAYLOAD_URL}/api/globals/site-settings`, {
-      next: { revalidate: 10 },
-    });
-
-    if (!response.ok) {
-      console.warn('Failed to fetch site settings, using defaults');
-      return defaultSettings;
-    }
-
-    const data = await response.json();
-    return mergeSettings(defaultSettings, data);
-  } catch (error) {
-    console.warn('Error fetching site settings:', error);
-    return defaultSettings;
-  }
-});
-
-function mergeSettings(defaults: SiteSettings, data: Partial<SiteSettings>): SiteSettings {
-  return {
-    hero: { ...defaults.hero, ...data.hero },
-    credentials: { ...defaults.credentials, ...data.credentials },
-    fslPage: {
-      ...defaults.fslPage,
-      ...data.fslPage,
-      videos: data.fslPage?.videos?.length ? data.fslPage.videos : defaults.fslPage.videos,
-      faqs: data.fslPage?.faqs?.length ? data.fslPage.faqs : defaults.fslPage.faqs,
-    },
-    about: { ...defaults.about, ...data.about },
-    services: { 
-      ...defaults.services, 
-      ...data.services,
-      items: data.services?.items?.length ? data.services.items : defaults.services.items,
-    },
-    process: {
-      ...defaults.process,
-      ...data.process,
-      steps: data.process?.steps?.length ? data.process.steps : defaults.process.steps,
-    },
-    valueProposition: { ...defaults.valueProposition, ...data.valueProposition },
-    faq: {
-      ...defaults.faq,
-      ...data.faq,
-      items: data.faq?.items?.length ? data.faq.items : defaults.faq.items,
-    },
-    awards: { ...defaults.awards, ...data.awards },
-    testimonialsSection: { ...defaults.testimonialsSection, ...data.testimonialsSection },
-    fractionalSalesLeader: { ...defaults.fractionalSalesLeader, ...data.fractionalSalesLeader },
-    social: { ...defaults.social, ...data.social },
-    contact: { ...defaults.contact, ...data.contact },
-    contactSection: { ...defaults.contactSection, ...data.contactSection },
-    footer: { ...defaults.footer, ...data.footer },
-    newsletter: { ...defaults.newsletter, ...data.newsletter },
-    newsletterPage: {
-      ...defaults.newsletterPage,
-      ...data.newsletterPage,
-      benefits: data.newsletterPage?.benefits?.length ? data.newsletterPage.benefits : defaults.newsletterPage.benefits,
-    },
-    toolsPage: {
-      ...defaults.toolsPage,
-      ...data.toolsPage,
-      tools: data.toolsPage?.tools?.length ? data.toolsPage.tools : defaults.toolsPage.tools,
-    },
-    roiCalculatorPage: { ...defaults.roiCalculatorPage, ...data.roiCalculatorPage },
-    videosPage: {
-      ...defaults.videosPage,
-      ...data.videosPage,
-      featuredVideos: data.videosPage?.featuredVideos?.length ? data.videosPage.featuredVideos : defaults.videosPage.featuredVideos,
-    },
-    course: { ...defaults.course, ...data.course },
-    coursePage: {
-      ...defaults.coursePage,
-      ...data.coursePage,
-      modules: data.coursePage?.modules?.length ? data.coursePage.modules : defaults.coursePage.modules,
-      previewVideos: data.coursePage?.previewVideos?.length ? data.coursePage.previewVideos : defaults.coursePage.previewVideos,
-      results: data.coursePage?.results?.length ? data.coursePage.results : defaults.coursePage.results,
-    },
-    seo: { ...defaults.seo, ...data.seo },
-  };
 }
 
 // ============================================================================
-// HELPER EXPORTS
-// ============================================================================
-
-export async function getHeroData() {
-  const settings = await getSiteSettings();
-  return { ...settings.hero, credentials: settings.credentials };
-}
-
-export async function getAboutData() {
-  const settings = await getSiteSettings();
-  return settings.about;
-}
-
-export async function getServicesData() {
-  const settings = await getSiteSettings();
-  return settings.services;
-}
-
-export async function getProcessData() {
-  const settings = await getSiteSettings();
-  return settings.process;
-}
-
-export async function getValuePropositionData() {
-  const settings = await getSiteSettings();
-  return settings.valueProposition;
-}
-
-export async function getFAQData() {
-  const settings = await getSiteSettings();
-  return settings.faq;
-}
-
-export async function getAwardsData() {
-  const settings = await getSiteSettings();
-  return settings.awards;
-}
-
-export async function getTestimonialsSectionData() {
-  const settings = await getSiteSettings();
-  return settings.testimonialsSection;
-}
-
-export async function getContactData() {
-  const settings = await getSiteSettings();
-  return { ...settings.contact, social: settings.social };
-}
-
-export async function getFooterData() {
-  const settings = await getSiteSettings();
-  return { ...settings.footer, contact: settings.contact, social: settings.social };
-}
-
-export async function getNewsletterPageData() {
-  const settings = await getSiteSettings();
-  return { ...settings.newsletterPage, newsletter: settings.newsletter };
-}
-
-export async function getVideosPageData() {
-  const settings = await getSiteSettings();
-  return settings.videosPage;
-}
-
-export async function getCoursePageData() {
-  const settings = await getSiteSettings();
-  return { ...settings.coursePage, playlistId: settings.course.playlistId };
-}
-
-export async function getToolsPageData() {
-  const settings = await getSiteSettings();
-  return settings.toolsPage;
-}
-
-export async function getROICalculatorPageData() {
-  const settings = await getSiteSettings();
-  return settings.roiCalculatorPage;
-}
-
-export async function getFSLPageData() {
-  const settings = await getSiteSettings();
-  return settings.fslPage;
-}
-
-// ============================================================================
-// TESTIMONIALS COLLECTION
+// DEFAULT TESTIMONIALS
 // ============================================================================
 
 interface Testimonial {
-  quote: string;
-  author: string;
-  role?: string;
-  company?: string;
-  image?: { url: string } | null;
-  featured?: boolean;
-  displayOrder?: number;
+  id?: string
+  quote: string
+  author: string
+  role?: string
+  company?: string
+  image?: { url: string } | null
+  featured?: boolean
+  displayOrder?: number
 }
 
-// Default testimonials (fallback if CMS is empty)
 const defaultTestimonials: Testimonial[] = [
   {
     quote: "When Louie came on board he wrote and organized our outbound scripts and emails. We now had everyone working off the same playbook, and it gave us consistency.",
@@ -728,31 +561,452 @@ const defaultTestimonials: Testimonial[] = [
     author: "Dan McDade",
     role: "Managing Partner @ Prospect-Experience | B2B Marketing Expert",
   },
-];
+]
 
-export const getTestimonials = cache(async (): Promise<Testimonial[]> => {
-  if (!CMS_ENABLED || !PAYLOAD_URL) {
-    return defaultTestimonials;
+// ============================================================================
+// SUPABASE DATA FETCHING
+// ============================================================================
+
+/**
+ * Fetch all site content sections from Supabase
+ */
+async function fetchSiteContentFromSupabase(): Promise<Record<string, Record<string, unknown>>> {
+  if (!supabaseAdmin) return {}
+
+  try {
+    const { data, error } = await supabaseAdmin
+      .from('site_content')
+      .select('section, content')
+
+    if (error) {
+      console.warn('[CMS] Error fetching site content:', error.message)
+      return {}
+    }
+
+    // Convert array to object keyed by section
+    const contentMap: Record<string, Record<string, unknown>> = {}
+    for (const row of data as SiteContentRow[]) {
+      contentMap[row.section] = row.content as Record<string, unknown>
+    }
+    return contentMap
+  } catch (error) {
+    console.warn('[CMS] Failed to fetch site content:', error)
+    return {}
+  }
+}
+
+/**
+ * Fetch testimonials from Supabase
+ */
+async function fetchTestimonialsFromSupabase(): Promise<Testimonial[]> {
+  if (!supabaseAdmin) return []
+
+  try {
+    const { data, error } = await supabaseAdmin
+      .from('testimonials')
+      .select('*')
+      .order('display_order', { ascending: true })
+
+    if (error) {
+      console.warn('[CMS] Error fetching testimonials:', error.message)
+      return []
+    }
+
+    return (data as TestimonialRow[]).map(row => ({
+      id: row.id,
+      quote: row.quote,
+      author: row.author,
+      role: row.role || undefined,
+      company: row.company || undefined,
+      image: row.image_url ? { url: row.image_url } : null,
+      featured: row.featured,
+      displayOrder: row.display_order,
+    }))
+  } catch (error) {
+    console.warn('[CMS] Failed to fetch testimonials:', error)
+    return []
+  }
+}
+
+/**
+ * Fetch FAQ items from Supabase
+ */
+async function fetchFAQItemsFromSupabase(page?: string): Promise<FAQItem[]> {
+  if (!supabaseAdmin) return []
+
+  try {
+    let query = supabaseAdmin
+      .from('faq_items')
+      .select('*')
+      .order('display_order', { ascending: true })
+
+    if (page) {
+      query = query.eq('page', page)
+    }
+
+    const { data, error } = await query
+
+    if (error) {
+      console.warn('[CMS] Error fetching FAQ items:', error.message)
+      return []
+    }
+
+    return (data as FAQItemRow[]).map(row => ({
+      question: row.question,
+      answer: row.answer,
+    }))
+  } catch (error) {
+    console.warn('[CMS] Failed to fetch FAQ items:', error)
+    return []
+  }
+}
+
+/**
+ * Fetch videos from Supabase
+ */
+async function fetchVideosFromSupabase(page?: string): Promise<VideoItem[]> {
+  if (!supabaseAdmin) return []
+
+  try {
+    let query = supabaseAdmin
+      .from('videos')
+      .select('*')
+      .order('display_order', { ascending: true })
+
+    if (page) {
+      query = query.eq('page', page)
+    }
+
+    const { data, error } = await query
+
+    if (error) {
+      console.warn('[CMS] Error fetching videos:', error.message)
+      return []
+    }
+
+    return (data as VideoRow[]).map(row => ({
+      videoId: row.youtube_id,
+      title: row.title,
+      description: row.description || undefined,
+    }))
+  } catch (error) {
+    console.warn('[CMS] Failed to fetch videos:', error)
+    return []
+  }
+}
+
+/**
+ * Fetch services from Supabase
+ */
+async function fetchServicesFromSupabase(): Promise<ServiceItem[]> {
+  if (!supabaseAdmin) return []
+
+  try {
+    const { data, error } = await supabaseAdmin
+      .from('services')
+      .select('*')
+      .order('display_order', { ascending: true })
+
+    if (error) {
+      console.warn('[CMS] Error fetching services:', error.message)
+      return []
+    }
+
+    return (data as ServiceRow[]).map(row => ({
+      title: row.title,
+      description: row.description,
+      icon: row.icon || undefined,
+      highlight: row.highlight,
+    }))
+  } catch (error) {
+    console.warn('[CMS] Failed to fetch services:', error)
+    return []
+  }
+}
+
+/**
+ * Fetch process steps from Supabase
+ */
+async function fetchProcessStepsFromSupabase(): Promise<ProcessStep[]> {
+  if (!supabaseAdmin) return []
+
+  try {
+    const { data, error } = await supabaseAdmin
+      .from('process_steps')
+      .select('*')
+      .order('display_order', { ascending: true })
+
+    if (error) {
+      console.warn('[CMS] Error fetching process steps:', error.message)
+      return []
+    }
+
+    return (data as ProcessStepRow[]).map(row => ({
+      number: row.step_number,
+      title: row.title,
+      description: row.description,
+    }))
+  } catch (error) {
+    console.warn('[CMS] Failed to fetch process steps:', error)
+    return []
+  }
+}
+
+// ============================================================================
+// MERGE SETTINGS
+// ============================================================================
+
+function deepMerge<T extends Record<string, unknown>>(defaults: T, overrides: Partial<T>): T {
+  const result = { ...defaults }
+  
+  for (const key in overrides) {
+    if (overrides[key] !== undefined && overrides[key] !== null) {
+      if (
+        typeof defaults[key] === 'object' &&
+        defaults[key] !== null &&
+        !Array.isArray(defaults[key]) &&
+        typeof overrides[key] === 'object' &&
+        !Array.isArray(overrides[key])
+      ) {
+        // Recursively merge nested objects
+        result[key] = deepMerge(
+          defaults[key] as Record<string, unknown>,
+          overrides[key] as Record<string, unknown>
+        ) as T[Extract<keyof T, string>]
+      } else {
+        // Override primitive values and arrays
+        result[key] = overrides[key] as T[Extract<keyof T, string>]
+      }
+    }
+  }
+  
+  return result
+}
+
+function mergeSettings(
+  defaults: SiteSettings,
+  siteContent: Record<string, Record<string, unknown>>,
+  services: ServiceItem[],
+  processSteps: ProcessStep[],
+  homepageFAQs: FAQItem[],
+  fslPageFAQs: FAQItem[],
+  featuredVideos: VideoItem[],
+  fslPageVideos: VideoItem[],
+  courseVideos: VideoItem[]
+): SiteSettings {
+  return {
+    hero: deepMerge(defaults.hero, (siteContent.hero || {}) as Partial<SiteSettings['hero']>),
+    credentials: deepMerge(defaults.credentials, (siteContent.credentials || {}) as Partial<SiteSettings['credentials']>),
+    fslPage: {
+      headline: (siteContent.fslPage?.headline as string) || defaults.fslPage.headline,
+      tagline: (siteContent.fslPage?.tagline as string) || defaults.fslPage.tagline,
+      introHook: (siteContent.fslPage?.introHook as string) || defaults.fslPage.introHook,
+      introParagraph1: (siteContent.fslPage?.introParagraph1 as string) || defaults.fslPage.introParagraph1,
+      introParagraph2: (siteContent.fslPage?.introParagraph2 as string) || defaults.fslPage.introParagraph2,
+      introParagraph3: (siteContent.fslPage?.introParagraph3 as string) || defaults.fslPage.introParagraph3,
+      introParagraph4: (siteContent.fslPage?.introParagraph4 as string) || defaults.fslPage.introParagraph4,
+      playlistId: (siteContent.fslPage?.playlistId as string) || defaults.fslPage.playlistId,
+      videos: fslPageVideos.length > 0 ? fslPageVideos : defaults.fslPage.videos,
+      faqs: fslPageFAQs.length > 0 ? fslPageFAQs : defaults.fslPage.faqs,
+      finalCtaHeadline: (siteContent.fslPage?.finalCtaHeadline as string) || defaults.fslPage.finalCtaHeadline,
+      finalCtaButtonText: (siteContent.fslPage?.finalCtaButtonText as string) || defaults.fslPage.finalCtaButtonText,
+      finalCtaDescription: (siteContent.fslPage?.finalCtaDescription as string) || defaults.fslPage.finalCtaDescription,
+    },
+    about: deepMerge(defaults.about, (siteContent.about || {}) as Partial<SiteSettings['about']>),
+    services: {
+      ...deepMerge(
+        { headline: defaults.services.headline, subheadline: defaults.services.subheadline },
+        (siteContent.servicesSection || {}) as Partial<{ headline: string; subheadline: string }>
+      ),
+      items: services.length > 0 ? services : defaults.services.items,
+    },
+    process: {
+      ...deepMerge(
+        { headline: defaults.process.headline, subheadline: defaults.process.subheadline },
+        (siteContent.processSection || {}) as Partial<{ headline: string; subheadline: string }>
+      ),
+      steps: processSteps.length > 0 ? processSteps : defaults.process.steps,
+    },
+    valueProposition: deepMerge(defaults.valueProposition, (siteContent.valueProposition || {}) as Partial<SiteSettings['valueProposition']>),
+    faq: {
+      ...deepMerge(
+        { headline: defaults.faq.headline, subheadline: defaults.faq.subheadline },
+        (siteContent.faqSection || {}) as Partial<{ headline: string; subheadline: string }>
+      ),
+      items: homepageFAQs.length > 0 ? homepageFAQs : defaults.faq.items,
+    },
+    awards: deepMerge(defaults.awards, (siteContent.awards || {}) as Partial<SiteSettings['awards']>),
+    testimonialsSection: deepMerge(defaults.testimonialsSection, (siteContent.testimonialsSection || {}) as Partial<SiteSettings['testimonialsSection']>),
+    fractionalSalesLeader: deepMerge(defaults.fractionalSalesLeader, (siteContent.fractionalSalesLeader || {}) as Partial<SiteSettings['fractionalSalesLeader']>),
+    social: deepMerge(defaults.social, (siteContent.social || {}) as Partial<SiteSettings['social']>),
+    contact: deepMerge(defaults.contact, (siteContent.contact || {}) as Partial<SiteSettings['contact']>),
+    contactSection: deepMerge(defaults.contactSection, (siteContent.contactSection || {}) as Partial<SiteSettings['contactSection']>),
+    footer: deepMerge(defaults.footer, (siteContent.footer || {}) as Partial<SiteSettings['footer']>),
+    newsletter: deepMerge(defaults.newsletter, (siteContent.newsletter || {}) as Partial<SiteSettings['newsletter']>),
+    newsletterPage: deepMerge(defaults.newsletterPage, (siteContent.newsletterPage || {}) as Partial<SiteSettings['newsletterPage']>),
+    toolsPage: deepMerge(defaults.toolsPage, (siteContent.toolsPage || {}) as Partial<SiteSettings['toolsPage']>),
+    roiCalculatorPage: deepMerge(defaults.roiCalculatorPage, (siteContent.roiCalculatorPage || {}) as Partial<SiteSettings['roiCalculatorPage']>),
+    videosPage: {
+      ...deepMerge(defaults.videosPage, (siteContent.videosPage || {}) as Partial<SiteSettings['videosPage']>),
+      featuredVideos: featuredVideos.length > 0 ? featuredVideos : defaults.videosPage.featuredVideos,
+    },
+    course: deepMerge(defaults.course, (siteContent.course || {}) as Partial<SiteSettings['course']>),
+    coursePage: {
+      ...deepMerge(defaults.coursePage, (siteContent.coursePage || {}) as Partial<SiteSettings['coursePage']>),
+      previewVideos: courseVideos.length > 0 ? courseVideos : defaults.coursePage.previewVideos,
+    },
+    seo: deepMerge(defaults.seo, (siteContent.seo || {}) as Partial<SiteSettings['seo']>),
+  }
+}
+
+// ============================================================================
+// PUBLIC API (cached)
+// ============================================================================
+
+/**
+ * Get all site settings, merged with defaults
+ */
+export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
+  // If Supabase CMS is disabled or not configured, return defaults
+  if (!USE_SUPABASE_CMS || !isSupabaseConfigured) {
+    return defaultSettings
   }
 
   try {
-    const response = await fetch(
-      `${PAYLOAD_URL}/api/testimonials?limit=50&sort=displayOrder`,
-      { next: { revalidate: 10 } }
-    );
+    // Fetch all data in parallel
+    const [
+      siteContent,
+      services,
+      processSteps,
+      homepageFAQs,
+      fslPageFAQs,
+      featuredVideos,
+      fslPageVideos,
+      courseVideos,
+    ] = await Promise.all([
+      fetchSiteContentFromSupabase(),
+      fetchServicesFromSupabase(),
+      fetchProcessStepsFromSupabase(),
+      fetchFAQItemsFromSupabase('homepage'),
+      fetchFAQItemsFromSupabase('fslPage'),
+      fetchVideosFromSupabase('featured'),
+      fetchVideosFromSupabase('fslPage'),
+      fetchVideosFromSupabase('course'),
+    ])
 
-    if (!response.ok) {
-      console.warn('Failed to fetch testimonials, using defaults');
-      return defaultTestimonials;
-    }
-
-    const data = await response.json();
-    const testimonials = data.docs as Testimonial[];
-
-    // Return CMS testimonials if we have them, otherwise defaults
-    return testimonials.length > 0 ? testimonials : defaultTestimonials;
+    return mergeSettings(
+      defaultSettings,
+      siteContent,
+      services,
+      processSteps,
+      homepageFAQs,
+      fslPageFAQs,
+      featuredVideos,
+      fslPageVideos,
+      courseVideos
+    )
   } catch (error) {
-    console.warn('Error fetching testimonials:', error);
-    return defaultTestimonials;
+    console.warn('[CMS] Error fetching settings, using defaults:', error)
+    return defaultSettings
   }
-});
+})
+
+/**
+ * Get testimonials
+ */
+export const getTestimonials = cache(async (): Promise<Testimonial[]> => {
+  if (!USE_SUPABASE_CMS || !isSupabaseConfigured) {
+    return defaultTestimonials
+  }
+
+  const testimonials = await fetchTestimonialsFromSupabase()
+  return testimonials.length > 0 ? testimonials : defaultTestimonials
+})
+
+// ============================================================================
+// HELPER EXPORTS (matching payload.ts interface)
+// ============================================================================
+
+export async function getHeroData() {
+  const settings = await getSiteSettings()
+  return { ...settings.hero, credentials: settings.credentials }
+}
+
+export async function getAboutData() {
+  const settings = await getSiteSettings()
+  return settings.about
+}
+
+export async function getServicesData() {
+  const settings = await getSiteSettings()
+  return settings.services
+}
+
+export async function getProcessData() {
+  const settings = await getSiteSettings()
+  return settings.process
+}
+
+export async function getValuePropositionData() {
+  const settings = await getSiteSettings()
+  return settings.valueProposition
+}
+
+export async function getFAQData() {
+  const settings = await getSiteSettings()
+  return settings.faq
+}
+
+export async function getAwardsData() {
+  const settings = await getSiteSettings()
+  return settings.awards
+}
+
+export async function getTestimonialsSectionData() {
+  const settings = await getSiteSettings()
+  return settings.testimonialsSection
+}
+
+export async function getContactData() {
+  const settings = await getSiteSettings()
+  return { ...settings.contact, social: settings.social }
+}
+
+export async function getFooterData() {
+  const settings = await getSiteSettings()
+  return { ...settings.footer, contact: settings.contact, social: settings.social }
+}
+
+export async function getNewsletterPageData() {
+  const settings = await getSiteSettings()
+  return { ...settings.newsletterPage, newsletter: settings.newsletter }
+}
+
+export async function getVideosPageData() {
+  const settings = await getSiteSettings()
+  return settings.videosPage
+}
+
+export async function getCoursePageData() {
+  const settings = await getSiteSettings()
+  return { ...settings.coursePage, playlistId: settings.course.playlistId }
+}
+
+export async function getToolsPageData() {
+  const settings = await getSiteSettings()
+  return settings.toolsPage
+}
+
+export async function getROICalculatorPageData() {
+  const settings = await getSiteSettings()
+  return settings.roiCalculatorPage
+}
+
+export async function getFSLPageData() {
+  const settings = await getSiteSettings()
+  return settings.fslPage
+}
+
+// Re-export types for use in components
+export type { SiteSettings, Testimonial, FAQItem, VideoItem, ServiceItem, ProcessStep }
+
