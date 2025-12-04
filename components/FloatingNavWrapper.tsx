@@ -1,7 +1,7 @@
 "use client";
 
 import { FloatingNav } from "@/components/ui/floating-navbar";
-import { Home, FileText, Video, Mail, Wrench, BookOpen, GraduationCap } from "lucide-react";
+import { Home, FileText, Video, Mail, Wrench, BookOpen, GraduationCap, UserCheck } from "lucide-react";
 
 export function FloatingNavWrapper() {
   return (
@@ -16,6 +16,11 @@ export function FloatingNavWrapper() {
           name: "Learn",
           icon: <BookOpen className="h-4 w-4 text-neutral-500 dark:text-white" />,
           children: [
+            {
+              name: "Fractional Sales Leader",
+              link: "/fractional-sales-leader",
+              icon: <UserCheck className="h-4 w-4 text-neutral-500 dark:text-white" />,
+            },
             {
               name: "Articles",
               link: "/articles",
