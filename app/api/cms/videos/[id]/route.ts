@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { getUser } from '@/lib/auth'
 import { supabaseAdmin } from '@/lib/supabase'
 
@@ -69,6 +70,9 @@ export async function PUT(
 
     if (error) throw error
 
+    // Revalidate so changes appear immediately
+    revalidatePath('/', 'layout')
+
     return NextResponse.json({ success: true, video: data })
   } catch (error) {
     console.error('[CMS API] Error updating video:', error)
@@ -99,6 +103,9 @@ export async function DELETE(
       .eq('id', id)
 
     if (error) throw error
+
+    // Revalidate so changes appear immediately
+    revalidatePath('/', 'layout')
 
     return NextResponse.json({ success: true })
   } catch (error) {

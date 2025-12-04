@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { getUser } from '@/lib/auth'
 import { supabaseAdmin } from '@/lib/supabase'
 
@@ -91,6 +92,9 @@ export async function PUT(
     if (error) {
       throw error
     }
+
+    // Revalidate the site so changes appear immediately
+    revalidatePath('/', 'layout')
 
     return NextResponse.json({
       success: true,
