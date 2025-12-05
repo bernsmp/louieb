@@ -76,12 +76,25 @@ export async function PUT(
       )
     }
 
-    // Upsert the content
+    // Fetch existing content first to merge (prevents data loss)
+    const { data: existing } = await supabaseAdmin
+      .from('site_content')
+      .select('content')
+      .eq('section', section)
+      .single()
+
+    // Deep merge: existing content + new content (new values override)
+    const mergedContent = {
+      ...(existing?.content || {}),
+      ...content,
+    }
+
+    // Upsert the merged content
     const { data, error } = await supabaseAdmin
       .from('site_content')
       .upsert({
         section,
-        content,
+        content: mergedContent,
         updated_by: user.email,
       }, {
         onConflict: 'section',

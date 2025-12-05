@@ -119,36 +119,39 @@ export default function EditHeroPage() {
     setMessage(null)
 
     try {
+      // Only include non-empty fields to prevent wiping data
+      const heroContent: Record<string, unknown> = {}
+      if (content.headline) heroContent.headline = content.headline
+      if (content.tagline) heroContent.tagline = content.tagline
+      if (content.description) heroContent.description = content.description
+      if (content.videoId) heroContent.videoId = content.videoId
+      if (content.ctaPrimary?.text || content.ctaPrimary?.url) {
+        heroContent.ctaPrimary = content.ctaPrimary
+      }
+      if (content.ctaSecondary?.text || content.ctaSecondary?.url) {
+        heroContent.ctaSecondary = content.ctaSecondary
+      }
+
       // Save hero content
       const heroResponse = await fetch('/api/cms/section/hero', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          content: {
-            headline: content.headline,
-            tagline: content.tagline,
-            description: content.description,
-            videoId: content.videoId,
-            ctaPrimary: content.ctaPrimary,
-            ctaSecondary: content.ctaSecondary,
-          }
-        }),
+        body: JSON.stringify({ content: heroContent }),
       })
 
       if (!heroResponse.ok) {
         throw new Error('Failed to save hero content')
       }
       
-      // Save credentials content
+      // Save credentials content (only if non-empty)
+      const credContent: Record<string, unknown> = {}
+      if (content.credentialPrimary) credContent.primary = content.credentialPrimary
+      if (content.credentialSecondary) credContent.secondary = content.credentialSecondary
+
       const credResponse = await fetch('/api/cms/section/credentials', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          content: {
-            primary: content.credentialPrimary,
-            secondary: content.credentialSecondary,
-          }
-        }),
+        body: JSON.stringify({ content: credContent }),
       })
 
       if (!credResponse.ok) {
