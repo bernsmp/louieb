@@ -10,6 +10,9 @@ import { Contact } from "@/components/sections/Contact";
 import { Awards } from "@/components/sections/Awards";
 import { getSiteSettings, getTestimonials } from "@/lib/cms";
 
+// Make this page dynamic so CMS changes are reflected immediately
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const [settings, testimonials] = await Promise.all([
     getSiteSettings(),
