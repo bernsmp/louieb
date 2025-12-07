@@ -122,7 +122,7 @@ async function upsertSection(section: string, content: Record<string, any>) {
 
 async function seedAllDefaults() {
   console.log('🌱 Seeding ALL CMS pages with default content...\n');
-  console.log(`📡 Connecting to Supabase: ${supabaseUrl.substring(0, 30)}...\n`);
+  console.log(`📡 Connecting to Supabase: ${supabaseUrl!.substring(0, 30)}...\n`);
 
   try {
     // Test connection

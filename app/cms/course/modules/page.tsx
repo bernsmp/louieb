@@ -30,7 +30,7 @@ export default function CourseModulesAdmin() {
       const data = await response.json()
       const rawModules = data.content?.modules || []
       // Add IDs if they don't exist
-      const modulesWithIds = rawModules.map((m: any, index: number) => ({
+      const modulesWithIds = rawModules.map((m: Omit<CourseModule, 'id'> & { id?: string }, index: number) => ({
         ...m,
         id: m.id || `module-${index}`,
       }))
@@ -46,7 +46,7 @@ export default function CourseModulesAdmin() {
     setSaving(true)
     try {
       // Strip IDs before saving (they're just for UI)
-      const modulesToSave = newModules.map(({ id, ...rest }) => rest)
+      const modulesToSave = newModules.map(({ id: _id, ...rest }) => rest)
       
       const response = await fetch('/api/cms/section/coursePage', {
         method: 'PUT',
