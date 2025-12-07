@@ -1,17 +1,45 @@
 'use client'
 
+import Link from 'next/link'
 import { SectionEditor } from '../components/SectionEditor'
 
 export default function EditCoursePage() {
   return (
-    <SectionEditor
-      section="coursePage"
-      title="Course Page"
-      description="Content for the /course page."
-      backHref="/cms"
-      backLabel="Back to Dashboard"
-      previewUrl="/cms/preview/course"
-      fields={[
+    <div>
+      {/* Link to Course Modules Editor */}
+      <div style={{ 
+        background: '#1a1a1a', 
+        border: '1px solid #333', 
+        borderRadius: '8px', 
+        padding: '1rem 1.5rem', 
+        marginBottom: '1rem',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }}>
+        <div>
+          <h3 style={{ margin: 0, fontSize: '1rem', color: '#fff' }}>Course Modules</h3>
+          <p style={{ margin: '0.25rem 0 0', fontSize: '0.85rem', color: '#888' }}>
+            Edit the 4 cards shown in &quot;What you get with this FREE course&quot;
+          </p>
+        </div>
+        <Link 
+          href="/cms/course/modules" 
+          className="btn btn--primary"
+          style={{ whiteSpace: 'nowrap' }}
+        >
+          Edit Modules →
+        </Link>
+      </div>
+
+      <SectionEditor
+        section="coursePage"
+        title="Course Page"
+        description="Content for the /course page."
+        backHref="/cms"
+        backLabel="Back to Dashboard"
+        previewUrl="/cms/preview/course"
+        fields={[
         {
           name: 'headline',
           label: 'Page Headline',
@@ -83,6 +111,7 @@ export default function EditCoursePage() {
           type: 'text',
         },
       ]}
-    />
+      />
+    </div>
   )
 }

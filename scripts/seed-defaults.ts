@@ -1,15 +1,17 @@
 /**
  * Seed Script - Populates CMS database with default content
  * 
- * Run this script after initial deployment to ensure all default content
- * is in the database and editable via the CMS admin panel.
+ * DEPRECATED: Use seed-all-defaults.ts instead (uses Supabase)
  * 
- * Usage: npx ts-node scripts/seed-defaults.ts
- * Or add to package.json: "seed": "ts-node scripts/seed-defaults.ts"
+ * This script is kept for reference but should not be used.
+ * All seeding should go through Supabase, not Payload/MongoDB.
  * 
- * IMPORTANT: This script only adds defaults if fields are empty.
- * It will NOT overwrite existing content.
+ * Usage: npm run seed:all (uses Supabase)
  */
+
+// This script is deprecated - use seed-all-defaults.ts instead
+console.warn('⚠️  WARNING: This script is deprecated. Use "npm run seed:all" instead (uses Supabase).');
+process.exit(1);
 
 const PAYLOAD_URL = process.env.PAYLOAD_URL || 'https://louiebernstein.com';
 

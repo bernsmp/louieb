@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 /**
  * On-demand revalidation endpoint for CMS updates.
- * Called by Payload CMS afterChange hook to instantly invalidate cached pages.
+ * Called by Supabase CMS webhooks to instantly invalidate cached pages.
  */
 export async function POST(request: NextRequest) {
   const secret = request.headers.get('x-revalidate-secret')
