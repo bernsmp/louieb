@@ -52,49 +52,6 @@ export default async function CoursePage() {
         </div>
       </section>
 
-      {/* What You Get Section */}
-      <section className="bg-white py-32">
-        <div className="container mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-5xl font-bold text-neutral-900 md:text-6xl lg:text-7xl">
-              {pageData.modulesHeadline}
-            </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-xl text-neutral-600">
-              {pageData.modulesSubheadline}
-            </p>
-          </div>
-
-          {/* Course Modules - Compact List */}
-          <div className="mt-12 max-w-4xl mx-auto">
-            <div className="space-y-4">
-              {pageData.modules.map((module, index) => (
-                <div
-                  key={index}
-                  className="flex gap-4 rounded-lg border border-neutral-200 bg-white p-6 transition-all hover:border-neutral-900 hover:shadow-md"
-                >
-                  <div className="flex-shrink-0">
-                    <Icon src={module.icon || "/icons/business-plan-11962831.svg"} alt={module.title} size={48} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-neutral-900">
-                      {module.title}
-                    </h3>
-                    <p className="mt-2 text-base text-neutral-600">
-                      {module.description}
-                    </p>
-                    {module.benefit && (
-                      <p className="mt-2 text-sm font-semibold text-neutral-700">
-                        {module.benefit}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Video Previews Section */}
       <section className="bg-neutral-50 py-32">
         <div className="container mx-auto max-w-7xl px-6 lg:px-8">
@@ -171,8 +128,51 @@ export default async function CoursePage() {
         </div>
       </section>
 
-      {/* Results Section */}
+      {/* What You Get Section */}
       <section className="bg-white py-32">
+        <div className="container mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-5xl font-bold text-neutral-900 md:text-6xl lg:text-7xl">
+              {pageData.modulesHeadline}
+            </h2>
+            <p className="mx-auto mt-6 max-w-2xl text-xl text-neutral-600">
+              {pageData.modulesSubheadline}
+            </p>
+          </div>
+
+          {/* Course Modules - Compact List */}
+          <div className="mt-12 max-w-4xl mx-auto">
+            <div className="space-y-4">
+              {pageData.modules.map((module, index) => (
+                <div
+                  key={index}
+                  className="flex gap-4 rounded-lg border border-neutral-200 bg-white p-6 transition-all hover:border-neutral-900 hover:shadow-md"
+                >
+                  <div className="flex-shrink-0">
+                    <Icon src={module.icon || "/icons/business-plan-11962831.svg"} alt={module.title} size={48} />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold text-neutral-900">
+                      {module.title}
+                    </h3>
+                    <p className="mt-2 text-base text-neutral-600">
+                      {module.description}
+                    </p>
+                    {module.benefit && (
+                      <p className="mt-2 text-sm font-semibold text-neutral-700">
+                        {module.benefit}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Results Section */}
+      <section className="bg-neutral-50 py-32">
         <div className="container mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-5xl font-bold text-neutral-900 md:text-6xl lg:text-7xl">
