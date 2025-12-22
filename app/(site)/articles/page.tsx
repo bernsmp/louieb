@@ -32,7 +32,7 @@ export default function ArticlesPage() {
                 href={`/articles/${article.metadata.slug}`}
                 className="group rounded-2xl border-2 border-border bg-card p-8 transition-all hover:border-[#0966c2] hover:shadow-lg"
               >
-                <div className="mb-4 aspect-video w-full rounded-lg bg-gradient-to-br from-[#0966c2]/10 to-[#0855a3]/10 overflow-hidden relative">
+                <div className="mb-4 aspect-square w-full rounded-lg bg-gradient-to-br from-[#0966c2]/10 to-[#0855a3]/10 overflow-hidden relative">
                   {article.metadata.image ? (
                     <Image
                       src={article.metadata.image}
