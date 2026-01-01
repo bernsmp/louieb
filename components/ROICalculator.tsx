@@ -254,6 +254,37 @@ export function ROICalculator() {
         </Link>
       </div>
 
+      {/* Download Calculator Section */}
+      <div className="mt-8 p-6 bg-gray-50 dark:bg-neutral-900 rounded-lg border border-gray-200 dark:border-neutral-800">
+        <p className="mb-4 text-sm text-gray-700 dark:text-gray-300">
+          <strong>Note:</strong> This calculator shows top-line impact only. Gross and net profit are not calculated.
+        </p>
+        <a
+          href="https://docs.google.com/spreadsheets/d/1i9yvZM5BPvYfftJGYaOmgRGMr6u4Y-Xm/edit?gid=1275642810#gid=1275642810"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-[#0966c2] text-white rounded-md font-medium hover:bg-[#0855a3] transition-colors"
+        >
+          <svg
+            className="w-5 h-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download the complete Fractional Sales Leadership pricing calculator
+        </a>
+        <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
+          Compare against Founder-Led Sales, Hiring a Sales VP, and hiring a Fractional Sales Leader.
+        </p>
+      </div>
+
       {/* Disclaimer */}
       <p className="text-xs text-center text-muted-foreground">
         Note: This calculator shows top-line impact only. Gross and net profit are not calculated.
