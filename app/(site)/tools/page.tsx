@@ -4,9 +4,18 @@ import { Calculator, BarChart, PieChart, TrendingUp, Target, Users } from "lucid
 import { getToolsPageData } from "@/lib/cms";
 
 export const metadata: Metadata = {
-  title: "Tools | Louie Bernstein - Sales Leadership Tools",
+  title: "Free Sales Leadership Tools & Calculators | Louie Bernstein",
   description:
-    "Free sales leadership tools and calculators to help you make better business decisions.",
+    "Free sales leadership tools and calculators to help you make better business decisions. ROI calculators, cost comparison tools, and more.",
+  keywords:
+    "sales tools, sales calculators, sales leadership tools, fractional sales calculator, sales roi calculator, free sales tools",
+  openGraph: {
+    title: "Free Sales Leadership Tools & Calculators",
+    description:
+      "Free sales leadership tools and calculators to help you make better business decisions.",
+    url: "https://louiebernstein.com/tools",
+    type: "website",
+  },
 };
 
 // Map icon names to Lucide components
