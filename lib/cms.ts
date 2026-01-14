@@ -1089,6 +1089,45 @@ export async function getFSLPageDataWithLayout() {
   }
 }
 
+// Video slug utilities
+function slugify(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+}
+
+export interface VideoWithSlug extends VideoItem {
+  slug: string
+}
+
+/**
+ * Get all video slugs for static generation and sitemap
+ */
+export async function getAllVideoSlugs(): Promise<string[]> {
+  const settings = await getSiteSettings()
+  return settings.videosPage.featuredVideos.map((video) => slugify(video.title))
+}
+
+/**
+ * Get all videos with their slugs
+ */
+export async function getAllVideosWithSlugs(): Promise<VideoWithSlug[]> {
+  const settings = await getSiteSettings()
+  return settings.videosPage.featuredVideos.map((video) => ({
+    ...video,
+    slug: slugify(video.title),
+  }))
+}
+
+/**
+ * Get a single video by its slug
+ */
+export async function getVideoBySlug(slug: string): Promise<VideoWithSlug | null> {
+  const videos = await getAllVideosWithSlugs()
+  return videos.find((video) => video.slug === slug) || null
+}
+
 // Re-export types for use in components
 export type { SiteSettings, Testimonial, FAQItem, VideoItem, ServiceItem, ProcessStep, PageLayout }
 

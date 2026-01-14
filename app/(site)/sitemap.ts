@@ -1,7 +1,8 @@
 import { MetadataRoute } from 'next';
 import { getArticleSlugs, getArticleBySlug } from '@/lib/markdown';
+import { getAllVideoSlugs } from '@/lib/cms';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://louiebernstein.com';
 
   // Static routes
@@ -68,6 +69,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
-  return [...staticRoutes, ...articleRoutes];
+  // Dynamic video routes
+  const videoSlugs = await getAllVideoSlugs();
+  const videoRoutes: MetadataRoute.Sitemap = videoSlugs.map((slug) => ({
+    url: `${baseUrl}/videos/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
+  return [...staticRoutes, ...articleRoutes, ...videoRoutes];
 }
 

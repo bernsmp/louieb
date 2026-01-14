@@ -1,5 +1,6 @@
 import { Metadata } from "next";
-import { getVideosPageData } from "@/lib/cms";
+import Link from "next/link";
+import { getVideosPageData, getAllVideosWithSlugs } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Sales Training Videos | Louie Bernstein - Top Sales Insights",
@@ -52,7 +53,7 @@ function generateVideoSchema(videos: Array<{ videoId: string; title: string; des
 export default async function VideosPage() {
   // Fetch videos page data from CMS
   const pageData = await getVideosPageData();
-  const featuredVideos = pageData.featuredVideos;
+  const featuredVideos = await getAllVideosWithSlugs();
   const videoSchema = generateVideoSchema(featuredVideos);
 
   return (
@@ -102,14 +103,12 @@ export default async function VideosPage() {
                       <p className="mt-2 font-sans text-sm text-muted-foreground">
                         {video.description}
                       </p>
-                      <a
-                        href={`https://www.youtube.com/watch?v=${video.videoId}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <Link
+                        href={`/videos/${video.slug}`}
                         className="mt-3 inline-block font-sans text-sm font-medium text-[#0966c2] hover:underline"
                       >
-                        {pageData.watchOnYoutubeText}
-                      </a>
+                        Watch Video →
+                      </Link>
                     </div>
                   </div>
                 ))}

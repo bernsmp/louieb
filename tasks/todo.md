@@ -1,93 +1,59 @@
-# CMS Editability & Admin UX Overhaul
+# Individual Video Watch Pages
 
-## Overview
-Two-part project to ensure all site content is CMS-editable and reorganize the admin panel for better UX.
+## Goal
+Create dedicated watch pages for each video (`/videos/[slug]`) so Google can index them properly. Currently all 4 videos are on `/videos` and Google reports "Video isn't on a watch page".
 
----
+## Plan
 
-## Part 1: Make Everything CMS-Editable ✅ COMPLETE
-All content is now CMS-editable (see tasks/cms-editability-plan-2025-12-02.md for details).
+- [ ] 1. Add `getVideoBySlug` and `getAllVideoSlugs` functions to `lib/cms.ts`
+- [ ] 2. Create `/app/(site)/videos/[slug]/page.tsx` with:
+  - Video as hero/primary content
+  - Proper VideoObject schema markup
+  - Dynamic metadata for SEO
+  - Links to other videos
+- [ ] 3. Update `/app/(site)/videos/page.tsx` to link to individual pages
+- [ ] 4. Update `sitemap.ts` to include individual video URLs
+- [ ] 5. Test locally - verify pages render correctly
+- [ ] 6. Commit changes
 
----
-
-## Part 2: Admin UX Overhaul
-
-### Current State (Problematic)
-6 separate tabs that make it hard to find content:
-1. Homepage
-2. Services & Process
-3. FAQ
-4. Other Pages
-5. Brand & Contact
-6. SEO
-
-### New Structure (Goal)
-Single page with collapsible sections organized by **what page/section they affect**:
-
-```
-📄 HOMEPAGE CONTENT (collapsed by default)
-├── Hero Section
-├── Credentials Badge
-├── About Section
-├── Value Proposition
-├── Awards Section
-├── Testimonials Header
-├── Fractional Sales Leader Section
-└── Contact Section
-
-📄 SERVICES & PROCESS (collapsed by default)
-├── Services Section
-└── Process Section
-
-📄 FAQ (collapsed by default)
-└── FAQ Items
-
-📄 VIDEOS PAGE /videos
-├── Page Header
-├── Featured Videos
-└── Section Labels
-
-📄 NEWSLETTER PAGE /newsletter
-├── Page Header & Benefits
-├── Featured Content
-└── Final CTA
-
-📄 COURSE PAGE /course
-├── Header & Tagline
-├── Modules
-├── Preview Videos
-├── Results
-└── Case Study
-
-📄 TOOLS PAGES /tools
-├── Tools Landing Page
-└── ROI Calculator
-
-📄 BRAND & SOCIAL
-├── Social Links
-├── Contact Info
-├── Newsletter Settings
-└── Course Settings
-
-📄 FOOTER
-
-📄 SEO
-```
-
----
-
-### Implementation Tasks
-
-- [ ] 1. Backup current SiteSettings.ts before changes
-- [ ] 2. Convert tabs to top-level collapsible sections
-- [ ] 3. Test in admin panel - verify all fields appear correctly
-- [ ] 4. Verify frontend still works (field paths unchanged)
-- [ ] 5. Commit changes
-
-### Key Principle
-**Field paths stay the same** (e.g., `hero.headline`, `services.items`) - we're only changing the admin UI organization, not the data structure. The frontend code won't need any changes.
+## Technical Notes
+- Slug generated from video title (e.g., "Build This Before Hiring Salespeople" → `build-this-before-hiring-salespeople`)
+- Videos come from `getVideosPageData().featuredVideos`
+- Schema markup needs: name, description, thumbnailUrl, uploadDate, contentUrl, embedUrl
 
 ---
 
 ## Review
-_To be completed after implementation_
+
+### Summary of Changes
+- Added `slugify()`, `getAllVideoSlugs()`, `getAllVideosWithSlugs()`, and `getVideoBySlug()` functions to `lib/cms.ts`
+- Created new individual video watch page at `/app/(site)/videos/[slug]/page.tsx` with:
+  - Video as primary/hero content
+  - VideoObject schema markup for Google indexing
+  - Dynamic metadata (title, description, OpenGraph)
+  - "More Videos" section linking to other videos
+- Updated `/app/(site)/videos/page.tsx` to link to individual pages instead of YouTube
+- Updated `sitemap.ts` to include individual video URLs
+
+### New Video URLs
+- `/videos/build-this-before-hiring-salespeople`
+- `/videos/my-1st-sales-hire-mistake`
+- `/videos/build-the-system-before-the-team`
+- `/videos/the-secret-email-step-that-gets-replies`
+
+### Files Modified
+- `lib/cms.ts` - Added video helper functions
+- `app/(site)/videos/page.tsx` - Updated links
+- `app/(site)/sitemap.ts` - Added video routes
+
+### Files Created
+- `app/(site)/videos/[slug]/page.tsx` - Individual video watch page
+
+### No New Dependencies
+No new packages added.
+
+### No New Environment Variables
+No new env vars needed.
+
+### Known Limitations
+- Video upload dates are hardcoded to "2025-11-23" - could be made dynamic if dates are stored in CMS
