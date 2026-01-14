@@ -219,6 +219,10 @@ interface SiteSettings {
     playlistHeadline: string
     watchOnYoutubeText: string
     watchMoreButtonText: string
+    // Individual video page settings
+    videoPageBackLinkText: string
+    videoPageWatchButtonText: string
+    videoPageMoreVideosHeadline: string
   }
   course: {
     playlistId: string
@@ -438,6 +442,10 @@ const defaultSettings: SiteSettings = {
     playlistHeadline: 'Complete Sales Leadership Playlist',
     watchOnYoutubeText: 'Watch on YouTube →',
     watchMoreButtonText: 'Watch More Videos on YouTube',
+    // Individual video page settings
+    videoPageBackLinkText: 'All Videos',
+    videoPageWatchButtonText: 'Watch on YouTube',
+    videoPageMoreVideosHeadline: 'More Videos',
     featuredVideos: [
       { videoId: 'ScygjngNNY4', title: 'Build This Before Hiring Salespeople', description: "Don't hire sales reps until you have a playbook. Learn why building the system first is crucial for scaling revenue." },
       { videoId: 'LgaJZ4R6Y-4', title: 'My 1st Sales Hire Mistake', description: 'Avoid common hiring pitfalls. Louie shares his personal experience with early sales hires and what he learned.' },

@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getVideoBySlug, getAllVideosWithSlugs } from "@/lib/cms";
+import { getVideoBySlug, getAllVideosWithSlugs, getVideosPageData } from "@/lib/cms";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -64,14 +64,17 @@ function generateVideoSchema(video: { videoId: string; title: string; descriptio
 
 export default async function VideoPage({ params }: Props) {
   const { slug } = await params;
-  const video = await getVideoBySlug(slug);
+  const [video, pageData, allVideos] = await Promise.all([
+    getVideoBySlug(slug),
+    getVideosPageData(),
+    getAllVideosWithSlugs(),
+  ]);
 
   if (!video) {
     notFound();
   }
 
   // Get other videos for "More Videos" section
-  const allVideos = await getAllVideosWithSlugs();
   const otherVideos = allVideos.filter((v) => v.slug !== slug);
 
   const videoSchema = generateVideoSchema(video);
@@ -102,7 +105,7 @@ export default async function VideoPage({ params }: Props) {
                 d="M15 19l-7-7 7-7"
               />
             </svg>
-            All Videos
+            {pageData.videoPageBackLinkText}
           </Link>
 
           {/* Video Player - Primary Content */}
@@ -134,7 +137,7 @@ export default async function VideoPage({ params }: Props) {
               rel="noopener noreferrer"
               className="mt-6 inline-block rounded-lg bg-[#0966c2] px-6 py-3 font-sans text-sm font-semibold text-white shadow-md transition-all hover:bg-[#0855a3] hover:shadow-lg"
             >
-              Watch on YouTube
+              {pageData.videoPageWatchButtonText}
             </a>
           </div>
 
@@ -142,7 +145,7 @@ export default async function VideoPage({ params }: Props) {
           {otherVideos.length > 0 && (
             <div className="mt-16 border-t border-border pt-12">
               <h2 className="mb-8 font-sans text-2xl font-bold text-foreground">
-                More Videos
+                {pageData.videoPageMoreVideosHeadline}
               </h2>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {otherVideos.map((otherVideo) => (

@@ -12,6 +12,10 @@ interface VideosPageContent {
   playlistHeadline: string
   watchOnYoutubeText: string
   watchMoreButtonText: string
+  // Individual video page settings
+  videoPageBackLinkText: string
+  videoPageWatchButtonText: string
+  videoPageMoreVideosHeadline: string
 }
 
 // Default values that match what's shown on the live site
@@ -23,6 +27,10 @@ const defaults: VideosPageContent = {
   playlistHeadline: 'Complete Sales Leadership Playlist',
   watchOnYoutubeText: 'Watch on YouTube →',
   watchMoreButtonText: 'Watch More Videos on YouTube',
+  // Individual video page settings
+  videoPageBackLinkText: 'All Videos',
+  videoPageWatchButtonText: 'Watch on YouTube',
+  videoPageMoreVideosHeadline: 'More Videos',
 }
 
 export default function EditVideosPage() {
@@ -242,6 +250,56 @@ export default function EditVideosPage() {
               onChange={(e) => handleChange('watchMoreButtonText', e.target.value)}
               placeholder={defaults.watchMoreButtonText}
             />
+          </div>
+
+          {/* Individual Video Page Settings */}
+          <div style={{
+            borderTop: '1px solid rgba(255,255,255,0.1)',
+            marginTop: '2rem',
+            paddingTop: '1.5rem',
+          }}>
+            <h3 style={{ color: '#f5f5f5', fontSize: '1rem', fontWeight: 600, marginBottom: '1rem' }}>
+              Individual Video Page Settings
+            </h3>
+            <p style={{ color: '#a3a3a3', fontSize: '0.875rem', marginBottom: '1.5rem' }}>
+              These settings apply to individual video watch pages (/videos/video-name).
+            </p>
+
+            <div className="form-group">
+              <label className="form-label">Back Link Text</label>
+              <input
+                type="text"
+                className="form-input"
+                value={content.videoPageBackLinkText}
+                onChange={(e) => handleChange('videoPageBackLinkText', e.target.value)}
+                placeholder={defaults.videoPageBackLinkText}
+              />
+              <p className="form-hint">The "← All Videos" link at the top of each video page</p>
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Watch Button Text</label>
+              <input
+                type="text"
+                className="form-input"
+                value={content.videoPageWatchButtonText}
+                onChange={(e) => handleChange('videoPageWatchButtonText', e.target.value)}
+                placeholder={defaults.videoPageWatchButtonText}
+              />
+              <p className="form-hint">The YouTube button below each video</p>
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">More Videos Headline</label>
+              <input
+                type="text"
+                className="form-input"
+                value={content.videoPageMoreVideosHeadline}
+                onChange={(e) => handleChange('videoPageMoreVideosHeadline', e.target.value)}
+                placeholder={defaults.videoPageMoreVideosHeadline}
+              />
+              <p className="form-hint">The heading above related videos at the bottom</p>
+            </div>
           </div>
         </div>
 
