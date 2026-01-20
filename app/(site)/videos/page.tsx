@@ -132,6 +132,24 @@ export default async function VideosPage() {
               </div>
             </div>
 
+            {/* Video Links Section */}
+            <div className="mt-10 text-center">
+              <h3 className="mb-4 font-sans text-lg font-semibold text-foreground">
+                Watch Individual Videos
+              </h3>
+              <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+                {featuredVideos.map((video) => (
+                  <Link
+                    key={video.slug}
+                    href={`/videos/${video.slug}`}
+                    className="font-sans text-[#0966c2] hover:underline"
+                  >
+                    {video.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             {/* CTA Section */}
             <div className="mt-12 text-center">
               <a
