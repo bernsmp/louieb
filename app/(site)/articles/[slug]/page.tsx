@@ -21,6 +21,7 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const article = getArticleBySlug(slug);
+  const baseUrl = "https://louiebernstein.com";
 
   if (!article) {
     return {
@@ -28,16 +29,41 @@ export async function generateMetadata({
     };
   }
 
+  const articleUrl = `${baseUrl}/articles/${slug}`;
+  const imageUrl = article.metadata.image
+    ? `${baseUrl}${article.metadata.image}`
+    : `${baseUrl}/logo/og-image.png`;
+
   return {
     title: `${article.metadata.title} | Louie Bernstein`,
     description: article.metadata.description,
     keywords: article.metadata.keywords,
+    authors: [{ name: article.metadata.author }],
+    alternates: {
+      canonical: articleUrl,
+    },
     openGraph: {
       title: article.metadata.title,
       description: article.metadata.description,
       type: "article",
       publishedTime: article.metadata.date,
       authors: [article.metadata.author],
+      url: articleUrl,
+      siteName: "Louie Bernstein",
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: article.metadata.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.metadata.title,
+      description: article.metadata.description,
+      images: [imageUrl],
     },
   };
 }
@@ -45,13 +71,53 @@ export async function generateMetadata({
 export default async function ArticlePage({ params }: PageProps) {
   const { slug } = await params;
   const article = getArticleBySlug(slug);
+  const baseUrl = "https://louiebernstein.com";
 
   if (!article) {
     notFound();
   }
 
+  const articleUrl = `${baseUrl}/articles/${slug}`;
+  const imageUrl = article.metadata.image
+    ? `${baseUrl}${article.metadata.image}`
+    : `${baseUrl}/logo/og-image.png`;
+
+  // Article schema for rich search results
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.metadata.title,
+    description: article.metadata.description,
+    image: imageUrl,
+    datePublished: article.metadata.date,
+    dateModified: article.metadata.date,
+    author: {
+      "@type": "Person",
+      name: article.metadata.author,
+      url: "https://www.linkedin.com/in/louiebernstein",
+      jobTitle: "Fractional Sales Leader",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Louie Bernstein",
+      logo: {
+        "@type": "ImageObject",
+        url: `${baseUrl}/logo/og-image.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": articleUrl,
+    },
+    keywords: article.metadata.keywords,
+  };
+
   return (
     <main className="py-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <div className="container mx-auto max-w-4xl px-6 lg:px-8">
         {/* Breadcrumb */}
         <nav className="mb-8">
