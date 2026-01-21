@@ -17,6 +17,7 @@ export default function EditVideoPage({ params }: { params: Promise<{ id: string
     description: '',
     page: 'featured',
     display_order: 0,
+    is_featured_short: false,
   })
 
   useEffect(() => {
@@ -34,6 +35,7 @@ export default function EditVideoPage({ params }: { params: Promise<{ id: string
           description: data.video.description || '',
           page: data.video.page || 'featured',
           display_order: data.video.display_order || 0,
+          is_featured_short: data.video.is_featured_short || false,
         })
       }
     } catch (error) {
@@ -111,9 +113,23 @@ export default function EditVideoPage({ params }: { params: Promise<{ id: string
           <textarea className="form-textarea" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} rows={3} />
         </div>
 
-        <div className="form-group">
-          <label className="form-label">Display Order</label>
-          <input type="number" className="form-input" value={form.display_order} onChange={(e) => setForm({ ...form, display_order: parseInt(e.target.value) || 0 })} style={{ width: '100px' }} />
+        <div className="edit-form__row">
+          <div className="form-group">
+            <label className="form-label">Display Order</label>
+            <input type="number" className="form-input" value={form.display_order} onChange={(e) => setForm({ ...form, display_order: parseInt(e.target.value) || 0 })} style={{ width: '100px' }} />
+          </div>
+          <div className="form-group">
+            <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+              <input
+                type="checkbox"
+                checked={form.is_featured_short}
+                onChange={(e) => setForm({ ...form, is_featured_short: e.target.checked })}
+                style={{ width: '18px', height: '18px' }}
+              />
+              Featured Short (shows in grid on Videos page)
+            </label>
+            <p style={{ fontSize: '0.875rem', color: '#737373', marginTop: '0.25rem' }}>Only 4 featured shorts will display at a time</p>
+          </div>
         </div>
 
         <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem' }}>

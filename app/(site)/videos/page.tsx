@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { getVideosPageData, getAllVideosWithSlugs } from "@/lib/cms";
+import { getVideosPageData, getAllVideosWithSlugs, getFeaturedShortsWithSlugs } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Sales Training Videos | Louie Bernstein - Top Sales Insights",
@@ -53,8 +53,9 @@ function generateVideoSchema(videos: Array<{ videoId: string; title: string; des
 export default async function VideosPage() {
   // Fetch videos page data from CMS
   const pageData = await getVideosPageData();
-  const featuredVideos = await getAllVideosWithSlugs();
-  const videoSchema = generateVideoSchema(featuredVideos);
+  const featuredShorts = await getFeaturedShortsWithSlugs(); // For the grid (max 4)
+  const allVideos = await getAllVideosWithSlugs(); // For video links section
+  const videoSchema = generateVideoSchema(allVideos);
 
   return (
     <>
@@ -81,7 +82,7 @@ export default async function VideosPage() {
                 {pageData.featuredShortsHeadline}
               </h2>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                {featuredVideos.map((video) => (
+                {featuredShorts.map((video) => (
                   <div
                     key={video.videoId}
                     className="group rounded-2xl border-2 border-[#0966c2] bg-card p-4 shadow-lg transition-all hover:shadow-xl"
@@ -138,7 +139,7 @@ export default async function VideosPage() {
                 Watch Individual Videos
               </h3>
               <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-                {featuredVideos.map((video) => (
+                {allVideos.map((video) => (
                   <Link
                     key={video.slug}
                     href={`/videos/${video.slug}`}

@@ -53,7 +53,7 @@ export async function PUT(
 
   try {
     const body = await request.json()
-    const { youtube_id, title, description, page, display_order } = body
+    const { youtube_id, title, description, page, display_order, is_featured_short } = body
 
     const { data, error } = await supabaseAdmin
       .from('videos')
@@ -63,6 +63,7 @@ export async function PUT(
         description: description || null,
         page: page || 'featured',
         display_order: display_order || 0,
+        is_featured_short: is_featured_short ?? false,
       })
       .eq('id', id)
       .select()

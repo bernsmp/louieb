@@ -704,6 +704,36 @@ async function fetchVideosFromSupabase(page?: string): Promise<VideoItem[]> {
 }
 
 /**
+ * Fetch only featured shorts from Supabase (is_featured_short = true, max 4)
+ */
+async function fetchFeaturedShortsFromSupabase(): Promise<VideoItem[]> {
+  if (!supabaseAdmin) return []
+
+  try {
+    const { data, error } = await supabaseAdmin
+      .from('videos')
+      .select('*')
+      .eq('is_featured_short', true)
+      .order('display_order', { ascending: true })
+      .limit(4)
+
+    if (error) {
+      console.warn('[CMS] Error fetching featured shorts:', error.message)
+      return []
+    }
+
+    return (data as VideoRow[]).map(row => ({
+      videoId: row.youtube_id,
+      title: row.title,
+      description: row.description || undefined,
+    }))
+  } catch (error) {
+    console.warn('[CMS] Failed to fetch featured shorts:', error)
+    return []
+  }
+}
+
+/**
  * Fetch services from Supabase
  */
 async function fetchServicesFromSupabase(): Promise<ServiceItem[]> {
@@ -1134,6 +1164,28 @@ export async function getAllVideosWithSlugs(): Promise<VideoWithSlug[]> {
 export async function getVideoBySlug(slug: string): Promise<VideoWithSlug | null> {
   const videos = await getAllVideosWithSlugs()
   return videos.find((video) => video.slug === slug) || null
+}
+
+/**
+ * Get featured shorts with slugs (only videos marked as is_featured_short, max 4)
+ * Used for the Featured Shorts grid on the videos page
+ */
+export async function getFeaturedShortsWithSlugs(): Promise<VideoWithSlug[]> {
+  const featuredShorts = await fetchFeaturedShortsFromSupabase()
+
+  // Fallback to first 4 from settings if no featured shorts in DB
+  if (featuredShorts.length === 0) {
+    const settings = await getSiteSettings()
+    return settings.videosPage.featuredVideos.slice(0, 4).map((video) => ({
+      ...video,
+      slug: slugify(video.title),
+    }))
+  }
+
+  return featuredShorts.map((video) => ({
+    ...video,
+    slug: slugify(video.title),
+  }))
 }
 
 // Re-export types for use in components
