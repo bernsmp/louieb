@@ -4,6 +4,32 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
+// Extract video ID from any YouTube URL format (including Shorts)
+function extractYouTubeId(input: string): string {
+  if (!input) return ''
+
+  // If it's already just an ID (11 characters, alphanumeric with - and _)
+  if (/^[a-zA-Z0-9_-]{11}$/.test(input.trim())) {
+    return input.trim()
+  }
+
+  // Try to extract from URL
+  const patterns = [
+    /youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/,  // Shorts URL
+    /youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})/, // Standard watch URL
+    /youtu\.be\/([a-zA-Z0-9_-]{11})/,             // Short URL
+    /youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/,   // Embed URL
+  ]
+
+  for (const pattern of patterns) {
+    const match = input.match(pattern)
+    if (match) return match[1]
+  }
+
+  // Return original input if no pattern matches (let user see it's invalid)
+  return input.trim()
+}
+
 export default function NewVideoPage() {
   const router = useRouter()
   const [saving, setSaving] = useState(false)
@@ -53,9 +79,25 @@ export default function NewVideoPage() {
       <form onSubmit={handleSubmit} className="edit-form">
         <div className="edit-form__row">
           <div className="form-group">
-            <label className="form-label">YouTube Video ID *</label>
-            <input type="text" className="form-input" value={form.youtube_id} onChange={(e) => setForm({ ...form, youtube_id: e.target.value })} placeholder="e.g., dQw4w9WgXcQ" required />
-            <p className="form-hint">The ID from youtube.com/watch?v=ID</p>
+            <label className="form-label">YouTube URL or Video ID *</label>
+            <input
+              type="text"
+              className="form-input"
+              value={form.youtube_id}
+              onChange={(e) => setForm({ ...form, youtube_id: extractYouTubeId(e.target.value) })}
+              placeholder="Paste URL or ID (e.g., youtube.com/shorts/...)"
+              required
+            />
+            <p className="form-hint">Works with Shorts, regular videos, or just the ID</p>
+            {form.youtube_id && /^[a-zA-Z0-9_-]{11}$/.test(form.youtube_id) && (
+              <div style={{ marginTop: '0.5rem' }}>
+                <img
+                  src={`https://img.youtube.com/vi/${form.youtube_id}/mqdefault.jpg`}
+                  alt="Video thumbnail preview"
+                  style={{ width: '160px', borderRadius: '4px', border: '1px solid #333' }}
+                />
+              </div>
+            )}
           </div>
           <div className="form-group">
             <label className="form-label">Page</label>

@@ -1,72 +1,65 @@
-# Task: Featured Shorts Selection Control
+# Task: Fix YouTube Shorts URL Support in CMS
 
-## Goal
-Allow Louie to control which 4 videos appear as "Featured Shorts" on the /videos page while all videos still get individual pages and appear in the video links section.
+## Problem
+When pasting YouTube Shorts URLs like `https://youtube.com/shorts/L04eim_5gDU`, the CMS stores the full URL instead of extracting the video ID. This breaks:
+- Thumbnail display (uses `img.youtube.com/vi/{ID}/...`)
+- Video embed (uses `youtube-nocookie.com/embed/{ID}`)
 
-## Current Behavior
-- All videos with `page: 'featured'` appear in the Featured Shorts grid (no limit)
-- Same videos appear in Video Links section
-- No way to distinguish between "shown in grid" vs "just has a page"
-
-## Desired Behavior
-- Only 4 videos appear in Featured Shorts grid
-- CMS toggle to mark which videos are "Featured Shorts"
-- All videos with `page: 'featured'` get individual pages
-- All videos appear in Video Links section
-- Display order controls the order of Featured Shorts
+## Solution
+Add automatic URL parsing to extract video IDs from any YouTube URL format:
+- `https://youtube.com/shorts/VIDEO_ID`
+- `https://youtube.com/shorts/VIDEO_ID?feature=share`
+- `https://www.youtube.com/watch?v=VIDEO_ID`
+- `https://youtu.be/VIDEO_ID`
+- Or just the raw ID
 
 ## Tasks
 
-- [ ] Add `is_featured_short` column to Supabase videos table
-- [ ] Update CMS video edit form with "Featured Short" checkbox
-- [ ] Update API routes to handle `is_featured_short` field
-- [ ] Update `fetchVideosFromSupabase` to include the new field
-- [ ] Create separate fetch functions for featured shorts vs all videos
-- [ ] Update videos page to use featured shorts for grid, all videos for links
-- [ ] Test the changes locally
-- [ ] Verify existing videos still work
+- [ ] Create `extractYouTubeId()` helper function
+- [ ] Update New Video form to auto-extract ID from URLs
+- [ ] Update Edit Video form to auto-extract ID from URLs
+- [ ] Add thumbnail preview so user sees it worked
+- [ ] Update label/hint text to clarify "paste URL or ID"
+- [ ] Test with Shorts URL
+- [ ] Test with regular YouTube URL
+- [ ] Test with just an ID
 
 ## Files to Modify
-- Supabase database (add column)
-- `/app/cms/videos-list/[id]/page.tsx` - Add checkbox
-- `/app/api/cms/videos/route.ts` - Handle new field in POST
-- `/app/api/cms/videos/[id]/route.ts` - Handle new field in PUT
-- `/lib/cms.ts` - Add function to get featured shorts
-- `/app/(site)/videos/page.tsx` - Use separate data sources
+- `/app/cms/videos-list/new/page.tsx`
+- `/app/cms/videos-list/[id]/page.tsx`
 
 ---
 
 ## Review
 
 ### Summary of Changes
+Added automatic YouTube URL parsing to the CMS video forms so Louie can paste any YouTube URL (including Shorts) and the video ID will be extracted automatically.
 
-Added ability to control which videos appear as "Featured Shorts" in the grid on the /videos page:
+**What was added:**
+1. `extractYouTubeId()` helper function that handles:
+   - YouTube Shorts URLs (`youtube.com/shorts/ID`)
+   - Regular watch URLs (`youtube.com/watch?v=ID`)
+   - Short URLs (`youtu.be/ID`)
+   - Embed URLs (`youtube.com/embed/ID`)
+   - Raw IDs (passed through as-is)
 
-1. **Supabase** - Added `is_featured_short` boolean column to videos table
-2. **CMS Edit Form** - Added "Featured Short" checkbox with helper text
-3. **API Routes** - Updated POST and PUT to handle `is_featured_short` field
-4. **lib/cms.ts** - Added `fetchFeaturedShortsFromSupabase()` and `getFeaturedShortsWithSlugs()` functions
-5. **Videos Page** - Grid uses featured shorts (max 4), links section uses all videos
+2. Thumbnail preview - shows the video thumbnail as soon as a valid ID is detected
+
+3. Updated labels from "YouTube Video ID" to "YouTube URL or Video ID"
 
 ### Files Modified
-- `/app/cms/videos-list/[id]/page.tsx` - Added checkbox to form
-- `/app/api/cms/videos/route.ts` - Handle field in POST
-- `/app/api/cms/videos/[id]/route.ts` - Handle field in PUT
-- `/lib/cms.ts` - New fetch functions for featured shorts
-- `/app/(site)/videos/page.tsx` - Separate data sources for grid vs links
-
-### How It Works Now
-- **Featured Shorts Grid**: Shows only videos with `is_featured_short: true` (max 4)
-- **Video Links Section**: Shows ALL videos with `page: 'featured'`
-- **Individual Pages**: All featured videos get their own `/videos/[slug]` page
-
-### Workflow for Louie
-1. Add new video in CMS → gets individual page + appears in Video Links
-2. Check "Featured Short" → also appears in the grid (limit 4, ordered by display_order)
-3. Uncheck to remove from grid while keeping the individual page
+- `/app/cms/videos-list/new/page.tsx` - New video form
+- `/app/cms/videos-list/[id]/page.tsx` - Edit video form
 
 ### No New Dependencies
 No new packages added.
 
 ### No New Environment Variables
 No changes needed.
+
+### How It Works Now
+1. Louie pastes any YouTube URL (Shorts, regular, short link, etc.)
+2. The ID is automatically extracted and stored
+3. A thumbnail preview appears to confirm it worked
+4. Embeds and thumbnails now work correctly on the video pages
+
