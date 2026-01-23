@@ -146,6 +146,6 @@ Deciding between a VP and a Fractional Leader is not just a gut feeling—it is 
 
 Louie Bernstein is a Fractional Sales Leader and LinkedIn Top Voice with 9+ years of experience helping $1M-$10M ARR companies build repeatable sales systems.
 
-* [LinkedIn](https://www.linkedin.com/in/louiebernstein)
+* [LinkedIn](https://www.linkedin.com/in/sales-processes/)
 * [Subscribe to The Sunday Starter Newsletter](https://www.louiebernstein.com/newsletter)
 
