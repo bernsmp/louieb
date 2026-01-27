@@ -1,6 +1,6 @@
 ---
 title: "The Founder Burnout Calculator: How Much Revenue Are You Losing by Doing Sales Yourself?"
-description: "Founder-led sales past $2M ARR costs you 3-5x more than you realize. Use the Founder Burnout Calculator to discover your hidden costs and learn how to transition to scalable sales."
+description: "Founder-led sales past $3M ARR costs you 3-5x more than you realize. Use the Founder Burnout Calculator to discover your hidden costs and learn how to transition to scalable sales."
 keywords: "founder burnout, founder-led sales, CEO opportunity cost, sales delegation, fractional sales leader, revenue leakage, sales transition, startup scaling"
 author: "Louie Bernstein"
 date: "2026-01-19"
@@ -9,8 +9,8 @@ image: "/images/articles/founder-burnout-calculator-thumbnail.png"
 
 ### **Key Takeaways:**
 
-* Founder-led sales past $2M ARR costs you 3-5x more than you realize when you factor in opportunity cost and revenue leakage
-* Every hour you spend on sales activities is an hour not spent on CEO-level work worth $300-$500/hour
+* Founder-led sales past $3M ARR costs you 3-5x more than you realize when you factor in opportunity cost and revenue leakage
+* Every hour you spend on sales activities is an hour not spent on CEO-level work worth $900/hour
 * The "Founder Burnout Tax" includes lost deals, delayed product development, and literal health costs
 * A simple calculation reveals that staying in sales past $2M ARR can cost you $200,000-$500,000 annually in hidden losses
 
@@ -18,7 +18,7 @@ image: "/images/articles/founder-burnout-calculator-thumbnail.png"
 
 ## **You Are Not Just Tired - You Are Expensive**
 
-You are the founder of a $1 million ARR company. You are closing deals, writing code, managing customer success, and trying to fundraise. You work 70-hour weeks. You have not taken a vacation in two years.
+You are the founder of a $3 million ARR company. You are closing deals, writing code, managing customer success, and trying to fundraise. You work 70-hour weeks. You have not taken a vacation in two years.
 
 You tell yourself, "Once we hit $5M, I will hire someone to take over sales."
 
@@ -51,11 +51,11 @@ Let's break down each one.
 
 ---
 
-## **Cost #1: Opportunity Cost (The $500/Hour Problem)**
+## **Cost #1: Opportunity Cost (The $900/Hour Problem)**
 
 ### What Is Your CEO Hourly Rate?
 
-If you are a founder of a $3M ARR company your hourly rate is roughly $300/hour (assuming 2,000 working hours per year).
+If you are a founder of a $3M ARR company your hourly rate is roughly $900/hour (assuming a 40 hour work week (probably very low for a founder).
 
 But that is not your economic value to the company. Your economic value is what the company could achieve if you focused exclusively on high-leverage CEO activities.
 
@@ -86,9 +86,9 @@ Most founders doing sales spend 20-30 hours per week on these activities.
 
 ### The Math:
 
-25 hours/week on sales × $300/hour CEO value = **$7,500 per week in opportunity cost**
+25 hours/week on sales × $900/hour ($3M ARR) CEO value = **$22,500 per week in opportunity cost**
 
-$7,500/week × 52 weeks = **$390,000 per year in lost CEO productivity**
+$22,500/week × 52 weeks = **$1,170,000 per year in lost CEO productivity**
 
 You are not "saving money" by doing sales yourself. You are hemorrhaging half a million dollars in opportunity cost.
 
@@ -190,7 +190,7 @@ Let's calculate what founder-led sales is costing you right now.
 
 **1. CEO Opportunity Cost:**
 * Hours per week on sales activities: ____
-* Your CEO hourly value (conservative estimate: $300-$500): ____
+* Your CEO hourly value (conservative estimate: $300-$900): ____
 * Annual opportunity cost = Hours × Hourly Value × 52 weeks
 
 **2. Revenue Leakage:**
@@ -217,15 +217,15 @@ For most $2M-$5M ARR founders, this number is between **$300,000 and $700,000 pe
 
 ---
 
-## **Example Calculation: Meet Sarah, $4M ARR SaaS Founder**
+## **Example Calculation: Meet Sarah, $3M ARR SaaS Founder**
 
 ![Example calculation showing Sarah's hidden costs](/images/articles/founder-burnout-example-calc.png)
-*A real-world example of the Founder Burnout Calculator showing hidden costs at a $4M ARR company.*
+*A real-world example of the Founder Burnout Calculator showing hidden costs at a $3M ARR company.*
 
 ### Sarah's Inputs:
 
 * Sales time: 28 hours/week
-* CEO hourly value: $400/hour
+* CEO hourly value: $900/hour
 * Pipeline: $1.5M with 25% normal close rate, but only 18% when distracted
 * Prospecting blackout: 12 weeks/year (fundraising, product launches)
 * Average new monthly business when prospecting: $80,000
@@ -234,7 +234,7 @@ For most $2M-$5M ARR founders, this number is between **$300,000 and $700,000 pe
 ### Sarah's Calculation:
 
 **CEO Opportunity Cost:**
-* 28 hours × $400 × 52 weeks = **$582,400**
+* 28 hours × $900 × 52 weeks = **$1,310,400**
 
 **Revenue Leakage:**
 * $1.5M × (25% - 18%) = **$105,000** per quarter
@@ -246,9 +246,9 @@ For most $2M-$5M ARR founders, this number is between **$300,000 and $700,000 pe
 **Health Tax:**
 * **$5,000**
 
-**Total Annual Cost: $1,229,000**
+**Total Annual Cost: $1,957,000**
 
-Sarah is a $4M ARR company. Founder-led sales is costing her nearly one-third of her annual revenue in hidden losses.
+Sarah is a $3M ARR company. Founder-led sales is costing her nearly two-thirds of her annual revenue in hidden losses.
 
 ---
 
@@ -257,7 +257,7 @@ Sarah is a $4M ARR company. Founder-led sales is costing her nearly one-third of
 Now let's run the numbers in reverse. What if Sarah hired a Fractional Sales Leader?
 
 ### Cost of Fractional Sales Leader:
-$10,000/month × 12 months = **$120,000/year**
+$12,000/month × 12 months = **$144,000/year**
 
 ### What Sarah Gets:
 
@@ -277,12 +277,12 @@ $10,000/month × 12 months = **$120,000/year**
 
 ### Net Result:
 
-* **Gross benefit:** $1,246,600 (conservative)
-* **Cost:** $120,000
-* **Net gain:** $1,126,600
-* **ROI:** 939%
+* **Gross benefit:** $646,600 (conservative)
+* **Cost:** $144,000
+* **Net gain:** $502,600
+* **ROI:** 448%
 
-Sarah pays $10,000/month and gets back over $1M in recovered and new revenue.
+Sarah pays $12,000/month and gets back over $1M in recovered and new revenue.
 
 ---
 
@@ -310,9 +310,9 @@ But customers do not need you. They need consistent, professional sales experien
 
 You cannot afford NOT to.
 
-As we just calculated, doing sales yourself is costing you $300K-$700K per year. A Fractional Sales Leader costs $120K/year.
+As we just calculated, doing sales yourself is costing you $300K-$700K per year. A Fractional Sales Leader costs $144K/year.
 
-You are choosing to spend $500K (in hidden costs) to avoid spending $120K (in direct costs).
+You are choosing to spend $500K (in hidden costs) to avoid spending $144K (in direct costs).
 
 That is not frugality. That is financial self-sabotage.
 
@@ -388,7 +388,7 @@ We brought me in as his Fractional Sales Leader.
 
 As Kevin said:
 
-*"Thank you Louie for what you have done in the past year. I believe our sales are far better than where they were a year ago, great job!"* — Kevin Zhao, CEO
+*"Thank you Louie for what you have done in the past year. I believe our sales are far better than where they were a year ago, great job!"* — Kevin, Founder ecommerce company
 
 ---
 
@@ -436,7 +436,7 @@ Run the numbers. Calculate your real cost. Then make the decision that your futu
 
 I have built a detailed Founder Burnout Calculator tool that walks you through this exact analysis for your business.
 
-[Access the Free Founder Burnout Calculator](https://www.louiebernstein.com/tools/founder-burnout-calculator)
+[Access the Free Founder Burnout Calculator](https://www.louiebernstein.com/tools/roi-calculator)
 
 Or if you are ready to talk about how a Fractional Sales Leader can free you from the sales grind:
 
@@ -450,10 +450,5 @@ Louie Bernstein is a Fractional Sales Leader with 50 years of sales experience h
 
 Connect with Louie:
 
-* [LinkedIn](https://www.linkedin.com/in/louiebernstein)
 * [Schedule a Consultation](https://calendly.com/louiebernstein/30minutes)
 * [Subscribe to The Sunday Starter Newsletter](https://www.louiebernstein.com/newsletter)
-
----
-
-Tags: Founder Burnout, Founder-Led Sales, CEO Productivity, Sales Delegation, Fractional Sales Leader, Startup Scaling, Revenue Growth
