@@ -20,7 +20,7 @@ import type {
 const USE_SUPABASE_CMS = process.env.USE_SUPABASE_CMS === 'true'
 
 // ============================================================================
-// TYPE DEFINITIONS (matching existing payload.ts interfaces)
+// TYPE DEFINITIONS
 // ============================================================================
 
 interface ServiceItem {
@@ -252,7 +252,7 @@ interface SiteSettings {
 }
 
 // ============================================================================
-// DEFAULT VALUES (same as payload.ts)
+// DEFAULT VALUES
 // ============================================================================
 
 const defaultSettings: SiteSettings = {
@@ -962,7 +962,7 @@ export const getTestimonials = cache(async (): Promise<Testimonial[]> => {
 })
 
 // ============================================================================
-// HELPER EXPORTS (matching payload.ts interface)
+// HELPER EXPORTS
 // ============================================================================
 
 export async function getHeroData() {
