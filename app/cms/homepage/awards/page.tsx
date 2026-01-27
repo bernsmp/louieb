@@ -25,10 +25,10 @@ export default function EditAwardsPage() {
         },
         {
           name: 'imageUrl',
-          label: 'Awards Image URL',
-          type: 'url',
-          placeholder: 'https://...',
-          hint: 'URL to the awards image',
+          label: 'Awards Image',
+          type: 'image',
+          folder: 'awards',
+          hint: 'Upload or drag and drop an awards image',
         },
         {
           name: 'description',

@@ -116,3 +116,128 @@ export interface ProcessStepRow {
   updated_at: string
 }
 
+/**
+ * Upload an image to Supabase Storage
+ * @param file - The file to upload
+ * @param folder - The folder within the 'media' bucket (e.g., 'testimonials', 'services')
+ * @returns Object with public URL and storage path, or null on error
+ */
+export async function uploadImage(
+  file: File,
+  folder: string
+): Promise<{ url: string; path: string } | null> {
+  if (!supabase) {
+    console.error('Supabase is not configured')
+    return null
+  }
+
+  try {
+    // Generate unique filename with timestamp
+    const timestamp = Date.now()
+    const fileExt = file.name.split('.').pop()
+    const fileName = `${timestamp}_${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`
+    const filePath = `${folder}/${fileName}`
+
+    // Upload to 'media' bucket
+    const { data, error } = await supabase.storage
+      .from('media')
+      .upload(filePath, file, {
+        cacheControl: '3600',
+        upsert: false
+      })
+
+    if (error) {
+      console.error('Error uploading image:', error)
+      return null
+    }
+
+    // Get public URL
+    const { data: { publicUrl } } = supabase.storage
+      .from('media')
+      .getPublicUrl(data.path)
+
+    return {
+      url: publicUrl,
+      path: data.path
+    }
+  } catch (error) {
+    console.error('Exception uploading image:', error)
+    return null
+  }
+}
+
+/**
+ * Delete an image from Supabase Storage
+ * @param path - The storage path of the file to delete
+ * @returns True if successful, false otherwise
+ */
+export async function deleteImage(path: string): Promise<boolean> {
+  if (!supabase) {
+    console.error('Supabase is not configured')
+    return false
+  }
+
+  try {
+    const { error } = await supabase.storage
+      .from('media')
+      .remove([path])
+
+    if (error) {
+      console.error('Error deleting image:', error)
+      return false
+    }
+
+    return true
+  } catch (error) {
+    console.error('Exception deleting image:', error)
+    return false
+  }
+}
+
+/**
+ * List images in Supabase Storage
+ * @param folder - Optional folder to filter by (e.g., 'testimonials')
+ * @returns Array of objects with name, public URL, and path
+ */
+export async function listImages(
+  folder?: string
+): Promise<{ name: string; url: string; path: string }[]> {
+  if (!supabase) {
+    console.error('Supabase is not configured')
+    return []
+  }
+
+  try {
+    // List files in the specified folder or root
+    const { data, error } = await supabase.storage
+      .from('media')
+      .list(folder || '', {
+        limit: 100,
+        offset: 0,
+        sortBy: { column: 'created_at', order: 'desc' }
+      })
+
+    if (error) {
+      console.error('Error listing images:', error)
+      return []
+    }
+
+    // Map to include public URLs
+    return data.map(file => {
+      const filePath = folder ? `${folder}/${file.name}` : file.name
+      const { data: { publicUrl } } = supabase.storage
+        .from('media')
+        .getPublicUrl(filePath)
+
+      return {
+        name: file.name,
+        url: publicUrl,
+        path: filePath
+      }
+    })
+  } catch (error) {
+    console.error('Exception listing images:', error)
+    return []
+  }
+}
+

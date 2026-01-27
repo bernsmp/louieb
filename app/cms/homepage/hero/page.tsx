@@ -3,12 +3,14 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { ImageUploader } from '@/app/cms/components/ImageUploader'
 
 interface HeroContent {
   headline?: string
   tagline?: string
   description?: string
   videoId?: string
+  videoThumbnail?: string
   credentialPrimary?: string
   credentialSecondary?: string
   ctaPrimary?: { text?: string; url?: string }
@@ -27,6 +29,7 @@ export default function EditHeroPage() {
     tagline: '',
     description: '',
     videoId: '',
+    videoThumbnail: '',
     credentialPrimary: '',
     credentialSecondary: '',
     ctaPrimary: { text: '', url: '' },
@@ -91,6 +94,7 @@ export default function EditHeroPage() {
         tagline: heroData.content?.tagline || '',
         description: heroData.content?.description || '',
         videoId: heroData.content?.videoId || '',
+        videoThumbnail: heroData.content?.videoThumbnail || '',
         credentialPrimary: credData.content?.primary || '',
         credentialSecondary: credData.content?.secondary || '',
         ctaPrimary: {
@@ -125,6 +129,7 @@ export default function EditHeroPage() {
       if (content.tagline) heroContent.tagline = content.tagline
       if (content.description) heroContent.description = content.description
       if (content.videoId) heroContent.videoId = content.videoId
+      if (content.videoThumbnail) heroContent.videoThumbnail = content.videoThumbnail
       if (content.ctaPrimary?.text || content.ctaPrimary?.url) {
         heroContent.ctaPrimary = content.ctaPrimary
       }
@@ -288,6 +293,16 @@ export default function EditHeroPage() {
                 placeholder="e.g., fCVKpcpD8tA"
               />
               <p className="form-hint">The ID from the YouTube URL (e.g., youtube.com/watch?v=fCVKpcpD8tA)</p>
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Video Thumbnail</label>
+              <ImageUploader
+                value={content.videoThumbnail}
+                onChange={(url) => handleContentChange({ videoThumbnail: url || '' })}
+                folder="hero"
+              />
+              <p className="form-hint">Custom thumbnail image for the video</p>
             </div>
           </div>
 

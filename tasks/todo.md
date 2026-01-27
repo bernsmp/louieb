@@ -32,30 +32,30 @@ Peace of mind that changes are saved.
 
 ---
 
-## Phase 2 - Media Foundation (2-3 days)
+## Phase 2 - Media Foundation ✅ COMPLETE
 
-### 4. Supabase Storage Setup
+### 4. Supabase Storage Setup ✅
 Infrastructure for image uploads.
 
-- [ ] 4.1 Create `media` storage bucket in Supabase
-- [ ] 4.2 Configure bucket policies (public read, authenticated write)
-- [ ] 4.3 Add upload helper functions to `lib/supabase.ts`
+- [x] 4.1 Create `media` storage bucket in Supabase
+- [x] 4.2 Configure bucket policies (public read, authenticated write)
+- [x] 4.3 Add upload helper functions to `lib/supabase.ts`
 
-### 5. Image Upload Component
+### 5. Image Upload Component ✅
 Replace painful URL pasting with drag-and-drop.
 
-- [ ] 5.1 Create `ImageUploader` component with drag-and-drop
-- [ ] 5.2 Add upload progress indicator
-- [ ] 5.3 Show image preview after upload
-- [ ] 5.4 Return public URL on success
+- [x] 5.1 Create `ImageUploader` component with drag-and-drop
+- [x] 5.2 Add upload progress indicator
+- [x] 5.3 Show image preview after upload
+- [x] 5.4 Return public URL on success
 
-### 6. Replace URL Inputs with Uploader
+### 6. Replace URL Inputs with Uploader ✅
 Swap out manual URL paste fields.
 
-- [ ] 6.1 Hero section - video thumbnail
-- [ ] 6.2 Awards section - awards image
-- [ ] 6.3 Testimonials - author photos
-- [ ] 6.4 Add "pick from uploaded" modal for reuse
+- [x] 6.1 Hero section - video thumbnail
+- [x] 6.2 Awards section - awards image
+- [x] 6.3 Testimonials - author photos
+- [x] 6.4 Add "pick from uploaded" modal for reuse
 
 ---
 
@@ -80,14 +80,16 @@ Individual pages need their own meta tags.
 
 ## Phase 4 - Delighters (Optional)
 
-### 9. AI Content Assistant (Gemini 2.5)
-Smart suggestions to help Louie write better content.
+### 9. AI Content Assistant
+Smart suggestions to help Louie write better content. Uses cost-efficient models:
+- **Gemini 3 Flash** for vision tasks (alt text) — $0.10/$0.40 per 1M tokens
+- **Claude 4.5 Haiku** for text tasks (headlines, SEO) — fast + great prose
 
-- [ ] 9.1 Add Gemini API key to environment
-- [ ] 9.2 Create `/api/ai/suggest` endpoint
-- [ ] 9.3 "Suggest alt text" button for images
-- [ ] 9.4 "Rewrite headline" button for text fields
-- [ ] 9.5 "Generate SEO description" from page content
+- [ ] 9.1 Add API keys to environment (GEMINI_API_KEY, ANTHROPIC_API_KEY)
+- [ ] 9.2 Create `/api/ai/suggest` endpoint with model routing
+- [ ] 9.3 "Suggest alt text" button for images (Gemini Flash vision)
+- [ ] 9.4 "Rewrite headline" button for text fields (Haiku)
+- [ ] 9.5 "Generate SEO description" from page content (Haiku)
 
 ### 10. Preview Enhancements
 Make previews more useful.
@@ -170,3 +172,42 @@ None
 
 ### Environment Variables
 None
+
+---
+
+## Review - Phase 2 Complete
+
+### Summary of Changes
+
+**Supabase Storage Setup:**
+- Created `supabase/migrations/20240127_create_media_bucket.sql` — bucket creation
+- Created `supabase/migrations/20240127_media_bucket_policies.sql` — RLS policies (public read, auth write/delete)
+- Added `uploadImage()`, `deleteImage()`, `listImages()` helpers to `lib/supabase.ts`
+
+**ImageUploader Component:**
+- Created `app/cms/components/ImageUploader.tsx` — drag-and-drop with progress bar, preview, remove/change buttons
+- 5MB file size limit, image type validation
+- Matches CMS dark theme
+
+**ImagePicker Modal:**
+- Created `app/cms/components/ImagePicker.tsx` — browse previously uploaded images or upload new
+- Grid view with folder filtering
+- Reusable across all image fields
+
+**Integration:**
+- Hero editor (`app/cms/homepage/hero/page.tsx`) — added `videoThumbnail` field with ImageUploader
+- SectionEditor — added `type: 'image'` field support with optional folder
+- Awards (`app/cms/homepage/awards/page.tsx`) — switched from URL input to ImageUploader
+- Testimonials (`app/cms/testimonials/[id]/page.tsx`, `new/page.tsx`) — added author photo upload
+
+### New Dependencies
+None
+
+### Environment Variables
+None
+
+### Setup Required
+Run the SQL migrations in Supabase to create the `media` bucket and policies:
+1. Go to Supabase Dashboard → SQL Editor
+2. Run `supabase/migrations/20240127_create_media_bucket.sql`
+3. Run `supabase/migrations/20240127_media_bucket_policies.sql`

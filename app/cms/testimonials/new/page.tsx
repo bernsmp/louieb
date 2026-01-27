@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { ImageUploader } from '@/app/cms/components/ImageUploader'
 
 export default function NewTestimonialPage() {
   const router = useRouter()
@@ -14,6 +15,7 @@ export default function NewTestimonialPage() {
     author: '',
     role: '',
     company: '',
+    image_url: '',
     featured: false,
     display_order: 0,
   })
@@ -114,6 +116,15 @@ export default function NewTestimonialPage() {
             />
             <p className="form-hint">Lower numbers appear first</p>
           </div>
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Author Photo (optional)</label>
+          <ImageUploader
+            value={form.image_url}
+            onChange={(url) => setForm({ ...form, image_url: url || '' })}
+            folder="testimonials"
+          />
         </div>
 
         <div className="form-group">

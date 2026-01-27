@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { DevicePreviewToggle, type DeviceType } from './DevicePreviewToggle'
 import { VisibilityToggle } from './VisibilityToggle'
+import { ImageUploader } from './ImageUploader'
 
 // Helper to format relative time
 function formatRelativeTime(dateString: string | null): string {
@@ -30,11 +31,12 @@ function formatRelativeTime(dateString: string | null): string {
 interface FieldConfig {
   name: string
   label: string
-  type: 'text' | 'textarea' | 'url'
+  type: 'text' | 'textarea' | 'url' | 'image'
   placeholder?: string
   hint?: string
   rows?: number
   nested?: string // For nested fields like 'ctaPrimary.text'
+  folder?: string // For image upload folder
 }
 
 interface SectionEditorProps {
@@ -305,6 +307,12 @@ export function SectionEditor({
                   onChange={(e) => setValue(field, e.target.value)}
                   placeholder={field.placeholder}
                   rows={field.rows || 4}
+                />
+              ) : field.type === 'image' ? (
+                <ImageUploader
+                  value={getValue(field)}
+                  onChange={(url) => setValue(field, url || '')}
+                  folder={field.folder || 'general'}
                 />
               ) : (
                 <input
