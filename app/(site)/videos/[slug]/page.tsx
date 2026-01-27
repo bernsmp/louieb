@@ -127,7 +127,7 @@ export default async function VideoPage({ params }: Props) {
               {video.title}
             </h1>
             {video.description && (
-              <p className="mt-4 font-sans text-lg text-muted-foreground">
+              <p className="mt-4 font-sans text-lg text-muted-foreground whitespace-pre-line">
                 {video.description}
               </p>
             )}

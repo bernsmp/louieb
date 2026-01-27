@@ -76,7 +76,7 @@ export function FAQ({
               </button>
               {openIndex === index && (
                 <div className="border-t border-neutral-200 px-6 pb-6 pt-4 lg:px-8 lg:pb-8">
-                  <p className="text-base leading-relaxed text-neutral-600 md:text-lg">
+                  <p className="text-base leading-relaxed text-neutral-600 md:text-lg whitespace-pre-line">
                     {faq.answer}
                   </p>
                 </div>

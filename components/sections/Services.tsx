@@ -62,7 +62,7 @@ export function Services({
                 <h3 className={`mt-6 text-2xl font-bold ${service.highlight ? "text-neutral-900" : "text-neutral-800"}`}>
                   {service.title}
                 </h3>
-                <p className="mt-4 text-base leading-relaxed text-neutral-600">
+                <p className="mt-4 text-base leading-relaxed text-neutral-600 whitespace-pre-line">
                   {service.description}
                 </p>
               </div>

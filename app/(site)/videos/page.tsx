@@ -101,7 +101,7 @@ export default async function VideosPage() {
                       <h3 className="font-sans text-lg font-semibold text-foreground">
                         {video.title}
                       </h3>
-                      <p className="mt-2 font-sans text-sm text-muted-foreground">
+                      <p className="mt-2 font-sans text-sm text-muted-foreground whitespace-pre-line">
                         {video.description}
                       </p>
                       <Link
