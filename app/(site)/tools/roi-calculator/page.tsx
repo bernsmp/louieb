@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { ROICalculator } from "@/components/ROICalculator";
-import { getROICalculatorPageData } from "@/lib/cms";
+import { getROICalculatorPageData, getROICalculatorTextData } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Free Fractional Sales ROI Calculator | Compare Costs & Savings | Louie Bernstein",
@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 
 export default async function ROICalculatorPage() {
   const pageData = await getROICalculatorPageData();
+  const textData = await getROICalculatorTextData();
 
   const calculatorSchema = {
     "@context": "https://schema.org",
@@ -67,7 +68,7 @@ export default async function ROICalculatorPage() {
           </div>
 
           <div className="mt-12">
-            <ROICalculator />
+            <ROICalculator text={textData} />
           </div>
         </div>
       </main>

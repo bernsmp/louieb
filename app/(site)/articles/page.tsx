@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { getAllArticles } from "@/lib/markdown";
+import { getArticlesPageData } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Articles | Louie Bernstein - Sales Leadership Insights",
@@ -9,18 +10,19 @@ export const metadata: Metadata = {
     "Read expert insights on sales leadership, team optimization, and sales process improvement from Louie Bernstein.",
 };
 
-export default function ArticlesPage() {
+export default async function ArticlesPage() {
   const articles = getAllArticles();
+  const pageData = await getArticlesPageData();
 
   return (
     <main className="py-24">
       <div className="container mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center">
           <h1 className="font-serif text-5xl font-bold text-primary md:text-6xl lg:text-7xl">
-            Articles
+            {pageData.headline}
           </h1>
           <p className="mx-auto mt-6 max-w-2xl font-sans text-lg text-muted-foreground md:text-xl">
-            Expert insights on sales leadership and team optimization
+            {pageData.description}
           </p>
         </div>
 
@@ -85,7 +87,7 @@ export default function ArticlesPage() {
         ) : (
           <div className="mt-16 text-center">
             <p className="font-sans text-lg text-muted-foreground">
-              Articles coming soon. Check back for expert insights on sales leadership.
+              {pageData.emptyStateText}
             </p>
           </div>
         )}

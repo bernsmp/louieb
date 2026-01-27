@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getArticleBySlug, getArticleSlugs } from "@/lib/markdown";
 import { ArticleContent } from "@/components/ArticleContent";
+import { getArticlesPageData } from "@/lib/cms";
 import Link from "next/link";
-import Image from "next/image";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -71,6 +71,7 @@ export async function generateMetadata({
 export default async function ArticlePage({ params }: PageProps) {
   const { slug } = await params;
   const article = getArticleBySlug(slug);
+  const pageData = await getArticlesPageData();
   const baseUrl = "https://louiebernstein.com";
 
   if (!article) {
@@ -125,7 +126,7 @@ export default async function ArticlePage({ params }: PageProps) {
             href="/articles"
             className="text-[#0966c2] hover:underline font-sans text-sm"
           >
-            ← Back to Articles
+            ← {pageData.backLinkText}
           </Link>
         </nav>
 
@@ -158,7 +159,7 @@ export default async function ArticlePage({ params }: PageProps) {
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
             <div>
               <p className="font-sans text-sm text-muted-foreground">
-                Share this article:
+                {pageData.shareLabel}
               </p>
               <div className="flex gap-2 mt-2">
                 <a
@@ -188,7 +189,7 @@ export default async function ArticlePage({ params }: PageProps) {
               href="/articles"
               className="text-[#0966c2] hover:underline font-sans text-sm font-semibold"
             >
-              View All Articles →
+              {pageData.viewAllText} →
             </Link>
           </div>
         </footer>

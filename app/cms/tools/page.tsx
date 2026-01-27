@@ -42,10 +42,22 @@ export default async function ToolsAdmin() {
           style={{ textDecoration: 'none' }}
         >
           <h3 className="dashboard-card__title" style={{ marginBottom: '0.5rem' }}>
-            ROI Calculator
+            ROI Calculator Page
           </h3>
           <p className="dashboard-card__description" style={{ marginBottom: 0 }}>
             The /tools/roi-calculator page header.
+          </p>
+        </Link>
+        <Link
+          href="/cms/tools/roi-calculator-text"
+          className="dashboard-card"
+          style={{ textDecoration: 'none' }}
+        >
+          <h3 className="dashboard-card__title" style={{ marginBottom: '0.5rem' }}>
+            ROI Calculator Text
+          </h3>
+          <p className="dashboard-card__description" style={{ marginBottom: 0 }}>
+            Labels and descriptions in the calculator itself.
           </p>
         </Link>
       </div>

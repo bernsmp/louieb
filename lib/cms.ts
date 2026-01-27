@@ -87,6 +87,14 @@ interface FSLPageData {
   finalCtaHeadline: string
   finalCtaButtonText: string
   finalCtaDescription: string
+  // Section titles
+  videosSectionHeadline: string
+  videosSectionSubheadline: string
+  videosPlaylistButtonText: string
+  faqSectionHeadline: string
+  faqSectionSubheadline: string
+  introCtaNote: string
+  finalCtaSecondaryText: string
 }
 
 interface SiteSettings {
@@ -219,6 +227,7 @@ interface SiteSettings {
     playlistHeadline: string
     watchOnYoutubeText: string
     watchMoreButtonText: string
+    individualVideosHeadline: string
     // Individual video page settings
     videoPageBackLinkText: string
     videoPageWatchButtonText: string
@@ -238,16 +247,68 @@ interface SiteSettings {
     previewHeadline: string
     previewVideos: VideoItem[]
     resultsHeadline: string
+    resultsSubheadline: string
     results: ResultStat[]
     caseStudyQuote: string
     caseStudyAttribution: string
     finalCtaHeadline: string
     finalCtaDescription: string
+    // Extra text fields
+    previewSubheadline: string
+    playlistHeadline: string
+    playlistDescription: string
+    watchOnYoutubeText: string
+    finalCtaButtonText: string
+    finalCtaSecondaryText: string
   }
   seo: {
     siteTitle: string
     siteDescription: string
     keywords: string
+  }
+  navigation: {
+    logoText: string
+    logoTagline: string
+    navHome: string
+    navArticles: string
+    navVideos: string
+    navNewsletter: string
+    navContact: string
+  }
+  articlesPage: {
+    headline: string
+    description: string
+    emptyStateText: string
+    backLinkText: string
+    shareLabel: string
+    viewAllText: string
+  }
+  roiCalculatorText: {
+    // Input section
+    inputSectionHeadline: string
+    inputSectionDescription: string
+    // Result section
+    resultsSectionHeadline: string
+    founderLedLabel: string
+    founderLedDescription: string
+    badVPLabel: string
+    badVPDescription: string
+    fractionalLabel: string
+    fractionalDescription: string
+    // Savings section
+    savingsSectionHeadline: string
+    savingsVsFounderLabel: string
+    savingsVsBadVPLabel: string
+    missedRevenuePrefix: string
+    missedRevenueSuffix: string
+    // CTA
+    ctaText: string
+    ctaButtonText: string
+    // Download section
+    downloadButtonText: string
+    downloadDescription: string
+    // Disclaimer
+    disclaimerText: string
   }
 }
 
@@ -295,6 +356,14 @@ const defaultSettings: SiteSettings = {
     finalCtaHeadline: 'Ready to Stop Being the Bottleneck?',
     finalCtaButtonText: 'Schedule a 30-Minute Call',
     finalCtaDescription: "Let's talk about your sales challenges. No pitch, no pressure—just a conversation about whether a Fractional Sales Leader makes sense for your company.",
+    // Section titles
+    videosSectionHeadline: 'Everything You Need to Know',
+    videosSectionSubheadline: 'Five videos that answer the questions every founder asks before hiring a Fractional Sales Leader.',
+    videosPlaylistButtonText: 'Watch Full Playlist on YouTube',
+    faqSectionHeadline: 'Frequently Asked Questions',
+    faqSectionSubheadline: 'Straight answers to the questions I hear most often.',
+    introCtaNote: 'No pitch. Just a conversation about your sales challenges.',
+    finalCtaSecondaryText: 'Learn More About Me',
   },
   about: {
     headline: 'Fractional Sales Leadership',
@@ -442,6 +511,7 @@ const defaultSettings: SiteSettings = {
     playlistHeadline: 'Complete Sales Leadership Playlist',
     watchOnYoutubeText: 'Watch on YouTube →',
     watchMoreButtonText: 'Watch More Videos on YouTube',
+    individualVideosHeadline: 'Watch Individual Videos',
     // Individual video page settings
     videoPageBackLinkText: 'All Videos',
     videoPageWatchButtonText: 'Watch on YouTube',
@@ -477,6 +547,7 @@ const defaultSettings: SiteSettings = {
       { videoId: 'WxyaNBgAzrE', title: 'Step 4. The Sales Hiring System - Phase 2' },
     ],
     resultsHeadline: 'Real Results From Real Businesses',
+    resultsSubheadline: 'This system has helped companies transform their sales operations',
     results: [
       { metric: '61%', description: 'Sales increase year-over-year', source: 'Client case study' },
       { metric: '120+', description: 'Hiring questions in the scorecard', source: 'Hiring System' },
@@ -487,11 +558,62 @@ const defaultSettings: SiteSettings = {
     caseStudyAttribution: 'Client Case Study',
     finalCtaHeadline: 'Start Building Your Sales System Today',
     finalCtaDescription: 'Get instant access to all 20 modules, templates, scripts, and resources',
+    // Extra text fields
+    previewSubheadline: "Watch the first modules to see what's inside",
+    playlistHeadline: 'Complete Course Playlist',
+    playlistDescription: 'Watch all 20 modules, download templates, and get lifetime access to the complete course',
+    watchOnYoutubeText: 'Watch on YouTube',
+    finalCtaButtonText: 'Watch on YouTube',
+    finalCtaSecondaryText: 'Have Questions? Contact Me',
   },
   seo: {
     siteTitle: 'Louie Bernstein - Fractional Sales Leader',
     siteDescription: 'LinkedIn Top Voice | Fractional Sales Leader helping $1M–$10M ARR companies build repeatable sales systems.',
     keywords: 'fractional sales leader, sales consulting, sales team optimization',
+  },
+  navigation: {
+    logoText: 'Louie Bernstein',
+    logoTagline: 'Fractional Sales Leader',
+    navHome: 'Home',
+    navArticles: 'Articles',
+    navVideos: 'Videos',
+    navNewsletter: 'Newsletter',
+    navContact: 'Contact',
+  },
+  articlesPage: {
+    headline: 'Articles',
+    description: 'Expert insights on sales leadership and team optimization',
+    emptyStateText: 'Articles coming soon. Check back for expert insights on sales leadership.',
+    backLinkText: 'Back to Articles',
+    shareLabel: 'Share this article:',
+    viewAllText: 'View All Articles',
+  },
+  roiCalculatorText: {
+    // Input section
+    inputSectionHeadline: 'Your Numbers',
+    inputSectionDescription: 'Adjust these values to match your company',
+    // Result section
+    resultsSectionHeadline: '6-Month Cost Comparison',
+    founderLedLabel: 'Founder-Led Sales',
+    founderLedDescription: '{hours} hrs/week × {rate}/hr (from revenue)',
+    badVPLabel: 'Bad VP Hire',
+    badVPDescription: 'Includes salary + turnover costs',
+    fractionalLabel: 'Fractional Sales Leader',
+    fractionalDescription: '20 hours/week for 26 weeks',
+    // Savings section
+    savingsSectionHeadline: 'Your Potential Savings',
+    savingsVsFounderLabel: 'vs. Founder-Led Sales',
+    savingsVsBadVPLabel: 'vs. Bad VP Hire',
+    missedRevenuePrefix: 'Plus: Without proper sales leadership, you\'re leaving an estimated',
+    missedRevenueSuffix: 'on the table over 6 months from missed opportunities.',
+    // CTA
+    ctaText: 'Ready to see what a Fractional Sales Leader can do for your business?',
+    ctaButtonText: "Let's Talk",
+    // Download section
+    downloadButtonText: 'Download the complete Fractional Sales Leadership pricing calculator',
+    downloadDescription: 'Compare against Founder-Led Sales, Hiring a Sales VP, and hiring a Fractional Sales Leader.',
+    // Disclaimer
+    disclaimerText: 'Note: This calculator shows top-line impact only. Gross and net profit are not calculated.',
   },
 }
 
@@ -849,6 +971,14 @@ function mergeSettings(
       finalCtaHeadline: (siteContent.fslPage?.finalCtaHeadline as string) || defaults.fslPage.finalCtaHeadline,
       finalCtaButtonText: (siteContent.fslPage?.finalCtaButtonText as string) || defaults.fslPage.finalCtaButtonText,
       finalCtaDescription: (siteContent.fslPage?.finalCtaDescription as string) || defaults.fslPage.finalCtaDescription,
+      // Section titles
+      videosSectionHeadline: (siteContent.fslPage?.videosSectionHeadline as string) || defaults.fslPage.videosSectionHeadline,
+      videosSectionSubheadline: (siteContent.fslPage?.videosSectionSubheadline as string) || defaults.fslPage.videosSectionSubheadline,
+      videosPlaylistButtonText: (siteContent.fslPage?.videosPlaylistButtonText as string) || defaults.fslPage.videosPlaylistButtonText,
+      faqSectionHeadline: (siteContent.fslPage?.faqSectionHeadline as string) || defaults.fslPage.faqSectionHeadline,
+      faqSectionSubheadline: (siteContent.fslPage?.faqSectionSubheadline as string) || defaults.fslPage.faqSectionSubheadline,
+      introCtaNote: (siteContent.fslPage?.introCtaNote as string) || defaults.fslPage.introCtaNote,
+      finalCtaSecondaryText: (siteContent.fslPage?.finalCtaSecondaryText as string) || defaults.fslPage.finalCtaSecondaryText,
     },
     about: deepMerge(defaults.about, (siteContent.about || {}) as Partial<SiteSettings['about']>),
     services: {
@@ -894,6 +1024,9 @@ function mergeSettings(
       previewVideos: courseVideos.length > 0 ? courseVideos : defaults.coursePage.previewVideos,
     },
     seo: deepMerge(defaults.seo, (siteContent.seo || {}) as Partial<SiteSettings['seo']>),
+    navigation: deepMerge(defaults.navigation, (siteContent.navigation || {}) as Partial<SiteSettings['navigation']>),
+    articlesPage: deepMerge(defaults.articlesPage, (siteContent.articlesPage || {}) as Partial<SiteSettings['articlesPage']>),
+    roiCalculatorText: deepMerge(defaults.roiCalculatorText, (siteContent.roiCalculatorText || {}) as Partial<SiteSettings['roiCalculatorText']>),
   }
 }
 
@@ -1043,6 +1176,21 @@ export async function getROICalculatorPageData() {
 export async function getFSLPageData() {
   const settings = await getSiteSettings()
   return settings.fslPage
+}
+
+export async function getNavigationData() {
+  const settings = await getSiteSettings()
+  return settings.navigation
+}
+
+export async function getArticlesPageData() {
+  const settings = await getSiteSettings()
+  return settings.articlesPage
+}
+
+export async function getROICalculatorTextData() {
+  const settings = await getSiteSettings()
+  return settings.roiCalculatorText
 }
 
 // ============================================================================

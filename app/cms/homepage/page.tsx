@@ -31,6 +31,21 @@ export default async function HomepageAdmin() {
       href: '/cms/homepage/value-proposition',
     },
     {
+      title: 'Services Header',
+      description: '"What I Offer" section headline and subheadline.',
+      href: '/cms/homepage/services-header',
+    },
+    {
+      title: 'Process Header',
+      description: '"How It Works" section headline and subheadline.',
+      href: '/cms/homepage/process-header',
+    },
+    {
+      title: 'FAQ Header',
+      description: '"Frequently Asked Questions" section headline and subheadline.',
+      href: '/cms/homepage/faq-header',
+    },
+    {
       title: 'Fractional Sales Leader',
       description: 'The marketing section targeting founders.',
       href: '/cms/homepage/fractional-sales-leader',

@@ -60,7 +60,7 @@ export default async function CoursePage() {
               {pageData.previewHeadline}
             </h2>
             <p className="mx-auto mt-6 max-w-2xl text-xl text-neutral-600">
-              Watch the first modules to see what&apos;s inside
+              {pageData.previewSubheadline}
             </p>
           </div>
 
@@ -100,10 +100,10 @@ export default async function CoursePage() {
           {/* Full Course Playlist */}
           <div className="mt-16 rounded-3xl border-2 border-neutral-900 bg-neutral-900 p-12">
             <h3 className="text-center text-4xl font-bold text-white md:text-5xl">
-              Complete Course Playlist
+              {pageData.playlistHeadline}
             </h3>
             <p className="mx-auto mt-6 max-w-2xl text-center text-xl text-neutral-200">
-              Watch all 20 modules, download templates, and get lifetime access to the complete course
+              {pageData.playlistDescription}
             </p>
             <div className="mt-8 aspect-video w-full overflow-hidden rounded-lg">
               <iframe
@@ -121,7 +121,7 @@ export default async function CoursePage() {
                 rel="noopener noreferrer"
                 className="inline-block rounded-lg bg-white px-10 py-4 text-lg font-semibold text-neutral-900 transition-all hover:bg-neutral-100 hover:shadow-xl"
               >
-                Watch on YouTube →
+                {pageData.watchOnYoutubeText} →
               </a>
             </div>
           </div>
@@ -179,7 +179,7 @@ export default async function CoursePage() {
               {pageData.resultsHeadline}
             </h2>
             <p className="mx-auto mt-6 max-w-2xl text-xl text-neutral-600">
-              This system has helped companies transform their sales operations
+              {pageData.resultsSubheadline}
             </p>
           </div>
 
@@ -232,13 +232,13 @@ export default async function CoursePage() {
               rel="noopener noreferrer"
               className="rounded-lg bg-white px-10 py-4 text-lg font-semibold text-neutral-900 transition-all hover:bg-neutral-100 hover:shadow-xl"
             >
-              Watch on YouTube
+              {pageData.finalCtaButtonText}
             </a>
             <Link
               href="/#contact"
               className="rounded-lg border-2 border-white px-10 py-4 text-lg font-semibold text-white transition-all hover:bg-white hover:text-neutral-900"
             >
-              Have Questions? Contact Me
+              {pageData.finalCtaSecondaryText}
             </Link>
           </div>
         </div>

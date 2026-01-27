@@ -11,6 +11,11 @@ export default async function SettingsAdmin() {
 
   const sections = [
     {
+      title: 'Navigation & Branding',
+      description: 'Logo text, tagline, and navigation labels.',
+      href: '/cms/settings/navigation',
+    },
+    {
       title: 'Social Links',
       description: 'LinkedIn, YouTube, and Calendly URLs.',
       href: '/cms/settings/social',

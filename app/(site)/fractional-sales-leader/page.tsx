@@ -55,6 +55,14 @@ interface PageData {
   finalCtaButtonText: string;
   finalCtaDescription: string;
   layout: { sections: string[] };
+  // Section titles
+  videosSectionHeadline: string;
+  videosSectionSubheadline: string;
+  videosPlaylistButtonText: string;
+  faqSectionHeadline: string;
+  faqSectionSubheadline: string;
+  introCtaNote: string;
+  finalCtaSecondaryText: string;
 }
 
 // Generate FAQPage schema for SEO
@@ -136,10 +144,10 @@ function VideosSection({ pageData }: { pageData: PageData }) {
       <div className="container mx-auto max-w-6xl px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-neutral-900 md:text-4xl lg:text-5xl">
-            Everything You Need to Know
+            {pageData.videosSectionHeadline}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-neutral-600">
-            Five videos that answer the questions every founder asks before hiring a Fractional Sales Leader.
+            {pageData.videosSectionSubheadline}
           </p>
         </div>
 
@@ -184,7 +192,7 @@ function VideosSection({ pageData }: { pageData: PageData }) {
             rel="noopener noreferrer"
             className="inline-block rounded-lg border-2 border-[#0966c2] bg-white px-8 py-4 text-lg font-semibold text-[#0966c2] transition-all hover:bg-[#0966c2] hover:text-white"
           >
-            Watch Full Playlist on YouTube
+            {pageData.videosPlaylistButtonText}
           </a>
         </div>
       </div>
@@ -229,7 +237,7 @@ function IntroSection({ pageData }: { pageData: PageData }) {
             {pageData.finalCtaButtonText}
           </Link>
           <p className="mt-3 text-sm text-neutral-500">
-            No pitch. Just a conversation about your sales challenges.
+            {pageData.introCtaNote}
           </p>
         </div>
       </div>
@@ -244,10 +252,10 @@ function FAQSection({ pageData }: { pageData: PageData }) {
       <div className="container mx-auto max-w-4xl px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-neutral-900 md:text-4xl lg:text-5xl">
-            Frequently Asked Questions
+            {pageData.faqSectionHeadline}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-neutral-600">
-            Straight answers to the questions I hear most often.
+            {pageData.faqSectionSubheadline}
           </p>
         </div>
 
@@ -295,7 +303,7 @@ function FinalCtaSection({ pageData }: { pageData: PageData }) {
             href="/"
             className="rounded-lg border-2 border-white px-10 py-4 text-lg font-semibold text-white transition-all hover:bg-white hover:text-neutral-900"
           >
-            Learn More About Me
+            {pageData.finalCtaSecondaryText}
           </Link>
         </div>
       </div>

@@ -13,6 +13,28 @@ type InputField = {
   suffix?: string;
 };
 
+type ROICalculatorTextProps = {
+  inputSectionHeadline: string;
+  inputSectionDescription: string;
+  resultsSectionHeadline: string;
+  founderLedLabel: string;
+  founderLedDescription: string;
+  badVPLabel: string;
+  badVPDescription: string;
+  fractionalLabel: string;
+  fractionalDescription: string;
+  savingsSectionHeadline: string;
+  savingsVsFounderLabel: string;
+  savingsVsBadVPLabel: string;
+  missedRevenuePrefix: string;
+  missedRevenueSuffix: string;
+  ctaText: string;
+  ctaButtonText: string;
+  downloadButtonText: string;
+  downloadDescription: string;
+  disclaimerText: string;
+};
+
 const inputFields: InputField[] = [
   {
     label: "Annual Revenue",
@@ -62,7 +84,7 @@ function formatNumber(value: number): string {
   return new Intl.NumberFormat("en-US").format(Math.round(value));
 }
 
-export function ROICalculator() {
+export function ROICalculator({ text }: { text: ROICalculatorTextProps }) {
   const [inputs, setInputs] = useState<Record<string, number>>(() => {
     const defaults: Record<string, number> = {};
     inputFields.forEach((field) => {
@@ -109,9 +131,9 @@ export function ROICalculator() {
     <div className="space-y-8">
       {/* Input Section */}
       <div className="rounded-2xl border-2 border-border bg-card p-6 md:p-8">
-        <h2 className="text-xl font-bold text-foreground mb-6">Your Numbers</h2>
+        <h2 className="text-xl font-bold text-foreground mb-6">{text.inputSectionHeadline}</h2>
         <p className="text-sm text-muted-foreground mb-6">
-          Adjust these values to match your company
+          {text.inputSectionDescription}
         </p>
 
         <div className="grid gap-4 md:grid-cols-2">
@@ -165,13 +187,13 @@ export function ROICalculator() {
 
       {/* Results Section */}
       <div className="rounded-2xl border-2 border-[#0966c2] bg-gradient-to-br from-[#0966c2]/5 to-[#0855a3]/5 p-6 md:p-8">
-        <h2 className="text-xl font-bold text-foreground mb-6">6-Month Cost Comparison</h2>
+        <h2 className="text-xl font-bold text-foreground mb-6">{text.resultsSectionHeadline}</h2>
 
         <div className="grid gap-6 md:grid-cols-3">
           {/* Founder-Led Sales */}
           <div className="rounded-xl bg-white dark:bg-neutral-900 p-6 shadow-sm">
             <h3 className="text-sm font-medium text-muted-foreground mb-2">
-              Founder-Led Sales
+              {text.founderLedLabel}
             </h3>
             <p className="text-3xl font-bold text-foreground">
               {formatCurrency(founderSixMonthCost)}
@@ -184,37 +206,37 @@ export function ROICalculator() {
           {/* Bad VP Hire */}
           <div className="rounded-xl bg-white dark:bg-neutral-900 p-6 shadow-sm">
             <h3 className="text-sm font-medium text-muted-foreground mb-2">
-              Bad VP Hire
+              {text.badVPLabel}
             </h3>
             <p className="text-3xl font-bold text-foreground">
               {formatCurrency(badVPSixMonthCost)}
             </p>
             <p className="text-xs text-muted-foreground mt-2">
-              Includes salary + turnover costs
+              {text.badVPDescription}
             </p>
           </div>
 
           {/* Fractional Sales Leader */}
           <div className="rounded-xl bg-[#0966c2] p-6 shadow-sm">
             <h3 className="text-sm font-medium text-white/80 mb-2">
-              Fractional Sales Leader
+              {text.fractionalLabel}
             </h3>
             <p className="text-3xl font-bold text-white">
               {formatCurrency(fractionalSixMonthCost)}
             </p>
             <p className="text-xs text-white/80 mt-2">
-              20 hours/week for 26 weeks
+              {text.fractionalDescription}
             </p>
           </div>
         </div>
 
         {/* Savings */}
         <div className="mt-8 pt-6 border-t border-border">
-          <h3 className="text-lg font-bold text-foreground mb-4">Your Potential Savings</h3>
+          <h3 className="text-lg font-bold text-foreground mb-4">{text.savingsSectionHeadline}</h3>
           <div className="grid gap-4 md:grid-cols-2">
             <div className="flex items-center justify-between rounded-xl bg-green-50 dark:bg-green-950/30 p-4">
               <span className="text-sm font-medium text-foreground">
-                vs. Founder-Led Sales
+                {text.savingsVsFounderLabel}
               </span>
               <span className="text-xl font-bold text-green-600 dark:text-green-400">
                 {formatCurrency(savingsOverFounder)}
@@ -222,7 +244,7 @@ export function ROICalculator() {
             </div>
             <div className="flex items-center justify-between rounded-xl bg-green-50 dark:bg-green-950/30 p-4">
               <span className="text-sm font-medium text-foreground">
-                vs. Bad VP Hire
+                {text.savingsVsBadVPLabel}
               </span>
               <span className="text-xl font-bold text-green-600 dark:text-green-400">
                 {formatCurrency(savingsOverBadVP)}
@@ -234,9 +256,8 @@ export function ROICalculator() {
         {/* Missed Revenue */}
         <div className="mt-6 p-4 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800">
           <p className="text-sm text-amber-800 dark:text-amber-200">
-            <strong>Plus:</strong> Without proper sales leadership, you're leaving an estimated{" "}
-            <strong>{formatCurrency(sixMonthUnrealizedRevenue)}</strong> on the table over 6 months
-            from missed opportunities.
+            <strong>{text.missedRevenuePrefix}</strong>{" "}
+            <strong>{formatCurrency(sixMonthUnrealizedRevenue)}</strong> {text.missedRevenueSuffix}
           </p>
         </div>
       </div>
@@ -244,20 +265,20 @@ export function ROICalculator() {
       {/* CTA */}
       <div className="text-center">
         <p className="text-muted-foreground mb-4">
-          Ready to see what a Fractional Sales Leader can do for your business?
+          {text.ctaText}
         </p>
         <Link
           href="/#contact"
           className="inline-flex items-center justify-center rounded-full bg-[#0966c2] px-8 py-3 text-white font-medium hover:bg-[#0855a3] transition-colors"
         >
-          Let&apos;s Talk
+          {text.ctaButtonText}
         </Link>
       </div>
 
       {/* Download Calculator Section */}
       <div className="mt-8 p-6 bg-gray-50 dark:bg-neutral-900 rounded-lg border border-gray-200 dark:border-neutral-800">
         <p className="mb-4 text-sm text-gray-700 dark:text-gray-300">
-          <strong>Note:</strong> This calculator shows top-line impact only. Gross and net profit are not calculated.
+          <strong>Note:</strong> {text.disclaimerText}
         </p>
         <a
           href="https://docs.google.com/spreadsheets/d/1i9yvZM5BPvYfftJGYaOmgRGMr6u4Y-Xm/edit?gid=1275642810#gid=1275642810"
@@ -278,16 +299,16 @@ export function ROICalculator() {
             <polyline points="7 10 12 15 17 10"></polyline>
             <line x1="12" y1="15" x2="12" y2="3"></line>
           </svg>
-          Download the complete Fractional Sales Leadership pricing calculator
+          {text.downloadButtonText}
         </a>
         <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
-          Compare against Founder-Led Sales, Hiring a Sales VP, and hiring a Fractional Sales Leader.
+          {text.downloadDescription}
         </p>
       </div>
 
       {/* Disclaimer */}
       <p className="text-xs text-center text-muted-foreground">
-        Note: This calculator shows top-line impact only. Gross and net profit are not calculated.
+        {text.disclaimerText}
         <br />
         © Louie Bernstein - Fractional Sales Leader
       </p>

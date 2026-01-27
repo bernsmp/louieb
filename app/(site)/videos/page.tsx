@@ -136,7 +136,7 @@ export default async function VideosPage() {
             {/* Video Links Section */}
             <div className="mt-10 text-center">
               <h3 className="mb-4 font-sans text-lg font-semibold text-foreground">
-                Watch Individual Videos
+                {pageData.individualVideosHeadline}
               </h3>
               <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
                 {allVideos.map((video) => (
