@@ -1,23 +1,35 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
-import { getCoursePageData } from "@/lib/cms";
+import { getCoursePageData, getCoursePageSEO } from "@/lib/cms";
 
-export const metadata: Metadata = {
-  title: "The Founder's and CEO's Sales System | Complete Sales Training Course",
-  description:
-    "Build, optimize, and scale your sales team with this complete 20-step system. Includes hiring system, sales playbook, LinkedIn lead generation, pipeline management, and more. Created by a Fractional Sales Leader with decades of experience.",
-  keywords: [
-    "sales system course",
-    "CEO sales training",
-    "fractional sales leader",
-    "build sales team",
-    "sales playbook",
-    "sales hiring system",
-    "LinkedIn lead generation",
-    "sales pipeline management",
-  ],
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getCoursePageSEO();
+
+  const defaultTitle = "The Founder's and CEO's Sales System | Complete Sales Training Course";
+  const defaultDescription = "Build, optimize, and scale your sales team with this complete 20-step system. Includes hiring system, sales playbook, LinkedIn lead generation, pipeline management, and more. Created by a Fractional Sales Leader with decades of experience.";
+
+  return {
+    title: seo.seoTitle || defaultTitle,
+    description: seo.seoDescription || defaultDescription,
+    keywords: [
+      "sales system course",
+      "CEO sales training",
+      "fractional sales leader",
+      "build sales team",
+      "sales playbook",
+      "sales hiring system",
+      "LinkedIn lead generation",
+      "sales pipeline management",
+    ],
+    openGraph: {
+      title: seo.seoTitle || defaultTitle,
+      description: seo.seoDescription || defaultDescription,
+      type: "website",
+      images: seo.seoImage ? [seo.seoImage] : [],
+    },
+  };
+}
 
 export default async function CoursePage() {
   // Fetch course page data from CMS

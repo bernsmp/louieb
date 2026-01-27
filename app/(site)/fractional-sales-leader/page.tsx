@@ -1,32 +1,38 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { getFSLPageDataWithLayout } from "@/lib/cms";
+import { getFSLPageDataWithLayout, getFSLPageSEO } from "@/lib/cms";
 
-export const metadata: Metadata = {
-  title: "Fractional Sales Leader | What It Is & How It Works | Louie Bernstein",
-  description:
-    "A Fractional Sales Leader gives you experienced sales leadership at a fraction of the cost. Learn what they do, how to hire one, and if it's right for your $1M-$10M company.",
-  keywords: [
-    "fractional sales leader",
-    "fractional sales leadership",
-    "fractional VP of sales",
-    "fractional sales manager",
-    "part-time sales leader",
-    "outsourced sales leadership",
-    "sales leadership consulting",
-    "fractional executive",
-  ],
-  openGraph: {
-    title: "Fractional Sales Leader | What It Is & How It Works",
-    description:
-      "A Fractional Sales Leader gives you experienced sales leadership at a fraction of the cost. Learn what they do and if it's right for your company.",
-    type: "website",
-    url: "https://louiebernstein.com/fractional-sales-leader",
-  },
-  alternates: {
-    canonical: "https://louiebernstein.com/fractional-sales-leader",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getFSLPageSEO();
+
+  const defaultTitle = "Fractional Sales Leader | What It Is & How It Works | Louie Bernstein";
+  const defaultDescription = "A Fractional Sales Leader gives you experienced sales leadership at a fraction of the cost. Learn what they do, how to hire one, and if it's right for your $1M-$10M company.";
+
+  return {
+    title: seo.seoTitle || defaultTitle,
+    description: seo.seoDescription || defaultDescription,
+    keywords: [
+      "fractional sales leader",
+      "fractional sales leadership",
+      "fractional VP of sales",
+      "fractional sales manager",
+      "part-time sales leader",
+      "outsourced sales leadership",
+      "sales leadership consulting",
+      "fractional executive",
+    ],
+    openGraph: {
+      title: seo.seoTitle || "Fractional Sales Leader | What It Is & How It Works",
+      description: seo.seoDescription || defaultDescription,
+      type: "website",
+      url: "https://louiebernstein.com/fractional-sales-leader",
+      images: seo.seoImage ? [seo.seoImage] : [],
+    },
+    alternates: {
+      canonical: "https://louiebernstein.com/fractional-sales-leader",
+    },
+  };
+}
 
 // Types for page data
 interface VideoItem {

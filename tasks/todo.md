@@ -59,22 +59,22 @@ Swap out manual URL paste fields.
 
 ---
 
-## Phase 3 - Editor Safety (1 day)
+## Phase 3 - Editor Safety ✅ COMPLETE
 
-### 7. In-Session Undo/Redo
+### 7. In-Session Undo/Redo ✅
 Recover from typos without page reload. No database needed.
 
-- [ ] 7.1 Create `useUndoRedo` hook (state stack, last 20 states)
-- [ ] 7.2 Add undo/redo buttons to editor header
-- [ ] 7.3 Implement Ctrl+Z / Ctrl+Y keyboard shortcuts
-- [ ] 7.4 Show disabled state when nothing to undo/redo
+- [x] 7.1 Create `useUndoRedo` hook (state stack, last 20 states)
+- [x] 7.2 Add undo/redo buttons to editor header
+- [x] 7.3 Implement Ctrl+Z / Ctrl+Y keyboard shortcuts
+- [x] 7.4 Show disabled state when nothing to undo/redo
 
-### 8. Per-Page SEO Fields
+### 8. Per-Page SEO Fields ✅
 Individual pages need their own meta tags.
 
-- [ ] 8.1 Add SEO fields (title, description, ogImage) to page content
-- [ ] 8.2 Update FSL, Course, Videos page editors
-- [ ] 8.3 Wire up page metadata in frontend
+- [x] 8.1 Add SEO fields (title, description, ogImage) to page content
+- [x] 8.2 Update FSL, Course, Videos page editors
+- [x] 8.3 Wire up page metadata in frontend
 
 ---
 
@@ -211,3 +211,30 @@ Run the SQL migrations in Supabase to create the `media` bucket and policies:
 1. Go to Supabase Dashboard → SQL Editor
 2. Run `supabase/migrations/20240127_create_media_bucket.sql`
 3. Run `supabase/migrations/20240127_media_bucket_policies.sql`
+
+---
+
+## Review - Phase 3 Complete
+
+### Summary of Changes
+
+**Undo/Redo System:**
+- Created `app/cms/hooks/useUndoRedo.ts` — state history hook (max 20 states)
+- Integrated into SectionEditor with undo/redo buttons
+- Keyboard shortcuts: Ctrl+Z (undo), Ctrl+Y or Ctrl+Shift+Z (redo)
+- Buttons disabled when nothing to undo/redo
+
+**Per-Page SEO Fields:**
+- Added seoTitle, seoDescription, seoImage fields to:
+  - FSL page editor (`app/cms/fsl-page/page.tsx`)
+  - Course page editor (`app/cms/course/page.tsx`)
+  - Videos page editor (`app/cms/videos/page.tsx`)
+- Created `PageSEO` interface and fetch helpers in `lib/cms.ts`
+- Updated frontend pages to use `generateMetadata()` with CMS values
+- Fallbacks to defaults if SEO fields empty
+
+### New Dependencies
+None
+
+### Environment Variables
+None

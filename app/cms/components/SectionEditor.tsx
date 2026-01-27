@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { DevicePreviewToggle, type DeviceType } from './DevicePreviewToggle'
 import { VisibilityToggle } from './VisibilityToggle'
 import { ImageUploader } from './ImageUploader'
+import { useUndoRedo } from '../hooks/useUndoRedo'
 
 // Helper to format relative time
 function formatRelativeTime(dateString: string | null): string {
@@ -62,7 +63,7 @@ export function SectionEditor({
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
-  const [content, setContent] = useState<Record<string, unknown>>({})
+  const { state: content, setState: setContentWithHistory, undo, redo, canUndo, canRedo } = useUndoRedo<Record<string, unknown>>({})
   const [lastSavedAt, setLastSavedAt] = useState<string | null>(null)
   const [isDirty, setIsDirty] = useState(false)
   const [saveSuccess, setSaveSuccess] = useState(false)
@@ -114,12 +115,12 @@ export function SectionEditor({
       const response = await fetch(`/api/cms/section/${section}`)
       const data = await response.json()
       if (data.content && Object.keys(data.content).length > 0) {
-        setContent(data.content)
+        setContentWithHistory(data.content)
         // Update preview after initial load
         setTimeout(() => updatePreview(data.content), 500)
       } else {
         // Initialize with visible: true by default if no content exists
-        setContent({ visible: true })
+        setContentWithHistory({ visible: true })
       }
       // Set initial last saved timestamp
       if (data.updated_at) {
@@ -130,7 +131,7 @@ export function SectionEditor({
     } finally {
       setLoading(false)
     }
-  }, [section, updatePreview])
+  }, [section, updatePreview, setContentWithHistory])
 
   useEffect(() => {
     fetchContent()
@@ -141,18 +142,24 @@ export function SectionEditor({
     }
   }, [fetchContent])
 
-  // Keyboard shortcut: Cmd+S / Ctrl+S to save
+  // Keyboard shortcuts: Cmd+S / Ctrl+S to save, Ctrl+Z to undo, Ctrl+Y / Ctrl+Shift+Z to redo
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 's') {
         e.preventDefault()
         handleSave()
+      } else if (e.ctrlKey && !e.shiftKey && e.key === 'z') {
+        e.preventDefault()
+        undo()
+      } else if (e.ctrlKey && (e.key === 'y' || (e.shiftKey && e.key === 'Z'))) {
+        e.preventDefault()
+        redo()
       }
     }
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [content, section])
+  }, [content, section, undo, redo])
 
   // Warn on navigate away if unsaved changes
   useEffect(() => {
@@ -192,7 +199,7 @@ export function SectionEditor({
       newContent = { ...content, [field.name]: value }
     }
 
-    setContent(newContent)
+    setContentWithHistory(newContent)
     setIsDirty(true)
 
     // Debounce preview updates
@@ -206,7 +213,7 @@ export function SectionEditor({
 
   const handleVisibilityChange = (visible: boolean) => {
     const newContent = { ...content, visible }
-    setContent(newContent)
+    setContentWithHistory(newContent)
     setIsDirty(true)
     updatePreview(newContent)
   }
@@ -281,6 +288,24 @@ export function SectionEditor({
             visible={content.visible !== false}
             onChange={handleVisibilityChange}
           />
+          <div className="undo-redo-buttons">
+            <button
+              onClick={undo}
+              className="btn btn--icon"
+              disabled={!canUndo}
+              title="Undo (Ctrl+Z)"
+            >
+              ←
+            </button>
+            <button
+              onClick={redo}
+              className="btn btn--icon"
+              disabled={!canRedo}
+              title="Redo (Ctrl+Y)"
+            >
+              →
+            </button>
+          </div>
           <button onClick={() => router.back()} className="btn btn--secondary">
             Cancel
           </button>

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { ImageUploader } from '../components/ImageUploader'
 
 interface VideosPageContent {
   headline: string
@@ -16,6 +17,10 @@ interface VideosPageContent {
   videoPageBackLinkText: string
   videoPageWatchButtonText: string
   videoPageMoreVideosHeadline: string
+  // SEO settings
+  seoTitle: string
+  seoDescription: string
+  seoImage: string
 }
 
 // Default values that match what's shown on the live site
@@ -31,6 +36,10 @@ const defaults: VideosPageContent = {
   videoPageBackLinkText: 'All Videos',
   videoPageWatchButtonText: 'Watch on YouTube',
   videoPageMoreVideosHeadline: 'More Videos',
+  // SEO settings
+  seoTitle: 'Sales Videos | Louie Bernstein',
+  seoDescription: 'The most popular sales training content, handpicked for you',
+  seoImage: '',
 }
 
 export default function EditVideosPage() {
@@ -299,6 +308,54 @@ export default function EditVideosPage() {
                 placeholder={defaults.videoPageMoreVideosHeadline}
               />
               <p className="form-hint">The heading above related videos at the bottom</p>
+            </div>
+          </div>
+
+          {/* SEO Settings */}
+          <div style={{
+            borderTop: '1px solid rgba(255,255,255,0.1)',
+            marginTop: '2rem',
+            paddingTop: '1.5rem',
+          }}>
+            <h3 style={{ color: '#f5f5f5', fontSize: '1rem', fontWeight: 600, marginBottom: '1rem' }}>
+              SEO Settings
+            </h3>
+            <p style={{ color: '#a3a3a3', fontSize: '0.875rem', marginBottom: '1.5rem' }}>
+              Optimize how this page appears in search engines and when shared on social media.
+            </p>
+
+            <div className="form-group">
+              <label className="form-label">SEO: Page Title</label>
+              <input
+                type="text"
+                className="form-input"
+                value={content.seoTitle}
+                onChange={(e) => handleChange('seoTitle', e.target.value)}
+                placeholder={defaults.seoTitle}
+              />
+              <p className="form-hint">Displayed in search results and browser tabs (50-60 characters recommended)</p>
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">SEO: Meta Description</label>
+              <textarea
+                className="form-textarea"
+                value={content.seoDescription}
+                onChange={(e) => handleChange('seoDescription', e.target.value)}
+                placeholder={defaults.seoDescription}
+                rows={3}
+              />
+              <p className="form-hint">Displayed in search results under the title (150-160 characters recommended)</p>
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">SEO: Social Share Image</label>
+              <ImageUploader
+                value={content.seoImage}
+                onChange={(url) => handleChange('seoImage', url || '')}
+                folder="seo"
+              />
+              <p className="form-hint">Image shown when page is shared on social media (og:image). Recommended: 1200x630px</p>
             </div>
           </div>
         </div>

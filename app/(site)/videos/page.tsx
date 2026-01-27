@@ -1,18 +1,24 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { getVideosPageData, getAllVideosWithSlugs, getFeaturedShortsWithSlugs } from "@/lib/cms";
+import { getVideosPageData, getAllVideosWithSlugs, getFeaturedShortsWithSlugs, getVideosPageSEO } from "@/lib/cms";
 
-export const metadata: Metadata = {
-  title: "Sales Training Videos | Louie Bernstein - Top Sales Insights",
-  description:
-    "Watch the top-rated sales training videos and insights from Louie Bernstein. Featured YouTube Shorts and sales leadership content.",
-  openGraph: {
-    title: "Sales Training Videos | Louie Bernstein - Top Sales Insights",
-    description:
-      "Watch the top-rated sales training videos and insights from Louie Bernstein.",
-    type: "website",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getVideosPageSEO();
+
+  const defaultTitle = "Sales Training Videos | Louie Bernstein - Top Sales Insights";
+  const defaultDescription = "Watch the top-rated sales training videos and insights from Louie Bernstein. Featured YouTube Shorts and sales leadership content.";
+
+  return {
+    title: seo.seoTitle || defaultTitle,
+    description: seo.seoDescription || defaultDescription,
+    openGraph: {
+      title: seo.seoTitle || defaultTitle,
+      description: seo.seoDescription || defaultDescription,
+      type: "website",
+      images: seo.seoImage ? [seo.seoImage] : [],
+    },
+  };
+}
 
 // Generate VideoObject schema for SEO/AEO
 function generateVideoSchema(videos: Array<{ videoId: string; title: string; description?: string }>) {

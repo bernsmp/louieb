@@ -110,6 +110,28 @@ export default function EditCoursePage() {
           label: 'Final CTA Description',
           type: 'text',
         },
+        {
+          name: 'seoTitle',
+          label: 'SEO: Page Title',
+          type: 'text',
+          placeholder: 'e.g., Free Sales System Course | Louie Bernstein',
+          hint: 'Displayed in search results and browser tabs (50-60 characters recommended)',
+        },
+        {
+          name: 'seoDescription',
+          label: 'SEO: Meta Description',
+          type: 'textarea',
+          rows: 3,
+          placeholder: 'Brief description of this page for search engines',
+          hint: 'Displayed in search results under the title (150-160 characters recommended)',
+        },
+        {
+          name: 'seoImage',
+          label: 'SEO: Social Share Image',
+          type: 'image',
+          folder: 'seo',
+          hint: 'Image shown when page is shared on social media (og:image). Recommended: 1200x630px',
+        },
       ]}
       />
     </div>

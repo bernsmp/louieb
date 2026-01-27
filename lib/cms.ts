@@ -1336,6 +1336,80 @@ export async function getFeaturedShortsWithSlugs(): Promise<VideoWithSlug[]> {
   }))
 }
 
+// ============================================================================
+// SEO DATA FETCHING
+// ============================================================================
+
+interface PageSEO {
+  seoTitle?: string
+  seoDescription?: string
+  seoImage?: string
+}
+
+/**
+ * Fetch SEO data for a specific page from site_content table
+ */
+async function fetchPageSEOFromSupabase(section: string): Promise<PageSEO> {
+  if (!supabaseAdmin) return {}
+
+  try {
+    const { data, error } = await supabaseAdmin
+      .from('site_content')
+      .select('content')
+      .eq('section', section)
+      .single()
+
+    if (error) {
+      if (error.code === 'PGRST116') {
+        // Not found - return empty object
+        return {}
+      }
+      console.warn('[CMS] Error fetching page SEO:', error.message)
+      return {}
+    }
+
+    const content = data?.content as Record<string, unknown>
+    return {
+      seoTitle: content?.seoTitle as string | undefined,
+      seoDescription: content?.seoDescription as string | undefined,
+      seoImage: content?.seoImage as string | undefined,
+    }
+  } catch (error) {
+    console.warn('[CMS] Failed to fetch page SEO:', error)
+    return {}
+  }
+}
+
+/**
+ * Get SEO data for FSL page
+ */
+export const getFSLPageSEO = cache(async (): Promise<PageSEO> => {
+  if (!USE_SUPABASE_CMS || !isSupabaseConfigured) {
+    return {}
+  }
+  return fetchPageSEOFromSupabase('fslPage')
+})
+
+/**
+ * Get SEO data for Course page
+ */
+export const getCoursePageSEO = cache(async (): Promise<PageSEO> => {
+  if (!USE_SUPABASE_CMS || !isSupabaseConfigured) {
+    return {}
+  }
+  return fetchPageSEOFromSupabase('coursePage')
+})
+
+/**
+ * Get SEO data for Videos page
+ */
+export const getVideosPageSEO = cache(async (): Promise<PageSEO> => {
+  if (!USE_SUPABASE_CMS || !isSupabaseConfigured) {
+    return {}
+  }
+  return fetchPageSEOFromSupabase('videosPage')
+})
+
 // Re-export types for use in components
-export type { SiteSettings, Testimonial, FAQItem, VideoItem, ServiceItem, ProcessStep, PageLayout }
+export type { SiteSettings, Testimonial, FAQItem, VideoItem, ServiceItem, ProcessStep, PageLayout, PageSEO }
 
