@@ -5,7 +5,7 @@ Make Louie's life easier editing his site. Not building Wix.
 
 ---
 
-## Phase 1 - Essential Polish (1-2 days)
+## Phase 1 - Essential Polish ✅ COMPLETE
 
 ### 1. Device Preview Toggle ✅
 See mobile/tablet layouts without resizing browser.
@@ -137,8 +137,8 @@ Make previews more useful.
 
 ## Verification
 - [x] Run `npm run build` after each phase
-- [ ] Test in browser
-- [ ] No regressions
+- [x] Test in browser (Playwright verified Phase 1)
+- [x] No regressions (Phase 1)
 
 ---
 
