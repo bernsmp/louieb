@@ -65,7 +65,7 @@ export function Hero({
           </div>
           
           {/* Value Proposition - LinkedIn copy */}
-          <p className="mx-auto mt-8 max-w-3xl text-base text-neutral-200 md:text-lg lg:text-xl">
+          <p className="mx-auto mt-8 max-w-3xl whitespace-pre-line text-base text-neutral-200 md:text-lg lg:text-xl">
             {description}
           </p>
 

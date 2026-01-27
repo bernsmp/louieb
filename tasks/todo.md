@@ -270,3 +270,32 @@ None
 
 ### Environment Variables
 - `OPENROUTER_API_KEY` — required for AI features
+
+---
+
+## Bug Fixes - January 2026
+
+### Issue 1: FSL Page Missing Preview Panel
+The FSL page editor doesn't show a preview because `previewUrl` prop isn't passed.
+
+- [ ] Add preview route for FSL page or remove preview expectation
+
+### Issue 2: Hero Description Doesn't Preserve Line Breaks ✅
+Double enters (blank lines) are collapsed because no `whitespace-pre-line` CSS.
+
+- [x] Add `whitespace-pre-line` to Hero description `<p>` tag
+- [x] Update Hero preview route CSS as well
+
+### Issue 3: Wrong Dev Server Running
+Port 3000 is running "Strategic Command Center" project, not Louie.
+All CMS API calls (image uploads, AI features) fail with 404.
+
+**User action required:** Stop wrong server, start Louie project:
+```bash
+# Find and kill wrong server
+lsof -ti :3000 | xargs kill
+
+# Start Louie project
+cd "/Users/maxb/Desktop/Vibe Projects/louieb"
+npm run dev
+```

@@ -226,6 +226,7 @@ function renderHeroHTML(content: HeroContent): string {
       max-width: 800px;
       margin-left: auto;
       margin-right: auto;
+      white-space: pre-line;
     }
     
     .cta-buttons {
