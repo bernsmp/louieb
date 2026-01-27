@@ -113,6 +113,7 @@ export default function EditFSLPage() {
           rows: 3,
           placeholder: 'Brief description of this page for search engines',
           hint: 'Displayed in search results under the title (150-160 characters recommended)',
+          aiGenerate: true,
         },
         {
           name: 'seoImage',

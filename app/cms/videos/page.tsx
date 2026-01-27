@@ -51,6 +51,8 @@ export default function EditVideosPage() {
   const [videoCount, setVideoCount] = useState(0)
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const debounceRef = useRef<NodeJS.Timeout | null>(null)
+  const [aiLoading, setAiLoading] = useState(false)
+  const [aiSuggestion, setAiSuggestion] = useState<string | null>(null)
 
   // Update preview
   const updatePreview = useCallback((newContent: VideosPageContent) => {
@@ -102,6 +104,56 @@ export default function EditVideosPage() {
     
     if (debounceRef.current) clearTimeout(debounceRef.current)
     debounceRef.current = setTimeout(() => updatePreview(newContent), 150)
+  }
+
+  const handleAiGenerate = async () => {
+    const title = content.seoTitle || content.headline
+    const pageContent = content.subheadline
+
+    if (!title.trim() && !pageContent.trim()) {
+      setMessage({ type: 'error', text: 'Please add a title or some content first.' })
+      setTimeout(() => setMessage(null), 3000)
+      return
+    }
+
+    setAiLoading(true)
+    setAiSuggestion(null)
+
+    try {
+      const response = await fetch('/api/ai/suggest', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'generate-seo',
+          title: title || undefined,
+          pageContent: pageContent || undefined,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to generate SEO description')
+      }
+
+      const data = await response.json()
+      setAiSuggestion(data.suggestion)
+    } catch (error) {
+      console.error('AI generate error:', error)
+      setMessage({ type: 'error', text: 'Failed to generate SEO description. Please try again.' })
+      setTimeout(() => setMessage(null), 3000)
+    } finally {
+      setAiLoading(false)
+    }
+  }
+
+  const applyAiSuggestion = () => {
+    if (aiSuggestion) {
+      handleChange('seoDescription', aiSuggestion)
+      setAiSuggestion(null)
+    }
+  }
+
+  const dismissAiSuggestion = () => {
+    setAiSuggestion(null)
   }
 
   const handleSave = async () => {
@@ -337,7 +389,18 @@ export default function EditVideosPage() {
             </div>
 
             <div className="form-group">
-              <label className="form-label">SEO: Meta Description</label>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <label className="form-label">SEO: Meta Description</label>
+                <button
+                  type="button"
+                  className="ai-generate-btn"
+                  onClick={handleAiGenerate}
+                  disabled={aiLoading}
+                  title="Generate SEO Description"
+                >
+                  {aiLoading ? '...' : '✨ AI Generate'}
+                </button>
+              </div>
               <textarea
                 className="form-textarea"
                 value={content.seoDescription}
@@ -345,6 +408,29 @@ export default function EditVideosPage() {
                 placeholder={defaults.seoDescription}
                 rows={3}
               />
+              {aiSuggestion && (
+                <div className="ai-suggestion">
+                  <div className="ai-suggestion__header">
+                    <span className="ai-suggestion__label">✨ AI Suggestion</span>
+                    <button
+                      type="button"
+                      className="ai-suggestion__dismiss"
+                      onClick={dismissAiSuggestion}
+                      title="Dismiss"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                  <div className="ai-suggestion__text">{aiSuggestion}</div>
+                  <button
+                    type="button"
+                    className="ai-suggestion__apply"
+                    onClick={applyAiSuggestion}
+                  >
+                    Use this
+                  </button>
+                </div>
+              )}
               <p className="form-hint">Displayed in search results under the title (150-160 characters recommended)</p>
             </div>
 

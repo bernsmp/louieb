@@ -78,18 +78,16 @@ Individual pages need their own meta tags.
 
 ---
 
-## Phase 4 - Delighters (Optional)
+## Phase 4 - Delighters ✅ COMPLETE
 
-### 9. AI Content Assistant
-Smart suggestions to help Louie write better content. Uses cost-efficient models:
-- **Gemini 3 Flash** for vision tasks (alt text) — $0.10/$0.40 per 1M tokens
-- **Claude 4.5 Haiku** for text tasks (headlines, SEO) — fast + great prose
+### 9. AI Content Assistant ✅
+Smart suggestions via OpenRouter (Gemini Flash for vision, Haiku for text).
 
-- [ ] 9.1 Add API keys to environment (GEMINI_API_KEY, ANTHROPIC_API_KEY)
-- [ ] 9.2 Create `/api/ai/suggest` endpoint with model routing
-- [ ] 9.3 "Suggest alt text" button for images (Gemini Flash vision)
-- [ ] 9.4 "Rewrite headline" button for text fields (Haiku)
-- [ ] 9.5 "Generate SEO description" from page content (Haiku)
+- [x] 9.1 Add API keys to environment (OPENROUTER_API_KEY)
+- [x] 9.2 Create `/api/ai/suggest` endpoint with model routing
+- [x] 9.3 "Suggest alt text" button for images (Gemini Flash vision)
+- [x] 9.4 "Rewrite headline" button for text fields (Haiku)
+- [x] 9.5 "Generate SEO description" from page content (Haiku)
 
 ### 10. Preview Enhancements
 Make previews more useful.
@@ -238,3 +236,37 @@ None
 
 ### Environment Variables
 None
+
+---
+
+## Review - Phase 4 Complete
+
+### Summary of Changes
+
+**AI Suggest API:**
+- Created `app/api/ai/suggest/route.ts` — routes requests through OpenRouter
+- Supports 3 actions: `alt-text`, `rewrite-headline`, `generate-seo`
+- Uses Gemini 2.0 Flash for vision, Claude 3.5 Haiku for text
+
+**Alt Text Generator:**
+- Added `showAltTextButton` and `onAltTextGenerated` props to ImageUploader
+- Sparkle button appears below uploaded images
+- Generates accessibility-focused alt text
+
+**Headline Rewriter:**
+- Added `aiRewrite` field option to SectionEditor
+- Purple "✨ AI Rewrite" button appears next to text fields
+- Shows suggestion in popover, user can apply or dismiss
+- Enabled on Value Proposition and About sections
+
+**SEO Description Generator:**
+- Added `aiGenerate` field option to SectionEditor
+- Green "AI Generate" button on SEO description textareas
+- Collects page context (title, headline, description) for better suggestions
+- Enabled on FSL, Course, Videos pages
+
+### New Dependencies
+None
+
+### Environment Variables
+- `OPENROUTER_API_KEY` — required for AI features

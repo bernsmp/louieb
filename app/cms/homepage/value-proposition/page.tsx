@@ -16,12 +16,14 @@ export default function EditValuePropositionPage() {
           label: 'Headline',
           type: 'text',
           placeholder: "e.g., It's not how much you sell.",
+          aiRewrite: true,
         },
         {
           name: 'subheadline',
           label: 'Subheadline',
           type: 'text',
           placeholder: "e.g., It's how much you take home.",
+          aiRewrite: true,
         },
         {
           name: 'description',

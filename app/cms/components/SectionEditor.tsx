@@ -38,6 +38,8 @@ interface FieldConfig {
   rows?: number
   nested?: string // For nested fields like 'ctaPrimary.text'
   folder?: string // For image upload folder
+  aiRewrite?: boolean // Enable AI rewrite button
+  aiGenerate?: boolean // Enable AI generate button (for SEO descriptions)
 }
 
 interface SectionEditorProps {
@@ -70,6 +72,8 @@ export function SectionEditor({
   const [device, setDevice] = useState<DeviceType>('desktop')
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const debounceRef = useRef<NodeJS.Timeout | null>(null)
+  const [aiSuggestion, setAiSuggestion] = useState<{ field: string; text: string } | null>(null)
+  const [aiLoading, setAiLoading] = useState<string | null>(null)
 
   // Load device preference from localStorage on mount
   useEffect(() => {
@@ -218,6 +222,100 @@ export function SectionEditor({
     updatePreview(newContent)
   }
 
+  const handleAiRewrite = async (field: FieldConfig) => {
+    const currentText = getValue(field)
+    if (!currentText.trim()) {
+      return
+    }
+
+    const fieldKey = field.nested || field.name
+    setAiLoading(fieldKey)
+    setAiSuggestion(null)
+
+    try {
+      const response = await fetch('/api/ai/suggest', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'rewrite-headline',
+          text: currentText,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to get AI suggestion')
+      }
+
+      const data = await response.json()
+      setAiSuggestion({ field: fieldKey, text: data.suggestion })
+    } catch (error) {
+      console.error('AI rewrite error:', error)
+      setMessage({ type: 'error', text: 'Failed to get AI suggestion. Please try again.' })
+      setTimeout(() => setMessage(null), 3000)
+    } finally {
+      setAiLoading(null)
+    }
+  }
+
+  const handleAiGenerate = async (field: FieldConfig) => {
+    // Collect context for SEO generation
+    const seoTitleField = fields.find(f => f.name === 'seoTitle')
+    const headlineField = fields.find(f => f.name === 'headline')
+    const descriptionField = fields.find(f => f.name === 'description')
+    const taglineField = fields.find(f => f.name === 'tagline')
+
+    const title = seoTitleField ? getValue(seoTitleField) : headlineField ? getValue(headlineField) : ''
+    const pageContent = [
+      taglineField ? getValue(taglineField) : '',
+      descriptionField ? getValue(descriptionField) : ''
+    ].filter(Boolean).join('\n\n')
+
+    if (!title.trim() && !pageContent.trim()) {
+      setMessage({ type: 'error', text: 'Please add a title or some content first.' })
+      setTimeout(() => setMessage(null), 3000)
+      return
+    }
+
+    const fieldKey = field.nested || field.name
+    setAiLoading(fieldKey)
+    setAiSuggestion(null)
+
+    try {
+      const response = await fetch('/api/ai/suggest', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'generate-seo',
+          title: title || undefined,
+          pageContent: pageContent || undefined,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to generate SEO description')
+      }
+
+      const data = await response.json()
+      setAiSuggestion({ field: fieldKey, text: data.suggestion })
+    } catch (error) {
+      console.error('AI generate error:', error)
+      setMessage({ type: 'error', text: 'Failed to generate SEO description. Please try again.' })
+      setTimeout(() => setMessage(null), 3000)
+    } finally {
+      setAiLoading(null)
+    }
+  }
+
+  const applyAiSuggestion = (field: FieldConfig) => {
+    if (!aiSuggestion) return
+    setValue(field, aiSuggestion.text)
+    setAiSuggestion(null)
+  }
+
+  const dismissAiSuggestion = () => {
+    setAiSuggestion(null)
+  }
+
   const handleSave = async () => {
     setSaving(true)
     setMessage(null)
@@ -322,35 +420,90 @@ export function SectionEditor({
       {/* Layout: with or without preview */}
       <div className={previewUrl ? 'edit-with-preview' : ''}>
         <div className="edit-form">
-          {fields.map((field) => (
-            <div key={field.nested || field.name} className="form-group">
-              <label className="form-label">{field.label}</label>
-              {field.type === 'textarea' ? (
-                <textarea
-                  className="form-textarea"
-                  value={getValue(field)}
-                  onChange={(e) => setValue(field, e.target.value)}
-                  placeholder={field.placeholder}
-                  rows={field.rows || 4}
-                />
-              ) : field.type === 'image' ? (
-                <ImageUploader
-                  value={getValue(field)}
-                  onChange={(url) => setValue(field, url || '')}
-                  folder={field.folder || 'general'}
-                />
-              ) : (
-                <input
-                  type={field.type === 'url' ? 'url' : 'text'}
-                  className="form-input"
-                  value={getValue(field)}
-                  onChange={(e) => setValue(field, e.target.value)}
-                  placeholder={field.placeholder}
-                />
-              )}
-              {field.hint && <p className="form-hint">{field.hint}</p>}
-            </div>
-          ))}
+          {fields.map((field) => {
+            const fieldKey = field.nested || field.name
+            const showAiRewriteButton = field.aiRewrite && (field.type === 'text' || field.type === 'textarea')
+            const showAiGenerateButton = field.aiGenerate && field.type === 'textarea'
+            const isAiLoading = aiLoading === fieldKey
+            const hasSuggestion = aiSuggestion?.field === fieldKey
+
+            return (
+              <div key={fieldKey} className="form-group">
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <label className="form-label">{field.label}</label>
+                  {showAiRewriteButton && (
+                    <button
+                      type="button"
+                      className="ai-rewrite-btn"
+                      onClick={() => handleAiRewrite(field)}
+                      disabled={isAiLoading || !getValue(field).trim()}
+                      title="AI Rewrite"
+                    >
+                      {isAiLoading ? '...' : '✨ AI Rewrite'}
+                    </button>
+                  )}
+                  {showAiGenerateButton && (
+                    <button
+                      type="button"
+                      className="ai-generate-btn"
+                      onClick={() => handleAiGenerate(field)}
+                      disabled={isAiLoading}
+                      title="Generate SEO Description"
+                    >
+                      {isAiLoading ? '...' : '✨ AI Generate'}
+                    </button>
+                  )}
+                </div>
+                {field.type === 'textarea' ? (
+                  <textarea
+                    className="form-textarea"
+                    value={getValue(field)}
+                    onChange={(e) => setValue(field, e.target.value)}
+                    placeholder={field.placeholder}
+                    rows={field.rows || 4}
+                  />
+                ) : field.type === 'image' ? (
+                  <ImageUploader
+                    value={getValue(field)}
+                    onChange={(url) => setValue(field, url || '')}
+                    folder={field.folder || 'general'}
+                  />
+                ) : (
+                  <input
+                    type={field.type === 'url' ? 'url' : 'text'}
+                    className="form-input"
+                    value={getValue(field)}
+                    onChange={(e) => setValue(field, e.target.value)}
+                    placeholder={field.placeholder}
+                  />
+                )}
+                {hasSuggestion && (
+                  <div className="ai-suggestion">
+                    <div className="ai-suggestion__header">
+                      <span className="ai-suggestion__label">✨ AI Suggestion</span>
+                      <button
+                        type="button"
+                        className="ai-suggestion__dismiss"
+                        onClick={dismissAiSuggestion}
+                        title="Dismiss"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                    <div className="ai-suggestion__text">{aiSuggestion.text}</div>
+                    <button
+                      type="button"
+                      className="ai-suggestion__apply"
+                      onClick={() => applyAiSuggestion(field)}
+                    >
+                      Use this
+                    </button>
+                  </div>
+                )}
+                {field.hint && <p className="form-hint">{field.hint}</p>}
+              </div>
+            )
+          })}
         </div>
 
         {/* Preview Panel */}

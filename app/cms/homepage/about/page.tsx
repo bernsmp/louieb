@@ -17,12 +17,14 @@ export default function EditAboutPage() {
           label: 'Headline',
           type: 'text',
           placeholder: 'e.g., Fractional Sales Leadership',
+          aiRewrite: true,
         },
         {
           name: 'headlineAccent',
           label: 'Headline Accent (colored text)',
           type: 'text',
           placeholder: 'e.g., for $1M–$10M ARR Companies',
+          aiRewrite: true,
         },
         {
           name: 'paragraph1',
