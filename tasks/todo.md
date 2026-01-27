@@ -1,107 +1,172 @@
-# Complete CMS Editability
+# CMS Enhancement Plan (Revised)
 
 ## Goal
-Make ALL user-facing text editable so Louie never needs code changes.
+Make Louie's life easier editing his site. Not building Wix.
 
 ---
 
-## Group 1: Homepage Section Headers (3 new CMS pages)
+## Phase 1 - Essential Polish (1-2 days)
 
-- [x] 1.1 Create `app/cms/homepage/services-header/page.tsx` - "What I Offer" headline & subheadline
-- [x] 1.2 Create `app/cms/homepage/process-header/page.tsx` - "How It Works" headline & subheadline
-- [x] 1.3 Create `app/cms/homepage/faq-header/page.tsx` - "Frequently Asked Questions" headline & subheadline
-- [x] 1.4 Add defaults to `lib/cms.ts` for servicesSection, processSection, faqSection (already existed)
-- [x] 1.5 Update `app/cms/homepage/page.tsx` to add these 3 new section links
-- [x] 1.6 Test all 3 pages save and display correctly
+### 1. Device Preview Toggle ✅
+See mobile/tablet layouts without resizing browser.
 
----
+- [x] 1.1 Create `DevicePreviewToggle` component (desktop/tablet/mobile buttons)
+- [x] 1.2 Add to preview panel header
+- [x] 1.3 Control iframe width (desktop: 100%, tablet: 768px, mobile: 375px)
+- [x] 1.4 Persist selection in localStorage
 
-## Group 2: Navigation & Branding (1 new CMS page)
+### 2. Section Visibility Toggle ✅
+Hide sections without deleting content = safe experimentation.
 
-- [x] 2.1 Create `app/cms/settings/navigation/page.tsx` - Logo text, tagline, nav items
-- [x] 2.2 Add `navigation` defaults to `lib/cms.ts`
-- [x] 2.3 Update `app/cms/settings/page.tsx` to add navigation link
-- [x] 2.4 Header.tsx not updated (not used - site uses FloatingNavWrapper)
-- [x] 2.5 FloatingNavWrapper - skipped for now (complex nested structure)
-- [x] 2.6 CMS page ready for future wiring
+- [x] 2.1 Add `visible` boolean to section content in `site_content`
+- [x] 2.2 Create toggle component for section editors
+- [x] 2.3 Update homepage to check visibility before rendering
+- [x] 2.4 Test toggling sections on/off
 
----
+### 3. Editor Confidence Indicators ✅
+Peace of mind that changes are saved.
 
-## Group 3: Page Content (4 new CMS pages)
-
-- [x] 3.1 Create `app/cms/articles-page/page.tsx` - Page heading, description, empty state, back link, share labels
-- [x] 3.2 Add `articlesPage` defaults to `lib/cms.ts`
-- [x] 3.3 Update articles pages to use CMS text
-
-- [x] 3.4 Videos page already uses CMS - added `individualVideosHeadline` field
-- [x] 3.5 Add `individualVideosHeadline` to videosPage defaults
-- [x] 3.6 Update videos page to use CMS text
-
-- [x] 3.7 Create `app/cms/fsl-page/sections/page.tsx` - 7 section titles
-- [x] 3.8 Add FSL section titles to `lib/cms.ts` defaults
-- [x] 3.9 Update FSL page to use CMS section titles
-
-- [x] 3.10 Create `app/cms/course-page/extras/page.tsx` - Playlist heading, descriptions, buttons
-- [x] 3.11 Add course extras to `lib/cms.ts`
-- [x] 3.12 Update course page to use CMS text
+- [x] 3.1 Add "Last saved at X" timestamp in editor header
+- [x] 3.2 Add Cmd+S / Ctrl+S keyboard shortcut to save
+- [x] 3.3 Add "Unsaved changes" warning on navigate away
 
 ---
 
-## Group 4: ROI Calculator Text (~20 fields)
+## Phase 2 - Media Foundation (2-3 days)
 
-- [x] 4.1 Create `app/cms/tools/roi-calculator-text/page.tsx`
-- [x] 4.2 Add `roiCalculatorText` defaults to `lib/cms.ts` with all labels/headings
-- [x] 4.3 Update `components/ROICalculator.tsx` to accept and use text props
-- [x] 4.4 Update `app/(site)/tools/roi-calculator/page.tsx` to pass CMS text
+### 4. Supabase Storage Setup
+Infrastructure for image uploads.
+
+- [ ] 4.1 Create `media` storage bucket in Supabase
+- [ ] 4.2 Configure bucket policies (public read, authenticated write)
+- [ ] 4.3 Add upload helper functions to `lib/supabase.ts`
+
+### 5. Image Upload Component
+Replace painful URL pasting with drag-and-drop.
+
+- [ ] 5.1 Create `ImageUploader` component with drag-and-drop
+- [ ] 5.2 Add upload progress indicator
+- [ ] 5.3 Show image preview after upload
+- [ ] 5.4 Return public URL on success
+
+### 6. Replace URL Inputs with Uploader
+Swap out manual URL paste fields.
+
+- [ ] 6.1 Hero section - video thumbnail
+- [ ] 6.2 Awards section - awards image
+- [ ] 6.3 Testimonials - author photos
+- [ ] 6.4 Add "pick from uploaded" modal for reuse
+
+---
+
+## Phase 3 - Editor Safety (1 day)
+
+### 7. In-Session Undo/Redo
+Recover from typos without page reload. No database needed.
+
+- [ ] 7.1 Create `useUndoRedo` hook (state stack, last 20 states)
+- [ ] 7.2 Add undo/redo buttons to editor header
+- [ ] 7.3 Implement Ctrl+Z / Ctrl+Y keyboard shortcuts
+- [ ] 7.4 Show disabled state when nothing to undo/redo
+
+### 8. Per-Page SEO Fields
+Individual pages need their own meta tags.
+
+- [ ] 8.1 Add SEO fields (title, description, ogImage) to page content
+- [ ] 8.2 Update FSL, Course, Videos page editors
+- [ ] 8.3 Wire up page metadata in frontend
+
+---
+
+## Phase 4 - Delighters (Optional)
+
+### 9. AI Content Assistant (Gemini 2.5)
+Smart suggestions to help Louie write better content.
+
+- [ ] 9.1 Add Gemini API key to environment
+- [ ] 9.2 Create `/api/ai/suggest` endpoint
+- [ ] 9.3 "Suggest alt text" button for images
+- [ ] 9.4 "Rewrite headline" button for text fields
+- [ ] 9.5 "Generate SEO description" from page content
+
+### 10. Preview Enhancements
+Make previews more useful.
+
+- [ ] 10.1 SEO preview card (how it looks in Google/social)
+- [ ] 10.2 Side-by-side before/after comparison
+
+---
+
+## Explicitly NOT Building
+
+| Feature | Reason |
+|---------|--------|
+| Draft/publish workflow | Single user, low stakes. Just don't click save. |
+| Version history table | Git + Vercel deployment history already exists |
+| Global style system | Site design is stable, code changes are fine |
+| Page creation from CMS | How often does Louie add pages? Almost never. |
+| Custom CSS injection | Dangerous footgun for non-developers |
+| Role-based permissions | Single user |
+| Image optimization pipeline | Use Vercel Image Optimization (free, automatic) |
+
+---
+
+## Files to Create/Modify
+
+**Phase 1:**
+- `app/cms/components/DevicePreviewToggle.tsx` (new)
+- `app/cms/components/VisibilityToggle.tsx` (new)
+- `app/cms/components/EditorHeader.tsx` (new) - last saved, keyboard shortcuts
+- `app/(site)/page.tsx` - check section visibility
+
+**Phase 2:**
+- `lib/supabase.ts` - storage helpers
+- `app/cms/components/ImageUploader.tsx` (new)
+- `app/cms/components/ImagePicker.tsx` (new)
+- Various editor pages - replace URL inputs
+
+**Phase 3:**
+- `app/cms/hooks/useUndoRedo.ts` (new)
+- Various editor pages - add SEO fields
+
+**Phase 4:**
+- `app/api/ai/suggest/route.ts` (new)
+- `.env.local` - add `GEMINI_API_KEY`
 
 ---
 
 ## Verification
-
-- [x] Run `npm run build` after each group
-- [x] All builds passed successfully
+- [x] Run `npm run build` after each phase
+- [ ] Test in browser
+- [ ] No regressions
 
 ---
 
-## Review
+## Review - Phase 1 Complete
 
 ### Summary of Changes
-- Created 8 new CMS pages for text editability
-- Added new type definitions and defaults to lib/cms.ts
-- Updated frontend components to use CMS data:
-  - Articles page (listing + individual)
-  - Videos page
-  - FSL page (all section titles)
-  - Course page (extra text fields)
-  - ROI Calculator (labels, headings, descriptions)
 
-### New CMS Pages Created
-1. `/cms/homepage/services-header/` - Services section header
-2. `/cms/homepage/process-header/` - Process section header
-3. `/cms/homepage/faq-header/` - FAQ section header
-4. `/cms/settings/navigation/` - Navigation & branding (CMS infrastructure ready)
-5. `/cms/articles-page/` - Articles page text
-6. `/cms/fsl-page/sections/` - FSL page section titles
-7. `/cms/course-page/extras/` - Course page extra text
-8. `/cms/tools/roi-calculator-text/` - ROI Calculator labels
+**Device Preview Toggle:**
+- Created `app/cms/components/DevicePreviewToggle.tsx` — 3 device buttons with SVG icons
+- Integrated in SectionEditor.tsx — manages state, controls iframe width
+- Added styles to cms.css — button styling, centered iframe with shadow
+- Persists selection in localStorage (`cms-preview-device`)
 
-### Files Modified
-- `lib/cms.ts` - Added types and defaults for all new CMS sections
-- `app/cms/homepage/page.tsx` - Added links to section headers
-- `app/cms/settings/page.tsx` - Added navigation link
-- `app/cms/fsl-page/page.tsx` - Added sections link
-- `app/cms/tools/page.tsx` - Added ROI calculator text link
-- `app/(site)/articles/page.tsx` - Uses CMS articlesPage data
-- `app/(site)/articles/[slug]/page.tsx` - Uses CMS articlesPage data
-- `app/(site)/videos/page.tsx` - Uses individualVideosHeadline
-- `app/(site)/fractional-sales-leader/page.tsx` - Uses 7 CMS section titles
-- `app/(site)/course/page.tsx` - Uses 6 new CMS text fields
-- `app/(site)/tools/roi-calculator/page.tsx` - Passes text to calculator
-- `components/ROICalculator.tsx` - Accepts text props from CMS
+**Section Visibility Toggle:**
+- Created `app/cms/components/VisibilityToggle.tsx` — toggle with eye icons + status badges
+- Integrated in SectionEditor.tsx — visibility saved with content
+- Updated `app/(site)/page.tsx` — checks `visible !== false` before rendering each section
+- Added styles to cms.css — toggle styling matching dark theme
 
-### Known Limitations
-- Navigation text is in CMS but Header.tsx/FloatingNavWrapper not wired up (complex nested structure)
-- Input field labels in ROI Calculator remain hardcoded (technical, rarely changed)
+**Editor Confidence Indicators:**
+- Added "Last saved at X" timestamp with relative time formatting
+- Added Cmd+S / Ctrl+S keyboard shortcut to trigger save
+- Added beforeunload warning for unsaved changes (dirty state tracking)
+- Added visual feedback: pulsing save button, green checkmark animation on success
+- Added styles to cms.css — save states, animations
 
-### No New Dependencies
-All changes use existing patterns and libraries.
+### New Dependencies
+None
+
+### Environment Variables
+None
