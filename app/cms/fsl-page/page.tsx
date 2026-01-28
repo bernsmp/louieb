@@ -30,6 +30,8 @@ export default function EditFSLPage() {
         description="SEO landing page content for the /fractional-sales-leader route."
         backHref="/cms"
         backLabel="Back to Dashboard"
+        previewUrl="/cms/preview/fsl-page"
+        seoPreview={{ url: 'louiebernstein.com/fractional-sales-leader' }}
         fields={[
         {
           name: 'headline',

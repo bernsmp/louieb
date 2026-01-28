@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { DevicePreviewToggle, type DeviceType } from './DevicePreviewToggle'
 import { VisibilityToggle } from './VisibilityToggle'
 import { ImageUploader } from './ImageUploader'
+import { SEOPreviewCard } from './SEOPreviewCard'
 import { useUndoRedo } from '../hooks/useUndoRedo'
 
 // Helper to format relative time
@@ -50,6 +51,12 @@ interface SectionEditorProps {
   backLabel: string
   fields: FieldConfig[]
   previewUrl?: string // Optional preview route URL
+  seoPreview?: {
+    url: string // The page URL for SEO preview
+    titleField?: string // Field name for SEO title (default: 'seoTitle')
+    descriptionField?: string // Field name for SEO description (default: 'seoDescription')
+    imageField?: string // Field name for SEO image (default: 'seoImage')
+  }
 }
 
 export function SectionEditor({
@@ -60,6 +67,7 @@ export function SectionEditor({
   backLabel,
   fields,
   previewUrl,
+  seoPreview,
 }: SectionEditorProps) {
   const router = useRouter()
   const [loading, setLoading] = useState(true)
@@ -504,6 +512,16 @@ export function SectionEditor({
               </div>
             )
           })}
+
+          {/* SEO Preview Card */}
+          {seoPreview && (
+            <SEOPreviewCard
+              title={(content[seoPreview.titleField || 'seoTitle'] as string) || ''}
+              description={(content[seoPreview.descriptionField || 'seoDescription'] as string) || ''}
+              url={seoPreview.url}
+              image={(content[seoPreview.imageField || 'seoImage'] as string) || undefined}
+            />
+          )}
         </div>
 
         {/* Preview Panel */}

@@ -39,6 +39,7 @@ export default function EditCoursePage() {
         backHref="/cms"
         backLabel="Back to Dashboard"
         previewUrl="/cms/preview/course"
+        seoPreview={{ url: 'louiebernstein.com/course' }}
         fields={[
         {
           name: 'headline',

@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ImageUploader } from '../components/ImageUploader'
+import { SEOPreviewCard } from '../components/SEOPreviewCard'
 
 interface VideosPageContent {
   headline: string
@@ -443,6 +444,14 @@ export default function EditVideosPage() {
               />
               <p className="form-hint">Image shown when page is shared on social media (og:image). Recommended: 1200x630px</p>
             </div>
+
+            {/* SEO Preview Card */}
+            <SEOPreviewCard
+              title={content.seoTitle || ''}
+              description={content.seoDescription || ''}
+              url="louiebernstein.com/videos"
+              image={content.seoImage || undefined}
+            />
           </div>
         </div>
 
