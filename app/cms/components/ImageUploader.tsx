@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useRef, useCallback } from 'react'
-import { uploadImage } from '@/lib/supabase'
 
 interface ImageUploaderProps {
   value?: string  // Current image URL
@@ -53,9 +52,24 @@ export function ImageUploader({
         setUploadProgress(prev => Math.min(prev + 10, 90))
       }, 100)
 
-      const result = await uploadImage(file, folder)
+      // Upload via API route (uses service role key)
+      const formData = new FormData()
+      formData.append('file', file)
+      formData.append('folder', folder)
+
+      const response = await fetch('/api/cms/upload', {
+        method: 'POST',
+        body: formData,
+      })
 
       clearInterval(progressInterval)
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Upload failed')
+      }
+
+      const result = await response.json()
       setUploadProgress(100)
 
       if (result?.url) {
@@ -68,7 +82,7 @@ export function ImageUploader({
       }
     } catch (err) {
       console.error('Upload error:', err)
-      setError('Upload failed. Please try again.')
+      setError(err instanceof Error ? err.message : 'Upload failed. Please try again.')
     } finally {
       setIsUploading(false)
     }

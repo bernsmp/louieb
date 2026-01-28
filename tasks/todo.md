@@ -92,8 +92,8 @@ Smart suggestions via OpenRouter (Gemini Flash for vision, Haiku for text).
 ### 10. Preview Enhancements
 Make previews more useful.
 
-- [ ] 10.1 SEO preview card (how it looks in Google/social)
-- [ ] 10.2 Side-by-side before/after comparison
+- [x] 10.1 SEO preview card (how it looks in Google/social)
+- [ ] 10.2 Side-by-side before/after comparison (skipping - low priority)
 
 ---
 
@@ -275,10 +275,20 @@ None
 
 ## Bug Fixes - January 2026
 
-### Issue 1: FSL Page Missing Preview Panel
+### Issue 1: FSL Page Missing Preview Panel ✅
 The FSL page editor doesn't show a preview because `previewUrl` prop isn't passed.
 
-- [ ] Add preview route for FSL page or remove preview expectation
+- [x] Create FSL preview route (`app/cms/preview/fsl-page/route.tsx`)
+- [x] Add previewUrl prop to FSL page editor
+- [ ] Test FSL preview works (manual verification needed)
+
+### Issue 4: SEO Preview Card (Phase 4, 10.1) ✅
+Show how page looks in Google/social when sharing.
+
+- [x] Create SEO preview card component (`app/cms/components/SEOPreviewCard.tsx`)
+- [x] Add SEO preview to FSL page editor
+- [x] Add SEO preview to Course page editor
+- [x] Add SEO preview to Videos page editor
 
 ### Issue 2: Hero Description Doesn't Preserve Line Breaks ✅
 Double enters (blank lines) are collapsed because no `whitespace-pre-line` CSS.
