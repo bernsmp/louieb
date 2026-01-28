@@ -1,0 +1,63 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title:
+    "Fractional Sales Leader vs Consultant: Key Differences | Louie Bernstein",
+  description:
+    "Understand the critical differences between a Fractional Sales Leader and a Consultant. Learn which option is right for your business growth, with side-by-side comparisons of scope, involvement, and impact.",
+  keywords: [
+    "fractional sales leader vs consultant",
+    "fractional sales leader",
+    "sales consultant",
+    "fractional VP of sales",
+    "sales leadership comparison",
+    "hire fractional sales leader",
+    "sales consultant vs fractional",
+    "fractional executive",
+    "sales leadership options",
+    "outsourced sales leadership",
+    "part-time sales leader",
+    "sales consultant comparison",
+    "fractional CSO",
+    "fractional chief sales officer",
+  ],
+  openGraph: {
+    title: "Fractional Sales Leader vs Consultant: Key Differences Explained",
+    description:
+      "Side-by-side comparison of Fractional Sales Leaders and Consultants. Discover which is right for your business growth strategy.",
+    type: "article",
+    url: "https://louiebernstein.com/fractional-sales-leader-vs-consultant",
+    images: [
+      {
+        url: "https://louiebernstein.com/images/fsl-vs-consultant-og.png",
+        width: 1200,
+        height: 630,
+        alt: "Fractional Sales Leader vs Consultant Comparison",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Fractional Sales Leader vs Consultant: Key Differences",
+    description:
+      "Understand the critical differences between hiring a Fractional Sales Leader and a Consultant for your sales growth.",
+  },
+  alternates: {
+    canonical: "https://louiebernstein.com/fractional-sales-leader-vs-consultant",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    "max-snippet": -1,
+    "max-image-preview": "large",
+    "max-video-preview": -1,
+  },
+};
+
+export default function FractionalSalesLeaderVsConsultantLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <>{children}</>;
+}
