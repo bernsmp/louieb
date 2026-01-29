@@ -133,7 +133,7 @@ const itemVariants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: [0.22, 1, 0.36, 1], // Custom easing for premium feel
+      ease: [0.22, 1, 0.36, 1] as const, // Custom easing for premium feel
     },
   },
 };
@@ -145,7 +145,7 @@ const wordVariants = {
     y: 0,
     transition: {
       duration: 0.5,
-      ease: [0.22, 1, 0.36, 1],
+      ease: [0.22, 1, 0.36, 1] as const,
     },
   },
 };
@@ -398,7 +398,7 @@ export default function FractionalSalesLeaderVsConsultantPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
               className="text-center"
             >
               <p className="text-lg leading-relaxed text-neutral-700 md:text-xl">
@@ -422,7 +422,7 @@ export default function FractionalSalesLeaderVsConsultantPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
               className="text-center mb-16"
             >
               <h2 className="text-3xl font-bold text-neutral-900 md:text-4xl lg:text-5xl tracking-tight">
@@ -469,7 +469,7 @@ export default function FractionalSalesLeaderVsConsultantPage() {
                   transition={{ 
                     delay: index * 0.03,
                     duration: 0.6,
-                    ease: [0.22, 1, 0.36, 1]
+                    ease: [0.22, 1, 0.36, 1] as const
                   }}
                   className="group"
                 >
@@ -572,7 +572,7 @@ export default function FractionalSalesLeaderVsConsultantPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
               className="text-center mb-16"
             >
               <h2 className="text-3xl font-bold text-neutral-900 md:text-4xl lg:text-5xl tracking-tight">
@@ -589,8 +589,8 @@ export default function FractionalSalesLeaderVsConsultantPage() {
                 whileHover={{ y: -8, scale: 1.02 }}
                 transition={{ 
                   duration: 0.6,
-                  ease: [0.22, 1, 0.36, 1],
-                  hover: { type: "spring", stiffness: 300, damping: 20 }
+                  ease: [0.22, 1, 0.36, 1] as const,
+                  layout: { type: "spring", stiffness: 300, damping: 20 }
                 }}
                 className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0966c2] to-[#0855a3] p-8 md:p-10 text-white shadow-2xl cursor-pointer group"
               >
@@ -676,8 +676,8 @@ export default function FractionalSalesLeaderVsConsultantPage() {
                 whileHover={{ y: -4 }}
                 transition={{ 
                   duration: 0.6,
-                  ease: [0.22, 1, 0.36, 1],
-                  hover: { type: "spring", stiffness: 300, damping: 20 }
+                  ease: [0.22, 1, 0.36, 1] as const,
+                  layout: { type: "spring", stiffness: 300, damping: 20 }
                 }}
                 className="relative overflow-hidden rounded-3xl bg-white border-2 border-neutral-200 p-8 md:p-10 shadow-lg group"
               >
