@@ -14,11 +14,11 @@ export function FloatingNavWrapper() {
           icon: <Home className="h-4 w-4 text-neutral-500 dark:text-white" />,
         },
         {
-          name: "Learn",
-          icon: <BookOpen className="h-4 w-4 text-neutral-500 dark:text-white" />,
+          name: "Fractional Sales Leader",
+          icon: <UserCheck className="h-4 w-4 text-neutral-500 dark:text-white" />,
           children: [
             {
-              name: "Fractional Sales Leader",
+              name: "What is FSL?",
               link: "/fractional-sales-leader",
               icon: <UserCheck className="h-4 w-4 text-neutral-500 dark:text-white" />,
             },
@@ -27,6 +27,12 @@ export function FloatingNavWrapper() {
               link: "/fractional-sales-leader-vs-consultant",
               icon: <Scale className="h-4 w-4 text-neutral-500 dark:text-white" />,
             },
+          ],
+        },
+        {
+          name: "Learn",
+          icon: <BookOpen className="h-4 w-4 text-neutral-500 dark:text-white" />,
+          children: [
             {
               name: "Articles",
               link: "/articles",
