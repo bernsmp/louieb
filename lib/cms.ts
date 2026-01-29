@@ -310,6 +310,52 @@ interface SiteSettings {
     // Disclaimer
     disclaimerText: string
   }
+  fslVsConsultantPage: {
+    hero: {
+      badgeText: string
+      badgeSubtext: string
+      headline: string
+      headlineAccent: string
+      description: string
+      ctaPrimary: string
+      ctaSecondary: string
+      imageAlt: string
+    }
+    introduction: {
+      text: string
+    }
+    comparison: {
+      headline: string
+      subheadline: string
+      points: Array<{
+        category: string
+        fsl: string
+        consultant: string
+      }>
+    }
+    summary: {
+      headline: string
+      fslCard: {
+        badge: string
+        headline: string
+        description: string
+        benefits: string[]
+        ctaText: string
+      }
+      consultantCard: {
+        badge: string
+        headline: string
+        description: string
+        benefits: string[]
+      }
+    }
+    finalCta: {
+      headline: string
+      description: string
+      ctaPrimary: string
+      ctaSecondary: string
+    }
+  }
 }
 
 // ============================================================================
@@ -614,6 +660,63 @@ const defaultSettings: SiteSettings = {
     downloadDescription: 'Compare against Founder-Led Sales, Hiring a Sales VP, and hiring a Fractional Sales Leader.',
     // Disclaimer
     disclaimerText: 'Note: This calculator shows top-line impact only. Gross and net profit are not calculated.',
+  },
+  fslVsConsultantPage: {
+    hero: {
+      badgeText: 'Making the Right Choice',
+      badgeSubtext: 'Sales Leadership Guide',
+      headline: 'Fractional Sales Leader',
+      headlineAccent: 'vs Consultant',
+      description: 'Understanding the key differences can make or break your sales growth strategy',
+      ctaPrimary: 'See the Differences',
+      ctaSecondary: 'Schedule a Discussion',
+      imageAlt: 'Professional sales leadership team collaboration',
+    },
+    introduction: {
+      text: 'These distinctions are based on common practices in business development, sales strategy, and organizational consulting. Note that these roles can sometimes overlap or vary by industry, but the core differences highlight their scope, involvement, and impact.',
+    },
+    comparison: {
+      headline: 'The Critical Differences',
+      subheadline: 'A side-by-side comparison of what you actually get',
+      points: [
+        { category: 'Discovery', fsl: 'Starts with a Sales Audit to understand the details', consultant: 'Speaks mostly with the CEO' },
+        { category: 'Process Building', fsl: 'Builds Sales Processes and Systems', consultant: 'Offers advice' },
+        { category: 'Team Management', fsl: 'Manages the Sales Team', consultant: 'Rarely manages teams' },
+        { category: 'Engagement', fsl: 'Embedded in the business', consultant: 'Project based' },
+        { category: 'Pipeline Assessment', fsl: 'Creates a sales pipeline based on reality', consultant: 'Takes the pipeline at face value' },
+        { category: 'Leadership Role', fsl: 'Acts as part of leadership', consultant: 'Advice from the outside' },
+        { category: 'Accountability', fsl: 'Accountable for results', consultant: 'Only accountable for the quality of their advice' },
+        { category: 'Hiring Support', fsl: 'Helps in interviewing and hiring the sales team', consultant: 'Very rarely interviews any salespeople' },
+        { category: 'Approach', fsl: 'Balances strategy with operational tactics', consultant: 'More strategy providing one-off expertise' },
+        { category: 'Involvement', fsl: 'Front line activities with the salespeople', consultant: 'Hands off' },
+        { category: 'Metrics', fsl: 'Develops relevant KPIs and metrics', consultant: 'Gives advice on what other companies do' },
+        { category: 'Daily Operations', fsl: 'Implements a daily sales cadence', consultant: 'Does not get that granular. More high level' },
+        { category: 'Tools & Technology', fsl: 'Familiar with most CRMs, sales tools including AI', consultant: 'Book knowledge' },
+        { category: 'Growth Systems', fsl: 'Builds the Sales Playbook for consistent growth', consultant: 'Uses existing company knowledge they uncover' },
+      ],
+    },
+    summary: {
+      headline: 'The Bottom Line',
+      fslCard: {
+        badge: 'Recommended',
+        headline: 'Hire a Fractional Sales Leader',
+        description: 'If you need someone to run sales while you scale or search for a full-time executive.',
+        benefits: ['Embedded leadership', 'Accountable for results', 'Builds systems that scale'],
+        ctaText: 'Talk to a Fractional Sales Leader',
+      },
+      consultantCard: {
+        badge: 'Alternative',
+        headline: 'Hire a Consultant',
+        description: 'If you need specialized insight, market validation, or a roadmap that your existing team can execute.',
+        benefits: ['External perspective', 'Project-based engagement', 'Strategic advice'],
+      },
+    },
+    finalCta: {
+      headline: 'Ready to Accelerate Your Sales?',
+      description: "Let's discuss whether a Fractional Sales Leader is the right fit for your business.",
+      ctaPrimary: 'Schedule a Free Consultation',
+      ctaSecondary: 'Learn About FSL',
+    },
   },
 }
 
@@ -1027,6 +1130,7 @@ function mergeSettings(
     navigation: deepMerge(defaults.navigation, (siteContent.navigation || {}) as Partial<SiteSettings['navigation']>),
     articlesPage: deepMerge(defaults.articlesPage, (siteContent.articlesPage || {}) as Partial<SiteSettings['articlesPage']>),
     roiCalculatorText: deepMerge(defaults.roiCalculatorText, (siteContent.roiCalculatorText || {}) as Partial<SiteSettings['roiCalculatorText']>),
+    fslVsConsultantPage: deepMerge(defaults.fslVsConsultantPage, (siteContent.fslVsConsultantPage || {}) as Partial<SiteSettings['fslVsConsultantPage']>),
   }
 }
 
@@ -1191,6 +1295,11 @@ export async function getArticlesPageData() {
 export async function getROICalculatorTextData() {
   const settings = await getSiteSettings()
   return settings.roiCalculatorText
+}
+
+export async function getFSLVsConsultantPageData() {
+  const settings = await getSiteSettings()
+  return settings.fslVsConsultantPage
 }
 
 // ============================================================================

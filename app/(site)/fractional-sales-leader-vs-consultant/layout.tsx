@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { getFSLVsConsultantPageData } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title:
@@ -54,10 +55,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function FractionalSalesLeaderVsConsultantLayout({
+export default async function FractionalSalesLeaderVsConsultantLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // Fetch CMS data server-side and pass to client component via context or props
+  // The page component will handle fetching via useEffect for now
   return <>{children}</>;
 }

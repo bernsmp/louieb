@@ -245,6 +245,17 @@ function IntroSection({ pageData }: { pageData: PageData }) {
           <p className="mt-3 text-sm text-neutral-500">
             {pageData.introCtaNote}
           </p>
+          <div className="mt-8 pt-8 border-t border-neutral-200">
+            <p className="text-sm text-neutral-600 mb-4">
+              Not sure if a Fractional Sales Leader is right for you?
+            </p>
+            <Link
+              href="/fractional-sales-leader-vs-consultant"
+              className="inline-block rounded-lg border-2 border-[#0966c2] px-6 py-3 text-base font-semibold text-[#0966c2] transition-all hover:bg-[#0966c2] hover:text-white"
+            >
+              Compare: FSL vs Consultant →
+            </Link>
+          </div>
         </div>
       </div>
     </section>
