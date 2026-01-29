@@ -3,6 +3,7 @@
 import { FloatingNav } from "@/components/ui/floating-navbar";
 import { Home, FileText, Video, Mail, Wrench, BookOpen, GraduationCap, UserCheck, Scale } from "lucide-react";
 
+// Navigation menu items - includes FSL vs Consultant comparison page
 export function FloatingNavWrapper() {
   return (
     <FloatingNav
