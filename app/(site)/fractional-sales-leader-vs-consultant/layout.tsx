@@ -28,11 +28,13 @@ export const metadata: Metadata = {
       "Side-by-side comparison of Fractional Sales Leaders and Consultants. Discover which is right for your business growth strategy.",
     type: "article",
     url: "https://louiebernstein.com/fractional-sales-leader-vs-consultant",
+    siteName: "Louie Bernstein",
+    locale: "en_US",
     images: [
       {
-        url: "https://louiebernstein.com/images/fsl-vs-consultant-og.png",
-        width: 1200,
-        height: 630,
+        url: "https://louiebernstein.com/images/fractional-sales-leader-hero.png",
+        width: 1920,
+        height: 1080,
         alt: "Fractional Sales Leader vs Consultant Comparison",
       },
     ],
@@ -42,6 +44,7 @@ export const metadata: Metadata = {
     title: "Fractional Sales Leader vs Consultant: Key Differences",
     description:
       "Understand the critical differences between hiring a Fractional Sales Leader and a Consultant for your sales growth.",
+    images: ["https://louiebernstein.com/images/fractional-sales-leader-hero.png"],
   },
   alternates: {
     canonical: "https://louiebernstein.com/fractional-sales-leader-vs-consultant",
