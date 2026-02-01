@@ -309,3 +309,51 @@ lsof -ti :3000 | xargs kill
 cd "/Users/maxb/Desktop/Vibe Projects/louieb"
 npm run dev
 ```
+
+---
+
+## February 2026 - RankScale Feedback Fixes
+
+### Issue 5: Add Privacy Policy Page ✅
+RankScale report flagged "lack of explicit legal information" and recommended adding a privacy policy.
+
+- [x] 5.1 Create `/privacy` page with standard privacy policy content
+- [x] 5.2 Add "Privacy Policy" link to footer (Quick Links section)
+- [x] 5.3 Verify page accessible and renders correctly
+
+### Issue 6: Fix Duplicate FAQPage Structured Data ✅
+Google Search Console reports "Duplicate field FAQPage" - caused by:
+- Global layout (`app/(site)/layout.tsx` lines 100-161) has FAQPage schema
+- FSL page (`app/(site)/fractional-sales-leader/page.tsx` lines 75-88) has its own FAQPage schema
+- When visiting FSL page, both schemas appear = duplicate
+
+**Fix:** Remove the global FAQ schema from layout.tsx. Each page should have its own contextual FAQ schema if needed.
+
+- [x] 6.1 Remove FAQPage schema from `app/(site)/layout.tsx`
+- [x] 6.2 Verify FSL page still has its own FAQ schema working
+- [x] 6.3 Test no duplicate FAQPage errors
+
+---
+
+## Review - February 2026 Fixes
+
+### Summary of Changes
+
+**Privacy Policy Page:**
+- Created `app/(site)/privacy/page.tsx` with standard privacy policy content
+- Covers: information collection, cookies, third-party services, user rights, contact info
+- Added SEO metadata (title, description)
+
+**Footer Update:**
+- Added "Privacy Policy" link to Quick Links section in `components/Footer.tsx`
+
+**Duplicate FAQPage Fix:**
+- Removed global FAQPage schema from `app/(site)/layout.tsx` (was ~60 lines)
+- FSL page (`/fractional-sales-leader`) retains its own contextual FAQ schema
+- No more duplicate structured data on any page
+
+### New Dependencies
+None
+
+### Environment Variables
+None

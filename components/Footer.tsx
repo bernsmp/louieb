@@ -68,6 +68,11 @@ export function Footer({
                   Newsletter
                 </Link>
               </li>
+              <li>
+                <Link href="/privacy" className="font-sans text-base text-muted-foreground transition-colors hover:text-primary">
+                  Privacy Policy
+                </Link>
+              </li>
             </ul>
           </div>
 
