@@ -601,7 +601,7 @@ const defaultSettings: SiteSettings = {
     featuredPostsHeadline: 'Featured Posts',
     allPostsHeadline: 'All Posts',
     linkedInCtaText: 'Follow on LinkedIn',
-    linkedInUrl: 'https://www.linkedin.com/in/louiebernstein/',
+    linkedInUrl: 'https://www.linkedin.com/in/sales-processes/',
     postPageBackLinkText: 'All Posts',
     postPageReadOnLinkedInText: 'Read on LinkedIn',
     postPageMorePostsHeadline: 'More Posts',
