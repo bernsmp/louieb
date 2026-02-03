@@ -7,13 +7,14 @@
 
 import { cache } from 'react'
 import { supabaseAdmin, isSupabaseConfigured } from './supabase'
-import type { 
-  SiteContentRow, 
-  TestimonialRow, 
-  FAQItemRow, 
+import type {
+  SiteContentRow,
+  TestimonialRow,
+  FAQItemRow,
   VideoRow,
   ServiceRow,
-  ProcessStepRow
+  ProcessStepRow,
+  BlogPostRow
 } from './supabase'
 
 // Feature flag to enable/disable Supabase CMS
@@ -58,6 +59,18 @@ interface VideoItem {
   videoId: string
   title: string
   description?: string
+}
+
+interface BlogPost {
+  title: string
+  excerpt: string
+  content: string
+  linkedInUrl: string
+  publishedDate: string
+  image?: string
+  imageAlt?: string
+  author?: string
+  tags?: string[]
 }
 
 interface CourseModule {
@@ -232,6 +245,19 @@ interface SiteSettings {
     videoPageBackLinkText: string
     videoPageWatchButtonText: string
     videoPageMoreVideosHeadline: string
+  }
+  blogPage: {
+    headline: string
+    subheadline: string
+    featuredPosts: BlogPost[]
+    featuredPostsHeadline: string
+    allPostsHeadline: string
+    linkedInCtaText: string
+    linkedInUrl: string
+    // Individual post page settings
+    postPageBackLinkText: string
+    postPageReadOnLinkedInText: string
+    postPageMorePostsHeadline: string
   }
   course: {
     playlistId: string
@@ -567,6 +593,47 @@ const defaultSettings: SiteSettings = {
       { videoId: 'LgaJZ4R6Y-4', title: 'My 1st Sales Hire Mistake', description: 'Avoid common hiring pitfalls. Louie shares his personal experience with early sales hires and what he learned.' },
       { videoId: '40BopNISisE', title: 'Build The System Before The Team', description: "Why you need a sales system before a sales team. A fractional sales leader's perspective on sustainable growth." },
       { videoId: 'epPZ4qZBo5I', title: 'The Secret Email Step That Gets Replies', description: 'A tactical email outreach tip to increase your response rates immediately. Simple but effective.' },
+    ],
+  },
+  blogPage: {
+    headline: 'Sales Insights',
+    subheadline: 'Lessons from 50 years in sales, shared on LinkedIn',
+    featuredPostsHeadline: 'Featured Posts',
+    allPostsHeadline: 'All Posts',
+    linkedInCtaText: 'Follow on LinkedIn',
+    linkedInUrl: 'https://www.linkedin.com/in/louiebernstein/',
+    postPageBackLinkText: 'All Posts',
+    postPageReadOnLinkedInText: 'Read on LinkedIn',
+    postPageMorePostsHeadline: 'More Posts',
+    featuredPosts: [
+      {
+        title: "Why Buyers Really Say No (It's Not What You Think)",
+        excerpt: "Risk, including losing a job, is the biggest issue when it comes to buyers giving the go ahead. Not features. Not benefits. Their livelihood.",
+        content: `Most buyers, sometimes even the CEO, only want one thing before they buy from you:
+
+They want to make sure their decision will not result with someone else sitting in "their chair" at the office when they show up in the morning. In office or virtual.
+
+Risk, including losing a job, is the biggest issue when it comes to buyers giving the go ahead to purchase your product.
+Not features.
+Not benefits.
+Their livelihood.
+Their career.
+
+Sellers, particularly founder-led sellers, ignore this at your own risk.
+
+Companies will often buy a less capable product for a more secure outcome.
+After 50 years in business I have seen this hundreds of times.
+
+Whatever guarantees, warranties, testimonials, references, etc. you have, make sure they are part of your value proposition.
+
+This is trust at its most basic and important level.
+
+Have you witnessed this?`,
+        linkedInUrl: 'https://www.linkedin.com/in/louiebernstein/',
+        publishedDate: '2025-01-15',
+        author: 'Louie Bernstein',
+        tags: ['sales psychology', 'buyer behavior', 'trust'],
+      },
     ],
   },
   course: {
@@ -1015,6 +1082,42 @@ async function fetchProcessStepsFromSupabase(): Promise<ProcessStep[]> {
   }
 }
 
+/**
+ * Fetch blog posts from Supabase
+ */
+async function fetchBlogPostsFromSupabase(): Promise<BlogPost[]> {
+  if (!USE_SUPABASE_CMS || !isSupabaseConfigured || !supabaseAdmin) {
+    return []
+  }
+
+  try {
+    const { data, error } = await supabaseAdmin
+      .from('blog_posts')
+      .select('*')
+      .order('display_order', { ascending: true })
+
+    if (error) {
+      console.warn('[CMS] Error fetching blog posts:', error.message)
+      return []
+    }
+
+    return (data as BlogPostRow[]).map(row => ({
+      title: row.title,
+      excerpt: row.excerpt,
+      content: row.content,
+      linkedInUrl: row.linkedin_url,
+      publishedDate: row.published_date,
+      image: row.image || undefined,
+      imageAlt: row.image_alt || undefined,
+      author: row.author || undefined,
+      tags: row.tags || undefined,
+    }))
+  } catch (error) {
+    console.warn('[CMS] Failed to fetch blog posts:', error)
+    return []
+  }
+}
+
 // ============================================================================
 // MERGE SETTINGS
 // ============================================================================
@@ -1121,6 +1224,7 @@ function mergeSettings(
       ...deepMerge(defaults.videosPage, (siteContent.videosPage || {}) as Partial<SiteSettings['videosPage']>),
       featuredVideos: featuredVideos.length > 0 ? featuredVideos : defaults.videosPage.featuredVideos,
     },
+    blogPage: deepMerge(defaults.blogPage, (siteContent.blogPage || {}) as Partial<SiteSettings['blogPage']>),
     course: deepMerge(defaults.course, (siteContent.course || {}) as Partial<SiteSettings['course']>),
     coursePage: {
       ...deepMerge(defaults.coursePage, (siteContent.coursePage || {}) as Partial<SiteSettings['coursePage']>),
@@ -1446,6 +1550,96 @@ export async function getFeaturedShortsWithSlugs(): Promise<VideoWithSlug[]> {
 }
 
 // ============================================================================
+// BLOG PAGE DATA FETCHING
+// ============================================================================
+
+interface BlogPostWithSlug extends BlogPost {
+  slug: string
+}
+
+/**
+ * Get blog page data (headline, subheadline, etc.)
+ */
+export async function getBlogPageData() {
+  const settings = await getSiteSettings()
+  return settings.blogPage
+}
+
+/**
+ * Get all blog posts with their slugs
+ */
+export async function getAllBlogPostsWithSlugs(): Promise<BlogPostWithSlug[]> {
+  // Try fetching from Supabase first
+  const postsFromDB = await fetchBlogPostsFromSupabase()
+
+  // If we got posts from Supabase, use them
+  if (postsFromDB.length > 0) {
+    return postsFromDB.map((post) => ({
+      ...post,
+      slug: slugify(post.title),
+    }))
+  }
+
+  // Fallback to defaults
+  const settings = await getSiteSettings()
+  return settings.blogPage.featuredPosts.map((post) => ({
+    ...post,
+    slug: slugify(post.title),
+  }))
+}
+
+/**
+ * Get a single blog post by its slug
+ */
+export async function getBlogPostBySlug(slug: string): Promise<BlogPostWithSlug | null> {
+  const posts = await getAllBlogPostsWithSlugs()
+  return posts.find((post) => post.slug === slug) || null
+}
+
+/**
+ * Get featured blog posts (max 4)
+ */
+export async function getFeaturedBlogPosts(): Promise<BlogPostWithSlug[]> {
+  // Try fetching from Supabase first
+  if (USE_SUPABASE_CMS && isSupabaseConfigured && supabaseAdmin) {
+    try {
+      const { data, error } = await supabaseAdmin
+        .from('blog_posts')
+        .select('*')
+        .eq('is_featured', true)
+        .order('display_order', { ascending: true })
+        .limit(4)
+
+      if (error) {
+        console.warn('[CMS] Error fetching featured blog posts:', error.message)
+      } else if (data && data.length > 0) {
+        return (data as BlogPostRow[]).map(row => ({
+          title: row.title,
+          excerpt: row.excerpt,
+          content: row.content,
+          linkedInUrl: row.linkedin_url,
+          publishedDate: row.published_date,
+          image: row.image || undefined,
+          imageAlt: row.image_alt || undefined,
+          author: row.author || undefined,
+          tags: row.tags || undefined,
+          slug: slugify(row.title),
+        }))
+      }
+    } catch (error) {
+      console.warn('[CMS] Failed to fetch featured blog posts:', error)
+    }
+  }
+
+  // Fallback to defaults
+  const settings = await getSiteSettings()
+  return settings.blogPage.featuredPosts.slice(0, 4).map((post) => ({
+    ...post,
+    slug: slugify(post.title),
+  }))
+}
+
+// ============================================================================
 // SEO DATA FETCHING
 // ============================================================================
 
@@ -1520,5 +1714,5 @@ export const getVideosPageSEO = cache(async (): Promise<PageSEO> => {
 })
 
 // Re-export types for use in components
-export type { SiteSettings, Testimonial, FAQItem, VideoItem, ServiceItem, ProcessStep, PageLayout, PageSEO }
+export type { SiteSettings, Testimonial, FAQItem, VideoItem, BlogPost, ServiceItem, ProcessStep, PageLayout, PageSEO }
 

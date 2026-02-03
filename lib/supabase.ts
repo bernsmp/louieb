@@ -116,6 +116,23 @@ export interface ProcessStepRow {
   updated_at: string
 }
 
+export interface BlogPostRow {
+  id: string
+  title: string
+  excerpt: string
+  content: string
+  linkedin_url: string
+  published_date: string
+  image: string | null
+  image_alt: string | null
+  author: string | null
+  tags: string[] | null
+  is_featured: boolean
+  display_order: number
+  created_at: string
+  updated_at: string
+}
+
 /**
  * Upload an image to Supabase Storage
  * @param file - The file to upload

@@ -1,359 +1,92 @@
-# CMS Enhancement Plan (Revised)
+# Blog Page Implementation
 
 ## Goal
-Make Louie's life easier editing his site. Not building Wix.
+Create a "Blog" page mirroring the Videos page structure, where Louie can showcase LinkedIn posts as blog articles.
 
 ---
 
-## Phase 1 - Essential Polish ✅ COMPLETE
+## Tasks
 
-### 1. Device Preview Toggle ✅
-See mobile/tablet layouts without resizing browser.
+### 1. CMS Data Structure
+- [x] Add `BlogPost` interface to `lib/cms.ts`
+  - `title: string`
+  - `excerpt: string` (short preview text)
+  - `content: string` (full post content, markdown supported)
+  - `linkedInUrl: string` (link to original LinkedIn post)
+  - `publishedDate: string`
+  - `image?: string` (thumbnail/featured image URL)
+  - `imageAlt?: string` (alt text for accessibility)
+  - `author?: string` (defaults to "Louie Bernstein")
+  - `tags?: string[]` (optional categorization)
+- [x] Add `blogPage` settings object to `SiteSettings` interface
+- [x] Add default values for `blogPage` in defaults object
+- [x] Add CMS helper functions:
+  - `getBlogPageData()`
+  - `getAllBlogPostsWithSlugs()`
+  - `getBlogPostBySlug(slug)`
+  - `getFeaturedBlogPosts()` (max 4)
 
-- [x] 1.1 Create `DevicePreviewToggle` component (desktop/tablet/mobile buttons)
-- [x] 1.2 Add to preview panel header
-- [x] 1.3 Control iframe width (desktop: 100%, tablet: 768px, mobile: 375px)
-- [x] 1.4 Persist selection in localStorage
+### 2. Blog Listing Page
+- [x] Create `/app/(site)/blog/page.tsx`
+  - Header section (headline + subheadline)
+  - Featured posts grid (4 cards, similar to video shorts)
+    - Card shows: image thumbnail, title, excerpt, date, "Read More →" link
+  - All posts links section (shows when >4 posts)
+  - "Follow on LinkedIn" CTA button
+  - SEO metadata + structured data (BlogPosting schema)
 
-### 2. Section Visibility Toggle ✅
-Hide sections without deleting content = safe experimentation.
+### 3. Individual Blog Post Page
+- [x] Create `/app/(site)/blog/[slug]/page.tsx`
+  - Back link to `/blog`
+  - Post title (h1)
+  - Published date + author
+  - Tags display
+  - Full content (paragraph rendering)
+  - "Read on LinkedIn" button (links to original)
+  - "More Posts" section at bottom
+  - SEO metadata + BlogPosting schema
 
-- [x] 2.1 Add `visible` boolean to section content in `site_content`
-- [x] 2.2 Create toggle component for section editors
-- [x] 2.3 Update homepage to check visibility before rendering
-- [x] 2.4 Test toggling sections on/off
+### 4. Navigation
+- [x] Add "Blog" to "Learn" dropdown in `components/FloatingNavWrapper.tsx`
+  - Position after "Articles"
+  - Icon: `PenLine` from lucide-react
 
-### 3. Editor Confidence Indicators ✅
-Peace of mind that changes are saved.
-
-- [x] 3.1 Add "Last saved at X" timestamp in editor header
-- [x] 3.2 Add Cmd+S / Ctrl+S keyboard shortcut to save
-- [x] 3.3 Add "Unsaved changes" warning on navigate away
-
----
-
-## Phase 2 - Media Foundation ✅ COMPLETE
-
-### 4. Supabase Storage Setup ✅
-Infrastructure for image uploads.
-
-- [x] 4.1 Create `media` storage bucket in Supabase
-- [x] 4.2 Configure bucket policies (public read, authenticated write)
-- [x] 4.3 Add upload helper functions to `lib/supabase.ts`
-
-### 5. Image Upload Component ✅
-Replace painful URL pasting with drag-and-drop.
-
-- [x] 5.1 Create `ImageUploader` component with drag-and-drop
-- [x] 5.2 Add upload progress indicator
-- [x] 5.3 Show image preview after upload
-- [x] 5.4 Return public URL on success
-
-### 6. Replace URL Inputs with Uploader ✅
-Swap out manual URL paste fields.
-
-- [x] 6.1 Hero section - video thumbnail
-- [x] 6.2 Awards section - awards image
-- [x] 6.3 Testimonials - author photos
-- [x] 6.4 Add "pick from uploaded" modal for reuse
-
----
-
-## Phase 3 - Editor Safety ✅ COMPLETE
-
-### 7. In-Session Undo/Redo ✅
-Recover from typos without page reload. No database needed.
-
-- [x] 7.1 Create `useUndoRedo` hook (state stack, last 20 states)
-- [x] 7.2 Add undo/redo buttons to editor header
-- [x] 7.3 Implement Ctrl+Z / Ctrl+Y keyboard shortcuts
-- [x] 7.4 Show disabled state when nothing to undo/redo
-
-### 8. Per-Page SEO Fields ✅
-Individual pages need their own meta tags.
-
-- [x] 8.1 Add SEO fields (title, description, ogImage) to page content
-- [x] 8.2 Update FSL, Course, Videos page editors
-- [x] 8.3 Wire up page metadata in frontend
+### 5. Sample Content
+- [x] Add first blog post:
+  - **Title:** "Why Buyers Really Say No (It's Not What You Think)"
+  - **Content:** The "risk to their chair" LinkedIn post about job security being the #1 buyer concern
+  - **Image:** Not yet added (uses placeholder gradient)
 
 ---
 
-## Phase 4 - Delighters ✅ COMPLETE
+## File Changes Summary
 
-### 9. AI Content Assistant ✅
-Smart suggestions via OpenRouter (Gemini Flash for vision, Haiku for text).
-
-- [x] 9.1 Add API keys to environment (OPENROUTER_API_KEY)
-- [x] 9.2 Create `/api/ai/suggest` endpoint with model routing
-- [x] 9.3 "Suggest alt text" button for images (Gemini Flash vision)
-- [x] 9.4 "Rewrite headline" button for text fields (Haiku)
-- [x] 9.5 "Generate SEO description" from page content (Haiku)
-
-### 10. Preview Enhancements
-Make previews more useful.
-
-- [x] 10.1 SEO preview card (how it looks in Google/social)
-- [ ] 10.2 Side-by-side before/after comparison (skipping - low priority)
+| File | Action |
+|------|--------|
+| `lib/cms.ts` | Added BlogPost type, blogPage settings, helper functions |
+| `app/(site)/blog/page.tsx` | Created (new file) |
+| `app/(site)/blog/[slug]/page.tsx` | Created (new file) |
+| `components/FloatingNavWrapper.tsx` | Added Blog nav item with PenLine icon |
 
 ---
 
-## Explicitly NOT Building
-
-| Feature | Reason |
-|---------|--------|
-| Draft/publish workflow | Single user, low stakes. Just don't click save. |
-| Version history table | Git + Vercel deployment history already exists |
-| Global style system | Site design is stable, code changes are fine |
-| Page creation from CMS | How often does Louie add pages? Almost never. |
-| Custom CSS injection | Dangerous footgun for non-developers |
-| Role-based permissions | Single user |
-| Image optimization pipeline | Use Vercel Image Optimization (free, automatic) |
-
----
-
-## Files to Create/Modify
-
-**Phase 1:**
-- `app/cms/components/DevicePreviewToggle.tsx` (new)
-- `app/cms/components/VisibilityToggle.tsx` (new)
-- `app/cms/components/EditorHeader.tsx` (new) - last saved, keyboard shortcuts
-- `app/(site)/page.tsx` - check section visibility
-
-**Phase 2:**
-- `lib/supabase.ts` - storage helpers
-- `app/cms/components/ImageUploader.tsx` (new)
-- `app/cms/components/ImagePicker.tsx` (new)
-- Various editor pages - replace URL inputs
-
-**Phase 3:**
-- `app/cms/hooks/useUndoRedo.ts` (new)
-- Various editor pages - add SEO fields
-
-**Phase 4:**
-- `app/api/ai/suggest/route.ts` (new)
-- `.env.local` - add `GEMINI_API_KEY`
-
----
-
-## Verification
-- [x] Run `npm run build` after each phase
-- [x] Test in browser (Playwright verified Phase 1)
-- [x] No regressions (Phase 1)
-
----
-
-## Review - Phase 1 Complete
-
-### Summary of Changes
-
-**Device Preview Toggle:**
-- Created `app/cms/components/DevicePreviewToggle.tsx` — 3 device buttons with SVG icons
-- Integrated in SectionEditor.tsx — manages state, controls iframe width
-- Added styles to cms.css — button styling, centered iframe with shadow
-- Persists selection in localStorage (`cms-preview-device`)
-
-**Section Visibility Toggle:**
-- Created `app/cms/components/VisibilityToggle.tsx` — toggle with eye icons + status badges
-- Integrated in SectionEditor.tsx — visibility saved with content
-- Updated `app/(site)/page.tsx` — checks `visible !== false` before rendering each section
-- Added styles to cms.css — toggle styling matching dark theme
-
-**Editor Confidence Indicators:**
-- Added "Last saved at X" timestamp with relative time formatting
-- Added Cmd+S / Ctrl+S keyboard shortcut to trigger save
-- Added beforeunload warning for unsaved changes (dirty state tracking)
-- Added visual feedback: pulsing save button, green checkmark animation on success
-- Added styles to cms.css — save states, animations
-
-### New Dependencies
-None
-
-### Environment Variables
-None
-
----
-
-## Review - Phase 2 Complete
-
-### Summary of Changes
-
-**Supabase Storage Setup:**
-- Created `supabase/migrations/20240127_create_media_bucket.sql` — bucket creation
-- Created `supabase/migrations/20240127_media_bucket_policies.sql` — RLS policies (public read, auth write/delete)
-- Added `uploadImage()`, `deleteImage()`, `listImages()` helpers to `lib/supabase.ts`
-
-**ImageUploader Component:**
-- Created `app/cms/components/ImageUploader.tsx` — drag-and-drop with progress bar, preview, remove/change buttons
-- 5MB file size limit, image type validation
-- Matches CMS dark theme
-
-**ImagePicker Modal:**
-- Created `app/cms/components/ImagePicker.tsx` — browse previously uploaded images or upload new
-- Grid view with folder filtering
-- Reusable across all image fields
-
-**Integration:**
-- Hero editor (`app/cms/homepage/hero/page.tsx`) — added `videoThumbnail` field with ImageUploader
-- SectionEditor — added `type: 'image'` field support with optional folder
-- Awards (`app/cms/homepage/awards/page.tsx`) — switched from URL input to ImageUploader
-- Testimonials (`app/cms/testimonials/[id]/page.tsx`, `new/page.tsx`) — added author photo upload
-
-### New Dependencies
-None
-
-### Environment Variables
-None
-
-### Setup Required
-Run the SQL migrations in Supabase to create the `media` bucket and policies:
-1. Go to Supabase Dashboard → SQL Editor
-2. Run `supabase/migrations/20240127_create_media_bucket.sql`
-3. Run `supabase/migrations/20240127_media_bucket_policies.sql`
-
----
-
-## Review - Phase 3 Complete
-
-### Summary of Changes
-
-**Undo/Redo System:**
-- Created `app/cms/hooks/useUndoRedo.ts` — state history hook (max 20 states)
-- Integrated into SectionEditor with undo/redo buttons
-- Keyboard shortcuts: Ctrl+Z (undo), Ctrl+Y or Ctrl+Shift+Z (redo)
-- Buttons disabled when nothing to undo/redo
-
-**Per-Page SEO Fields:**
-- Added seoTitle, seoDescription, seoImage fields to:
-  - FSL page editor (`app/cms/fsl-page/page.tsx`)
-  - Course page editor (`app/cms/course/page.tsx`)
-  - Videos page editor (`app/cms/videos/page.tsx`)
-- Created `PageSEO` interface and fetch helpers in `lib/cms.ts`
-- Updated frontend pages to use `generateMetadata()` with CMS values
-- Fallbacks to defaults if SEO fields empty
-
-### New Dependencies
-None
-
-### Environment Variables
-None
-
----
-
-## Review - Phase 4 Complete
-
-### Summary of Changes
-
-**AI Suggest API:**
-- Created `app/api/ai/suggest/route.ts` — routes requests through OpenRouter
-- Supports 3 actions: `alt-text`, `rewrite-headline`, `generate-seo`
-- Uses Gemini 2.0 Flash for vision, Claude 3.5 Haiku for text
-
-**Alt Text Generator:**
-- Added `showAltTextButton` and `onAltTextGenerated` props to ImageUploader
-- Sparkle button appears below uploaded images
-- Generates accessibility-focused alt text
-
-**Headline Rewriter:**
-- Added `aiRewrite` field option to SectionEditor
-- Purple "✨ AI Rewrite" button appears next to text fields
-- Shows suggestion in popover, user can apply or dismiss
-- Enabled on Value Proposition and About sections
-
-**SEO Description Generator:**
-- Added `aiGenerate` field option to SectionEditor
-- Green "AI Generate" button on SEO description textareas
-- Collects page context (title, headline, description) for better suggestions
-- Enabled on FSL, Course, Videos pages
-
-### New Dependencies
-None
-
-### Environment Variables
-- `OPENROUTER_API_KEY` — required for AI features
-
----
-
-## Bug Fixes - January 2026
-
-### Issue 1: FSL Page Missing Preview Panel ✅
-The FSL page editor doesn't show a preview because `previewUrl` prop isn't passed.
-
-- [x] Create FSL preview route (`app/cms/preview/fsl-page/route.tsx`)
-- [x] Add previewUrl prop to FSL page editor
-- [ ] Test FSL preview works (manual verification needed)
-
-### Issue 4: SEO Preview Card (Phase 4, 10.1) ✅
-Show how page looks in Google/social when sharing.
-
-- [x] Create SEO preview card component (`app/cms/components/SEOPreviewCard.tsx`)
-- [x] Add SEO preview to FSL page editor
-- [x] Add SEO preview to Course page editor
-- [x] Add SEO preview to Videos page editor
-
-### Issue 2: Hero Description Doesn't Preserve Line Breaks ✅
-Double enters (blank lines) are collapsed because no `whitespace-pre-line` CSS.
-
-- [x] Add `whitespace-pre-line` to Hero description `<p>` tag
-- [x] Update Hero preview route CSS as well
-
-### Issue 3: Wrong Dev Server Running
-Port 3000 is running "Strategic Command Center" project, not Louie.
-All CMS API calls (image uploads, AI features) fail with 404.
-
-**User action required:** Stop wrong server, start Louie project:
-```bash
-# Find and kill wrong server
-lsof -ti :3000 | xargs kill
-
-# Start Louie project
-cd "/Users/maxb/Desktop/Vibe Projects/louieb"
-npm run dev
-```
-
----
-
-## February 2026 - RankScale Feedback Fixes
-
-### Issue 5: Add Privacy Policy Page ✅
-RankScale report flagged "lack of explicit legal information" and recommended adding a privacy policy.
-
-- [x] 5.1 Create `/privacy` page with standard privacy policy content
-- [x] 5.2 Add "Privacy Policy" link to footer (Quick Links section)
-- [x] 5.3 Verify page accessible and renders correctly
-
-### Issue 6: Fix Duplicate FAQPage Structured Data ✅
-Google Search Console reports "Duplicate field FAQPage" - caused by:
-- Global layout (`app/(site)/layout.tsx` lines 100-161) has FAQPage schema
-- FSL page (`app/(site)/fractional-sales-leader/page.tsx` lines 75-88) has its own FAQPage schema
-- When visiting FSL page, both schemas appear = duplicate
-
-**Fix:** Remove the global FAQ schema from layout.tsx. Each page should have its own contextual FAQ schema if needed.
-
-- [x] 6.1 Remove FAQPage schema from `app/(site)/layout.tsx`
-- [x] 6.2 Verify FSL page still has its own FAQ schema working
-- [x] 6.3 Test no duplicate FAQPage errors
-
----
-
-## Review - February 2026 Fixes
-
-### Summary of Changes
-
-**Privacy Policy Page:**
-- Created `app/(site)/privacy/page.tsx` with standard privacy policy content
-- Covers: information collection, cookies, third-party services, user rights, contact info
-- Added SEO metadata (title, description)
-
-**Footer Update:**
-- Added "Privacy Policy" link to Quick Links section in `components/Footer.tsx`
-
-**Duplicate FAQPage Fix:**
-- Removed global FAQPage schema from `app/(site)/layout.tsx` (was ~60 lines)
-- FSL page (`/fractional-sales-leader`) retains its own contextual FAQ schema
-- No more duplicate structured data on any page
-
-### New Dependencies
-None
-
-### Environment Variables
-None
+## Review Section
+
+- **Summary of changes made:**
+  - Added complete blog functionality mirroring the videos page structure
+  - Blog posts support: title, excerpt, content, LinkedIn URL, date, image, tags
+  - Featured posts grid (max 4) with fallback placeholder for posts without images
+  - Individual post pages with full content, tags, and "More Posts" section
+  - Added "Blog" to Learn dropdown menu in navigation
+
+- **New dependencies added:**
+  - None (using existing lucide-react icons)
+
+- **Environment variables needed:**
+  - None
+
+- **Known limitations / future improvements:**
+  - Posts are currently stored in CMS defaults (hardcoded) - could add Supabase table for dynamic management
+  - No image uploaded yet for first post (using gradient placeholder)
+  - Could add pagination if post count grows significantly
+  - Could add search/filter by tags

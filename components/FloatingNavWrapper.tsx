@@ -1,7 +1,7 @@
 "use client";
 
 import { FloatingNav } from "@/components/ui/floating-navbar";
-import { Home, FileText, Video, Mail, Wrench, BookOpen, GraduationCap, UserCheck, Scale } from "lucide-react";
+import { Home, FileText, Video, Mail, Wrench, BookOpen, GraduationCap, UserCheck, Scale, PenLine } from "lucide-react";
 
 // Navigation menu items - includes FSL vs Consultant comparison page
 export function FloatingNavWrapper() {
@@ -37,6 +37,11 @@ export function FloatingNavWrapper() {
               name: "Articles",
               link: "/articles",
               icon: <FileText className="h-4 w-4 text-neutral-500 dark:text-white" />,
+            },
+            {
+              name: "Blog",
+              link: "/blog",
+              icon: <PenLine className="h-4 w-4 text-neutral-500 dark:text-white" />,
             },
             {
               name: "Videos",
