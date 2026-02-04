@@ -90,3 +90,16 @@ Create a "Blog" page mirroring the Videos page structure, where Louie can showca
   - No image uploaded yet for first post (using gradient placeholder)
   - Could add pagination if post count grows significantly
   - Could add search/filter by tags
+
+---
+
+## Image Fix (Current Issue)
+
+**Problem:** Blog images don't display because Next.js Image component blocks external images from Supabase
+
+**Root cause:** `next.config.ts` has empty `remotePatterns` array
+
+### Tasks
+- [x] Add Supabase storage domain to `next.config.ts` remotePatterns
+- [x] Test build passes
+- [ ] Commit all changes to git (entire src/ folder is uncommitted)
