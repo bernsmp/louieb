@@ -90,6 +90,16 @@ export interface VideoRow {
   title: string
   description: string | null
   page: string
+  category_id: string | null
+  display_order: number
+  created_at: string
+  updated_at: string
+}
+
+export interface VideoCategoryRow {
+  id: string
+  name: string
+  slug: string
   display_order: number
   created_at: string
   updated_at: string

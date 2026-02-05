@@ -1,8 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+
+interface Category {
+  id: string
+  name: string
+}
 
 // Extract video ID from any YouTube URL format (including Shorts)
 function extractYouTubeId(input: string): string {
@@ -35,13 +40,23 @@ export default function NewVideoPage() {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
 
+  const [categories, setCategories] = useState<Category[]>([])
+
   const [form, setForm] = useState({
     youtube_id: '',
     title: '',
     description: '',
     page: 'featured',
     display_order: 0,
+    category_id: '',
   })
+
+  useEffect(() => {
+    fetch('/api/cms/categories')
+      .then((r) => r.json())
+      .then((data) => setCategories(data.categories || []))
+      .catch(() => {})
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -108,6 +123,16 @@ export default function NewVideoPage() {
               <option value="newsletter">Newsletter</option>
             </select>
           </div>
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Category</label>
+          <select className="form-input" value={form.category_id} onChange={(e) => setForm({ ...form, category_id: e.target.value })}>
+            <option value="">No Category</option>
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>{cat.name}</option>
+            ))}
+          </select>
         </div>
 
         <div className="form-group">

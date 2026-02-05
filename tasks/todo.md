@@ -1,105 +1,116 @@
-# Blog Page Implementation
+# Video Categories + Filterable Grid
 
 ## Goal
-Create a "Blog" page mirroring the Videos page structure, where Louie can showcase LinkedIn posts as blog articles.
+Add a category system for videos with full CMS management, then replace the flat text links on the public videos page with a filterable thumbnail card grid.
 
 ---
 
 ## Tasks
 
-### 1. CMS Data Structure
-- [x] Add `BlogPost` interface to `lib/cms.ts`
-  - `title: string`
-  - `excerpt: string` (short preview text)
-  - `content: string` (full post content, markdown supported)
-  - `linkedInUrl: string` (link to original LinkedIn post)
-  - `publishedDate: string`
-  - `image?: string` (thumbnail/featured image URL)
-  - `imageAlt?: string` (alt text for accessibility)
-  - `author?: string` (defaults to "Louie Bernstein")
-  - `tags?: string[]` (optional categorization)
-- [x] Add `blogPage` settings object to `SiteSettings` interface
-- [x] Add default values for `blogPage` in defaults object
-- [x] Add CMS helper functions:
-  - `getBlogPageData()`
-  - `getAllBlogPostsWithSlugs()`
-  - `getBlogPostBySlug(slug)`
-  - `getFeaturedBlogPosts()` (max 4)
+### 1. Database Migration
+- [x] Create `supabase/migrations/20250205_add_video_categories.sql`
+  - `video_categories` table (id, name, slug, display_order, created_at, updated_at)
+  - Add `category_id` (nullable FK) to `videos` table
+  - RLS policies (public read, authenticated write)
+  - `ON DELETE SET NULL`
+  - Reuse `handle_updated_at()` trigger
 
-### 2. Blog Listing Page
-- [x] Create `/app/(site)/blog/page.tsx`
-  - Header section (headline + subheadline)
-  - Featured posts grid (4 cards, similar to video shorts)
-    - Card shows: image thumbnail, title, excerpt, date, "Read More →" link
-  - All posts links section (shows when >4 posts)
-  - "Follow on LinkedIn" CTA button
-  - SEO metadata + structured data (BlogPosting schema)
+### 2. Add Types
+- [x] Modify `lib/supabase.ts`
+  - Add `VideoCategoryRow` interface
+  - Add `category_id: string | null` to `VideoRow`
 
-### 3. Individual Blog Post Page
-- [x] Create `/app/(site)/blog/[slug]/page.tsx`
-  - Back link to `/blog`
-  - Post title (h1)
-  - Published date + author
-  - Tags display
-  - Full content (paragraph rendering)
-  - "Read on LinkedIn" button (links to original)
-  - "More Posts" section at bottom
-  - SEO metadata + BlogPosting schema
+### 3. Categories API Routes
+- [x] Create `app/api/cms/categories/route.ts` (GET + POST)
+- [x] Create `app/api/cms/categories/[id]/route.ts` (GET + PUT + DELETE)
+  - Follow pattern from `app/api/cms/services/` routes
+  - Auto-generate slug from name on create
 
-### 4. Navigation
-- [x] Add "Blog" to "Learn" dropdown in `components/FloatingNavWrapper.tsx`
-  - Position after "Articles"
-  - Icon: `PenLine` from lucide-react
+### 4. Register in Order Blocks API
+- [x] Modify `app/api/cms/order/blocks/route.ts`
+  - Add `'video-categories': 'video_categories'` to `BLOCK_TABLES`
 
-### 5. Sample Content
-- [x] Add first blog post:
-  - **Title:** "Why Buyers Really Say No (It's Not What You Think)"
-  - **Content:** The "risk to their chair" LinkedIn post about job security being the #1 buyer concern
-  - **Image:** Not yet added (uses placeholder gradient)
+### 5. CMS Categories Pages
+- [x] Create `app/cms/categories/page.tsx` (list with drag-to-reorder)
+- [x] Create `app/cms/categories/new/page.tsx` (create form)
+- [x] Create `app/cms/categories/[id]/page.tsx` (edit form)
+  - Follow pattern from `app/cms/services/` pages
 
----
+### 6. Add to Sidebar Nav
+- [x] Modify `app/cms/components/AdminSidebar.tsx`
+  - Add `{ name: 'Categories', href: '/cms/categories', icon: TagIcon }` to Collections
+  - Add `TagIcon` SVG function
 
-## File Changes Summary
+### 7. Update Video Forms with Category Dropdown
+- [x] Modify `app/api/cms/videos/route.ts` — add `category_id` to POST
+- [x] Modify `app/api/cms/videos/[id]/route.ts` — add `category_id` to PUT
+- [x] Modify `app/cms/videos-list/new/page.tsx` — fetch categories, add `<select>`
+- [x] Modify `app/cms/videos-list/[id]/page.tsx` — same, pre-select current
 
-| File | Action |
-|------|--------|
-| `lib/cms.ts` | Added BlogPost type, blogPage settings, helper functions |
-| `app/(site)/blog/page.tsx` | Created (new file) |
-| `app/(site)/blog/[slug]/page.tsx` | Created (new file) |
-| `components/FloatingNavWrapper.tsx` | Added Blog nav item with PenLine icon |
+### 8. Add Data Fetch Functions
+- [x] Modify `lib/cms.ts`
+  - Add `getCategories()` function
+  - Update `getAllVideosWithSlugs()` to include category data
+
+### 9. Redesign Public Videos Page
+- [x] Modify `app/(site)/videos/page.tsx`
+- [x] Create `app/(site)/videos/VideoGrid.tsx` (client component)
+  - Filter tabs: "All" + one per category
+  - Thumbnail card grid (YouTube thumbnail, title, link)
+  - Client-side filtering via `useState`
+  - Keep hero, featured shorts, playlist, CTA unchanged
 
 ---
 
-## Review Section
+## Key Patterns (for reference)
+- API routes: follow `app/api/cms/services/` pattern exactly
+- CMS pages: follow `app/cms/services/` pattern (SortableList, forms)
+- Types: follow `lib/supabase.ts` interface pattern
+- Data fetching: follow `lib/cms.ts` pattern with cache()
+- Sidebar: icon functions defined at bottom of AdminSidebar.tsx
 
-- **Summary of changes made:**
-  - Added complete blog functionality mirroring the videos page structure
-  - Blog posts support: title, excerpt, content, LinkedIn URL, date, image, tags
-  - Featured posts grid (max 4) with fallback placeholder for posts without images
-  - Individual post pages with full content, tags, and "More Posts" section
-  - Added "Blog" to Learn dropdown menu in navigation
+## Files Touched
 
-- **New dependencies added:**
-  - None (using existing lucide-react icons)
-
-- **Environment variables needed:**
-  - None
-
-- **Known limitations / future improvements:**
-  - Posts are currently stored in CMS defaults (hardcoded) - could add Supabase table for dynamic management
-  - No image uploaded yet for first post (using gradient placeholder)
-  - Could add pagination if post count grows significantly
-  - Could add search/filter by tags
+| File | Type |
+|------|------|
+| `supabase/migrations/20250205_add_video_categories.sql` | NEW |
+| `lib/supabase.ts` | MODIFY |
+| `app/api/cms/categories/route.ts` | NEW |
+| `app/api/cms/categories/[id]/route.ts` | NEW |
+| `app/api/cms/order/blocks/route.ts` | MODIFY (1 line) |
+| `app/cms/categories/page.tsx` | NEW |
+| `app/cms/categories/new/page.tsx` | NEW |
+| `app/cms/categories/[id]/page.tsx` | NEW |
+| `app/cms/components/AdminSidebar.tsx` | MODIFY |
+| `app/api/cms/videos/route.ts` | MODIFY |
+| `app/api/cms/videos/[id]/route.ts` | MODIFY |
+| `app/cms/videos-list/new/page.tsx` | MODIFY |
+| `app/cms/videos-list/[id]/page.tsx` | MODIFY |
+| `lib/cms.ts` | MODIFY |
+| `app/(site)/videos/page.tsx` | MODIFY |
+| `app/(site)/videos/VideoGrid.tsx` | NEW |
 
 ---
 
-## Image Fix (Current Issue)
+## Review
 
-**Problem:** Blog images don't display because Next.js Image component blocks external images from Supabase
+### Summary of Changes
+- Added a `video_categories` table with full CRUD support (API, CMS pages, drag-to-reorder)
+- Added `category_id` nullable FK to `videos` table with `ON DELETE SET NULL`
+- Updated video forms (new + edit) with a category dropdown
+- Updated `getAllVideosWithSlugs()` to join category data from Supabase
+- Added `getCategories()` cached fetch function
+- Replaced flat text video links with a filterable thumbnail card grid (`VideoGrid` client component)
+- Added "Categories" to CMS sidebar navigation
 
-**Root cause:** `next.config.ts` has empty `remotePatterns` array
+### New Dependencies
+- None
 
-### Tasks
-- [x] Add Supabase storage domain to `next.config.ts` remotePatterns
-- [x] Test build passes
-- [ ] Commit all changes to git (entire src/ folder is uncommitted)
+### Environment Variables
+- No new environment variables required
+- Migration must be run on Supabase: `supabase/migrations/20250205_add_video_categories.sql`
+
+### Known Limitations / Future Improvements
+- Categories only appear as filter tabs when at least one category exists in the database
+- Videos without a category still show under "All" but won't appear in any specific category tab
+- The `VideoGrid` uses YouTube `mqdefault.jpg` thumbnails (320x180) — could upgrade to `maxresdefault.jpg` if higher resolution is needed

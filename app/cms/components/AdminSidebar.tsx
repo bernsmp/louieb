@@ -27,6 +27,7 @@ const navSections = [
       { name: 'Testimonials', href: '/cms/testimonials', icon: QuoteIcon },
       { name: 'FAQ Items', href: '/cms/faq', icon: HelpCircleIcon },
       { name: 'Videos', href: '/cms/videos-list', icon: PlayIcon },
+      { name: 'Categories', href: '/cms/categories', icon: TagIcon },
       { name: 'Services', href: '/cms/services', icon: GridIcon },
       { name: 'Process Steps', href: '/cms/process', icon: ListIcon },
     ],
@@ -229,6 +230,15 @@ function SearchIcon() {
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="11" cy="11" r="8"/>
       <path d="m21 21-4.3-4.3"/>
+    </svg>
+  )
+}
+
+function TagIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/>
+      <path d="M7 7h.01"/>
     </svg>
   )
 }

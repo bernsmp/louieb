@@ -12,6 +12,7 @@ import type {
   TestimonialRow,
   FAQItemRow,
   VideoRow,
+  VideoCategoryRow,
   ServiceRow,
   ProcessStepRow,
   BlogPostRow
@@ -59,6 +60,12 @@ interface VideoItem {
   videoId: string
   title: string
   description?: string
+}
+
+interface VideoCategory {
+  id: string
+  name: string
+  slug: string
 }
 
 interface BlogPost {
@@ -1026,6 +1033,34 @@ async function fetchFeaturedShortsFromSupabase(): Promise<VideoItem[]> {
 }
 
 /**
+ * Fetch video categories from Supabase
+ */
+async function fetchVideoCategoriesFromSupabase(): Promise<VideoCategory[]> {
+  if (!supabaseAdmin) return []
+
+  try {
+    const { data, error } = await supabaseAdmin
+      .from('video_categories')
+      .select('*')
+      .order('display_order', { ascending: true })
+
+    if (error) {
+      console.warn('[CMS] Error fetching video categories:', error.message)
+      return []
+    }
+
+    return (data as VideoCategoryRow[]).map(row => ({
+      id: row.id,
+      name: row.name,
+      slug: row.slug,
+    }))
+  } catch (error) {
+    console.warn('[CMS] Failed to fetch video categories:', error)
+    return []
+  }
+}
+
+/**
  * Fetch services from Supabase
  */
 async function fetchServicesFromSupabase(): Promise<ServiceItem[]> {
@@ -1498,7 +1533,20 @@ function slugify(title: string): string {
 
 export interface VideoWithSlug extends VideoItem {
   slug: string
+  categoryId?: string
+  categoryName?: string
+  categorySlug?: string
 }
+
+/**
+ * Get all video categories
+ */
+export const getCategories = cache(async (): Promise<VideoCategory[]> => {
+  if (!USE_SUPABASE_CMS || !isSupabaseConfigured) {
+    return []
+  }
+  return fetchVideoCategoriesFromSupabase()
+})
 
 /**
  * Get all video slugs for static generation and sitemap
@@ -1509,9 +1557,38 @@ export async function getAllVideoSlugs(): Promise<string[]> {
 }
 
 /**
- * Get all videos with their slugs
+ * Get all videos with their slugs (includes category data)
  */
 export async function getAllVideosWithSlugs(): Promise<VideoWithSlug[]> {
+  // Try fetching from Supabase with category join
+  if (USE_SUPABASE_CMS && isSupabaseConfigured && supabaseAdmin) {
+    try {
+      const { data, error } = await supabaseAdmin
+        .from('videos')
+        .select('*, video_categories(id, name, slug)')
+        .eq('page', 'featured')
+        .order('display_order', { ascending: true })
+
+      if (!error && data && data.length > 0) {
+        return data.map((row: Record<string, unknown>) => {
+          const cat = row.video_categories as { id: string; name: string; slug: string } | null
+          return {
+            videoId: row.youtube_id as string,
+            title: row.title as string,
+            description: (row.description as string) || undefined,
+            slug: slugify(row.title as string),
+            categoryId: cat?.id,
+            categoryName: cat?.name,
+            categorySlug: cat?.slug,
+          }
+        })
+      }
+    } catch (error) {
+      console.warn('[CMS] Failed to fetch videos with categories:', error)
+    }
+  }
+
+  // Fallback to settings
   const settings = await getSiteSettings()
   return settings.videosPage.featuredVideos.map((video) => ({
     ...video,
@@ -1714,5 +1791,5 @@ export const getVideosPageSEO = cache(async (): Promise<PageSEO> => {
 })
 
 // Re-export types for use in components
-export type { SiteSettings, Testimonial, FAQItem, VideoItem, BlogPost, ServiceItem, ProcessStep, PageLayout, PageSEO }
+export type { SiteSettings, Testimonial, FAQItem, VideoItem, VideoCategory, BlogPost, ServiceItem, ProcessStep, PageLayout, PageSEO }
 

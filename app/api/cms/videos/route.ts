@@ -46,7 +46,7 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json()
-    const { youtube_id, title, description, page, display_order, is_featured_short } = body
+    const { youtube_id, title, description, page, display_order, is_featured_short, category_id } = body
 
     if (!youtube_id || !title) {
       return NextResponse.json({ error: 'YouTube ID and title are required' }, { status: 400 })
@@ -61,6 +61,7 @@ export async function POST(request: Request) {
         page: page || 'featured',
         display_order: display_order || 0,
         is_featured_short: is_featured_short || false,
+        category_id: category_id || null,
       })
       .select()
       .single()

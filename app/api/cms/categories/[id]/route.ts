@@ -3,7 +3,7 @@ import { revalidatePath } from 'next/cache'
 import { getUser } from '@/lib/auth'
 import { supabaseAdmin } from '@/lib/supabase'
 
-// GET: Fetch a single video
+// GET: Fetch a single category
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -16,26 +16,21 @@ export async function GET(
 
   try {
     const { data, error } = await supabaseAdmin
-      .from('videos')
+      .from('video_categories')
       .select('*')
       .eq('id', id)
       .single()
 
-    if (error) {
-      if (error.code === 'PGRST116') {
-        return NextResponse.json({ error: 'Not found' }, { status: 404 })
-      }
-      throw error
-    }
+    if (error) throw error
 
-    return NextResponse.json({ video: data })
+    return NextResponse.json({ category: data })
   } catch (error) {
-    console.error('[CMS API] Error fetching video:', error)
-    return NextResponse.json({ error: 'Failed to fetch video' }, { status: 500 })
+    console.error('[CMS API] Error fetching category:', error)
+    return NextResponse.json({ error: 'Failed to fetch category' }, { status: 500 })
   }
 }
 
-// PUT: Update a video
+// PUT: Update a category
 export async function PUT(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -53,36 +48,36 @@ export async function PUT(
 
   try {
     const body = await request.json()
-    const { youtube_id, title, description, page, display_order, is_featured_short, category_id } = body
+    const { name, display_order } = body
+
+    // Auto-generate slug from name
+    const slug = name
+      ? name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+      : undefined
+
+    const updateData: Record<string, unknown> = {}
+    if (name !== undefined) { updateData.name = name; updateData.slug = slug }
+    if (display_order !== undefined) updateData.display_order = display_order
 
     const { data, error } = await supabaseAdmin
-      .from('videos')
-      .update({
-        youtube_id,
-        title,
-        description: description || null,
-        page: page || 'featured',
-        display_order: display_order || 0,
-        is_featured_short: is_featured_short ?? false,
-        category_id: category_id || null,
-      })
+      .from('video_categories')
+      .update(updateData)
       .eq('id', id)
       .select()
       .single()
 
     if (error) throw error
 
-    // Revalidate so changes appear immediately
     revalidatePath('/', 'layout')
 
-    return NextResponse.json({ success: true, video: data })
+    return NextResponse.json({ success: true, category: data })
   } catch (error) {
-    console.error('[CMS API] Error updating video:', error)
-    return NextResponse.json({ error: 'Failed to update video' }, { status: 500 })
+    console.error('[CMS API] Error updating category:', error)
+    return NextResponse.json({ error: 'Failed to update category' }, { status: 500 })
   }
 }
 
-// DELETE: Delete a video
+// DELETE: Delete a category
 export async function DELETE(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -100,19 +95,17 @@ export async function DELETE(
 
   try {
     const { error } = await supabaseAdmin
-      .from('videos')
+      .from('video_categories')
       .delete()
       .eq('id', id)
 
     if (error) throw error
 
-    // Revalidate so changes appear immediately
     revalidatePath('/', 'layout')
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error('[CMS API] Error deleting video:', error)
-    return NextResponse.json({ error: 'Failed to delete video' }, { status: 500 })
+    console.error('[CMS API] Error deleting category:', error)
+    return NextResponse.json({ error: 'Failed to delete category' }, { status: 500 })
   }
 }
-

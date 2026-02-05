@@ -4,6 +4,11 @@ import { useState, useEffect, use } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
+interface Category {
+  id: string
+  name: string
+}
+
 // Extract video ID from any YouTube URL format (including Shorts)
 function extractYouTubeId(input: string): string {
   if (!input) return ''
@@ -37,6 +42,8 @@ export default function EditVideoPage({ params }: { params: Promise<{ id: string
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
 
+  const [categories, setCategories] = useState<Category[]>([])
+
   const [form, setForm] = useState({
     youtube_id: '',
     title: '',
@@ -44,10 +51,15 @@ export default function EditVideoPage({ params }: { params: Promise<{ id: string
     page: 'featured',
     display_order: 0,
     is_featured_short: false,
+    category_id: '',
   })
 
   useEffect(() => {
     fetchVideo()
+    fetch('/api/cms/categories')
+      .then((r) => r.json())
+      .then((data) => setCategories(data.categories || []))
+      .catch(() => {})
   }, [id])
 
   const fetchVideo = async () => {
@@ -62,6 +74,7 @@ export default function EditVideoPage({ params }: { params: Promise<{ id: string
           page: data.video.page || 'featured',
           display_order: data.video.display_order || 0,
           is_featured_short: data.video.is_featured_short || false,
+          category_id: data.video.category_id || '',
         })
       }
     } catch (error) {
@@ -144,6 +157,16 @@ export default function EditVideoPage({ params }: { params: Promise<{ id: string
               <option value="newsletter">Newsletter</option>
             </select>
           </div>
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Category</label>
+          <select className="form-input" value={form.category_id} onChange={(e) => setForm({ ...form, category_id: e.target.value })}>
+            <option value="">No Category</option>
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>{cat.name}</option>
+            ))}
+          </select>
         </div>
 
         <div className="form-group">

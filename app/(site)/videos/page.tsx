@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { getVideosPageData, getAllVideosWithSlugs, getFeaturedShortsWithSlugs, getVideosPageSEO } from "@/lib/cms";
+import { getVideosPageData, getAllVideosWithSlugs, getFeaturedShortsWithSlugs, getVideosPageSEO, getCategories } from "@/lib/cms";
+import VideoGrid from "./VideoGrid";
 
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getVideosPageSEO();
@@ -60,7 +61,8 @@ export default async function VideosPage() {
   // Fetch videos page data from CMS
   const pageData = await getVideosPageData();
   const featuredShorts = await getFeaturedShortsWithSlugs(); // For the grid (max 4)
-  const allVideos = await getAllVideosWithSlugs(); // For video links section
+  const allVideos = await getAllVideosWithSlugs(); // For video card grid
+  const categories = await getCategories(); // For filter tabs
   const videoSchema = generateVideoSchema(allVideos);
 
   return (
@@ -139,22 +141,12 @@ export default async function VideosPage() {
               </div>
             </div>
 
-            {/* Video Links Section */}
-            <div className="mt-10 text-center">
-              <h3 className="mb-4 font-sans text-lg font-semibold text-foreground">
+            {/* Filterable Video Grid */}
+            <div className="mt-10">
+              <h3 className="mb-6 font-sans text-2xl font-bold text-foreground">
                 {pageData.individualVideosHeadline}
               </h3>
-              <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-                {allVideos.map((video) => (
-                  <Link
-                    key={video.slug}
-                    href={`/videos/${video.slug}`}
-                    className="font-sans text-[#0966c2] hover:underline"
-                  >
-                    {video.title}
-                  </Link>
-                ))}
-              </div>
+              <VideoGrid videos={allVideos} categories={categories} />
             </div>
 
             {/* CTA Section */}

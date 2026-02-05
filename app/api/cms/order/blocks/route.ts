@@ -10,6 +10,7 @@ const BLOCK_TABLES: Record<string, string> = {
   testimonials: 'testimonials',
   services: 'services',
   'process-steps': 'process_steps',
+  'video-categories': 'video_categories',
 }
 
 interface OrderItem {
