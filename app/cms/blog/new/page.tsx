@@ -32,16 +32,29 @@ export default function NewBlogPostPage() {
     setError('')
 
     try {
+      // Convert tags string to array
+      const tagsArray = form.tags
+        .split(',')
+        .map(tag => tag.trim())
+        .filter(tag => tag.length > 0)
+
       const response = await fetch('/api/cms/blog', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          tags: tagsArray,
+        }),
       })
 
-      if (!response.ok) throw new Error('Failed to create blog post')
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.details || data.error || 'Failed to create blog post')
+      }
       router.push('/cms/blog')
     } catch (err) {
-      setError('Failed to create blog post.')
+      const errorMessage = err instanceof Error ? err.message : 'Failed to create blog post'
+      setError(errorMessage)
       console.error(err)
     } finally {
       setSaving(false)

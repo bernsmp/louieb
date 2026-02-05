@@ -83,6 +83,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true, post: data })
   } catch (error) {
     console.error('[CMS API] Error creating blog post:', error)
-    return NextResponse.json({ error: 'Failed to create blog post' }, { status: 500 })
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    return NextResponse.json({ error: 'Failed to create blog post', details: errorMessage }, { status: 500 })
   }
 }

@@ -8,8 +8,8 @@ interface BlogPost {
   id: string
   title: string
   excerpt: string | null
-  thumbnail: string | null
-  published_at: string | null
+  image: string | null
+  published_date: string | null
   display_order: number
 }
 
@@ -122,9 +122,9 @@ function BlogListContent() {
             renderItem={(post) => (
               <div className="sortable-block-card">
                 <div className="sortable-block-card__thumb">
-                  {post.thumbnail ? (
+                  {post.image ? (
                     <img
-                      src={post.thumbnail}
+                      src={post.image}
                       alt={post.title}
                     />
                   ) : (
@@ -144,7 +144,7 @@ function BlogListContent() {
                 </div>
                 <div className="sortable-block-card__info">
                   <p className="sortable-block-card__title">{post.title}</p>
-                  <p className="sortable-block-card__meta">{formatDate(post.published_at)}</p>
+                  <p className="sortable-block-card__meta">{formatDate(post.published_date)}</p>
                 </div>
                 <div className="sortable-block-card__actions">
                   <Link
