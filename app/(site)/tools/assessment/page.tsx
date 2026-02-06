@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { AssessmentQuiz } from "./AssessmentQuiz";
+import { getAllVideosWithSlugs } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Do You Need a Fractional Sales Manager? | Free Assessment | Louie Bernstein",
@@ -16,7 +17,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AssessmentPage() {
+export default async function AssessmentPage() {
+  const allVideos = await getAllVideosWithSlugs();
+
   const quizSchema = {
     "@context": "https://schema.org",
     "@type": "Quiz",
@@ -54,7 +57,7 @@ export default function AssessmentPage() {
           </div>
 
           <div className="mt-12">
-            <AssessmentQuiz />
+            <AssessmentQuiz videos={allVideos} />
           </div>
         </div>
       </main>

@@ -4,6 +4,16 @@ import { useState } from "react";
 import { CheckCircle2, ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
+interface VideoWithSlug {
+  videoId: string;
+  title: string;
+  description?: string;
+  slug: string;
+  categoryId?: string;
+  categoryName?: string;
+  categorySlug?: string;
+}
+
 type Question = {
   id: number;
   question: string;
@@ -138,7 +148,19 @@ function getTier(score: number): ResultTier {
   );
 }
 
-export function AssessmentQuiz() {
+// Question-to-category mapping
+const questionCategoryMap: Record<number, string> = {
+  0: 'Fractional Sales Leadership',  // Q1: Who manages your team
+  1: 'Sales Process',                 // Q2: Sales process
+  2: 'Hiring & Team Building',        // Q3: Coaching
+  3: 'Sales Process',                 // Q4: Forecast
+  4: 'Hiring & Team Building',        // Q5: Performance
+  5: 'Sales Process',                 // Q6: CRM
+  6: 'Founder Growth',                // Q7: Revenue
+  7: 'Fractional Sales Leadership',   // Q8: Budget
+};
+
+export function AssessmentQuiz({ videos }: { videos: VideoWithSlug[] }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [showResults, setShowResults] = useState(false);
@@ -147,6 +169,34 @@ export function AssessmentQuiz() {
   const isLastQuestion = currentQuestion === questions.length - 1;
   const totalScore = Object.values(answers).reduce((sum, score) => sum + score, 0);
   const tier = getTier(totalScore);
+
+  // Get recommended video based on highest scoring question
+  const getRecommendedVideo = (): VideoWithSlug | null => {
+    // Find the question with the highest score (most pain)
+    let highestScore = 0;
+    let highestQuestionIndex = 0;
+
+    Object.entries(answers).forEach(([questionIndex, score]) => {
+      if (score > highestScore) {
+        highestScore = score;
+        highestQuestionIndex = parseInt(questionIndex);
+      }
+    });
+
+    // Get the category for that question
+    const categoryName = questionCategoryMap[highestQuestionIndex];
+    if (!categoryName) return videos[0] || null;
+
+    // Find the first video matching that category
+    const matchingVideo = videos.find(
+      (video) => video.categoryName === categoryName
+    );
+
+    // Fallback to first video if no match
+    return matchingVideo || videos[0] || null;
+  };
+
+  const recommendedVideo = showResults ? getRecommendedVideo() : null;
 
   const handleSelectOption = (score: number) => {
     setAnswers((prev) => ({ ...prev, [currentQuestion]: score }));
@@ -196,9 +246,41 @@ export function AssessmentQuiz() {
             </p>
           </div>
 
+          {recommendedVideo && (
+            <div className="mt-8 border-t border-border pt-8">
+              <p className="mb-4 font-sans text-sm font-medium text-muted-foreground uppercase tracking-wide">
+                Recommended for You
+              </p>
+              <a
+                href={`/videos/${recommendedVideo.slug}`}
+                className="group block overflow-hidden rounded-xl border border-border bg-card transition-all hover:shadow-lg"
+              >
+                <div className="aspect-video w-full overflow-hidden">
+                  <img
+                    src={`https://img.youtube.com/vi/${recommendedVideo.videoId}/mqdefault.jpg`}
+                    alt={recommendedVideo.title}
+                    className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-4">
+                  <h4 className="font-sans text-base font-semibold text-foreground line-clamp-2">
+                    {recommendedVideo.title}
+                  </h4>
+                  {recommendedVideo.categoryName && (
+                    <span className="mt-2 inline-block rounded-full bg-muted px-2.5 py-0.5 font-sans text-xs text-muted-foreground">
+                      {recommendedVideo.categoryName}
+                    </span>
+                  )}
+                </div>
+              </a>
+            </div>
+          )}
+
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
             <Link
-              href="/#contact"
+              href="https://calendly.com/louiebernstein/30minutes"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-lg bg-[#0966c2] px-8 py-3 font-sans font-medium text-white transition-colors hover:bg-[#0855a3]"
             >
               Book a Free Consultation
