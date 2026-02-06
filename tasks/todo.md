@@ -1,116 +1,135 @@
-# Video Categories + Filterable Grid
+# "Do You Need a Fractional Sales Manager?" Quiz/Assessment
 
 ## Goal
-Add a category system for videos with full CMS management, then replace the flat text links on the public videos page with a filterable thumbnail card grid.
+Build an 8-question scored quiz that helps visitors self-assess whether they need a fractional sales manager. Show results immediately (score + tier + personalized recommendation). **Fully free, no email capture or database.**
+
+This is the site's **first lead generation funnel** — referenced from SEO research (`tasks/seo-aeo-research.md`, Section 6, Tool #1).
+
+---
+
+## Design Decisions
+
+- **8 questions** (sweet spot — abandonment spikes after 7, but we need coverage)
+- **Equal weight scoring** (keep v1 simple — each answer 1-4 points)
+- **3 tiers**: Strong Fit (26-32), Likely Fit (17-25), Not Yet (8-16)
+- **No database needed** — pure client-side quiz with immediate results display
+- **No new dependencies** — pure React state, existing Tailwind
+- **Follow ROI Calculator pattern** exactly: server page with metadata → client component
 
 ---
 
 ## Tasks
 
-### 1. Database Migration
-- [x] Create `supabase/migrations/20250205_add_video_categories.sql`
-  - `video_categories` table (id, name, slug, display_order, created_at, updated_at)
-  - Add `category_id` (nullable FK) to `videos` table
-  - RLS policies (public read, authenticated write)
-  - `ON DELETE SET NULL`
-  - Reuse `handle_updated_at()` trigger
+### 1. Quiz Client Component
+- [ ] Create `app/(site)/tools/assessment/AssessmentQuiz.tsx`
+  - 8 hardcoded questions, each with 4 multiple-choice options (scored 1-4)
+  - State: `currentQuestion`, `answers`, `showResults`
+  - Progress bar showing question X of 8
+  - Single question per screen with animated transitions
+  - Calculate score on completion, determine tier
+  - Results screen: tier badge, score, personalized recommendation text
+  - Final CTA: "Book a Free Consultation" linking to Calendly/contact
 
-### 2. Add Types
-- [x] Modify `lib/supabase.ts`
-  - Add `VideoCategoryRow` interface
-  - Add `category_id: string | null` to `VideoRow`
+### 2. Quiz Page (Server Component)
+- [ ] Create `app/(site)/tools/assessment/page.tsx`
+  - SEO metadata (title, description, keywords, OpenGraph)
+  - Schema.org Quiz structured data
+  - Hero section: headline + subheadline
+  - Render `<AssessmentQuiz />`
+  - Follow ROI calculator page pattern exactly
 
-### 3. Categories API Routes
-- [x] Create `app/api/cms/categories/route.ts` (GET + POST)
-- [x] Create `app/api/cms/categories/[id]/route.ts` (GET + PUT + DELETE)
-  - Follow pattern from `app/api/cms/services/` routes
-  - Auto-generate slug from name on create
+### 3. Add to Tools Hub
+- [ ] Modify CMS tools data or `app/(site)/tools/page.tsx`
+  - Add assessment card to the tools grid
+  - Icon: `Target` or `Users` from Lucide
+  - Link to `/tools/assessment`
 
-### 4. Register in Order Blocks API
-- [x] Modify `app/api/cms/order/blocks/route.ts`
-  - Add `'video-categories': 'video_categories'` to `BLOCK_TABLES`
-
-### 5. CMS Categories Pages
-- [x] Create `app/cms/categories/page.tsx` (list with drag-to-reorder)
-- [x] Create `app/cms/categories/new/page.tsx` (create form)
-- [x] Create `app/cms/categories/[id]/page.tsx` (edit form)
-  - Follow pattern from `app/cms/services/` pages
-
-### 6. Add to Sidebar Nav
-- [x] Modify `app/cms/components/AdminSidebar.tsx`
-  - Add `{ name: 'Categories', href: '/cms/categories', icon: TagIcon }` to Collections
-  - Add `TagIcon` SVG function
-
-### 7. Update Video Forms with Category Dropdown
-- [x] Modify `app/api/cms/videos/route.ts` — add `category_id` to POST
-- [x] Modify `app/api/cms/videos/[id]/route.ts` — add `category_id` to PUT
-- [x] Modify `app/cms/videos-list/new/page.tsx` — fetch categories, add `<select>`
-- [x] Modify `app/cms/videos-list/[id]/page.tsx` — same, pre-select current
-
-### 8. Add Data Fetch Functions
-- [x] Modify `lib/cms.ts`
-  - Add `getCategories()` function
-  - Update `getAllVideosWithSlugs()` to include category data
-
-### 9. Redesign Public Videos Page
-- [x] Modify `app/(site)/videos/page.tsx`
-- [x] Create `app/(site)/videos/VideoGrid.tsx` (client component)
-  - Filter tabs: "All" + one per category
-  - Thumbnail card grid (YouTube thumbnail, title, link)
-  - Client-side filtering via `useState`
-  - Keep hero, featured shorts, playlist, CTA unchanged
+### 4. Deploy + Verify
+- [ ] Commit, push, verify on production
 
 ---
 
-## Key Patterns (for reference)
-- API routes: follow `app/api/cms/services/` pattern exactly
-- CMS pages: follow `app/cms/services/` pattern (SortableList, forms)
-- Types: follow `lib/supabase.ts` interface pattern
-- Data fetching: follow `lib/cms.ts` pattern with cache()
-- Sidebar: icon functions defined at bottom of AdminSidebar.tsx
+## Quiz Questions (Draft)
+
+Each question has 4 options scored 1-4 (1 = least need, 4 = strongest need).
+
+**Q1: Who currently manages your sales team day-to-day?**
+1. A dedicated full-time sales manager (1)
+2. A senior rep who also sells (2)
+3. Me (the CEO/founder), part-time (3)
+4. Nobody — reps manage themselves (4)
+
+**Q2: How would you describe your sales process?**
+1. Documented, followed consistently, and measured (1)
+2. Exists but not always followed (2)
+3. Informal — each rep does their own thing (3)
+4. We don't really have one (4)
+
+**Q3: How often do your sales reps get 1-on-1 coaching?**
+1. Weekly with structured feedback (1)
+2. Monthly or as-needed (2)
+3. Rarely — only when there's a problem (3)
+4. Never (4)
+
+**Q4: How accurate is your sales forecast?**
+1. Within 10% — we trust our pipeline data (1)
+2. Roughly directional — off by 20-30% (2)
+3. Mostly guessing based on gut feel (3)
+4. We don't forecast (4)
+
+**Q5: What's happening with your sales team's performance?**
+1. Consistently hitting or exceeding targets (1)
+2. Some reps hit quota, others don't (2)
+3. Most reps are underperforming (3)
+4. We don't have clear targets or quotas (4)
+
+**Q6: How is your CRM being used?**
+1. Fully adopted — pipeline, activities, reporting all tracked (1)
+2. Used for basic contact tracking but not pipeline (2)
+3. Some reps use it, some don't (3)
+4. We don't have one, or it's abandoned (4)
+
+**Q7: What's your annual revenue range?**
+1. Under $500K (1)
+2. $500K – $2M (2)
+3. $2M – $10M (3)
+4. $10M+ (4)
+
+**Q8: What's your budget comfort for sales leadership?**
+1. I can't invest anything right now (1)
+2. Under $3K/month (2)
+3. $3K – $8K/month (3)
+4. $8K+/month — I need results (4)
+
+---
+
+## Result Tiers
+
+**Strong Fit (26-32 points)**
+> Your sales team is running without real leadership — and it's costing you. A fractional sales manager would bring immediate structure, accountability, and process without the $150K+ commitment of a full-time hire. This is exactly what fractional sales leadership is built for.
+
+**Likely Fit (17-25 points)**
+> You have some pieces in place, but gaps in process, coaching, or accountability are holding your team back. A fractional sales manager could fill those gaps and accelerate your growth — especially if you're not ready for a full-time hire.
+
+**Not Yet (8-16 points)**
+> You're in a solid position. Your sales leadership needs are either covered or your business may not be at the stage where fractional management makes sense yet. That said, if you're feeling a ceiling on growth, a conversation could still uncover opportunities.
+
+---
 
 ## Files Touched
 
 | File | Type |
 |------|------|
-| `supabase/migrations/20250205_add_video_categories.sql` | NEW |
-| `lib/supabase.ts` | MODIFY |
-| `app/api/cms/categories/route.ts` | NEW |
-| `app/api/cms/categories/[id]/route.ts` | NEW |
-| `app/api/cms/order/blocks/route.ts` | MODIFY (1 line) |
-| `app/cms/categories/page.tsx` | NEW |
-| `app/cms/categories/new/page.tsx` | NEW |
-| `app/cms/categories/[id]/page.tsx` | NEW |
-| `app/cms/components/AdminSidebar.tsx` | MODIFY |
-| `app/api/cms/videos/route.ts` | MODIFY |
-| `app/api/cms/videos/[id]/route.ts` | MODIFY |
-| `app/cms/videos-list/new/page.tsx` | MODIFY |
-| `app/cms/videos-list/[id]/page.tsx` | MODIFY |
-| `lib/cms.ts` | MODIFY |
-| `app/(site)/videos/page.tsx` | MODIFY |
-| `app/(site)/videos/VideoGrid.tsx` | NEW |
+| `app/(site)/tools/assessment/page.tsx` | NEW |
+| `app/(site)/tools/assessment/AssessmentQuiz.tsx` | NEW |
+| `app/(site)/tools/page.tsx` or CMS data | MODIFY (add card) |
 
 ---
 
-## Review
-
-### Summary of Changes
-- Added a `video_categories` table with full CRUD support (API, CMS pages, drag-to-reorder)
-- Added `category_id` nullable FK to `videos` table with `ON DELETE SET NULL`
-- Updated video forms (new + edit) with a category dropdown
-- Updated `getAllVideosWithSlugs()` to join category data from Supabase
-- Added `getCategories()` cached fetch function
-- Replaced flat text video links with a filterable thumbnail card grid (`VideoGrid` client component)
-- Added "Categories" to CMS sidebar navigation
-
-### New Dependencies
-- None
-
-### Environment Variables
-- No new environment variables required
-- Migration must be run on Supabase: `supabase/migrations/20250205_add_video_categories.sql`
-
-### Known Limitations / Future Improvements
-- Categories only appear as filter tabs when at least one category exists in the database
-- Videos without a category still show under "All" but won't appear in any specific category tab
-- The `VideoGrid` uses YouTube `mqdefault.jpg` thumbnails (320x180) — could upgrade to `maxresdefault.jpg` if higher resolution is needed
+## v2 Ideas (Not Now)
+- CMS-editable questions and scoring weights
+- Automated email delivery of detailed results PDF
+- Lead capture with email gate
+- Admin dashboard showing lead analytics
+- A/B test different question sets
+- Retargeting pixel on results page

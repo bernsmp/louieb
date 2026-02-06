@@ -576,6 +576,12 @@ const defaultSettings: SiteSettings = {
         href: '/tools/roi-calculator',
         icon: 'Calculator',
       },
+      {
+        name: 'Sales Leadership Assessment',
+        description: 'Find out if your business needs a fractional sales manager with this free 2-minute assessment. Get a personalized recommendation based on your team\'s current state.',
+        href: '/tools/assessment',
+        icon: 'Target',
+      },
     ],
   },
   roiCalculatorPage: {
