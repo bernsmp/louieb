@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { getBlogPageData, getAllBlogPostsWithSlugs, getFeaturedBlogPosts } from "@/lib/cms";
+import { getBlogPageData, getAllBlogPostsWithSlugs, getFeaturedBlogPosts, getCategories } from "@/lib/cms";
+import BlogGrid from "./BlogGrid";
 
 export async function generateMetadata(): Promise<Metadata> {
   const pageData = await getBlogPageData();
@@ -61,6 +62,7 @@ export default async function BlogPage() {
   const pageData = await getBlogPageData();
   const featuredPosts = await getFeaturedBlogPosts();
   const allPosts = await getAllBlogPostsWithSlugs();
+  const categories = await getCategories();
   const blogSchema = generateBlogSchema(allPosts);
 
   return (
@@ -132,25 +134,13 @@ export default async function BlogPage() {
               </div>
             </div>
 
-            {/* All Posts Links */}
-            {allPosts.length > 4 && (
-              <div className="mt-10 text-center">
-                <h3 className="mb-4 font-sans text-lg font-semibold text-foreground">
-                  {pageData.allPostsHeadline}
-                </h3>
-                <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-                  {allPosts.map((post) => (
-                    <Link
-                      key={post.slug}
-                      href={`/blog/${post.slug}`}
-                      className="font-sans text-[#0966c2] hover:underline"
-                    >
-                      {post.title}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
+            {/* All Posts with Category Filter */}
+            <div className="mt-10">
+              <h3 className="mb-6 font-sans text-2xl font-bold text-foreground">
+                {pageData.allPostsHeadline}
+              </h3>
+              <BlogGrid posts={allPosts} categories={categories} />
+            </div>
 
             {/* LinkedIn CTA */}
             <div className="mt-12 text-center">

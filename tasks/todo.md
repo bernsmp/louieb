@@ -1,33 +1,35 @@
-# Add Categories to Blog Posts
+# Add Category Filtering to Blog Page (Frontend)
 
 ## Goal
-Let Louie assign categories to blog posts in the CMS, reusing the same categories that already exist for videos (`video_categories` table). Rename the concept to just "categories" since they're shared.
+Show category filter tabs on the public blog page, matching the same pattern used on the videos page (`VideoGrid` component). Categories already exist in the DB and CMS — this is frontend display only.
 
 ---
 
 ## Tasks
 
-### 1. Add `category_id` column to `blog_posts` table in Supabase
-- [ ] Add nullable `category_id` (UUID) column to `blog_posts`
-- [ ] (Optional) Add foreign key reference to `video_categories.id`
+### 1. Update `BlogPost` interface to include category fields
+- [ ] Add `categoryId?`, `categoryName?`, `categorySlug?` to `BlogPost` in `lib/cms.ts`
 
-### 2. Update Blog Post CMS Editor — Add category dropdown
-- [ ] In `app/cms/blog/new/page.tsx` — fetch categories, add dropdown select
-- [ ] In `app/cms/blog/[id]/page.tsx` — fetch categories, add dropdown select, load existing value
+### 2. Update `fetchBlogPostsFromSupabase()` to join category data
+- [ ] Join `video_categories` table on `category_id` to get name/slug
+- [ ] Map `categoryId`, `categoryName`, `categorySlug` into returned objects
 
-### 3. Update Blog Post API route
-- [ ] In `app/api/cms/blog/route.ts` — handle `category_id` on create and update
+### 3. Update `getFeaturedBlogPosts()` to include category data
+- [ ] Same join pattern for featured posts
 
-### 4. Update data fetching in `lib/cms.ts`
-- [ ] Include `category_id` when fetching blog posts (if needed for frontend display)
+### 4. Create `BlogGrid` client component
+- [ ] Mirror `VideoGrid` pattern — filter tabs, "All" default, show more/less
+- [ ] Place at `app/(site)/blog/BlogGrid.tsx`
 
-### 5. (Optional) Rename "Video Categories" to "Categories" in CMS sidebar
-- [ ] Update AdminSidebar label so it's clear categories are shared
+### 5. Update blog page to use `BlogGrid` with categories
+- [ ] Fetch categories via `getCategories()` in the server page
+- [ ] Replace the current all-posts section with `BlogGrid`
+- [ ] Keep featured posts section as-is, add category filter to the grid below
 
 ### 6. Test
-- [ ] Create a blog post with a category assigned
-- [ ] Edit a blog post and change its category
-- [ ] Verify category is saved and loads correctly
+- [ ] Verify filter tabs appear on blog page
+- [ ] Verify clicking a category filters posts correctly
+- [ ] Verify "All" shows all posts
 
 ---
 
@@ -35,9 +37,6 @@ Let Louie assign categories to blog posts in the CMS, reusing the same categorie
 
 | File | Change |
 |------|--------|
-| Supabase `blog_posts` table | ADD `category_id` column |
-| `app/cms/blog/new/page.tsx` | ADD category dropdown |
-| `app/cms/blog/[id]/page.tsx` | ADD category dropdown |
-| `app/api/cms/blog/route.ts` | HANDLE `category_id` |
-| `lib/cms.ts` | MINOR — include category in fetch if needed |
-| `app/cms/components/AdminSidebar.tsx` | OPTIONAL — rename label |
+| `lib/cms.ts` | Add category fields to BlogPost, update fetch functions |
+| `app/(site)/blog/BlogGrid.tsx` | NEW — client component with category filter tabs |
+| `app/(site)/blog/page.tsx` | Fetch categories, use BlogGrid component |

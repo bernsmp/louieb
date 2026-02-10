@@ -78,6 +78,9 @@ interface BlogPost {
   imageAlt?: string
   author?: string
   tags?: string[]
+  categoryId?: string
+  categoryName?: string
+  categorySlug?: string
 }
 
 interface CourseModule {
@@ -1134,7 +1137,7 @@ async function fetchBlogPostsFromSupabase(): Promise<BlogPost[]> {
   try {
     const { data, error } = await supabaseAdmin
       .from('blog_posts')
-      .select('*')
+      .select('*, video_categories(id, name, slug)')
       .order('display_order', { ascending: true })
 
     if (error) {
@@ -1142,17 +1145,23 @@ async function fetchBlogPostsFromSupabase(): Promise<BlogPost[]> {
       return []
     }
 
-    return (data as BlogPostRow[]).map(row => ({
-      title: row.title,
-      excerpt: row.excerpt,
-      content: row.content,
-      linkedInUrl: row.linkedin_url,
-      publishedDate: row.published_date,
-      image: row.image || undefined,
-      imageAlt: row.image_alt || undefined,
-      author: row.author || undefined,
-      tags: row.tags || undefined,
-    }))
+    return (data as Record<string, unknown>[]).map(row => {
+      const cat = row.video_categories as { id: string; name: string; slug: string } | null
+      return {
+        title: row.title as string,
+        excerpt: row.excerpt as string,
+        content: row.content as string,
+        linkedInUrl: row.linkedin_url as string,
+        publishedDate: row.published_date as string,
+        image: (row.image as string) || undefined,
+        imageAlt: (row.image_alt as string) || undefined,
+        author: (row.author as string) || undefined,
+        tags: (row.tags as string[]) || undefined,
+        categoryId: cat?.id,
+        categoryName: cat?.name,
+        categorySlug: cat?.slug,
+      }
+    })
   } catch (error) {
     console.warn('[CMS] Failed to fetch blog posts:', error)
     return []
@@ -1688,7 +1697,7 @@ export async function getFeaturedBlogPosts(): Promise<BlogPostWithSlug[]> {
     try {
       const { data, error } = await supabaseAdmin
         .from('blog_posts')
-        .select('*')
+        .select('*, video_categories(id, name, slug)')
         .eq('is_featured', true)
         .order('display_order', { ascending: true })
         .limit(4)
@@ -1696,18 +1705,24 @@ export async function getFeaturedBlogPosts(): Promise<BlogPostWithSlug[]> {
       if (error) {
         console.warn('[CMS] Error fetching featured blog posts:', error.message)
       } else if (data && data.length > 0) {
-        return (data as BlogPostRow[]).map(row => ({
-          title: row.title,
-          excerpt: row.excerpt,
-          content: row.content,
-          linkedInUrl: row.linkedin_url,
-          publishedDate: row.published_date,
-          image: row.image || undefined,
-          imageAlt: row.image_alt || undefined,
-          author: row.author || undefined,
-          tags: row.tags || undefined,
-          slug: slugify(row.title),
-        }))
+        return (data as Record<string, unknown>[]).map(row => {
+          const cat = row.video_categories as { id: string; name: string; slug: string } | null
+          return {
+            title: row.title as string,
+            excerpt: row.excerpt as string,
+            content: row.content as string,
+            linkedInUrl: row.linkedin_url as string,
+            publishedDate: row.published_date as string,
+            image: (row.image as string) || undefined,
+            imageAlt: (row.image_alt as string) || undefined,
+            author: (row.author as string) || undefined,
+            tags: (row.tags as string[]) || undefined,
+            categoryId: cat?.id,
+            categoryName: cat?.name,
+            categorySlug: cat?.slug,
+            slug: slugify(row.title as string),
+          }
+        })
       }
     } catch (error) {
       console.warn('[CMS] Failed to fetch featured blog posts:', error)
