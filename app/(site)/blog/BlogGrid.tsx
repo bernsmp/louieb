@@ -2,14 +2,11 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 
 interface BlogPostItem {
   title: string
   excerpt: string
   publishedDate: string
-  image?: string
-  imageAlt?: string
   slug: string
   categoryId?: string
   categoryName?: string
@@ -89,21 +86,6 @@ export default function BlogGrid({ posts, categories }: BlogGridProps) {
                 href={`/blog/${post.slug}`}
                 className="group overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all hover:shadow-lg"
               >
-                {post.image ? (
-                  <div className="aspect-video w-full overflow-hidden">
-                    <Image
-                      src={post.image}
-                      alt={post.imageAlt || post.title}
-                      width={400}
-                      height={225}
-                      className="h-full w-full object-cover transition-transform group-hover:scale-105"
-                    />
-                  </div>
-                ) : (
-                  <div className="aspect-video w-full overflow-hidden bg-gradient-to-br from-[#0966c2]/10 to-[#0966c2]/5 flex items-center justify-center">
-                    <span className="text-4xl text-[#0966c2]/30">📝</span>
-                  </div>
-                )}
                 <div className="p-4">
                   <p className="font-sans text-xs text-muted-foreground">
                     {new Date(post.publishedDate).toLocaleDateString('en-US', {
