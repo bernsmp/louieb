@@ -64,7 +64,8 @@ export async function PUT(
       author,
       tags,
       display_order,
-      is_featured
+      is_featured,
+      category_id
     } = body
 
     const { data, error } = await supabaseAdmin
@@ -81,6 +82,7 @@ export async function PUT(
         tags: tags || [],
         display_order: display_order || 0,
         is_featured: is_featured ?? false,
+        category_id: category_id || null,
       })
       .eq('id', id)
       .select()

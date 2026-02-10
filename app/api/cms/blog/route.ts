@@ -48,7 +48,8 @@ export async function POST(request: Request) {
       author,
       tags,
       display_order,
-      is_featured
+      is_featured,
+      category_id
     } = body
 
     if (!title || !excerpt || !content || !published_date) {
@@ -71,6 +72,7 @@ export async function POST(request: Request) {
         tags: tags || [],
         display_order: display_order || 0,
         is_featured: is_featured || false,
+        category_id: category_id || null,
       })
       .select()
       .single()

@@ -137,6 +137,7 @@ export interface BlogPostRow {
   image_alt: string | null
   author: string | null
   tags: string[] | null
+  category_id: string | null
   is_featured: boolean
   display_order: number
   created_at: string

@@ -5,12 +5,22 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ImageUploader } from '../../components/ImageUploader'
 
+interface Category {
+  id: string
+  name: string
+  slug: string
+}
+
 export default function EditBlogPostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
   const router = useRouter()
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
+  const [categories, setCategories] = useState<Category[]>([])
+  const [showNewCategory, setShowNewCategory] = useState(false)
+  const [newCategoryName, setNewCategoryName] = useState('')
+  const [creatingCategory, setCreatingCategory] = useState(false)
 
   const [form, setForm] = useState({
     title: '',
@@ -23,11 +33,46 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
     author: 'Louie Bernstein',
     tags: '',
     is_featured: false,
+    category_id: '',
   })
 
   useEffect(() => {
     fetchPost()
+    fetchCategories()
   }, [id])
+
+  const fetchCategories = async () => {
+    try {
+      const res = await fetch('/api/cms/categories')
+      const data = await res.json()
+      if (data.categories) setCategories(data.categories)
+    } catch (err) {
+      console.error('Failed to fetch categories:', err)
+    }
+  }
+
+  const handleCreateCategory = async () => {
+    if (!newCategoryName.trim()) return
+    setCreatingCategory(true)
+    try {
+      const res = await fetch('/api/cms/categories', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: newCategoryName.trim() }),
+      })
+      const data = await res.json()
+      if (data.category) {
+        setCategories([...categories, data.category])
+        setForm({ ...form, category_id: data.category.id })
+        setNewCategoryName('')
+        setShowNewCategory(false)
+      }
+    } catch (err) {
+      console.error('Failed to create category:', err)
+    } finally {
+      setCreatingCategory(false)
+    }
+  }
 
   const fetchPost = async () => {
     try {
@@ -45,6 +90,7 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
           author: data.post.author || 'Louie Bernstein',
           tags: Array.isArray(data.post.tags) ? data.post.tags.join(', ') : '',
           is_featured: data.post.is_featured || false,
+          category_id: data.post.category_id || '',
         })
       }
     } catch (error) {
@@ -72,6 +118,7 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
         body: JSON.stringify({
           ...form,
           tags: tagsArray,
+          category_id: form.category_id || null,
         }),
       })
 
@@ -213,6 +260,50 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
           <p style={{ fontSize: '0.875rem', color: '#737373', marginTop: '0.25rem' }}>
             Separate multiple tags with commas
           </p>
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Category</label>
+          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+            <select
+              className="form-input"
+              value={form.category_id}
+              onChange={(e) => setForm({ ...form, category_id: e.target.value })}
+            >
+              <option value="">No category</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>{cat.name}</option>
+              ))}
+            </select>
+            <button
+              type="button"
+              onClick={() => setShowNewCategory(!showNewCategory)}
+              className="btn btn--secondary"
+              style={{ whiteSpace: 'nowrap' }}
+            >
+              + New
+            </button>
+          </div>
+          {showNewCategory && (
+            <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
+              <input
+                type="text"
+                className="form-input"
+                value={newCategoryName}
+                onChange={(e) => setNewCategoryName(e.target.value)}
+                placeholder="New category name"
+                onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleCreateCategory())}
+              />
+              <button
+                type="button"
+                onClick={handleCreateCategory}
+                className="btn btn--primary"
+                disabled={creatingCategory || !newCategoryName.trim()}
+              >
+                {creatingCategory ? 'Adding...' : 'Add'}
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="form-group">
