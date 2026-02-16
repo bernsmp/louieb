@@ -18,6 +18,7 @@ const navSections = [
       { name: 'Videos Page', href: '/cms/videos', icon: VideoIcon },
       { name: 'Newsletter', href: '/cms/newsletter', icon: MailIcon },
       { name: 'Blog Page', href: '/cms/blog-page', icon: PenIcon },
+      { name: 'Articles Page', href: '/cms/articles-page', icon: FileTextIcon },
       { name: 'Course', href: '/cms/course', icon: BookIcon },
       { name: 'Tools', href: '/cms/tools', icon: WrenchIcon },
     ],
