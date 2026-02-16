@@ -180,65 +180,63 @@ export default function FractionalSalesLeaderVsConsultantPage() {
 
   return (
     <>
-      {/* JSON-LD Schema for SEO */}
+      {/* JSON-LD Schema for SEO — single @graph block to avoid duplicate structured data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Article",
-            headline:
-              "Fractional Sales Leader vs Consultant: Key Differences Explained",
-            description:
-              "Understand the critical differences between hiring a Fractional Sales Leader and a Consultant for your business growth.",
-            author: {
-              "@type": "Person",
-              name: "Louie Bernstein",
-              url: "https://louiebernstein.com",
-            },
-            publisher: {
-              "@type": "Organization",
-              name: "Louie Bernstein",
-              url: "https://louiebernstein.com",
-            },
-            mainEntityOfPage: {
-              "@type": "WebPage",
-              "@id":
-                "https://louiebernstein.com/fractional-sales-leader-vs-consultant",
-            },
-          }),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: [
+            "@graph": [
               {
-                "@type": "Question",
-                name: "What is the main difference between a Fractional Sales Leader and a Consultant?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "A Fractional Sales Leader is embedded in your business, manages the sales team, and is accountable for results. A Consultant provides external advice on specific projects but typically doesn't manage teams or take ownership of outcomes.",
+                "@type": "Article",
+                headline:
+                  "Fractional Sales Leader vs Consultant: Key Differences Explained",
+                description:
+                  "Understand the critical differences between hiring a Fractional Sales Leader and a Consultant for your business growth.",
+                author: {
+                  "@type": "Person",
+                  name: "Louie Bernstein",
+                  url: "https://louiebernstein.com",
+                },
+                publisher: {
+                  "@type": "Organization",
+                  name: "Louie Bernstein",
+                  url: "https://louiebernstein.com",
+                },
+                mainEntityOfPage: {
+                  "@type": "WebPage",
+                  "@id":
+                    "https://louiebernstein.com/fractional-sales-leader-vs-consultant",
                 },
               },
               {
-                "@type": "Question",
-                name: "When should I hire a Fractional Sales Leader vs a Consultant?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "Hire a Fractional Sales Leader if you need someone to run sales while you scale or search for a full-time executive. Hire a Consultant if you need specialized insight, market validation, or a roadmap that your existing team can execute.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "Is a Fractional Sales Leader accountable for sales results?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "Yes, a Fractional Sales Leader is accountable for results, unlike a consultant who is only accountable for the quality of their advice.",
-                },
+                "@type": "FAQPage",
+                mainEntity: [
+                  {
+                    "@type": "Question",
+                    name: "What is the main difference between a Fractional Sales Leader and a Consultant?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "A Fractional Sales Leader is embedded in your business, manages the sales team, and is accountable for results. A Consultant provides external advice on specific projects but typically doesn't manage teams or take ownership of outcomes.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "When should I hire a Fractional Sales Leader vs a Consultant?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Hire a Fractional Sales Leader if you need someone to run sales while you scale or search for a full-time executive. Hire a Consultant if you need specialized insight, market validation, or a roadmap that your existing team can execute.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "Is a Fractional Sales Leader accountable for sales results?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Yes, a Fractional Sales Leader is accountable for results, unlike a consultant who is only accountable for the quality of their advice.",
+                    },
+                  },
+                ],
               },
             ],
           }),

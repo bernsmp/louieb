@@ -1,42 +1,37 @@
-# Add Category Filtering to Blog Page (Frontend)
+# Tasks: FAQPage Schema Fix + Articles CMS
 
-## Goal
-Show category filter tabs on the public blog page, matching the same pattern used on the videos page (`VideoGrid` component). Categories already exist in the DB and CMS — this is frontend display only.
+## Fixes
 
----
+- [x] Fix 1: Merge duplicate FAQPage/Article schema into single @graph JSON-LD block
+- [x] Fix 2: Build Articles CMS API routes (GET all, GET/PUT/DELETE single, POST new)
+- [x] Fix 3: Build Articles CMS pages (list, edit, new)
+- [x] Fix 4: Add "Articles" link to AdminSidebar Collections section
+- [x] Verify: `npm run build` passes
 
-## Tasks
+## Review
 
-### 1. Update `BlogPost` interface to include category fields
-- [ ] Add `categoryId?`, `categoryName?`, `categorySlug?` to `BlogPost` in `lib/cms.ts`
+### Changes Summary
+1. **`app/(site)/fractional-sales-leader-vs-consultant/page.tsx`** — Merged two separate `<script type="application/ld+json">` blocks (Article + FAQPage) into a single block using `@graph` array. Fixes Google Search Console duplicate structured data error.
 
-### 2. Update `fetchBlogPostsFromSupabase()` to join category data
-- [ ] Join `video_categories` table on `category_id` to get name/slug
-- [ ] Map `categoryId`, `categoryName`, `categorySlug` into returned objects
+2. **`app/api/cms/articles/route.ts`** (NEW) — GET returns all articles (frontmatter only), POST creates a new .md file with slug generated from title.
 
-### 3. Update `getFeaturedBlogPosts()` to include category data
-- [ ] Same join pattern for featured posts
+3. **`app/api/cms/articles/[slug]/route.ts`** (NEW) — GET returns single article (frontmatter + content), PUT updates it, DELETE removes the .md file. All write operations require auth.
 
-### 4. Create `BlogGrid` client component
-- [ ] Mirror `VideoGrid` pattern — filter tabs, "All" default, show more/less
-- [ ] Place at `app/(site)/blog/BlogGrid.tsx`
+4. **`app/cms/articles/page.tsx`** (NEW) — Article list page matching blog list pattern. Shows cards with image thumbnail, title, date, Edit/Delete buttons.
 
-### 5. Update blog page to use `BlogGrid` with categories
-- [ ] Fetch categories via `getCategories()` in the server page
-- [ ] Replace the current all-posts section with `BlogGrid`
-- [ ] Keep featured posts section as-is, add category filter to the grid below
+5. **`app/cms/articles/[slug]/page.tsx`** (NEW) — Edit article form with all frontmatter fields + markdown content textarea + ImageUploader for featured image.
 
-### 6. Test
-- [ ] Verify filter tabs appear on blog page
-- [ ] Verify clicking a category filters posts correctly
-- [ ] Verify "All" shows all posts
+6. **`app/cms/articles/new/page.tsx`** (NEW) — New article form, generates slug from title.
 
----
+7. **`app/cms/components/AdminSidebar.tsx`** — Added "Articles" link to Collections section (after Blog Posts), using existing FileTextIcon.
 
-## Files Touched
+### New Dependencies
+- None (uses existing `gray-matter` and `lib/markdown.ts`)
 
-| File | Change |
-|------|--------|
-| `lib/cms.ts` | Add category fields to BlogPost, update fetch functions |
-| `app/(site)/blog/BlogGrid.tsx` | NEW — client component with category filter tabs |
-| `app/(site)/blog/page.tsx` | Fetch categories, use BlogGrid component |
+### Env Vars
+- None new
+
+### Limitations
+- Articles stay as markdown files — no database migration
+- No drag-to-reorder (articles don't have display_order)
+- Slug is generated once on create; renaming title won't change the slug/filename

@@ -26,6 +26,7 @@ const navSections = [
     title: 'Collections',
     items: [
       { name: 'Blog Posts', href: '/cms/blog', icon: PenIcon },
+      { name: 'Articles', href: '/cms/articles', icon: FileTextIcon },
       { name: 'Testimonials', href: '/cms/testimonials', icon: QuoteIcon },
       { name: 'FAQ Items', href: '/cms/faq', icon: HelpCircleIcon },
       { name: 'Videos', href: '/cms/videos-list', icon: PlayIcon },
