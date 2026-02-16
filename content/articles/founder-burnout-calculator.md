@@ -11,7 +11,8 @@ keywords: >-
   fractional sales leader, revenue leakage, sales transition, startup scaling
 author: Louie Bernstein
 date: '2026-01-19'
-image: /images/articles/founder-burnout-calculator-thumbnail.png
+image: >-
+  https://apkwktwnjvspfinrnhmz.supabase.co/storage/v1/object/public/media/articles/1771276144350_16_x_9_for_videos.png
 ---
 
 ### **Key Takeaways:**
