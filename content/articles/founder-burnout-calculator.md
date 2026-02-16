@@ -1,10 +1,17 @@
 ---
-title: "The Founder Burnout Calculator: How Much Revenue Are You Losing by Doing Sales Yourself?"
-description: "Founder-led sales past $3M ARR costs you 3-5x more than you realize. Use the Founder Burnout Calculator to discover your hidden costs and learn how to transition to scalable sales."
-keywords: "founder burnout, founder-led sales, CEO opportunity cost, sales delegation, fractional sales leader, revenue leakage, sales transition, startup scaling"
-author: "Louie Bernstein"
-date: "2026-01-19"
-image: "/images/articles/founder-burnout-calculator-thumbnail.png"
+title: >-
+  The Founder Burnout Calculator: How Much Revenue Are You Losing by Doing Sales
+  Yourself?
+description: >-
+  Founder-led sales past $3M ARR costs you 3-5x more than you realize. Use the
+  Founder Burnout Calculator to discover your hidden costs and learn how to
+  transition to scalable sales.
+keywords: >-
+  founder burnout, founder-led sales, CEO opportunity cost, sales delegation,
+  fractional sales leader, revenue leakage, sales transition, startup scaling
+author: Louie Bernstein
+date: '2026-01-19'
+image: /images/articles/founder-burnout-calculator-thumbnail.png
 ---
 
 ### **Key Takeaways:**
