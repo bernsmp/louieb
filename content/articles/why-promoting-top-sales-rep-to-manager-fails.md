@@ -1,10 +1,16 @@
 ---
-title: "Why Promoting Your Top Sales Rep to Manager Almost Always Fails"
-description: "Promoting your top sales rep to manager is a $150,000 mistake. Learn why sales skills don't equal management skills, and what to do instead to build a scalable sales team."
-keywords: "sales promotion mistake, sales rep to manager, fractional sales leader, sales management, sales team building, sales infrastructure, founder-led sales"
-author: "Louie Bernstein"
-date: "2026-01-19"
-image: "/images/articles/promoting-top-rep-thumbnail.png"
+title: Why Promoting Your Top Sales Rep to Manager Almost Always Fails
+description: >-
+  Promoting your top sales rep to manager is a $150,000 mistake. Learn why sales
+  skills don't equal management skills, and what to do instead to build a
+  scalable sales team.
+keywords: >-
+  sales promotion mistake, sales rep to manager, fractional sales leader, sales
+  management, sales team building, sales infrastructure, founder-led sales
+author: Louie Bernstein
+date: '2026-01-19'
+image: >-
+  https://apkwktwnjvspfinrnhmz.supabase.co/storage/v1/object/public/media/articles/1771337735626_sales_rep_vs_sales_manager.png
 ---
 
 ### **Key Takeaways:**
