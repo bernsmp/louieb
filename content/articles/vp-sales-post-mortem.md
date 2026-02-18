@@ -1,14 +1,21 @@
 ---
-title: "The VP of Sales Post-Mortem: 7 Warning Signs Your $250k Hire Is About to Fail (And How to Save It)"
-description: "60-70% of VP of Sales hires fail within 18 months. Learn the 7 warning signs that appear in the first 90 days and how a Fractional Sales Leader can rescue the situation before it becomes a $500k disaster."
-keywords: "VP of Sales failure, sales leadership, fractional sales leader, sales VP hiring mistakes, sales team management, B2B SaaS sales, revenue growth"
-author: "Louie Bernstein"
-date: "2026-01-20"
-image: "https://apkwktwnjvspfinrnhmz.supabase.co/storage/v1/object/public/media/articles/vp-sales-post-mortem-header.png"
+title: >-
+  The VP of Sales Post-Mortem: 7 Warning Signs Your $250k Hire Is About to Fail
+  (And How to Save It)
+description: >-
+  60-70% of VP of Sales hires fail within 18 months. Learn the 7 warning signs
+  that appear in the first 90 days and how a Fractional Sales Leader can rescue
+  the situation before it becomes a $500k disaster.
+keywords: >-
+  VP of Sales failure, sales leadership, fractional sales leader, sales VP
+  hiring mistakes, sales team management, B2B SaaS sales, revenue growth
+author: Louie Bernstein
+date: '2026-01-20'
+image: >-
+  https://apkwktwnjvspfinrnhmz.supabase.co/storage/v1/object/public/media/articles/vp-sales-post-mortem-header.png
 ---
 
 ### **Key Takeaways:**
-
 * 60-70% of VP of Sales hires fail within 18 months, costing companies $200,000-$500,000 in wasted investment.
 
 * The failure is usually not the VP's fault. It is a mismatch between what they were hired to do (scale) and what you needed (build).
