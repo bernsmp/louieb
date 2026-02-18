@@ -88,7 +88,7 @@ export function Footer({
                 </a>
               </li>
               <li>
-                <a href={phoneLink} className="font-sans text-base text-muted-foreground transition-colors hover:text-primary">
+                <a href={phoneLink} aria-label={`Call ${phone}`} className="font-sans text-base text-muted-foreground transition-colors hover:text-primary">
                   {phone}
                 </a>
               </li>

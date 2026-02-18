@@ -87,6 +87,7 @@ export function Contact({
             </h3>
             <a
               href={phoneLink}
+              aria-label={`Call ${phone}`}
               className="mt-4 inline-block text-lg font-medium text-neutral-600 transition-colors hover:text-neutral-900"
             >
               {phone}

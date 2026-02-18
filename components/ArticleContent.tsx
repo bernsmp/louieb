@@ -10,7 +10,7 @@ interface ArticleContentProps {
 
 export function ArticleContent({ content }: ArticleContentProps) {
   return (
-    <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-foreground prose-h1:text-4xl prose-h1:md:text-5xl prose-h1:lg:text-6xl prose-h2:text-3xl prose-h2:md:text-4xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-2xl prose-h3:md:text-3xl prose-p:text-base prose-p:md:text-lg prose-p:leading-relaxed prose-p:my-6 prose-a:text-[#0966c2] prose-a:no-underline hover:prose-a:underline prose-strong:font-bold prose-strong:text-foreground prose-ul:list-disc prose-ul:list-inside prose-ul:pl-4 prose-ol:list-decimal prose-ol:list-inside prose-ol:pl-4 prose-li:my-2 prose-li:ml-4 prose-blockquote:border-l-4 prose-blockquote:border-[#0966c2] prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground prose-blockquote:my-8 prose-img:rounded-lg prose-img:shadow-lg prose-img:my-8">
+    <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-foreground prose-h1:text-4xl prose-h1:md:text-5xl prose-h1:lg:text-6xl prose-h2:text-3xl prose-h2:md:text-4xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-2xl prose-h3:md:text-3xl prose-p:text-base prose-p:md:text-lg prose-p:leading-relaxed prose-p:my-6 prose-a:text-[#0966c2] prose-a:no-underline hover:prose-a:underline prose-strong:font-bold prose-strong:text-foreground prose-ul:list-disc prose-ul:list-outside prose-ul:pl-6 prose-ol:list-decimal prose-ol:list-outside prose-ol:pl-6 prose-li:my-2 prose-blockquote:border-l-4 prose-blockquote:border-[#0966c2] prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground prose-blockquote:my-8 prose-img:rounded-lg prose-img:shadow-lg prose-img:my-8">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
@@ -85,17 +85,17 @@ export function ArticleContent({ content }: ArticleContentProps) {
             </h3>
           ),
           ul: ({ children }) => (
-            <ul className="list-disc list-inside pl-4 my-6 space-y-2">
+            <ul className="list-disc list-outside pl-6 my-6 space-y-2">
               {children}
             </ul>
           ),
           ol: ({ children }) => (
-            <ol className="list-decimal list-inside pl-4 my-6 space-y-2">
+            <ol className="list-decimal list-outside pl-6 my-6 space-y-2">
               {children}
             </ol>
           ),
           li: ({ children }) => (
-            <li className="ml-4 my-2">
+            <li className="my-2">
               {children}
             </li>
           ),
