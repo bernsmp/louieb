@@ -34,7 +34,7 @@ export function Footer({
             <h3 className="font-serif text-2xl font-bold text-primary">
               {copyrightName}
             </h3>
-            <p className="mt-3 font-sans text-base text-muted-foreground">
+            <p className="mt-3 font-sans text-base text-neutral-600">
               {tagline}
             </p>
             <p className="mt-1 font-sans text-lg font-semibold text-foreground">
@@ -49,27 +49,27 @@ export function Footer({
             </h4>
             <ul className="mt-4 space-y-3">
               <li>
-                <Link href="/" className="font-sans text-base text-muted-foreground transition-colors hover:text-primary">
+                <Link href="/" className="font-sans text-base text-neutral-600 transition-colors hover:text-primary">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/articles" className="font-sans text-base text-muted-foreground transition-colors hover:text-primary">
+                <Link href="/articles" className="font-sans text-base text-neutral-600 transition-colors hover:text-primary">
                   Articles
                 </Link>
               </li>
               <li>
-                <Link href="/videos" className="font-sans text-base text-muted-foreground transition-colors hover:text-primary">
+                <Link href="/videos" className="font-sans text-base text-neutral-600 transition-colors hover:text-primary">
                   Videos
                 </Link>
               </li>
               <li>
-                <Link href="/newsletter" className="font-sans text-base text-muted-foreground transition-colors hover:text-primary">
+                <Link href="/newsletter" className="font-sans text-base text-neutral-600 transition-colors hover:text-primary">
                   Newsletter
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="font-sans text-base text-muted-foreground transition-colors hover:text-primary">
+                <Link href="/privacy" className="font-sans text-base text-neutral-600 transition-colors hover:text-primary">
                   Privacy Policy
                 </Link>
               </li>
@@ -83,12 +83,12 @@ export function Footer({
             </h4>
             <ul className="mt-4 space-y-3">
               <li>
-                <a href={`mailto:${email}`} className="font-sans text-base text-muted-foreground transition-colors hover:text-primary">
+                <a href={`mailto:${email}`} className="font-sans text-base text-neutral-600 transition-colors hover:text-primary">
                   {email}
                 </a>
               </li>
               <li>
-                <a href={phoneLink} aria-label={`Call ${phone}`} className="font-sans text-base text-muted-foreground transition-colors hover:text-primary">
+                <a href={phoneLink} aria-label={`Call ${phone}`} className="font-sans text-base text-neutral-600 transition-colors hover:text-primary">
                   {phone}
                 </a>
               </li>
@@ -124,7 +124,7 @@ export function Footer({
 
         {/* Bottom Bar */}
         <div className="mt-12 border-t border-border pt-8">
-          <p className="text-center font-sans text-sm text-muted-foreground">
+          <p className="text-center font-sans text-sm text-neutral-600">
             &copy; {new Date().getFullYear()} {copyrightName}. All rights reserved.
           </p>
         </div>
