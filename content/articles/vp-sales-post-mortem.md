@@ -358,7 +358,7 @@ Sometimes the sales VP is salvageable. They are competent, but they have never b
 
 **Solution:** Bring in a Fractional Sales Leader to build the infrastructure.
 
-The Fractional Leader does not replace the VP. We work alongside them for 90-120 days to:
+The Fractional Leader does not replace the VP. We work immediately before, or alongside them for 90-120 days to:
 
 * Build the Sales Playbook they should have built
 * Configure the CRM workflows
@@ -401,7 +401,7 @@ One of my clients fired their VP after six months of poor performance. I came in
 
 As one client said:
 
-*"Louie came in and helped bring together all our sales efforts into a system with a Sales Playbook, realistic pipeline, and defined roles. We are better off from having Louie here." — Ted Alvarado*
+*"Louie came in and helped bring together all our sales efforts into a system with a Sales Playbook, realistic pipeline, and defined roles. We are better off from having Louie here." — Systems Engineer - eCommerce company*
 
 ---
 
@@ -494,7 +494,7 @@ But you cannot wait it out. The longer you delay, the more expensive this gets.
 
 ---
 
-## **Frequently Asked Questions**
+## **Frequently Asked Questions (FAQs)**
 
 **Q: How quickly should I expect to see results from a new VP of Sales?**
 
@@ -543,9 +543,10 @@ Louie Bernstein is a Fractional Sales Leader with 50 years of sales experience h
 
 * [LinkedIn](https://www.linkedin.com/in/louiebernstein)
 * [Subscribe to The Sunday Starter Newsletter](https://www.louiebernstein.com/newsletter)
+* [My YouTube Channel](https://www.youtube.com/@LouieBernstein)
 
 ---
 
 **Share this article:**
 
-[LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url=https://louiebernstein.com/articles/vp-sales-post-mortem) • [Twitter](https://twitter.com/intent/tweet?url=https://louiebernstein.com/articles/vp-sales-post-mortem&text=The%20VP%20of%20Sales%20Post-Mortem)
+[LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url=https://louiebernstein.com/articles/vp-sales-post-mortem) 
