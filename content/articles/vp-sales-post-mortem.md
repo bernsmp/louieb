@@ -54,7 +54,7 @@ Let me show you the seven warning signs that predict sales VP failure. More impo
 
 Before we diagnose the problem, let's be clear about the root cause.
 
-Most VP of Sales failures are not because the VP is incompetent. They are because the founder hired a **driver when they needed a builder**.
+Most VP of Sales failures are not because the VP is incompetent. The failures because the founder hired a **driver when they needed a builder**.
 
 ### **Drivers vs. Builders**
 
@@ -68,7 +68,7 @@ Builders come from early-stage companies where they had to figure things out wit
 
 ### **The Mismatch**
 
-Most $2M-$10M ARR companies need a Builder.
+Most $1M-$10M ARR companies need a Builder.
 
 But when they go to hire, they get seduced by the "brand name" VP from Oracle or HubSpot. That person is a Driver.
 
