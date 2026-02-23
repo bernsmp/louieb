@@ -29,7 +29,7 @@ function generateVideoSchema(videos: Array<{ videoId: string; title: string; des
     name: video.title,
     description: video.description || "",
     thumbnailUrl: `https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`,
-    uploadDate: "2025-11-23",
+    uploadDate: "2025-11-23T00:00:00Z",
     contentUrl: `https://www.youtube.com/watch?v=${video.videoId}`,
     embedUrl: `https://www.youtube-nocookie.com/embed/${video.videoId}`,
     publisher: {

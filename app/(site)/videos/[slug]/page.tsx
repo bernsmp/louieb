@@ -51,7 +51,7 @@ function generateVideoSchema(video: { videoId: string; title: string; descriptio
     name: video.title,
     description: video.description || `${video.title} - Sales training video from Louie Bernstein`,
     thumbnailUrl: `https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`,
-    uploadDate: "2025-11-23",
+    uploadDate: "2025-11-23T00:00:00Z",
     contentUrl: `https://www.youtube.com/watch?v=${video.videoId}`,
     embedUrl: `https://www.youtube-nocookie.com/embed/${video.videoId}`,
     publisher: {
