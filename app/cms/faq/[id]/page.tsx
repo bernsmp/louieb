@@ -99,6 +99,7 @@ export default function EditFAQPage({ params }: { params: Promise<{ id: string }
             <select className="form-input" value={form.page} onChange={(e) => setForm({ ...form, page: e.target.value })}>
               <option value="homepage">Homepage</option>
               <option value="fslPage">FSL Page</option>
+              <option value="faqsPage">FAQs Page</option>
             </select>
           </div>
           <div className="form-group">

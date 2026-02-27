@@ -32,6 +32,13 @@ export default function EditSEOPage() {
           placeholder: 'e.g., fractional sales leader, sales consulting, sales team optimization',
           hint: 'Comma-separated keywords for SEO',
         },
+        {
+          name: 'ogImageUrl',
+          label: 'OG Image URL',
+          type: 'text',
+          placeholder: 'e.g., https://louiebernstein.com/logo/og-image.png',
+          hint: 'Image used when the site is shared on social media (1200x630px recommended)',
+        },
       ]}
     />
   )

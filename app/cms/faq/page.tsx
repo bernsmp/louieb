@@ -118,6 +118,7 @@ export default function FAQAdmin() {
             <option value="all">All Pages</option>
             <option value="homepage">Homepage</option>
             <option value="fslPage">FSL Page</option>
+            <option value="faqsPage">FAQs Page</option>
           </select>
           <Link href="/cms/faq/new" className="btn btn--primary">+ Add FAQ</Link>
         </div>
