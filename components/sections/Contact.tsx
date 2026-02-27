@@ -36,9 +36,9 @@ export function Contact({
           </p>
         </div>
 
-        <div className="mt-20 grid gap-8 md:grid-cols-2">
+        <div className="mt-20 flex justify-center">
           {/* Email */}
-          <div className="group rounded-2xl border-2 border-neutral-200 bg-white p-10 text-center transition-all hover:border-neutral-900 hover:shadow-xl">
+          <div className="group w-full max-w-sm rounded-2xl border-2 border-neutral-200 bg-white p-10 text-center transition-all hover:border-neutral-900 hover:shadow-xl">
             <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-neutral-900 text-white transition-transform group-hover:scale-110">
               <svg
                 className="h-10 w-10"
@@ -62,35 +62,6 @@ export function Contact({
               className="mt-4 inline-block text-lg font-medium text-neutral-600 transition-colors hover:text-neutral-900"
             >
               {email}
-            </a>
-          </div>
-
-          {/* Phone */}
-          <div className="group rounded-2xl border-2 border-neutral-200 bg-white p-10 text-center transition-all hover:border-neutral-900 hover:shadow-xl">
-            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-neutral-900 text-white transition-transform group-hover:scale-110">
-              <svg
-                className="h-10 w-10"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                />
-              </svg>
-            </div>
-            <h3 className="mt-8 text-2xl font-bold text-neutral-900">
-              {phoneLabel}
-            </h3>
-            <a
-              href={phoneLink}
-              aria-label={`Call ${phone}`}
-              className="mt-4 inline-block text-lg font-medium text-neutral-600 transition-colors hover:text-neutral-900"
-            >
-              {phone}
             </a>
           </div>
         </div>

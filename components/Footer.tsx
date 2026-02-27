@@ -87,11 +87,6 @@ export function Footer({
                   {email}
                 </a>
               </li>
-              <li>
-                <a href={phoneLink} aria-label={`Call ${phone}`} className="font-sans text-base text-neutral-600 transition-colors hover:text-primary">
-                  {phone}
-                </a>
-              </li>
             </ul>
 
             {/* Social Links */}
