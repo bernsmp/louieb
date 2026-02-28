@@ -32,9 +32,9 @@ export function Hero({
   return (
     <section className="relative w-full overflow-hidden">
       <BackgroundCells className="bg-slate-950">
-        <div className="text-center">
+        <div className="px-6 text-center">
           {/* Main Heading - Large, bold, white text */}
-          <h1 className="text-4xl font-medium text-white md:text-5xl lg:text-7xl xl:text-8xl">
+          <h1 className="mx-auto max-w-5xl text-4xl font-medium text-white md:text-5xl lg:text-6xl">
             {headline}
           </h1>
           
