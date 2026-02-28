@@ -13,6 +13,53 @@ import { getSiteSettings, getTestimonials } from "@/lib/cms";
 // Make this page dynamic so CMS changes are reflected immediately
 export const dynamic = 'force-dynamic';
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a Fractional Sales Leader?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A Fractional Sales Leader is an experienced sales executive who works with your company part-time to build sales systems, processes, and teams — without the cost of a full-time VP of Sales hire."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is a Fractional Sales Leader different from a VP of Sales?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A VP of Sales is a full-time hire typically costing $200K+ per year. A Fractional Sales Leader provides the same strategic expertise at a fraction of the cost, working part-time while you build the systems needed before making a full-time hire."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When should a founder stop doing their own sales?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "When sales is preventing you from running and growing your business. If you're closing most deals yourself and can't step away without revenue dropping, you need a system — not just a salesperson."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What size company do you work with?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "I work with B2B founders at companies with $1M–$10M in ARR who are stuck in founder-led sales and need to build repeatable systems before hiring their first salesperson or sales team."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to see results?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most founders see a meaningful shift within the first 90 days — a documented process, consistent outbound activity, and a pipeline they can actually manage and forecast."
+      }
+    }
+  ]
+};
+
 export default async function Home() {
   const [settings, testimonials] = await Promise.all([
     getSiteSettings(),
@@ -26,6 +73,11 @@ export default async function Home() {
   };
 
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
     <main>
       {isVisible(settings.hero) && (
         <Hero
@@ -128,5 +180,6 @@ export default async function Home() {
         />
       )}
     </main>
+    </>
   );
 }

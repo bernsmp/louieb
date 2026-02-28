@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Outfit } from "next/font/google";
+import Script from "next/script";
 import "../globals.css";
 import { FloatingNavWrapper } from "@/components/FloatingNavWrapper";
 import { Footer } from "@/components/Footer";
@@ -120,6 +121,18 @@ export default async function SiteLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
         />
       </head>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-SF7HLC3FGT"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-SF7HLC3FGT');
+        `}
+      </Script>
       <body
         className={`${playfair.variable} ${outfit.variable} antialiased`}
       >
