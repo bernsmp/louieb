@@ -34,7 +34,7 @@ export function Hero({
       <BackgroundCells className="bg-slate-950">
         <div className="px-6 text-center">
           {/* Main Heading - Large, bold, white text */}
-          <h1 className="mx-auto max-w-5xl text-4xl font-medium text-white md:text-5xl lg:text-6xl">
+          <h1 className="mx-auto max-w-5xl text-4xl font-medium text-white md:text-6xl lg:text-7xl">
             {headline}
           </h1>
           
