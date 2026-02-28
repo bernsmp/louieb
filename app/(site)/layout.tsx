@@ -21,8 +21,8 @@ const outfit = Outfit({
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getSEOSettings()
 
-  const defaultTitle = "Louie Bernstein - LinkedIn Top Voice | Fractional Sales Leader for $1M–$10M ARR Companies"
-  const defaultDescription = "LinkedIn Top Voice | Fractional Sales Leader helping $1M–$10M ARR companies build repeatable sales systems and high-performing sales teams. I've scaled from zero to INC 500. Ready to break through? Let's talk."
+  const defaultTitle = "Louie Bernstein - INC 500 Founder | Fractional Sales Leader for $1M–$10M ARR Companies"
+  const defaultDescription = "Fractional Sales Leader for $1M–$10M ARR companies. INC 500 Founder with 9+ years helping technical and operational founders build repeatable sales systems — and stop being the bottleneck. Ready to break through? Let's talk."
   const defaultKeywords = "fractional sales leader, fractional sales leadership, sales consulting, sales team optimization, sales process consulting, sales training, $1M-$10M ARR, sales systems, sales team development"
   const defaultOgImage = "https://louiebernstein.com/logo/og-image.png"
 
@@ -45,8 +45,8 @@ export async function generateMetadata(): Promise<Metadata> {
       ],
     },
     openGraph: {
-      title: seo.siteTitle || "Louie Bernstein - LinkedIn Top Voice | Fractional Sales Leader",
-      description: seo.siteDescription || "LinkedIn Top Voice | Fractional Sales Leader helping $1M–$10M ARR companies build repeatable sales systems. I've scaled from zero to INC 500.",
+      title: seo.siteTitle || "Louie Bernstein - INC 500 Founder | Fractional Sales Leader",
+      description: seo.siteDescription || "Fractional Sales Leader for $1M–$10M ARR companies. INC 500 Founder with 9+ years helping founders build repeatable sales systems and stop being the bottleneck.",
       url: "https://louiebernstein.com",
       siteName: "Louie Bernstein",
       locale: "en_US",
@@ -62,8 +62,8 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: seo.siteTitle || "Louie Bernstein - LinkedIn Top Voice | Fractional Sales Leader",
-      description: seo.siteDescription || "LinkedIn Top Voice | Fractional Sales Leader helping $1M–$10M ARR companies build repeatable sales systems. I've scaled from zero to INC 500.",
+      title: seo.siteTitle || "Louie Bernstein - INC 500 Founder | Fractional Sales Leader",
+      description: seo.siteDescription || "Fractional Sales Leader for $1M–$10M ARR companies. INC 500 Founder with 9+ years helping founders build repeatable sales systems and stop being the bottleneck.",
       images: [ogImage],
     },
   }
