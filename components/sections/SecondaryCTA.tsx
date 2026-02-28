@@ -13,7 +13,7 @@ export function SecondaryCTA() {
         <p className="mx-auto mt-6 max-w-xl text-lg text-neutral-600">
           The complete Founder&apos;s and CEO&apos;s Sales System — 20 modules, templates,
           scripts, and the 588-page playbook that&apos;s helped companies grow sales over
-          60% year-over-year. Free on YouTube.
+          61% year-over-year. Free on YouTube.
         </p>
         <Link
           href="/course"
