@@ -27,7 +27,7 @@ export function ValueProposition({
       </div>
 
       <div className="container relative z-10 mx-auto max-w-5xl px-6 text-center lg:px-8">
-        <h2 className="whitespace-nowrap text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
+        <h2 className="text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
           {headline}
         </h2>
         <p className="mt-8 text-4xl font-semibold text-neutral-300 md:text-5xl lg:text-6xl">

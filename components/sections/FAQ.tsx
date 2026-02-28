@@ -33,13 +33,13 @@ export function FAQ({
   const faqs = items.length > 0 ? items : defaultFAQs;
 
   return (
-    <section id="faq" className="bg-neutral-50 py-32">
+    <section id="faq" className="bg-neutral-900 py-32">
       <div className="container mx-auto max-w-4xl px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="text-5xl font-bold text-neutral-900 md:text-6xl lg:text-7xl">
+          <h2 className="text-5xl font-bold text-white md:text-6xl lg:text-7xl">
             {headline}
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-xl text-neutral-600">
+          <p className="mx-auto mt-6 max-w-2xl text-xl text-neutral-400">
             {subheadline}
           </p>
         </div>
@@ -48,19 +48,19 @@ export function FAQ({
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="group rounded-2xl border-2 border-neutral-200 bg-white transition-all hover:border-neutral-900 hover:shadow-lg"
+              className="group rounded-2xl border-2 border-neutral-700 bg-neutral-800 transition-all hover:border-white hover:shadow-lg"
             >
               <button
                 className="flex w-full items-center justify-between gap-4 p-6 text-left lg:p-8"
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
               >
-                <h3 className="text-lg font-semibold text-neutral-900 md:text-xl lg:text-2xl">
+                <h3 className="text-lg font-semibold text-white md:text-xl lg:text-2xl">
                   {faq.question}
                 </h3>
                 <svg
                   className={cn(
-                    "h-6 w-6 flex-shrink-0 text-neutral-600 transition-transform duration-200",
-                    openIndex === index && "rotate-180 text-neutral-900"
+                    "h-6 w-6 flex-shrink-0 text-neutral-400 transition-transform duration-200",
+                    openIndex === index && "rotate-180 text-white"
                   )}
                   fill="none"
                   viewBox="0 0 24 24"
@@ -75,8 +75,8 @@ export function FAQ({
                 </svg>
               </button>
               {openIndex === index && (
-                <div className="border-t border-neutral-200 px-6 pb-6 pt-4 lg:px-8 lg:pb-8">
-                  <p className="text-base leading-relaxed text-neutral-600 md:text-lg whitespace-pre-line">
+                <div className="border-t border-neutral-700 px-6 pb-6 pt-4 lg:px-8 lg:pb-8">
+                  <p className="text-base leading-relaxed text-neutral-300 md:text-lg whitespace-pre-line">
                     {faq.answer}
                   </p>
                 </div>

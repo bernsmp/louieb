@@ -77,13 +77,13 @@ export function Testimonials({
   }
 
   return (
-    <section id="testimonials" className="bg-white py-32">
+    <section id="testimonials" className="bg-neutral-900 py-32">
       <div className="container mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="text-5xl font-bold text-neutral-900 md:text-6xl lg:text-7xl">
+          <h2 className="text-5xl font-bold text-white md:text-6xl lg:text-7xl">
             {headline}
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-xl text-neutral-600">
+          <p className="mx-auto mt-6 max-w-2xl text-xl text-neutral-400">
             {subheadline}
           </p>
         </div>
@@ -117,11 +117,11 @@ export function Testimonials({
                 }}
                 className="absolute inset-0 top-12"
               >
-                <div className="group relative rounded-3xl border-2 border-neutral-200 bg-white p-8 pt-20 shadow-sm transition-all hover:border-neutral-900 hover:shadow-xl lg:p-12 lg:pt-24 min-h-[400px] flex flex-col">
+                <div className="group relative rounded-3xl border-2 border-neutral-700 bg-neutral-800 p-8 pt-20 shadow-sm transition-all hover:border-white hover:shadow-xl lg:p-12 lg:pt-24 min-h-[400px] flex flex-col">
                   {/* Quote icon */}
-                  <div className="absolute -top-6 left-8 rounded-full bg-neutral-900 p-4 z-10">
+                  <div className="absolute -top-6 left-8 rounded-full bg-white p-4 z-10">
                     <svg
-                      className="h-8 w-8 text-white"
+                      className="h-8 w-8 text-neutral-900"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >
@@ -129,15 +129,15 @@ export function Testimonials({
                     </svg>
                   </div>
 
-                  <blockquote className="text-lg leading-relaxed text-neutral-700 lg:text-xl xl:text-2xl flex-1">
+                  <blockquote className="text-lg leading-relaxed text-neutral-200 lg:text-xl xl:text-2xl flex-1">
                     &ldquo;{testimonials[currentIndex].quote}&rdquo;
                   </blockquote>
 
-                  <div className="mt-8 border-t border-neutral-200 pt-6">
-                    <p className="text-base font-bold text-neutral-900 lg:text-lg">
+                  <div className="mt-8 border-t border-neutral-700 pt-6">
+                    <p className="text-base font-bold text-white lg:text-lg">
                       {testimonials[currentIndex].author}
                     </p>
-                    <p className="mt-1 text-sm text-neutral-600 lg:text-base">
+                    <p className="mt-1 text-sm text-neutral-400 lg:text-base">
                       {formatTitle(testimonials[currentIndex])}
                     </p>
                   </div>
@@ -150,11 +150,11 @@ export function Testimonials({
           <div className="flex items-center justify-center gap-4 mt-8">
             <button
               onClick={() => paginate(-1)}
-              className="rounded-full bg-neutral-100 p-2 hover:bg-neutral-200 transition-colors"
+              className="rounded-full bg-neutral-800 p-2 hover:bg-neutral-700 transition-colors"
               aria-label="Previous testimonial"
             >
               <svg
-                className="w-6 h-6 text-neutral-600"
+                className="w-6 h-6 text-neutral-300"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -182,8 +182,8 @@ export function Testimonials({
                 >
                   <span className={`h-2 rounded-full transition-all block ${
                     index === currentIndex
-                      ? "w-8 bg-[#0966c2]"
-                      : "w-2 bg-neutral-300 hover:bg-neutral-400"
+                      ? "w-8 bg-white"
+                      : "w-2 bg-neutral-600 hover:bg-neutral-400"
                   }`} />
                 </button>
               ))}
@@ -191,11 +191,11 @@ export function Testimonials({
 
             <button
               onClick={() => paginate(1)}
-              className="rounded-full bg-neutral-100 p-2 hover:bg-neutral-200 transition-colors"
+              className="rounded-full bg-neutral-800 p-2 hover:bg-neutral-700 transition-colors"
               aria-label="Next testimonial"
             >
               <svg
-                className="w-6 h-6 text-neutral-600"
+                className="w-6 h-6 text-neutral-300"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
