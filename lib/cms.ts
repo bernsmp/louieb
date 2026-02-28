@@ -401,16 +401,16 @@ interface SiteSettings {
 
 const defaultSettings: SiteSettings = {
   hero: {
-    headline: 'Fractional Sales Leader',
-    tagline: 'Less Spend. More Sales.',
-    description: "I've scaled from zero to INC 500, so I know the grind. Still running sales at $1M–$10M? You're bottlenecking your growth. Ready to break through? Let's talk.",
+    headline: 'You Built the Company. Sales Shouldn\'t Still Be Your Job.',
+    tagline: '90 days to a sales team that closes deals without you on the call.',
+    description: "If you step away from sales for a week, does revenue drop? That's not a you problem — it's a stage problem. Every founder between $1M and $10M hits this wall. The Founder's and CEO's Sales System is the 20-step process built to get you out of it — without the $250K VP gamble.",
     videoId: 'fCVKpcpD8tA',
-    ctaPrimary: { text: 'Learn How It Works', url: '#process' },
+    ctaPrimary: { text: 'See How It Works', url: '#process' },
     ctaSecondary: { text: 'Schedule a Discussion', url: 'https://calendly.com/louiebernstein/30minutes' },
   },
   credentials: {
-    primary: 'LinkedIn Top Voice',
-    secondary: '50+ Years Sales Experience',
+    primary: 'INC 500 Founder',
+    secondary: '9+ Years as Fractional Sales Leader',
   },
   fslPage: {
     headline: 'Fractional Sales Leader',

@@ -1,11 +1,12 @@
 import { Hero } from "@/components/Hero";
-import { About } from "@/components/sections/About";
-import { Services } from "@/components/sections/Services";
-import { ValueProposition } from "@/components/sections/ValueProposition";
-import { Testimonials } from "@/components/sections/Testimonials";
 import { FractionalSalesLeader } from "@/components/sections/FractionalSalesLeader";
+import { Transformation } from "@/components/sections/Transformation";
+import { Testimonials } from "@/components/sections/Testimonials";
 import { Process } from "@/components/sections/Process";
+import { ValueProposition } from "@/components/sections/ValueProposition";
+import { SecondaryCTA } from "@/components/sections/SecondaryCTA";
 import { FAQ } from "@/components/sections/FAQ";
+import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
 import { Awards } from "@/components/sections/Awards";
 import { getSiteSettings, getTestimonials } from "@/lib/cms";
@@ -93,44 +94,6 @@ export default async function Home() {
           ctaSecondaryUrl={settings.hero.ctaSecondary.url}
         />
       )}
-      {isVisible(settings.about) && (
-        <About
-          headline={settings.about.headline}
-          headlineAccent={settings.about.headlineAccent}
-          paragraph1={settings.about.paragraph1}
-          paragraph2={settings.about.paragraph2}
-          paragraph3={settings.about.paragraph3}
-          calloutText={settings.about.calloutText}
-          stat1Value={settings.about.stat1Value}
-          stat1Label={settings.about.stat1Label}
-          stat2Value={settings.about.stat2Value}
-          stat2Label={settings.about.stat2Label}
-          stat3Value={settings.about.stat3Value}
-          stat3Label={settings.about.stat3Label}
-        />
-      )}
-      {isVisible(settings.services) && (
-        <Services
-          headline={settings.services.headline}
-          subheadline={settings.services.subheadline}
-          items={settings.services.items}
-        />
-      )}
-      {isVisible(settings.valueProposition) && (
-        <ValueProposition
-          headline={settings.valueProposition.headline}
-          subheadline={settings.valueProposition.subheadline}
-          description={settings.valueProposition.description}
-          ctaText={settings.valueProposition.ctaText}
-        />
-      )}
-      {isVisible(settings.testimonialsSection) && (
-        <Testimonials
-          headline={settings.testimonialsSection.headline}
-          subheadline={settings.testimonialsSection.subheadline}
-          testimonials={testimonials}
-        />
-      )}
       {isVisible(settings.fractionalSalesLeader) && (
         <FractionalSalesLeader
           headline={settings.fractionalSalesLeader.headline}
@@ -145,6 +108,14 @@ export default async function Home() {
           ctaUrl={settings.fractionalSalesLeader.ctaUrl}
         />
       )}
+      <Transformation />
+      {isVisible(settings.testimonialsSection) && (
+        <Testimonials
+          headline={settings.testimonialsSection.headline}
+          subheadline={settings.testimonialsSection.subheadline}
+          testimonials={testimonials}
+        />
+      )}
       {isVisible(settings.process) && (
         <Process
           headline={settings.process.headline}
@@ -152,11 +123,36 @@ export default async function Home() {
           steps={settings.process.steps}
         />
       )}
+      {isVisible(settings.valueProposition) && (
+        <ValueProposition
+          headline={settings.valueProposition.headline}
+          subheadline={settings.valueProposition.subheadline}
+          description={settings.valueProposition.description}
+          ctaText={settings.valueProposition.ctaText}
+        />
+      )}
+      <SecondaryCTA />
       {isVisible(settings.faq) && (
         <FAQ
           headline={settings.faq.headline}
           subheadline={settings.faq.subheadline}
           items={settings.faq.items}
+        />
+      )}
+      {isVisible(settings.about) && (
+        <About
+          headline={settings.about.headline}
+          headlineAccent={settings.about.headlineAccent}
+          paragraph1={settings.about.paragraph1}
+          paragraph2={settings.about.paragraph2}
+          paragraph3={settings.about.paragraph3}
+          calloutText={settings.about.calloutText}
+          stat1Value={settings.about.stat1Value}
+          stat1Label={settings.about.stat1Label}
+          stat2Value={settings.about.stat2Value}
+          stat2Label={settings.about.stat2Label}
+          stat3Value={settings.about.stat3Value}
+          stat3Label={settings.about.stat3Label}
         />
       )}
       {isVisible(settings.contactSection) && (
