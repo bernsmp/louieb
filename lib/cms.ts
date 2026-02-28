@@ -401,7 +401,7 @@ interface SiteSettings {
 
 const defaultSettings: SiteSettings = {
   hero: {
-    headline: 'You Built the Company. Sales Shouldn\'t Still Be Your Job.',
+    headline: 'You Built the Company.\nSales Shouldn\'t Still Be Your Job.',
     tagline: '90 days to a sales team that closes deals without you on the call.',
     description: "If you step away from sales for a week, does revenue drop? That's not a you problem — it's a stage problem. Every founder between $1M and $10M hits this wall. The Founder's and CEO's Sales System is the 20-step process built to get you out of it — without the $250K VP gamble.",
     videoId: 'fCVKpcpD8tA',
