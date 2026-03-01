@@ -30,6 +30,10 @@ function renderInlineLinks(text: string): React.ReactNode[] {
   });
 }
 
+// Revalidate blog post pages every 60 seconds so Supabase content
+// changes appear automatically without a full redeploy.
+export const revalidate = 60;
+
 interface Props {
   params: Promise<{ slug: string }>;
 }
