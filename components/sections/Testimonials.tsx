@@ -2,6 +2,33 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+
+// Parse inline markdown links [text](url) into React elements
+function renderInlineLinks(text: string): React.ReactNode[] {
+  const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
+  return parts.map((part, i) => {
+    const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (match) {
+      const [, linkText, href] = match;
+      const isInternal = href.startsWith('/') || href.startsWith('https://louiebernstein.com');
+      const internalPath = href.replace('https://louiebernstein.com', '') || '/';
+      if (isInternal) {
+        return (
+          <Link key={i} href={internalPath} className="text-white underline underline-offset-2 hover:text-neutral-200">
+            {linkText}
+          </Link>
+        );
+      }
+      return (
+        <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="text-white underline underline-offset-2 hover:text-neutral-200">
+          {linkText}
+        </a>
+      );
+    }
+    return part;
+  });
+}
 
 interface TestimonialItem {
   quote: string;
@@ -130,7 +157,7 @@ export function Testimonials({
                   </div>
 
                   <blockquote className="text-lg leading-relaxed text-neutral-200 lg:text-xl xl:text-2xl flex-1">
-                    &ldquo;{testimonials[currentIndex].quote}&rdquo;
+                    &ldquo;{renderInlineLinks(testimonials[currentIndex].quote)}&rdquo;
                   </blockquote>
 
                   <div className="mt-8 border-t border-neutral-700 pt-6">

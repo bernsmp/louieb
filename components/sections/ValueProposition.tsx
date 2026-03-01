@@ -36,6 +36,13 @@ export function ValueProposition({
         <p className="mx-auto mt-10 max-w-3xl text-xl leading-relaxed text-neutral-400 md:text-2xl">
           {description}
         </p>
+        <p className="mt-6 text-lg text-neutral-400">
+          Read my latest{" "}
+          <Link href="/articles" className="font-semibold text-white underline underline-offset-2 hover:text-neutral-200">
+            sales leadership articles
+          </Link>
+          .
+        </p>
         <Link
           href="https://calendly.com/louiebernstein/30minutes"
           target="_blank"
