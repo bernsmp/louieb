@@ -4,6 +4,32 @@ import Link from "next/link";
 import Image from "next/image";
 import { getBlogPostBySlug, getAllBlogPostsWithSlugs, getBlogPageData } from "@/lib/cms";
 
+// Parse inline markdown links [text](url) into React elements
+function renderInlineLinks(text: string): React.ReactNode[] {
+  const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
+  return parts.map((part, i) => {
+    const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (match) {
+      const [, linkText, href] = match;
+      const isInternal = href.startsWith('/') || href.startsWith('https://louiebernstein.com');
+      const internalPath = href.replace('https://louiebernstein.com', '') || '/';
+      if (isInternal) {
+        return (
+          <Link key={i} href={internalPath} className="text-[#0966c2] underline underline-offset-2 hover:text-[#0855a3]">
+            {linkText}
+          </Link>
+        );
+      }
+      return (
+        <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="text-[#0966c2] underline underline-offset-2 hover:text-[#0855a3]">
+          {linkText}
+        </a>
+      );
+    }
+    return part;
+  });
+}
+
 interface Props {
   params: Promise<{ slug: string }>;
 }
@@ -163,7 +189,7 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="prose prose-lg max-w-none">
             {post.content.split('\n\n').map((paragraph, index) => (
               <p key={index} className="font-sans text-lg text-foreground leading-relaxed mb-4">
-                {paragraph}
+                {renderInlineLinks(paragraph)}
               </p>
             ))}
           </div>
