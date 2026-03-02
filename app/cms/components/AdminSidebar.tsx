@@ -15,6 +15,7 @@ const navSections = [
       { name: 'Dashboard', href: '/cms', icon: HomeIcon },
       { name: 'Homepage', href: '/cms/homepage', icon: LayoutIcon },
       { name: 'FSL Page', href: '/cms/fsl-page', icon: FileTextIcon },
+      { name: 'FSL vs Consultant', href: '/cms/fsl-vs-consultant-page', icon: FileTextIcon },
       { name: 'Videos Page', href: '/cms/videos', icon: VideoIcon },
       { name: 'Newsletter', href: '/cms/newsletter', icon: MailIcon },
       { name: 'Blog Page', href: '/cms/blog-page', icon: PenIcon },
