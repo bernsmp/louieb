@@ -157,7 +157,11 @@ export function Testimonials({
                   </div>
 
                   <blockquote className="text-lg leading-relaxed text-neutral-200 lg:text-xl xl:text-2xl flex-1">
-                    &ldquo;{renderInlineLinks(testimonials[currentIndex].quote)}&rdquo;
+                    {/<[a-z][\s\S]*?>/i.test(testimonials[currentIndex].quote) ? (
+                      <span dangerouslySetInnerHTML={{ __html: `\u201C${testimonials[currentIndex].quote}\u201D` }} className="cms-html-content" />
+                    ) : (
+                      <>&ldquo;{renderInlineLinks(testimonials[currentIndex].quote)}&rdquo;</>
+                    )}
                   </blockquote>
 
                   <div className="mt-8 border-t border-neutral-700 pt-6">

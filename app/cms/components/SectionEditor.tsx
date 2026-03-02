@@ -7,6 +7,7 @@ import { DevicePreviewToggle, type DeviceType } from './DevicePreviewToggle'
 import { VisibilityToggle } from './VisibilityToggle'
 import { ImageUploader } from './ImageUploader'
 import { SEOPreviewCard } from './SEOPreviewCard'
+import { RichTextEditor } from './RichTextEditor'
 import { useUndoRedo } from '../hooks/useUndoRedo'
 
 // Helper to format relative time
@@ -463,13 +464,24 @@ export function SectionEditor({
                   )}
                 </div>
                 {field.type === 'textarea' ? (
-                  <textarea
-                    className="form-textarea"
-                    value={getValue(field)}
-                    onChange={(e) => setValue(field, e.target.value)}
-                    placeholder={field.placeholder}
-                    rows={field.rows || 4}
-                  />
+                  // SEO description fields (aiGenerate) stay as plain textarea so HTML
+                  // tags don't leak into <meta> descriptions. All other textareas get
+                  // the rich text editor so hyperlinks and formatting work everywhere.
+                  field.aiGenerate ? (
+                    <textarea
+                      className="form-textarea"
+                      value={getValue(field)}
+                      onChange={(e) => setValue(field, e.target.value)}
+                      placeholder={field.placeholder}
+                      rows={field.rows || 4}
+                    />
+                  ) : (
+                    <RichTextEditor
+                      value={getValue(field)}
+                      onChange={(html) => setValue(field, html)}
+                      minHeight={field.rows ? field.rows * 28 : 160}
+                    />
+                  )
                 ) : field.type === 'image' ? (
                   <ImageUploader
                     value={getValue(field)}

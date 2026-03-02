@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ImageUploader } from '@/app/cms/components/ImageUploader'
+import { RichTextEditor } from '../../components/RichTextEditor'
 
 export default function NewTestimonialPage() {
   const router = useRouter()
@@ -61,13 +62,10 @@ export default function NewTestimonialPage() {
       <form onSubmit={handleSubmit} className="edit-form">
         <div className="form-group">
           <label className="form-label">Quote *</label>
-          <textarea
-            className="form-textarea"
+          <RichTextEditor
             value={form.quote}
-            onChange={(e) => setForm({ ...form, quote: e.target.value })}
-            placeholder="The testimonial text..."
-            rows={4}
-            required
+            onChange={(html) => setForm({ ...form, quote: html })}
+            minHeight={180}
           />
         </div>
 

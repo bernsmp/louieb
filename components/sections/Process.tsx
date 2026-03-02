@@ -51,9 +51,13 @@ export function Process({
                 <h3 className="text-2xl font-bold text-neutral-900 lg:text-3xl">
                   {step.title}
                 </h3>
-                <p className="mt-4 text-base leading-relaxed text-neutral-600 lg:text-lg">
-                  {step.description}
-                </p>
+                {/<[a-z][\s\S]*?>/i.test(step.description) ? (
+                  <div className="mt-4 text-base leading-relaxed text-neutral-600 lg:text-lg cms-html-content" dangerouslySetInnerHTML={{ __html: step.description }} />
+                ) : (
+                  <p className="mt-4 text-base leading-relaxed text-neutral-600 lg:text-lg whitespace-pre-line">
+                    {step.description}
+                  </p>
+                )}
               </div>
             </div>
           ))}

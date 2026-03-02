@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { RichTextEditor } from '../../components/RichTextEditor'
 
 export default function NewFAQPage() {
   const router = useRouter()
@@ -63,12 +64,10 @@ export default function NewFAQPage() {
 
         <div className="form-group">
           <label className="form-label">Answer *</label>
-          <textarea
-            className="form-textarea"
+          <RichTextEditor
             value={form.answer}
-            onChange={(e) => setForm({ ...form, answer: e.target.value })}
-            rows={4}
-            required
+            onChange={(html) => setForm({ ...form, answer: html })}
+            minHeight={180}
           />
         </div>
 

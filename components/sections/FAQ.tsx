@@ -178,9 +178,13 @@ export function FAQ({
                             </button>
                             {isOpen && (
                               <div className="border-t border-neutral-700 px-5 pb-5 pt-3">
-                                <p className="text-sm leading-relaxed text-neutral-300 md:text-base whitespace-pre-line">
-                                  {faq.answer}
-                                </p>
+                                {/<[a-z][\s\S]*?>/i.test(faq.answer) ? (
+                                  <div className="text-sm leading-relaxed text-neutral-300 md:text-base cms-html-content" dangerouslySetInnerHTML={{ __html: faq.answer }} />
+                                ) : (
+                                  <p className="text-sm leading-relaxed text-neutral-300 md:text-base whitespace-pre-line">
+                                    {faq.answer}
+                                  </p>
+                                )}
                               </div>
                             )}
                           </div>

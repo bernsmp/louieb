@@ -1,6 +1,17 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* ── CMS HTML content — public section components (light bg) ── */
+.cms-html-content a { color: #0966c2; text-decoration: underline; text-underline-offset: 2px; }
+.cms-html-content a:hover { color: #0855a3; }
+.cms-html-content p { margin-bottom: 0.75rem; }
+.cms-html-content p:last-child { margin-bottom: 0; }
+.cms-html-content ul, .cms-html-content ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+.cms-html-content li { margin-bottom: 0.25rem; }
+.cms-html-content strong, .cms-html-content b { font-weight: 700; }
+.cms-html-content em, .cms-html-content i { font-style: italic; }
+.cms-html-content font { color: inherit !important; font-family: inherit !important; font-size: inherit !important; }
+
 /* ── Blog HTML content (from rich-text editor) ── */
 .blog-html-content a { color: #0966c2 !important; text-decoration: underline; text-underline-offset: 2px; }
 .blog-html-content a:hover { color: #0855a3 !important; }

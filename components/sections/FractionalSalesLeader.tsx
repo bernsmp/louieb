@@ -45,21 +45,41 @@ export function FractionalSalesLeader({
         </div>
 
         <div className="mt-12 space-y-8 text-lg leading-relaxed text-neutral-600 md:text-xl">
-          <p>{paragraph1}</p>
+          {/<[a-z][\s\S]*?>/i.test(paragraph1) ? (
+            <div className="cms-html-content" dangerouslySetInnerHTML={{ __html: paragraph1 }} />
+          ) : (
+            <p className="whitespace-pre-line">{paragraph1}</p>
+          )}
 
-          <p className="text-xl font-semibold text-neutral-900 md:text-2xl">
-            {paragraph2}
-          </p>
+          {/<[a-z][\s\S]*?>/i.test(paragraph2) ? (
+            <div className="text-xl font-semibold text-neutral-900 md:text-2xl cms-html-content" dangerouslySetInnerHTML={{ __html: paragraph2 }} />
+          ) : (
+            <p className="text-xl font-semibold text-neutral-900 md:text-2xl whitespace-pre-line">
+              {paragraph2}
+            </p>
+          )}
 
-          <p>{paragraph3}</p>
+          {/<[a-z][\s\S]*?>/i.test(paragraph3) ? (
+            <div className="cms-html-content" dangerouslySetInnerHTML={{ __html: paragraph3 }} />
+          ) : (
+            <p className="whitespace-pre-line">{paragraph3}</p>
+          )}
 
-          <p>{paragraph4}</p>
+          {paragraph4 && (/<[a-z][\s\S]*?>/i.test(paragraph4) ? (
+            <div className="cms-html-content" dangerouslySetInnerHTML={{ __html: paragraph4 }} />
+          ) : (
+            <p className="whitespace-pre-line">{paragraph4}</p>
+          ))}
         </div>
 
         <div className="mt-12 rounded-2xl border-l-4 border-neutral-900 bg-white p-8 shadow-sm">
-          <p className="text-xl font-semibold leading-relaxed text-neutral-900 md:text-2xl">
-            {calloutText}
-          </p>
+          {/<[a-z][\s\S]*?>/i.test(calloutText) ? (
+            <div className="text-xl font-semibold leading-relaxed text-neutral-900 md:text-2xl cms-html-content" dangerouslySetInnerHTML={{ __html: calloutText }} />
+          ) : (
+            <p className="text-xl font-semibold leading-relaxed text-neutral-900 md:text-2xl whitespace-pre-line">
+              {calloutText}
+            </p>
+          )}
         </div>
 
         <div className="mt-12 text-center">

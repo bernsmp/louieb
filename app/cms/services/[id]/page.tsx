@@ -3,6 +3,7 @@
 import { useState, useEffect, use } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { RichTextEditor } from '../../components/RichTextEditor'
 
 export default function EditServicePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
@@ -92,7 +93,11 @@ export default function EditServicePage({ params }: { params: Promise<{ id: stri
 
         <div className="form-group">
           <label className="form-label">Description *</label>
-          <textarea className="form-textarea" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} rows={3} required />
+          <RichTextEditor
+            value={form.description}
+            onChange={(html) => setForm({ ...form, description: html })}
+            minHeight={180}
+          />
         </div>
 
         <div className="edit-form__row">

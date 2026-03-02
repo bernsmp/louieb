@@ -75,6 +75,9 @@ export function RichTextEditor({ value, onChange, minHeight = 320 }: RichTextEdi
   const savedRangeRef = useRef<Range | null>(null)
   const savedColorRangeRef = useRef<Range | null>(null)
   const hasInitialized = useRef(false)
+  // Tracks the last HTML we emitted via onChange — lets us detect external value
+  // changes (AI suggestions, parent undo/redo) vs. round-trips of our own edits.
+  const lastEmittedRef = useRef<string>('')
   const colorPickerRef = useRef<HTMLDivElement>(null)
   const customColorRef = useRef<HTMLInputElement>(null)
 
@@ -87,10 +90,23 @@ export function RichTextEditor({ value, onChange, minHeight = 320 }: RichTextEdi
   const [textColor, setTextColor] = useState('#e5e5e5')
   const urlInputRef = useRef<HTMLInputElement>(null)
 
+  // Sync editor with value prop:
+  // • First non-empty value  → initial load from API
+  // • value ≠ lastEmitted    → external change (AI suggestion, parent undo/redo) → overwrite
+  // • value === lastEmitted  → our own onChange round-trip → ignore (no cursor jump)
   useEffect(() => {
-    if (editorRef.current && value && !hasInitialized.current) {
+    if (!editorRef.current) return
+    if (!hasInitialized.current) {
+      if (value) {
+        editorRef.current.innerHTML = value
+        lastEmittedRef.current = value
+        hasInitialized.current = true
+      }
+      return
+    }
+    if (value !== lastEmittedRef.current) {
       editorRef.current.innerHTML = value
-      hasInitialized.current = true
+      lastEmittedRef.current = value
     }
   }, [value])
 
@@ -111,7 +127,11 @@ export function RichTextEditor({ value, onChange, minHeight = 320 }: RichTextEdi
   }, [showColorPicker])
 
   const emitChange = useCallback(() => {
-    if (editorRef.current) onChange(editorRef.current.innerHTML)
+    if (editorRef.current) {
+      const html = editorRef.current.innerHTML
+      lastEmittedRef.current = html
+      onChange(html)
+    }
   }, [onChange])
 
   const fmt = useCallback((cmd: string, val?: string) => {
@@ -241,6 +261,11 @@ export function RichTextEditor({ value, onChange, minHeight = 320 }: RichTextEdi
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
       e.preventDefault()
       openLinkDialog()
+    }
+    // Stop Ctrl+Z / Ctrl+Y bubbling to any parent undo/redo (e.g. SectionEditor).
+    // The browser handles native undo/redo within contenteditable natively.
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'z' || e.key === 'y' || (e.shiftKey && e.key === 'Z'))) {
+      e.stopPropagation()
     }
   }, [openLinkDialog])
 
