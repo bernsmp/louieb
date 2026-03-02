@@ -161,22 +161,40 @@ export default function FractionalSalesLeaderVsConsultantPage() {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   
   // CMS data state - will be populated from Supabase if available
-  const [cmsData, setCmsData] = useState<typeof comparisonPoints | null>(null);
-  
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [cmsContent, setCmsContent] = useState<Record<string, any> | null>(null);
+
   useEffect(() => {
-    // Fetch CMS data if available
     fetch('/api/cms/fsl-vs-consultant')
       .then(res => res.json())
-      .then(data => {
-        if (data && data.comparison?.points) {
-          setCmsData(data.comparison.points);
-        }
-      })
+      .then(data => { if (data && !data.error) setCmsContent(data); })
       .catch(err => console.warn('CMS data not available, using defaults:', err));
   }, []);
-  
-  // Use CMS data if available, otherwise use hardcoded defaults
-  const comparisonData = cmsData || comparisonPoints;
+
+  // Use CMS data if available, otherwise fall back to hardcoded defaults
+  const comparisonData: typeof comparisonPoints = cmsContent?.comparison?.points || comparisonPoints;
+  const heroBadgeText: string = cmsContent?.hero?.badgeText || 'Making the Right Choice';
+  const heroBadgeSubtext: string = cmsContent?.hero?.badgeSubtext || 'Sales Leadership Guide';
+  const heroDescription: string = cmsContent?.hero?.description || 'Understanding the key differences can make or break your sales growth strategy';
+  const heroCtaPrimary: string = cmsContent?.hero?.ctaPrimary || 'See the Differences';
+  const heroCtaSecondary: string = cmsContent?.hero?.ctaSecondary || 'Schedule a Discussion';
+  const introText: string = cmsContent?.introduction?.text || 'These distinctions are based on common practices in business development, sales strategy, and organizational consulting. Note that these roles can sometimes overlap or vary by industry, but the core differences highlight their scope, involvement, and impact.';
+  const comparisonHeadline: string = cmsContent?.comparison?.headline || 'The Critical Differences';
+  const comparisonSubheadline: string = cmsContent?.comparison?.subheadline || 'A side-by-side comparison of what you actually get';
+  const summaryHeadline: string = cmsContent?.summary?.headline || 'The Bottom Line';
+  const fslCardBadge: string = cmsContent?.summary?.fslCard?.badge || 'Recommended';
+  const fslCardHeadline: string = cmsContent?.summary?.fslCard?.headline || 'Hire a Fractional Sales Leader';
+  const fslCardDescription: string = cmsContent?.summary?.fslCard?.description || 'If you need someone to run sales while you scale or search for a full-time executive.';
+  const fslCardBenefits: string[] = cmsContent?.summary?.fslCard?.benefits || ['Embedded leadership', 'Accountable for results', 'Builds systems that scale'];
+  const fslCardCtaText: string = cmsContent?.summary?.fslCard?.ctaText || 'Talk to a Fractional Sales Leader';
+  const consultantCardBadge: string = cmsContent?.summary?.consultantCard?.badge || 'Alternative';
+  const consultantCardHeadline: string = cmsContent?.summary?.consultantCard?.headline || 'Hire a Consultant';
+  const consultantCardDescription: string = cmsContent?.summary?.consultantCard?.description || 'If you need specialized insight, market validation, or a roadmap that your existing team can execute.';
+  const consultantCardBenefits: string[] = cmsContent?.summary?.consultantCard?.benefits || ['External perspective', 'Project-based engagement', 'Strategic advice'];
+  const finalCtaHeadline: string = cmsContent?.finalCta?.headline || 'Ready to Accelerate Your Sales?';
+  const finalCtaDescription: string = cmsContent?.finalCta?.description || "Let's discuss whether a Fractional Sales Leader is the right fit for your business.";
+  const finalCtaPrimary: string = cmsContent?.finalCta?.ctaPrimary || 'Schedule a Free Consultation';
+  const finalCtaSecondary: string = cmsContent?.finalCta?.ctaSecondary || 'Learn About FSL';
 
   return (
     <>
@@ -257,11 +275,11 @@ export default function FractionalSalesLeaderVsConsultantPage() {
                 <motion.div variants={itemVariants} className="mb-6">
                   <div className="inline-flex items-center gap-2 rounded-full border border-neutral-600/50 bg-neutral-900/50 backdrop-blur-sm px-4 py-2 shadow-lg">
                     <span className="text-sm font-semibold text-white">
-                      Making the Right Choice
+                      {heroBadgeText}
                     </span>
                     <span className="text-neutral-400">|</span>
                     <span className="text-sm text-neutral-300">
-                      Sales Leadership Guide
+                      {heroBadgeSubtext}
                     </span>
                   </div>
                 </motion.div>
@@ -290,15 +308,14 @@ export default function FractionalSalesLeaderVsConsultantPage() {
                   </motion.span>
                 </motion.h1>
 
-                <motion.p 
+                <motion.p
                   variants={itemVariants}
                   className="mx-auto max-w-3xl text-lg text-neutral-300 md:text-xl lg:text-2xl leading-relaxed"
                 >
-                  Understanding the key differences can make or break your sales
-                  growth strategy
+                  {heroDescription}
                 </motion.p>
 
-                <motion.div 
+                <motion.div
                   variants={itemVariants}
                   className="mt-3 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6"
                 >
@@ -317,7 +334,7 @@ export default function FractionalSalesLeaderVsConsultantPage() {
                       }}
                       className="group relative inline-flex items-center justify-center rounded-lg bg-white px-8 py-3 text-base font-semibold text-slate-950 transition-all duration-300 hover:bg-blue-50 hover:shadow-xl hover:shadow-blue-500/20 md:px-10 md:py-4 md:text-lg overflow-hidden"
                     >
-                      <span className="relative z-10">See the Differences</span>
+                      <span className="relative z-10">{heroCtaPrimary}</span>
                       <motion.div
                         className="absolute inset-0 bg-gradient-to-r from-blue-50 to-white opacity-0 group-hover:opacity-100"
                         initial={false}
@@ -336,7 +353,7 @@ export default function FractionalSalesLeaderVsConsultantPage() {
                       rel="noopener noreferrer"
                       className="group relative inline-flex items-center justify-center rounded-lg border-2 border-[#0966c2] bg-[#0966c2] px-8 py-3 text-base font-semibold text-white transition-all duration-300 hover:border-[#0855a3] hover:bg-[#0855a3] hover:shadow-xl hover:shadow-[#0966c2]/30 md:px-10 md:py-4 md:text-lg overflow-hidden"
                     >
-                      <span className="relative z-10">Schedule a Discussion</span>
+                      <span className="relative z-10">{heroCtaSecondary}</span>
                       <motion.div
                         className="absolute inset-0 bg-gradient-to-r from-[#0855a3] to-[#0966c2] opacity-0 group-hover:opacity-100"
                         initial={false}
@@ -399,16 +416,11 @@ export default function FractionalSalesLeaderVsConsultantPage() {
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
               className="text-center"
             >
-              <p className="text-lg leading-relaxed text-neutral-700 md:text-xl">
-                These distinctions are based on common practices in business
-                development, sales strategy, and organizational consulting. Note
-                that these roles can sometimes overlap or vary by industry, but
-                the core differences highlight their{" "}
-                <strong className="text-neutral-900 font-semibold">
-                  scope, involvement, and impact
-                </strong>
-                .
-              </p>
+              {/<[a-z][\s\S]*?>/i.test(introText) ? (
+                <div className="text-lg leading-relaxed text-neutral-700 md:text-xl cms-html-content" dangerouslySetInnerHTML={{ __html: introText }} />
+              ) : (
+                <p className="text-lg leading-relaxed text-neutral-700 md:text-xl whitespace-pre-line">{introText}</p>
+              )}
             </motion.div>
           </div>
         </section>
@@ -424,16 +436,16 @@ export default function FractionalSalesLeaderVsConsultantPage() {
               className="text-center mb-16"
             >
               <h2 className="text-3xl font-bold text-neutral-900 md:text-4xl lg:text-5xl tracking-tight">
-                The Critical Differences
+                {comparisonHeadline}
               </h2>
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="mx-auto mt-4 max-w-2xl text-lg text-neutral-600"
               >
-                A side-by-side comparison of what you actually get
+                {comparisonSubheadline}
               </motion.p>
             </motion.div>
 
@@ -574,7 +586,7 @@ export default function FractionalSalesLeaderVsConsultantPage() {
               className="text-center mb-16"
             >
               <h2 className="text-3xl font-bold text-neutral-900 md:text-4xl lg:text-5xl tracking-tight">
-                The Bottom Line
+                {summaryHeadline}
               </h2>
             </motion.div>
 
@@ -612,18 +624,18 @@ export default function FractionalSalesLeaderVsConsultantPage() {
                     transition={{ delay: 0.2, type: "spring" }}
                     className="inline-flex items-center gap-2 rounded-full bg-white/20 backdrop-blur-sm px-4 py-2 mb-6"
                   >
-                    <span className="text-sm font-semibold">Recommended</span>
+                    <span className="text-sm font-semibold">{fslCardBadge}</span>
                   </motion.div>
                   <h3 className="text-2xl font-bold md:text-3xl">
-                    Hire a Fractional Sales Leader
+                    {fslCardHeadline}
                   </h3>
-                  <p className="mt-4 text-lg text-blue-100 leading-relaxed">
-                    If you need someone to{" "}
-                    <strong className="text-white">run sales</strong> while you
-                    scale or search for a full-time executive.
-                  </p>
+                  {/<[a-z][\s\S]*?>/i.test(fslCardDescription) ? (
+                    <div className="mt-4 text-lg text-blue-100 leading-relaxed cms-html-content" dangerouslySetInnerHTML={{ __html: fslCardDescription }} />
+                  ) : (
+                    <p className="mt-4 text-lg text-blue-100 leading-relaxed">{fslCardDescription}</p>
+                  )}
                   <ul className="mt-6 space-y-3">
-                    {["Embedded leadership", "Accountable for results", "Builds systems that scale"].map((item, i) => (
+                    {fslCardBenefits.map((item, i) => (
                       <motion.li 
                         key={i}
                         initial={{ opacity: 0, x: -10 }}
@@ -654,7 +666,7 @@ export default function FractionalSalesLeaderVsConsultantPage() {
                       rel="noopener noreferrer"
                       className="mt-8 inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-[#0966c2] font-semibold transition-all hover:shadow-xl hover:shadow-white/20 group-hover:bg-blue-50"
                     >
-                      Talk to a Fractional Sales Leader
+                      {fslCardCtaText}
                       <motion.div
                         animate={{ x: [0, 4, 0] }}
                         transition={{ duration: 1.5, repeat: Infinity }}
@@ -694,22 +706,19 @@ export default function FractionalSalesLeaderVsConsultantPage() {
                 <div className="relative z-10">
                   <div className="inline-flex items-center gap-2 rounded-full bg-neutral-100 px-4 py-2 mb-6">
                     <span className="text-sm font-semibold text-neutral-600">
-                      Alternative
+                      {consultantCardBadge}
                     </span>
                   </div>
                   <h3 className="text-2xl font-bold text-neutral-900 md:text-3xl">
-                    Hire a Consultant
+                    {consultantCardHeadline}
                   </h3>
-                  <p className="mt-4 text-lg text-neutral-600 leading-relaxed">
-                    If you need specialized insight, market validation, or a
-                    roadmap that your{" "}
-                    <strong className="text-neutral-900">
-                      existing team can execute
-                    </strong>
-                    .
-                  </p>
+                  {/<[a-z][\s\S]*?>/i.test(consultantCardDescription) ? (
+                    <div className="mt-4 text-lg text-neutral-600 leading-relaxed cms-html-content" dangerouslySetInnerHTML={{ __html: consultantCardDescription }} />
+                  ) : (
+                    <p className="mt-4 text-lg text-neutral-600 leading-relaxed">{consultantCardDescription}</p>
+                  )}
                   <ul className="mt-6 space-y-3 text-neutral-600">
-                    {["External perspective", "Project-based engagement", "Strategic advice"].map((item, i) => (
+                    {consultantCardBenefits.map((item, i) => (
                       <motion.li 
                         key={i}
                         initial={{ opacity: 0, x: 10 }}
@@ -770,17 +779,16 @@ export default function FractionalSalesLeaderVsConsultantPage() {
               transition={{ duration: 0.6 }}
               className="text-3xl font-bold md:text-4xl lg:text-5xl"
             >
-              Ready to Accelerate Your Sales?
+              {finalCtaHeadline}
             </motion.h2>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
               className="mx-auto mt-6 max-w-2xl text-xl text-neutral-200"
             >
-              Let&apos;s discuss whether a Fractional Sales Leader is the right
-              fit for your business.
+              {finalCtaDescription}
             </motion.p>
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -800,7 +808,7 @@ export default function FractionalSalesLeaderVsConsultantPage() {
                   rel="noopener noreferrer"
                   className="group relative inline-flex items-center justify-center rounded-lg bg-white px-10 py-4 text-lg font-semibold text-neutral-900 transition-all duration-300 hover:bg-neutral-100 hover:shadow-2xl hover:shadow-white/20 overflow-hidden"
                 >
-                  <span className="relative z-10">Schedule a Free Consultation</span>
+                  <span className="relative z-10">{finalCtaPrimary}</span>
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-neutral-50 to-white opacity-0 group-hover:opacity-100"
                     initial={false}
@@ -817,7 +825,7 @@ export default function FractionalSalesLeaderVsConsultantPage() {
                   href="/fractional-sales-leader"
                   className="group relative inline-flex items-center justify-center rounded-lg border-2 border-white px-10 py-4 text-lg font-semibold text-white transition-all duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-xl overflow-hidden"
                 >
-                  <span className="relative z-10">Learn About FSL</span>
+                  <span className="relative z-10">{finalCtaSecondary}</span>
                   <motion.div
                     className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100"
                     initial={false}

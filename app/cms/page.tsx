@@ -23,6 +23,12 @@ export default async function AdminDashboard() {
       icon: FileTextIcon,
     },
     {
+      title: 'FSL vs Consultant Page',
+      description: 'Comparison table, summary cards, intro text, and CTAs.',
+      href: '/cms/fsl-vs-consultant-page',
+      icon: FileTextIcon,
+    },
+    {
       title: 'Videos Page',
       description: 'Featured videos and page settings.',
       href: '/cms/videos',
