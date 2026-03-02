@@ -39,6 +39,11 @@ export function RichTextEditor({ value, onChange, minHeight = 320 }: RichTextEdi
     }
   }, [value])
 
+  // Ensure paragraphs are wrapped in <p> tags, not <div>
+  useEffect(() => {
+    document.execCommand('defaultParagraphSeparator', false, 'p')
+  }, [])
+
   const emitChange = useCallback(() => {
     if (editorRef.current) {
       onChange(editorRef.current.innerHTML)

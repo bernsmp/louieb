@@ -191,7 +191,7 @@ export default async function BlogPostPage({ params }: Props) {
 
           {/* Post Content */}
           <div className="prose prose-lg max-w-none">
-            {post.content.trimStart().startsWith('<') ? (
+            {/<[a-z][\s\S]*?>/i.test(post.content) ? (
               // HTML content from the rich-text editor
               <div
                 className="blog-html-content font-sans text-lg text-foreground leading-relaxed"
