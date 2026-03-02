@@ -206,31 +206,25 @@ function VideosSection({ pageData }: { pageData: PageData }) {
   );
 }
 
+// Helper to render a field as HTML or plain text
+function RenderField({ value, className }: { value: string; className: string }) {
+  if (/<[a-z][\s\S]*?>/i.test(value)) {
+    return <div className={`cms-html-content ${className}`} dangerouslySetInnerHTML={{ __html: value }} />;
+  }
+  return <p className={`whitespace-pre-line ${className}`}>{value}</p>;
+}
+
 // Section: Intro (Long-form text)
 function IntroSection({ pageData }: { pageData: PageData }) {
   return (
     <section className="py-16 md:py-24">
       <div className="container mx-auto max-w-4xl px-6 lg:px-8">
         <div className="prose prose-lg prose-neutral mx-auto max-w-none">
-          <p className="text-xl leading-relaxed text-neutral-700">
-            {pageData.introHook}
-          </p>
-
-          <p className="text-lg leading-relaxed text-neutral-600">
-            {pageData.introParagraph1}
-          </p>
-
-          <p className="text-lg leading-relaxed text-neutral-600">
-            {pageData.introParagraph2}
-          </p>
-
-          <p className="text-lg leading-relaxed text-neutral-600">
-            {pageData.introParagraph3}
-          </p>
-
-          <p className="text-lg leading-relaxed text-neutral-600">
-            {pageData.introParagraph4}
-          </p>
+          <RenderField value={pageData.introHook} className="text-xl leading-relaxed text-neutral-700" />
+          <RenderField value={pageData.introParagraph1} className="text-lg leading-relaxed text-neutral-600" />
+          <RenderField value={pageData.introParagraph2} className="text-lg leading-relaxed text-neutral-600" />
+          <RenderField value={pageData.introParagraph3} className="text-lg leading-relaxed text-neutral-600" />
+          <RenderField value={pageData.introParagraph4} className="text-lg leading-relaxed text-neutral-600" />
         </div>
 
         <div className="mt-12 text-center">
@@ -285,9 +279,7 @@ function FAQSection({ pageData }: { pageData: PageData }) {
               <h3 className="text-xl font-bold text-neutral-900">
                 {faq.question}
               </h3>
-              <p className="mt-3 text-lg leading-relaxed text-neutral-600">
-                {faq.answer}
-              </p>
+              <RenderField value={faq.answer} className="mt-3 text-lg leading-relaxed text-neutral-600" />
             </div>
           ))}
         </div>
