@@ -191,11 +191,20 @@ export default async function BlogPostPage({ params }: Props) {
 
           {/* Post Content */}
           <div className="prose prose-lg max-w-none">
-            {post.content.split('\n\n').map((paragraph, index) => (
-              <p key={index} className="font-sans text-lg text-foreground leading-relaxed mb-4">
-                {renderInlineLinks(paragraph)}
-              </p>
-            ))}
+            {post.content.trimStart().startsWith('<') ? (
+              // HTML content from the rich-text editor
+              <div
+                className="blog-html-content font-sans text-lg text-foreground leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: post.content }}
+              />
+            ) : (
+              // Legacy plain-text content
+              post.content.split('\n\n').map((paragraph, index) => (
+                <p key={index} className="font-sans text-lg text-foreground leading-relaxed mb-4">
+                  {renderInlineLinks(paragraph)}
+                </p>
+              ))
+            )}
           </div>
 
           {/* LinkedIn CTA */}

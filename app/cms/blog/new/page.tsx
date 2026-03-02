@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ImageUploader } from '../../components/ImageUploader'
+import { RichTextEditor } from '../../components/RichTextEditor'
 
 interface Category {
   id: string
@@ -79,6 +80,12 @@ export default function NewBlogPostPage() {
     setSaving(true)
     setError('')
 
+    if (!form.content.trim() || form.content === '<br>' || form.content === '<p><br></p>') {
+      setError('Content is required.')
+      setSaving(false)
+      return
+    }
+
     try {
       // Convert tags string to array
       const tagsArray = form.tags
@@ -146,12 +153,10 @@ export default function NewBlogPostPage() {
 
         <div className="form-group">
           <label className="form-label">Content *</label>
-          <textarea
-            className="form-textarea"
+          <RichTextEditor
             value={form.content}
-            onChange={(e) => setForm({ ...form, content: e.target.value })}
-            rows={15}
-            required
+            onChange={(html) => setForm({ ...form, content: html })}
+            minHeight={400}
           />
         </div>
 
