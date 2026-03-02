@@ -28,20 +28,34 @@ const FONTS = [
   { label: 'Courier New (Mono)', value: 'Courier New, monospace' },
 ]
 
-/** Strip color, background-color, and font-family from pasted HTML so external
- *  formatting (e.g. LinkedIn red text) never bleeds into the editor. */
+// 10 colour columns × 6 shade rows (darkest → lightest, top → bottom)
+const THEME_COLORS: string[][] = [
+  ['#000000', '#404040', '#595959', '#808080', '#BFBFBF', '#F2F2F2'],  // Grayscale
+  ['#1F3864', '#2F5496', '#4472C4', '#8FAADC', '#B4C6E7', '#DAE3F3'],  // Blue
+  ['#1F497D', '#1F75B5', '#2E9BD5', '#9DC3E6', '#BDD7EE', '#DEEAF1'],  // Sky blue
+  ['#843C0C', '#BE4B03', '#E36C0A', '#FAB57F', '#FCD5B0', '#FDEADA'],  // Brown/orange
+  ['#7F6000', '#BF8F00', '#FFC000', '#FFD966', '#FFE699', '#FFF2CC'],  // Gold/yellow
+  ['#375623', '#537D33', '#70AD47', '#A9D18E', '#C6E0B4', '#E2EFDA'],  // Green
+  ['#1E4D2B', '#2E7345', '#3EA861', '#7DC99B', '#AADCBF', '#D5F0E3'],  // Teal green
+  ['#0D4E6E', '#0E6B96', '#0E9ECB', '#6DC0DA', '#A2D6E8', '#D3EEF5'],  // Teal blue
+  ['#1F3864', '#203FA8', '#4A86E8', '#7BAED4', '#9FC5EB', '#D6E4F4'],  // Royal blue
+  ['#3A0F60', '#5C1F8A', '#7030A0', '#B47FDB', '#D4AEE9', '#ECDAF5'],  // Purple
+]
+
+const STANDARD_COLORS = [
+  '#C00000', '#FF0000', '#FF6600', '#FFC000', '#FFFF00',
+  '#00B050', '#00CCCC', '#00B0F0', '#0070C0', '#7030A0',
+]
+
+/** Strip colour, font-family, font-size from pasted HTML */
 function sanitizePastedHtml(html: string): string {
   const parser = new DOMParser()
   const doc = parser.parseFromString(html, 'text/html')
-
-  // Unwrap <font> tags — keep their children, lose the tag
   doc.querySelectorAll('font').forEach(el => {
     const frag = document.createDocumentFragment()
     while (el.firstChild) frag.appendChild(el.firstChild)
     el.parentNode?.replaceChild(frag, el)
   })
-
-  // Strip color / font-family / font-size from inline styles
   doc.querySelectorAll<HTMLElement>('[style]').forEach(el => {
     const cleaned = (el.getAttribute('style') || '')
       .split(';')
@@ -49,24 +63,23 @@ function sanitizePastedHtml(html: string): string {
         const prop = rule.split(':')[0].trim().toLowerCase()
         return !['color', 'background-color', 'background', 'font-family', 'font-size', 'mso-font-alt'].includes(prop)
       })
-      .join(';')
-      .trim()
+      .join(';').trim()
     cleaned ? el.setAttribute('style', cleaned) : el.removeAttribute('style')
   })
-
-  // Remove class attributes (often carry Word/Google Docs styling)
   doc.querySelectorAll('[class]').forEach(el => el.removeAttribute('class'))
-
   return doc.body.innerHTML
 }
 
 export function RichTextEditor({ value, onChange, minHeight = 320 }: RichTextEditorProps) {
   const editorRef = useRef<HTMLDivElement>(null)
   const savedRangeRef = useRef<Range | null>(null)
+  const savedColorRangeRef = useRef<Range | null>(null)
   const hasInitialized = useRef(false)
-  const colorInputRef = useRef<HTMLInputElement>(null)
+  const colorPickerRef = useRef<HTMLDivElement>(null)
+  const customColorRef = useRef<HTMLInputElement>(null)
 
   const [showDialog, setShowDialog] = useState(false)
+  const [showColorPicker, setShowColorPicker] = useState(false)
   const [dialogUrl, setDialogUrl] = useState('')
   const [dialogText, setDialogText] = useState('')
   const [dialogTarget, setDialogTarget] = useState('_self')
@@ -74,7 +87,6 @@ export function RichTextEditor({ value, onChange, minHeight = 320 }: RichTextEdi
   const [textColor, setTextColor] = useState('#e5e5e5')
   const urlInputRef = useRef<HTMLInputElement>(null)
 
-  // Initialize editor once when value first arrives (e.g. after post loads from API)
   useEffect(() => {
     if (editorRef.current && value && !hasInitialized.current) {
       editorRef.current.innerHTML = value
@@ -82,10 +94,21 @@ export function RichTextEditor({ value, onChange, minHeight = 320 }: RichTextEdi
     }
   }, [value])
 
-  // Ensure new paragraphs use <p>, not <div>
   useEffect(() => {
     document.execCommand('defaultParagraphSeparator', false, 'p')
   }, [])
+
+  // Close colour picker on outside click
+  useEffect(() => {
+    if (!showColorPicker) return
+    const handler = (e: MouseEvent) => {
+      if (colorPickerRef.current && !colorPickerRef.current.contains(e.target as Node)) {
+        setShowColorPicker(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [showColorPicker])
 
   const emitChange = useCallback(() => {
     if (editorRef.current) onChange(editorRef.current.innerHTML)
@@ -97,7 +120,29 @@ export function RichTextEditor({ value, onChange, minHeight = 320 }: RichTextEdi
     emitChange()
   }, [emitChange])
 
-  // ── Paste: sanitize incoming HTML to strip colour/font formatting ──────────
+  // Save selection before opening colour picker (clicking the button blurs the editor)
+  const openColorPicker = useCallback(() => {
+    const sel = window.getSelection()
+    if (sel && sel.rangeCount > 0) {
+      savedColorRangeRef.current = sel.getRangeAt(0).cloneRange()
+    }
+    setShowColorPicker(p => !p)
+  }, [])
+
+  // Restore selection then apply colour
+  const applyColor = useCallback((color: string) => {
+    setTextColor(color)
+    editorRef.current?.focus()
+    if (savedColorRangeRef.current) {
+      const sel = window.getSelection()
+      sel?.removeAllRanges()
+      sel?.addRange(savedColorRangeRef.current)
+    }
+    document.execCommand('foreColor', false, color)
+    emitChange()
+    setShowColorPicker(false)
+  }, [emitChange])
+
   const handlePaste = useCallback((e: React.ClipboardEvent) => {
     e.preventDefault()
     const html = e.clipboardData.getData('text/html')
@@ -105,18 +150,14 @@ export function RichTextEditor({ value, onChange, minHeight = 320 }: RichTextEdi
     if (html) {
       document.execCommand('insertHTML', false, sanitizePastedHtml(html))
     } else {
-      // Plain-text fallback: preserve line breaks as <br>
       const escaped = text
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
         .replace(/\n/g, '<br>')
       document.execCommand('insertHTML', false, escaped)
     }
     emitChange()
   }, [emitChange])
 
-  // ── Link helpers ─────────────────────────────────────────────────────────
   const checkLink = useCallback(() => {
     const sel = window.getSelection()
     if (!sel || sel.rangeCount === 0) { setShowRemoveLink(false); return }
@@ -209,7 +250,6 @@ export function RichTextEditor({ value, onChange, minHeight = 320 }: RichTextEdi
     return () => document.removeEventListener('keydown', handler)
   }, [showDialog, closeDialog])
 
-  // ── Shared styles ─────────────────────────────────────────────────────────
   const tbBtnBase: React.CSSProperties = {
     display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
     minWidth: 30, height: 30, border: 'none', background: 'transparent',
@@ -237,10 +277,7 @@ export function RichTextEditor({ value, onChange, minHeight = 320 }: RichTextEdi
 
         {/* Font family */}
         <div style={dividerStyle}>
-          <select
-            title="Font family"
-            style={selectStyle}
-            defaultValue=""
+          <select title="Font family" style={selectStyle} defaultValue=""
             onChange={e => { if (e.target.value) fmt('fontName', e.target.value); else fmt('removeFormat'); editorRef.current?.focus() }}
           >
             {FONTS.map(f => <option key={f.value} value={f.value}>{f.label}</option>)}
@@ -262,40 +299,104 @@ export function RichTextEditor({ value, onChange, minHeight = 320 }: RichTextEdi
           ))}
         </div>
 
-        {/* Text colour */}
-        <div style={dividerStyle}>
-          <label
-            title="Text colour"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 4, cursor: 'pointer', height: 30, padding: '0 8px', borderRadius: 5, fontSize: 12, fontWeight: 600, color: '#d4d4d4' }}
-            onMouseEnter={e => ((e.currentTarget as HTMLLabelElement).style.background = '#262626')}
-            onMouseLeave={e => ((e.currentTarget as HTMLLabelElement).style.background = 'transparent')}
-          >
-            {/* "A" with colour swatch underline */}
-            <span style={{ position: 'relative', lineHeight: 1 }}>
-              <b style={{ fontSize: 14 }}>A</b>
-              <span style={{ display: 'block', height: 3, borderRadius: 2, background: textColor, marginTop: 1 }} />
-            </span>
-            <input
-              ref={colorInputRef}
-              type="color"
-              value={textColor}
-              onChange={e => {
-                setTextColor(e.target.value)
-                fmt('foreColor', e.target.value)
-              }}
-              style={{ width: 0, height: 0, opacity: 0, position: 'absolute', pointerEvents: 'none' }}
-              tabIndex={-1}
-            />
-          </label>
-          {/* Reset to default colour */}
+        {/* ── Text colour picker ── */}
+        <div style={{ ...dividerStyle, position: 'relative' }} ref={colorPickerRef}>
           <button
             type="button"
-            title="Reset text colour to default"
-            onClick={() => { setTextColor('#e5e5e5'); fmt('foreColor', 'inherit') }}
-            style={{ ...tbBtnBase, fontSize: 11, color: '#a3a3a3' }}
+            title="Text colour"
+            onClick={openColorPicker}
+            style={{ ...tbBtnBase, flexDirection: 'column', gap: 1, minWidth: 34, padding: '0 6px' }}
             onMouseEnter={e => (e.currentTarget.style.background = '#262626')}
             onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
-          >Reset</button>
+          >
+            <b style={{ fontSize: 14, lineHeight: 1 }}>A</b>
+            <span style={{ display: 'block', width: 18, height: 4, borderRadius: 2, background: textColor }} />
+          </button>
+
+          {showColorPicker && (
+            <div style={{
+              position: 'absolute', top: 'calc(100% + 4px)', left: 0, zIndex: 9999,
+              background: '#1a1a1a', border: '1px solid #525252', borderRadius: 8,
+              padding: '10px 12px', boxShadow: '0 8px 32px rgba(0,0,0,0.6)',
+              minWidth: 248,
+            }}>
+              {/* Theme colours grid */}
+              <div style={{ fontSize: 11, color: '#a3a3a3', marginBottom: 6, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Theme Colors</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                {Array.from({ length: 6 }, (_, rowIdx) => (
+                  <div key={rowIdx} style={{ display: 'flex', gap: 2 }}>
+                    {THEME_COLORS.map((col, colIdx) => (
+                      <button
+                        key={colIdx}
+                        type="button"
+                        title={col[rowIdx]}
+                        onClick={() => applyColor(col[rowIdx])}
+                        style={{
+                          width: 20, height: 20, padding: 0, cursor: 'pointer',
+                          background: col[rowIdx], borderRadius: 2,
+                          border: textColor === col[rowIdx] ? '2px solid #3b82f6' : '1px solid rgba(255,255,255,0.15)',
+                          transition: 'transform 0.1s',
+                          flexShrink: 0,
+                        }}
+                        onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1.25)'; (e.currentTarget as HTMLButtonElement).style.zIndex = '2'; (e.currentTarget as HTMLButtonElement).style.position = 'relative' }}
+                        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1)'; (e.currentTarget as HTMLButtonElement).style.zIndex = 'auto' }}
+                      />
+                    ))}
+                  </div>
+                ))}
+              </div>
+
+              {/* Standard colours row */}
+              <div style={{ fontSize: 11, color: '#a3a3a3', margin: '10px 0 6px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Standard Colors</div>
+              <div style={{ display: 'flex', gap: 2 }}>
+                {STANDARD_COLORS.map((color, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    title={color}
+                    onClick={() => applyColor(color)}
+                    style={{
+                      width: 20, height: 20, padding: 0, cursor: 'pointer',
+                      background: color, borderRadius: 2,
+                      border: textColor === color ? '2px solid #3b82f6' : '1px solid rgba(255,255,255,0.15)',
+                      flexShrink: 0,
+                    }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1.25)'; (e.currentTarget as HTMLButtonElement).style.zIndex = '2'; (e.currentTarget as HTMLButtonElement).style.position = 'relative' }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1)'; (e.currentTarget as HTMLButtonElement).style.zIndex = 'auto' }}
+                  />
+                ))}
+              </div>
+
+              {/* Footer actions */}
+              <div style={{ marginTop: 10, display: 'flex', gap: 6 }}>
+                <button
+                  type="button"
+                  onClick={() => { fmt('foreColor', 'inherit'); setTextColor('#e5e5e5'); setShowColorPicker(false) }}
+                  style={{ flex: 1, background: 'transparent', border: '1px solid #404040', borderRadius: 5, padding: '5px 0', fontSize: 11, color: '#a3a3a3', cursor: 'pointer', fontFamily: 'inherit' }}
+                  onMouseEnter={e => (e.currentTarget.style.background = '#262626')}
+                  onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+                >Reset Color</button>
+
+                <label
+                  style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, background: 'transparent', border: '1px solid #404040', borderRadius: 5, padding: '5px 0', fontSize: 11, color: '#d4d4d4', cursor: 'pointer', position: 'relative' }}
+                  onMouseEnter={e => ((e.currentTarget as HTMLLabelElement).style.background = '#262626')}
+                  onMouseLeave={e => ((e.currentTarget as HTMLLabelElement).style.background = 'transparent')}
+                >
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/>
+                  </svg>
+                  More Colors…
+                  <input
+                    ref={customColorRef}
+                    type="color"
+                    value={textColor === '#e5e5e5' ? '#000000' : textColor}
+                    onChange={e => applyColor(e.target.value)}
+                    style={{ opacity: 0, position: 'absolute', width: '100%', height: '100%', cursor: 'pointer', top: 0, left: 0 }}
+                  />
+                </label>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Headings */}
