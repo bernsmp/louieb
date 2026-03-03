@@ -135,8 +135,8 @@ export function RichTextEditor({ value, onChange, minHeight = 320 }: RichTextEdi
   }, [onChange])
 
   const fmt = useCallback((cmd: string, val?: string) => {
-    document.execCommand(cmd, false, val ?? undefined)
     editorRef.current?.focus()
+    document.execCommand(cmd, false, val ?? undefined)
     emitChange()
   }, [emitChange])
 
