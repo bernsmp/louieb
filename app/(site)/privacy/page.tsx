@@ -3,6 +3,9 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Privacy Policy | Louie Bernstein",
   description: "Privacy Policy for louiebernstein.com - Learn how we collect, use, and protect your information.",
+  alternates: {
+    canonical: "https://louiebernstein.com/privacy",
+  },
 };
 
 export default function PrivacyPolicyPage() {

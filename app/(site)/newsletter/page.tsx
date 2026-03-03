@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "The Sunday Starter Newsletter | Louie Bernstein",
   description:
     "Subscribe to The Sunday Starter newsletter on LinkedIn - delivered weekly to accelerate your sales success.",
+  alternates: {
+    canonical: "https://louiebernstein.com/newsletter",
+  },
 };
 
 export default async function NewsletterPage() {

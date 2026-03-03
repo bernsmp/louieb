@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Articles | Louie Bernstein - Sales Leadership Insights",
   description:
     "Read expert insights on sales leadership, team optimization, and sales process improvement from Louie Bernstein.",
+  alternates: {
+    canonical: "https://louiebernstein.com/articles",
+  },
 };
 
 export default async function ArticlesPage() {

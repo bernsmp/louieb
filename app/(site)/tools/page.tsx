@@ -9,6 +9,9 @@ export const metadata: Metadata = {
     "Free sales leadership tools and calculators to help you make better business decisions. ROI calculators, cost comparison tools, and more.",
   keywords:
     "sales tools, sales calculators, sales leadership tools, fractional sales calculator, sales roi calculator, free sales tools",
+  alternates: {
+    canonical: "https://louiebernstein.com/tools",
+  },
   openGraph: {
     title: "Free Sales Leadership Tools & Calculators",
     description:
