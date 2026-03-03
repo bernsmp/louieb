@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ImageUploader } from '../../components/ImageUploader'
+import { RichTextEditor } from '../../components/RichTextEditor'
 
 export default function NewArticlePage() {
   const router = useRouter()
@@ -85,14 +86,11 @@ export default function NewArticlePage() {
         </div>
 
         <div className="form-group">
-          <label className="form-label">Content (Markdown) *</label>
-          <textarea
-            className="form-textarea"
+          <label className="form-label">Content *</label>
+          <RichTextEditor
             value={form.content}
-            onChange={(e) => setForm({ ...form, content: e.target.value })}
-            rows={20}
-            required
-            style={{ fontFamily: 'monospace', fontSize: '0.875rem' }}
+            onChange={(html) => setForm({ ...form, content: html })}
+            minHeight={500}
           />
         </div>
 
