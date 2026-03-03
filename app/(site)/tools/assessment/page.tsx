@@ -8,6 +8,9 @@ export const metadata: Metadata = {
     "Take this free 2-minute assessment to find out if your business needs a fractional sales manager. Get personalized recommendations based on your sales team's current state.",
   keywords:
     "fractional sales manager assessment, fractional sales leader quiz, do I need a sales manager, sales leadership assessment, fractional sales needs assessment, sales team readiness quiz",
+  alternates: {
+    canonical: "https://louiebernstein.com/tools/assessment",
+  },
   openGraph: {
     title: "Do You Need a Fractional Sales Manager? | Free Assessment",
     description:

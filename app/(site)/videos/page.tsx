@@ -12,9 +12,13 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: seo.seoTitle || defaultTitle,
     description: seo.seoDescription || defaultDescription,
+    alternates: {
+      canonical: "https://louiebernstein.com/videos",
+    },
     openGraph: {
       title: seo.seoTitle || defaultTitle,
       description: seo.seoDescription || defaultDescription,
+      url: "https://louiebernstein.com/videos",
       type: "website",
       images: seo.seoImage ? [seo.seoImage] : [],
     },

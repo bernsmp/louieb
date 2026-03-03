@@ -57,9 +57,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
+  const postUrl = `https://louiebernstein.com/blog/${slug}`;
   return {
     title: `${post.title} | Louie Bernstein`,
     description: post.excerpt,
+    alternates: {
+      canonical: postUrl,
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,

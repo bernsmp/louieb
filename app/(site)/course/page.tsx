@@ -12,6 +12,9 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: seo.seoTitle || defaultTitle,
     description: seo.seoDescription || defaultDescription,
+    alternates: {
+      canonical: "https://louiebernstein.com/course",
+    },
     keywords: [
       "sales system course",
       "CEO sales training",
