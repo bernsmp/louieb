@@ -26,9 +26,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
+  const videoUrl = `https://louiebernstein.com/videos/${slug}`;
   return {
     title: `${video.title} | Louie Bernstein`,
     description: video.description || `Watch ${video.title} - Sales training video from Louie Bernstein`,
+    alternates: {
+      canonical: videoUrl,
+    },
     openGraph: {
       title: video.title,
       description: video.description || `Watch ${video.title} - Sales training video from Louie Bernstein`,

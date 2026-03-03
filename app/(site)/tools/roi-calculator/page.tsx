@@ -8,6 +8,9 @@ export const metadata: Metadata = {
     "Free interactive ROI calculator to compare Fractional Sales Leader vs Founder-Led Sales vs Full-Time VP Hire. Calculate 6-month costs, savings, and missed revenue. No signup required.",
   keywords:
     "fractional sales calculator, sales roi calculator, fractional sales leader cost calculator, sales leader roi tool, compare fractional sales vs vp, sales leadership calculator, fractional sales roi tool",
+  alternates: {
+    canonical: "https://louiebernstein.com/tools/roi-calculator",
+  },
   openGraph: {
     title: "Free Fractional Sales ROI Calculator - Compare Costs & Savings",
     description:

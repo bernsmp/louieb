@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 import { getArticleSlugs, getArticleBySlug } from '@/lib/markdown';
-import { getAllVideoSlugs } from '@/lib/cms';
+import { getAllVideoSlugs, getAllBlogPostsWithSlugs } from '@/lib/cms';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://louiebernstein.com';
@@ -61,6 +61,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/fractional-sales-leader-vs-consultant`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/tools/assessment`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
   ];
 
   // Dynamic article routes
@@ -75,6 +93,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     };
   });
 
+  // Dynamic blog post routes
+  const blogPosts = await getAllBlogPostsWithSlugs();
+  const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: post.publishedDate ? new Date(post.publishedDate) : new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
   // Dynamic video routes
   const videoSlugs = await getAllVideoSlugs();
   const videoRoutes: MetadataRoute.Sitemap = videoSlugs.map((slug) => ({
@@ -84,6 +111,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...articleRoutes, ...videoRoutes];
+  return [...staticRoutes, ...articleRoutes, ...blogRoutes, ...videoRoutes];
 }
 

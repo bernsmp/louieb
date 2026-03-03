@@ -61,6 +61,14 @@ const faqSchema = {
   ]
 };
 
+export async function generateMetadata() {
+  return {
+    alternates: {
+      canonical: 'https://louiebernstein.com',
+    },
+  };
+}
+
 export default async function Home() {
   const [settings, testimonials] = await Promise.all([
     getSiteSettings(),
