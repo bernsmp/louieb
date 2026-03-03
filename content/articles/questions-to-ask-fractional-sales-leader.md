@@ -1,10 +1,15 @@
 ---
-title: "The 3 Critical Questions You Must Ask Before Hiring a Fractional Sales Leader"
-description: "Stop guessing. Use this vetting framework to ensure you hire an operator, not just a consultant. Learn the three questions that separate high-impact fractional leaders from passive advisors."
-keywords: "fractional sales leader, hiring sales leader, sales interview questions, vetting sales executive, sales leadership hiring, B2B sales management"
-author: "Louie Bernstein"
-date: "2025-12-21"
-image: "/images/articles/questions-thumbnail.png"
+title: The 3 Critical Questions You Must Ask Before Hiring a Fractional Sales Leader
+description: >-
+  Stop guessing. Use this vetting framework to ensure you hire an operator, not
+  just a consultant. Learn the three questions that separate high-impact
+  fractional leaders from passive advisors.
+keywords: >-
+  fractional sales leader, hiring sales leader, sales interview questions,
+  vetting sales executive, sales leadership hiring, B2B sales management
+author: Louie Bernstein
+date: '2025-12-21'
+image: /images/articles/questions-thumbnail.png
 ---
 
 ### **Key Takeaways:**
@@ -22,11 +27,11 @@ A Fractional Sales Leader is an experienced executive who takes ownership of the
 
 ---
 
-## The Founder's Dilemma: Hiring for Impact, Not Just Advice
+##&nbsp;<p><a href="https://louiebernstein.com/articles/what-fractional-sales-leader-does" target="_self">For a deeper dive on What a Fractional Sales Leader does, go here.</a></p><p>The Founder's Dilemma: Hiring for Impact, Not Just Advice
 
 You are at a revenue plateau. You have reached $2M or $5M in ARR through sheer force of will, founder-led sales, and perhaps a few early hires. But the system is breaking. You are the bottleneck.
 
-You know you need senior leadership, but a full-time VP of Sales commands a $250k+ base salary plus equity—a risk your P&L might not be ready to absorb. The logical bridge is a Fractional Sales Leader.
+You know you need senior leadership, but a full-time VP of Sales commands a $250k+ base salary plus equity—a risk your P&amp;L might not be ready to absorb. The logical bridge is a Fractional Sales Leader.
 
 However, the "fractional" market is noisy. It is filled with consultants who want to give advice from the sidelines and retired executives looking for a low-stress retirement gig. **You do not need advice; you need Revenue Operations installed and a team to be managed.**
 
@@ -53,7 +58,7 @@ Ask them to describe a specific scenario where they entered a company with:
 
 If they start talking about "brand alignment" or "corporate synergy," run. If they talk about defining entry/exit criteria for pipeline stages, establishing CAC:LTV baselines, and implementing a daily standup rhythm, you have found an operator.
 
-> **The "Red Flag" Answer:** "I ran a division of 500 reps at Oracle." Great, but that person has likely forgotten how to build a comp plan or configure a HubSpot pipeline. You need a builder, not a maintainer.
+&gt; **The "Red Flag" Answer:** "I ran a division of 500 reps at Oracle." Great, but that person has likely forgotten how to build a comp plan or configure a HubSpot pipeline. You need a builder, not a maintainer.
 
 ---
 
@@ -76,7 +81,7 @@ If they start talking about "brand alignment" or "corporate synergy," run. If th
 
 They must be embedded in the communication flow. If a rep hangs up the phone after a tough objection, they need to be able to ping their leader for immediate feedback. If the leader is "unavailable" until next week, the learning moment is lost.
 
-> **The "Red Flag" Answer:** "I check in once a week to review the numbers." That is a dashboard monitor, not a sales manager. You can check the numbers yourself. You are paying for active management and coaching.
+&gt; **The "Red Flag" Answer:** "I check in once a week to review the numbers." That is a dashboard monitor, not a sales manager. You can check the numbers yourself. You are paying for active management and coaching.
 
 ---
 
@@ -98,7 +103,7 @@ Before they change a single thing, a high-quality candidate will want to:
 
 If they cannot articulate how they diagnose problems, they will likely waste the first three months throwing spaghetti at the wall.
 
-> **The "Red Flag" Answer:** "I'll just come in and shake things up immediately." Chaos added to chaos does not equal order.
+&gt; **The "Red Flag" Answer:** "I'll just come in and shake things up immediately." Chaos added to chaos does not equal order.
 
 ---
 
@@ -147,3 +152,4 @@ Louie Bernstein is a Fractional Sales Leader and LinkedIn Top Voice with 9+ year
 * [LinkedIn](https://www.linkedin.com/in/louiebernstein)
 * [Subscribe to The Sunday Starter Newsletter](https://www.louiebernstein.com/newsletter)
 
+</p>
