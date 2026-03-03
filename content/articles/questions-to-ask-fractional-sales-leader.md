@@ -23,11 +23,7 @@ image: /images/articles/questions-thumbnail.png
 
 ## What is a Fractional Sales Leader?
 
-A Fractional Sales Leader is an experienced executive who takes ownership of the sales function for a company on a part-time, contract basis. Unlike a consultant who only advises, a Fractional Sales Leader is an operator who builds strategy, manages the team, installs infrastructure (CRM, playbooks), and is accountable for revenue targets, typically for businesses between $1M and $10M in ARR.
-
----
-
-##&nbsp;<p><a href="https://louiebernstein.com/articles/what-fractional-sales-leader-does" target="_self">For a deeper dive on What a Fractional Sales Leader does, go here.</a></p><p>The Founder's Dilemma: Hiring for Impact, Not Just Advice
+A Fractional Sales Leader is an experienced executive who takes ownership of the sales function for a company on a part-time, contract basis. Unlike a consultant who only advises, a Fractional Sales Leader is an operator who builds strategy, manages the team, installs infrastructure (CRM, playbooks), and is accountable for revenue targets, typically for businesses between $1M and $10M in ARR.&nbsp;<p><a href="https://louiebernstein.com/articles/what-fractional-sales-leader-does" target="_self">For a deeper dive on What a Fractional Sales Leader does, go here.</a></p><!--StartFragment--><!--EndFragment--><!--StartFragment--><!--EndFragment--><p>---&nbsp; ## The Founder's Dilemma: Hiring for Impact, Not Just Advice
 
 You are at a revenue plateau. You have reached $2M or $5M in ARR through sheer force of will, founder-led sales, and perhaps a few early hires. But the system is breaking. You are the bottleneck.
 
