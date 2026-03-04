@@ -311,6 +311,7 @@ interface SiteSettings {
     navVideos: string
     navNewsletter: string
     navContact: string
+    navItemOrder?: string[]
   }
   articlesPage: {
     headline: string
@@ -710,6 +711,7 @@ Have you witnessed this?`,
     navVideos: 'Videos',
     navNewsletter: 'Newsletter',
     navContact: 'Contact',
+    navItemOrder: ['home', 'fsl', 'learn', 'faqs', 'tools', 'contact'],
   },
   articlesPage: {
     headline: 'Articles',
