@@ -206,12 +206,31 @@ function VideosSection({ pageData }: { pageData: PageData }) {
   );
 }
 
+// Strip clipboard paste artifacts before rendering
+function sanitizeHtml(raw: string): string {
+  return raw
+    .replace(/<!--StartFragment-->/gi, "")
+    .replace(/<!--EndFragment-->/gi, "")
+    .trim();
+}
+
 // Helper to render a field as HTML or plain text
 function RenderField({ value, className }: { value: string; className: string }) {
-  if (/<[a-z][\s\S]*?>/i.test(value)) {
-    return <div className={`cms-html-content ${className}`} dangerouslySetInnerHTML={{ __html: value }} />;
+  const clean = sanitizeHtml(value);
+  if (/<[a-z][\s\S]*?>/i.test(clean)) {
+    return (
+      <div
+        className={`${className}
+          [&_a]:font-medium [&_a]:text-blue-600 [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-blue-800
+          [&_p]:mb-3 [&_p:last-child]:mb-0
+          [&_ul]:mb-3 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1
+          [&_ol]:mb-3 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1
+          [&_strong]:font-semibold`}
+        dangerouslySetInnerHTML={{ __html: clean }}
+      />
+    );
   }
-  return <p className={`whitespace-pre-line ${className}`}>{value}</p>;
+  return <p className={`whitespace-pre-line ${className}`}>{clean}</p>;
 }
 
 // Section: Intro (Long-form text)

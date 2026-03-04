@@ -3,6 +3,14 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
+/** Strip clipboard paste artifacts (<!--StartFragment--> etc.) */
+function sanitizeAnswer(raw: string): string {
+  return raw
+    .replace(/<!--StartFragment-->/gi, "")
+    .replace(/<!--EndFragment-->/gi, "")
+    .trim();
+}
+
 interface FAQItem {
   question: string;
   answer: string;
@@ -178,13 +186,24 @@ export function FAQ({
                             </button>
                             {isOpen && (
                               <div className="border-t border-neutral-700 px-5 pb-5 pt-3">
-                                {/<[a-z][\s\S]*?>/i.test(faq.answer) ? (
-                                  <div className="text-sm leading-relaxed text-neutral-300 md:text-base cms-html-content" dangerouslySetInnerHTML={{ __html: faq.answer }} />
-                                ) : (
-                                  <p className="text-sm leading-relaxed text-neutral-300 md:text-base whitespace-pre-line">
-                                    {faq.answer}
-                                  </p>
-                                )}
+                                {(() => {
+                                  const clean = sanitizeAnswer(faq.answer);
+                                  return /<[a-z][\s\S]*?>/i.test(clean) ? (
+                                    <div
+                                      className="text-sm leading-relaxed text-neutral-300 md:text-base
+                                        [&_a]:font-medium [&_a]:text-blue-400 [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-blue-300
+                                        [&_p]:mb-3 [&_p:last-child]:mb-0
+                                        [&_ul]:mb-3 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1
+                                        [&_ol]:mb-3 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1
+                                        [&_strong]:font-semibold [&_strong]:text-neutral-100"
+                                      dangerouslySetInnerHTML={{ __html: clean }}
+                                    />
+                                  ) : (
+                                    <p className="text-sm leading-relaxed text-neutral-300 md:text-base whitespace-pre-line">
+                                      {clean}
+                                    </p>
+                                  );
+                                })()}
                               </div>
                             )}
                           </div>
