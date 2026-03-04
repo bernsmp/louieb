@@ -316,7 +316,7 @@ function renderHeroHTML(content: HeroContent): string {
       // Update description
       const description = document.getElementById('description');
       if (description && content.description !== undefined) {
-        description.textContent = content.description || "I've scaled from zero to INC 500...";
+        description.innerHTML = content.description || "I've scaled from zero to INC 500...";
       }
       
       // Update credentials
@@ -382,7 +382,7 @@ function renderHeroHTML(content: HeroContent): string {
         </div>
       </div>
       
-      <p id="description" class="description">${escapeHTML(data.description || '')}</p>
+      <p id="description" class="description">${data.description || ''}</p>
       
       <div class="cta-buttons">
         <a id="cta-primary" href="${escapeHTML(data.ctaPrimaryUrl || '#')}" class="btn btn-primary">

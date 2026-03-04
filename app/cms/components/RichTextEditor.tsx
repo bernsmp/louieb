@@ -459,6 +459,34 @@ export function RichTextEditor({ value, onChange, minHeight = 320 }: RichTextEdi
           </button>
         </div>
 
+        {/* Alignment */}
+        <div style={dividerStyle}>
+          <button type="button" title="Align left" onClick={() => fmt('justifyLeft')} style={tbBtnBase}
+            onMouseEnter={e => (e.currentTarget.style.background = '#262626')}
+            onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+          >
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><line x1="3" y1="18" x2="18" y2="18"/>
+            </svg>
+          </button>
+          <button type="button" title="Align center" onClick={() => fmt('justifyCenter')} style={tbBtnBase}
+            onMouseEnter={e => (e.currentTarget.style.background = '#262626')}
+            onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+          >
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="3" y1="6" x2="21" y2="6"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/>
+            </svg>
+          </button>
+          <button type="button" title="Align right" onClick={() => fmt('justifyRight')} style={tbBtnBase}
+            onMouseEnter={e => (e.currentTarget.style.background = '#262626')}
+            onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+          >
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="3" y1="6" x2="21" y2="6"/><line x1="9" y1="12" x2="21" y2="12"/><line x1="6" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+        </div>
+
         {/* Insert / Remove Link */}
         <div style={dividerStyle}>
           <button type="button" onClick={openLinkDialog} title="Insert / Edit Hyperlink (Ctrl+K)"

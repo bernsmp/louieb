@@ -12,6 +12,10 @@
 .cms-html-content em, .cms-html-content i { font-style: italic; }
 .cms-html-content font { color: inherit !important; font-family: inherit !important; font-size: inherit !important; }
 
+/* ── Hero description HTML content (dark bg) ── */
+.hero-html-content a { color: #93c5fd; }
+.hero-html-content a:hover { color: #bfdbfe; }
+
 /* ── Blog HTML content (from rich-text editor) ── */
 .blog-html-content a { color: #0966c2 !important; text-decoration: underline; text-underline-offset: 2px; }
 .blog-html-content a:hover { color: #0855a3 !important; }
