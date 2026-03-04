@@ -65,9 +65,13 @@ export function Hero({
           </div>
           
           {/* Value Proposition - LinkedIn copy */}
-          <p className="mx-auto mt-8 max-w-3xl whitespace-pre-line text-base text-neutral-200 md:text-lg lg:text-xl">
-            {description}
-          </p>
+          {/<[a-z][\s\S]*?>/i.test(description) ? (
+            <div className="mx-auto mt-8 max-w-3xl text-base text-neutral-200 md:text-lg lg:text-xl cms-html-content hero-html-content" dangerouslySetInnerHTML={{ __html: description }} />
+          ) : (
+            <p className="mx-auto mt-8 max-w-3xl whitespace-pre-line text-base text-neutral-200 md:text-lg lg:text-xl">
+              {description}
+            </p>
+          )}
 
           {/* CTA Buttons - With accent colors */}
           <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">

@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ImageUploader } from '@/app/cms/components/ImageUploader'
+import { RichTextEditor } from '@/app/cms/components/RichTextEditor'
 
 interface HeroContent {
   headline?: string
@@ -274,12 +275,10 @@ export default function EditHeroPage() {
 
             <div className="form-group">
               <label className="form-label">Description</label>
-              <textarea
-                className="form-textarea"
-                value={content.description}
-                onChange={(e) => handleContentChange({ description: e.target.value })}
-                placeholder="Longer paragraph explaining your value proposition..."
-                rows={4}
+              <RichTextEditor
+                value={content.description || ''}
+                onChange={(html) => handleContentChange({ description: html })}
+                minHeight={120}
               />
             </div>
 
