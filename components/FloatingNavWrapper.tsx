@@ -1,76 +1,78 @@
 "use client";
 
 import { FloatingNav } from "@/components/ui/floating-navbar";
-import { Home, FileText, Video, Mail, Wrench, BookOpen, GraduationCap, UserCheck, Scale, PenLine } from "lucide-react";
+import { Home, FileText, Video, Mail, Wrench, BookOpen, GraduationCap, UserCheck, Scale, PenLine, HelpCircle } from "lucide-react";
 
-// Navigation menu items - includes FSL vs Consultant comparison page
-export function FloatingNavWrapper() {
-  return (
-    <FloatingNav
-      navItems={[
-        {
-          name: "Home",
-          link: "/",
-          icon: <Home className="h-4 w-4 text-neutral-500 dark:text-white" />,
-        },
-        {
-          name: "Fractional Sales Leader",
-          icon: <UserCheck className="h-4 w-4 text-neutral-500 dark:text-white" />,
-          children: [
-            {
-              name: "What is FSL?",
-              link: "/fractional-sales-leader",
-              icon: <UserCheck className="h-4 w-4 text-neutral-500 dark:text-white" />,
-            },
-            {
-              name: "FSL vs Consultant",
-              link: "/fractional-sales-leader-vs-consultant",
-              icon: <Scale className="h-4 w-4 text-neutral-500 dark:text-white" />,
-            },
-          ],
-        },
-        {
-          name: "Learn",
-          icon: <BookOpen className="h-4 w-4 text-neutral-500 dark:text-white" />,
-          children: [
-            {
-              name: "Articles",
-              link: "/articles",
-              icon: <FileText className="h-4 w-4 text-neutral-500 dark:text-white" />,
-            },
-            {
-              name: "Blog",
-              link: "/blog",
-              icon: <PenLine className="h-4 w-4 text-neutral-500 dark:text-white" />,
-            },
-            {
-              name: "Videos",
-              link: "/videos",
-              icon: <Video className="h-4 w-4 text-neutral-500 dark:text-white" />,
-            },
-            {
-              name: "Newsletter",
-              link: "/newsletter",
-              icon: <Mail className="h-4 w-4 text-neutral-500 dark:text-white" />,
-            },
-            {
-              name: "Course",
-              link: "/course",
-              icon: <GraduationCap className="h-4 w-4 text-neutral-500 dark:text-white" />,
-            },
-          ],
-        },
-        {
-          name: "Tools",
-          link: "/tools",
-          icon: <Wrench className="h-4 w-4 text-neutral-500 dark:text-white" />,
-        },
-        {
-          name: "Contact",
-          link: "/#contact",
-          icon: <Mail className="h-4 w-4 text-neutral-500 dark:text-white" />,
-        },
-      ]}
-    />
-  );
+export type NavKey = 'home' | 'fsl' | 'learn' | 'faqs' | 'tools' | 'contact';
+
+export const DEFAULT_NAV_ORDER: NavKey[] = ['home', 'fsl', 'learn', 'faqs', 'tools', 'contact'];
+
+export const NAV_ITEM_LABELS: Record<NavKey, string> = {
+  home: 'Home',
+  fsl: 'Fractional Sales Leader',
+  learn: 'Learn',
+  faqs: 'FAQs',
+  tools: 'Tools',
+  contact: 'Contact',
+};
+
+function buildNavItems(order: NavKey[]) {
+  const ic = "h-4 w-4 text-neutral-500 dark:text-white";
+
+  type NavItem = {
+    name: string;
+    link?: string;
+    icon?: React.ReactElement;
+    children?: { name: string; link: string; icon?: React.ReactElement }[];
+  };
+
+  const items: Record<NavKey, NavItem> = {
+    home: {
+      name: "Home",
+      link: "/",
+      icon: <Home className={ic} />,
+    },
+    fsl: {
+      name: "Fractional Sales Leader",
+      icon: <UserCheck className={ic} />,
+      children: [
+        { name: "What is FSL?", link: "/fractional-sales-leader", icon: <UserCheck className={ic} /> },
+        { name: "FSL vs Consultant", link: "/fractional-sales-leader-vs-consultant", icon: <Scale className={ic} /> },
+      ],
+    },
+    learn: {
+      name: "Learn",
+      icon: <BookOpen className={ic} />,
+      children: [
+        { name: "Articles", link: "/articles", icon: <FileText className={ic} /> },
+        { name: "Blog", link: "/blog", icon: <PenLine className={ic} /> },
+        { name: "Videos", link: "/videos", icon: <Video className={ic} /> },
+        { name: "Newsletter", link: "/newsletter", icon: <Mail className={ic} /> },
+        { name: "Course", link: "/course", icon: <GraduationCap className={ic} /> },
+      ],
+    },
+    faqs: {
+      name: "FAQs",
+      link: "/faqs",
+      icon: <HelpCircle className={ic} />,
+    },
+    tools: {
+      name: "Tools",
+      link: "/tools",
+      icon: <Wrench className={ic} />,
+    },
+    contact: {
+      name: "Contact",
+      link: "/#contact",
+      icon: <Mail className={ic} />,
+    },
+  };
+
+  return order.filter((key) => key in items).map((key) => items[key]);
+}
+
+export function FloatingNavWrapper({ navOrder }: { navOrder?: string[] }) {
+  const order = (navOrder?.length ? navOrder : DEFAULT_NAV_ORDER) as NavKey[];
+  const navItems = buildNavItems(order);
+  return <FloatingNav navItems={navItems} />;
 }

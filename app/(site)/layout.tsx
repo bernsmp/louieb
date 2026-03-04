@@ -136,7 +136,7 @@ export default async function SiteLayout({
       <body
         className={`${playfair.variable} ${outfit.variable} antialiased`}
       >
-        <FloatingNavWrapper />
+        <FloatingNavWrapper navOrder={settings.navigation.navItemOrder} />
         {children}
         <Footer 
           tagline={settings.footer.tagline}
