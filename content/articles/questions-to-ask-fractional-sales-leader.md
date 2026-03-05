@@ -10,6 +10,7 @@ keywords: >-
 author: Louie Bernstein
 date: '2025-12-21'
 image: /images/articles/questions-thumbnail.png
+category: Hiring
 ---
 
 ### **Key Takeaways:**
