@@ -1,10 +1,18 @@
 ---
-title: "What a Fractional Sales Leader Does: Stop Paying for Advice, Start Getting Execution"
-description: "The difference between a binder full of theories and revenue lies in who is driving the car. Learn what a Fractional Sales Leader actually does day-to-day to build your sales engine."
-keywords: "fractional sales leader responsibilities, sales leadership execution, sales consultant vs operator, sales playbook, position contract, revenue operations, B2B sales management"
-author: "Louie Bernstein"
-date: "2025-12-21"
-image: "/images/articles/what-fsl-does-thumbnail.png"
+title: >-
+  What a Fractional Sales Leader Does: Stop Paying for Advice, Start Getting
+  Execution
+description: >-
+  The difference between a binder full of theories and revenue lies in who is
+  driving the car. Learn what a Fractional Sales Leader actually does day-to-day
+  to build your sales engine.
+keywords: >-
+  fractional sales leader responsibilities, sales leadership execution, sales
+  consultant vs operator, sales playbook, position contract, revenue operations,
+  B2B sales management
+author: Louie Bernstein
+date: '2025-12-21'
+image: /images/articles/what-fsl-does-thumbnail.png
 ---
 
 ### **Key Takeaways:**
@@ -16,7 +24,7 @@ image: "/images/articles/what-fsl-does-thumbnail.png"
 
 ---
 
-> Consultants sell suggestions; Fractional Sales Leaders sell implementation. For founders stuck in the $1M–$10M ARR trap, the solution isn't more strategy—it's an experienced operator who embeds themselves in your company to build, run, and optimize the sales engine while you focus on the CEO role.
+&gt; Consultants sell suggestions; Fractional Sales Leaders sell implementation. For founders stuck in the $1M–$10M ARR trap, the solution isn't more strategy—it's an experienced operator who embeds themselves in your company to build, run, and optimize the sales engine while you focus on the CEO role.
 
 ---
 
@@ -140,9 +148,7 @@ A: A Fractional Sales Leader manages the team directly. They run the weekly sale
 
 If you're tired of binders full of recommendations that never get implemented, let's talk about what execution looks like.
 
-[Schedule a 30-minute consultation call](https://calendly.com/louiebernstein/30minutes) to discuss your specific situation.
-
----
+[Schedule a 30-minute consultation call](https://calendly.com/louiebernstein/30minutes) to discuss your specific situation.<p>If you're still not sure what Fractional Sales Management is, read&nbsp;<a href="https://louiebernstein.com/articles/what-is-fractional-sales-leader" target="_self">What Is A Fractional Sales Leader</a></p><p>&nbsp;---
 
 **About the Author**
 
@@ -151,3 +157,4 @@ Louie Bernstein is a Fractional Sales Leader and LinkedIn Top Voice with 9+ year
 * [LinkedIn](https://www.linkedin.com/in/louiebernstein)
 * [Subscribe to The Sunday Starter Newsletter](https://www.louiebernstein.com/newsletter)
 
+</p>
