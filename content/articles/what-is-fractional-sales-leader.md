@@ -13,6 +13,7 @@ keywords: >-
 author: Louie Bernstein
 date: '2025-12-21'
 image: /images/articles/what-is-fsl-thumbnail.png
+category: Fractional Sales Leadership
 ---
 
 ### **Key Takeaways:**
