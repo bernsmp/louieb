@@ -135,9 +135,7 @@ A: Most engagements last 6 to 18 months. The goal is for the Fractional Leader t
 
 You don't have to guess if your sales leadership is working. If you want to see how a structured audit and action plan can transform your revenue trajectory, let's talk.
 
-[Schedule a 30-minute consultation call](https://calendly.com/louiebernstein/30minutes) to discuss your specific situation.
-
----
+[Schedule a 30-minute consultation call](https://calendly.com/louiebernstein/30minutes) to discuss your specific situation.&nbsp;</p><p>If you got the correct answers to these questions, let's&nbsp;<a href="https://louiebernstein.com/articles/what-is-fractional-sales-leader" target="_self">look at what a Fractional Sales Leader should do for you.</a></p><p>&nbsp;---
 
 **About the Author**
 
