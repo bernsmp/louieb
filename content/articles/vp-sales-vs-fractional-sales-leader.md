@@ -12,6 +12,7 @@ keywords: >-
 author: Louie Bernstein
 date: '2025-12-21'
 image: /images/articles/vp-vs-fractional-thumbnail.png
+category: Fractional Sales Leadership
 ---
 
 ### **Key Takeaways:**
