@@ -12,6 +12,7 @@ author: Louie Bernstein
 date: '2025-11-23'
 image: >-
   https://apkwktwnjvspfinrnhmz.supabase.co/storage/v1/object/public/media/articles/1771438783670_performance_improvement_plan_-_PIP.png
+category: Sales Management
 ---
 
 ### **Key Takeaways:**
