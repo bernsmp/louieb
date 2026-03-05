@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { getAllArticles } from "@/lib/markdown";
-import { getArticlesPageData } from "@/lib/cms";
+import { getArticlesPageData, getArticlesOrder } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Articles | Louie Bernstein - Sales Leadership Insights",
@@ -14,8 +14,22 @@ export const metadata: Metadata = {
 };
 
 export default async function ArticlesPage() {
-  const articles = getAllArticles();
-  const pageData = await getArticlesPageData();
+  const [rawArticles, pageData, customOrder] = await Promise.all([
+    Promise.resolve(getAllArticles()),
+    getArticlesPageData(),
+    getArticlesOrder(),
+  ]);
+
+  const articles = customOrder.length > 0
+    ? [...rawArticles].sort((a, b) => {
+        const aIdx = customOrder.indexOf(a.metadata.slug)
+        const bIdx = customOrder.indexOf(b.metadata.slug)
+        if (aIdx === -1 && bIdx === -1) return new Date(b.metadata.date).getTime() - new Date(a.metadata.date).getTime()
+        if (aIdx === -1) return 1
+        if (bIdx === -1) return -1
+        return aIdx - bIdx
+      })
+    : rawArticles;
 
   return (
     <main className="py-24">

@@ -1459,6 +1459,16 @@ export async function getArticlesPageData() {
   return settings.articlesPage
 }
 
+export async function getArticlesOrder(): Promise<string[]> {
+  if (!supabaseAdmin) return []
+  const { data } = await supabaseAdmin
+    .from('site_content')
+    .select('content')
+    .eq('section', 'articlesOrder')
+    .single()
+  return (data?.content as { order?: string[] })?.order || []
+}
+
 export async function getROICalculatorTextData() {
   const settings = await getSiteSettings()
   return settings.roiCalculatorText
