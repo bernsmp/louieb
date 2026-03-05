@@ -12,8 +12,7 @@ date: '2026-01-19'
 image: >-
   https://apkwktwnjvspfinrnhmz.supabase.co/storage/v1/object/public/media/articles/1771338457098_sales_rep_vs_sales_manager__1_.png
 ---
-
-### **Key Takeaways:**
+<a href="https://louiebernstein.com/articles/founder-burnout-calculator" target="_self">https://louiebernstein.com/articles/founder-burnout-calculator</a>### **Key Takeaways:**
 
 * Promoting your top sales rep to manager is a $150,000 mistake that kills both revenue and morale
 * The skills that make someone a great closer are the opposite of what makes them a great manager
@@ -261,7 +260,7 @@ The odds are not in your favor.
 
 Instead, invest in the infrastructure first. Bring in someone who has built sales teams before. Let them create the system. Then, and only then, decide if your top rep is the right person to run it.
 
-Your top rep will thank you. Your team will thank you. Your P&L will definitely thank you.
+Your top rep will thank you. Your team will thank you. Your P&amp;L will definitely thank you.
 
 ---
 
@@ -269,9 +268,7 @@ Your top rep will thank you. Your team will thank you. Your P&L will definitely 
 
 If you are tired of guessing whether your top rep can manage, or if you have already made the promotion mistake and need to fix it, let's talk.
 
-I help $1M-$10M ARR companies build the sales infrastructure that makes management possible.
-
-[Schedule a 30-minute consultation call](https://calendly.com/louiebernstein/30minutes) to discuss your specific situation.
+I help $1M-$10M ARR companies build the sales infrastructure that makes management possible.&nbsp;<p>Having to deal with selling and managing a sales manager, can burn you out.&nbsp; See here how to keep that from happening by using the Founder Burnout Calculator.</p><p>&nbsp;[Schedule a 30-minute consultation call](https://calendly.com/louiebernstein/30minutes) to discuss your specific situation.
 
 ---
 
@@ -288,3 +285,4 @@ Connect with Louie:
 ---
 
 Tags: Sales Management, Sales Leadership, Fractional Sales Leader, Sales Team Building, Sales Promotion, Sales Infrastructure
+</p>
