@@ -276,9 +276,7 @@ When you work with me, you'll learn how to document what you expect so your team
 
 ## **Download the Position Contract Template**
 
-Want a ready-to-use Position Contract template? [Download the free template](https://calendly.com/louiebernstein/30minutes) when you schedule a consultation call.
-
----
+Want a ready-to-use Position Contract template? [Download the free template](https://calendly.com/louiebernstein/30minutes) when you schedule a consultation call.&nbsp;<p><a href="https://louiebernstein.com/articles/signs-you-need-fractional-sales-leader" target="_self">Here's 4 Signs you may need a Fractional Sales Leader</a></p><p>&nbsp;---
 
 ## **About the Author**
 
@@ -293,3 +291,4 @@ Connect with Louie:
 ---
 
 Tags: Sales Management, Sales Leadership, Performance Management, Sales Team Building, Fractional Sales Leader, Sales Documentation, Position Contracts, Sales Accountability
+</p>
