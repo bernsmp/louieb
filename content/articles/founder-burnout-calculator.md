@@ -13,6 +13,7 @@ author: Louie Bernstein
 date: '2026-01-19'
 image: >-
   https://apkwktwnjvspfinrnhmz.supabase.co/storage/v1/object/public/media/articles/1771276144350_16_x_9_for_videos.png
+category: Founder Growth
 ---
 
 ### **Key Takeaways:**
