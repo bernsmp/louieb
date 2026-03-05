@@ -13,6 +13,7 @@ author: Louie Bernstein
 date: '2026-01-20'
 image: >-
   https://apkwktwnjvspfinrnhmz.supabase.co/storage/v1/object/public/media/articles/1771857267043_vp-sales-post-mortem-header.png
+category: Hiring
 ---
 
 ### **Key Takeaways:**
