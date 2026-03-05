@@ -10,6 +10,7 @@ export interface ArticleMetadata {
   date: string;
   slug: string;
   image?: string;
+  category?: string;
 }
 
 export interface Article {
@@ -52,6 +53,7 @@ export function getArticleBySlug(slug: string): Article | null {
         date: data.date || new Date().toISOString(),
         slug,
         image: data.image,
+        category: data.category || '',
       },
       content,
     };

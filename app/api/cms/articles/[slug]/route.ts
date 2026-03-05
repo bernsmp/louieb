@@ -53,6 +53,7 @@ export async function GET(
           date: data.date || '',
           slug,
           image: data.image || undefined,
+          category: data.category || '',
         },
         content,
       },
@@ -89,7 +90,7 @@ export async function PUT(
     const sha = currentFile.sha
 
     const body = await request.json()
-    const { title, description, keywords, author, date, image, content } = body
+    const { title, description, keywords, author, date, image, category, content } = body
 
     if (!title || !content) {
       return NextResponse.json(
@@ -107,6 +108,7 @@ export async function PUT(
       date: date || new Date().toISOString().split('T')[0],
     }
     if (image) frontmatter.image = image
+    if (category) frontmatter.category = category
 
     const fileContent = matter.stringify(content, frontmatter)
     const encoded = Buffer.from(fileContent).toString('base64')

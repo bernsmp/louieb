@@ -17,6 +17,7 @@ export default function NewArticlePage() {
     title: '',
     description: '',
     keywords: '',
+    category: '',
     author: 'Louie Bernstein',
     date: today,
     image: '',
@@ -134,6 +135,20 @@ export default function NewArticlePage() {
             onChange={(e) => setForm({ ...form, keywords: e.target.value })}
             placeholder="fractional sales, leadership, scaling (comma separated)"
           />
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Category</label>
+          <input
+            type="text"
+            className="form-input"
+            value={form.category}
+            onChange={(e) => setForm({ ...form, category: e.target.value })}
+            placeholder="e.g. Hiring, Pipeline, Compensation"
+          />
+          <p style={{ fontSize: '0.875rem', color: '#737373', marginTop: '0.25rem' }}>
+            Single category shown as a filter pill on the Articles page
+          </p>
         </div>
 
         <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem' }}>
