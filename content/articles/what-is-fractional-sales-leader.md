@@ -1,10 +1,18 @@
 ---
-title: "What is a Fractional Sales Leader? The Capital-Efficient Model for Scaling Out of Founder-Led Sales"
-description: "The capital-efficient model for founders between $1M and $10M ARR who need to build a sales machine but aren't ready for a C-Level hire. Learn how fractional leadership works."
-keywords: "fractional sales leader, fractional sales leadership, founder-led sales, sales executive, B2B sales scaling, revenue operations, sales infrastructure, part-time VP sales"
-author: "Louie Bernstein"
-date: "2025-12-21"
-image: "/images/articles/what-is-fsl-thumbnail.png"
+title: >-
+  What is a Fractional Sales Leader? The Capital-Efficient Model for Scaling Out
+  of Founder-Led Sales
+description: >-
+  The capital-efficient model for founders between $1M and $10M ARR who need to
+  build a sales machine but aren't ready for a C-Level hire. Learn how
+  fractional leadership works.
+keywords: >-
+  fractional sales leader, fractional sales leadership, founder-led sales, sales
+  executive, B2B sales scaling, revenue operations, sales infrastructure,
+  part-time VP sales
+author: Louie Bernstein
+date: '2025-12-21'
+image: /images/articles/what-is-fsl-thumbnail.png
 ---
 
 ### **Key Takeaways:**
@@ -42,7 +50,7 @@ There is a third path: **The Fractional Sales Leader.**
 
 ## Buying Experience, Not Hours
 
-> "You get their experience, judgment, and systems, but you only pay for the slice of their time you need."
+&gt; "You get their experience, judgment, and systems, but you only pay for the slice of their time you need."
 
 This distinction is critical. When you hire a full-time employee, you pay 40 hours a week for their presence. When you hire a Fractional Leader, you pay for outcomes and systems.
 
@@ -118,9 +126,7 @@ You don't need another sales book, and you don't need a bloated payroll. You nee
 
 If you are ready to transition out of founder-led sales and want to install a proven revenue engine without the risk of a full-time executive hire, we should talk.
 
-[Schedule a 30-minute consultation call](https://calendly.com/louiebernstein/30minutes) to discuss your specific situation.
-
----
+[Schedule a 30-minute consultation call](https://calendly.com/louiebernstein/30minutes) to discuss your specific situation.&nbsp;<p><a href="https://louiebernstein.com/articles/what-fractional-sales-leader-does" target="_self">Here's What A Fractional Sales Leader Actually Does</a></p><p>&nbsp;---
 
 **About the Author**
 
@@ -129,3 +135,4 @@ Louie Bernstein is a Fractional Sales Leader and LinkedIn Top Voice with 9+ year
 * [LinkedIn](https://www.linkedin.com/in/louiebernstein)
 * [Subscribe to The Sunday Starter Newsletter](https://www.louiebernstein.com/newsletter)
 
+</p>
