@@ -444,9 +444,7 @@ Run the numbers. Calculate your real cost. Then make the decision that your futu
 
 I have built a detailed Founder Burnout Calculator tool that walks you through this exact analysis for your business.
 
-[Access the Free Founder Burnout Calculator](https://www.louiebernstein.com/tools/roi-calculator)
-
-Or if you are ready to talk about how a Fractional Sales Leader can free you from the sales grind:
+[Access the Free Founder Burnout Calculator](https://www.louiebernstein.com/tools/roi-calculator)&nbsp;<p>If you're ready to explore hiring a Fractional Sales Leader,&nbsp;<a href="https://louiebernstein.com/articles/questions-to-ask-fractional-sales-leader" target="_self">here's the 3 Critical Questions You Need To Ask First.</a></p><p>&nbsp;Or if you are ready to talk about how a Fractional Sales Leader can free you from the sales grind:
 
 [Schedule a 30-minute consultation call](https://calendly.com/louiebernstein/30minutes)
 
@@ -460,3 +458,4 @@ Connect with Louie:
 
 * [Schedule a Consultation](https://calendly.com/louiebernstein/30minutes)
 * [Subscribe to The Sunday Starter Newsletter](https://www.louiebernstein.com/newsletter)
+</p>
