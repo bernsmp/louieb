@@ -2,13 +2,16 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { sanitizeHtml } from "@/lib/sanitize";
 
-/** Strip clipboard paste artifacts (<!--StartFragment--> etc.) */
+/** Strip clipboard paste artifacts and XSS vectors */
 function sanitizeAnswer(raw: string): string {
-  return raw
-    .replace(/<!--StartFragment-->/gi, "")
-    .replace(/<!--EndFragment-->/gi, "")
-    .trim();
+  return sanitizeHtml(
+    raw
+      .replace(/<!--StartFragment-->/gi, "")
+      .replace(/<!--EndFragment-->/gi, "")
+      .trim()
+  );
 }
 
 interface FAQItem {

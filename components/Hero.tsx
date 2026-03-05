@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { BackgroundCells } from "@/components/ui/background-ripple-effect";
+import { sanitizeHtml } from "@/lib/sanitize";
 
 interface HeroProps {
   headline?: string;
@@ -66,7 +67,7 @@ export function Hero({
           
           {/* Value Proposition - LinkedIn copy */}
           {/<[a-z][\s\S]*?>/i.test(description) ? (
-            <div className="mx-auto mt-8 max-w-3xl text-base text-neutral-200 md:text-lg lg:text-xl cms-html-content hero-html-content" dangerouslySetInnerHTML={{ __html: description }} />
+            <div className="mx-auto mt-8 max-w-3xl text-base text-neutral-200 md:text-lg lg:text-xl cms-html-content hero-html-content" dangerouslySetInnerHTML={{ __html: sanitizeHtml(description) }} />
           ) : (
             <p className="mx-auto mt-8 max-w-3xl whitespace-pre-line text-base text-neutral-200 md:text-lg lg:text-xl">
               {description}

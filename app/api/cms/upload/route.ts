@@ -7,8 +7,14 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { supabaseAdmin } from '@/lib/supabase'
+import { getUser } from '@/lib/auth'
 
 export async function POST(request: NextRequest) {
+  const user = await getUser()
+  if (!user) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
   if (!supabaseAdmin) {
     return NextResponse.json(
       { error: 'Storage not configured' },

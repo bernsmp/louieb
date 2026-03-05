@@ -228,6 +228,7 @@ export function RichTextEditor({ value, onChange, minHeight = 320 }: RichTextEdi
   const insertLink = useCallback(() => {
     const url = dialogUrl.trim()
     if (!url) { urlInputRef.current?.focus(); return }
+    if (/^javascript\s*:/i.test(url)) { urlInputRef.current?.focus(); return }
     closeDialog()
     editorRef.current?.focus()
     if (savedRangeRef.current) {

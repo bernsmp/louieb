@@ -1,7 +1,34 @@
 import { createServerClient, isAuthConfigured } from '@/lib/auth'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
-export async function POST(request: Request) {
+// In-memory rate limiter: 10 attempts per IP per 15 minutes.
+// Note: resets on serverless cold-starts; provides best-effort protection.
+const loginAttempts = new Map<string, { count: number; resetAt: number }>()
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now()
+  const WINDOW_MS = 15 * 60 * 1000
+  const MAX_ATTEMPTS = 10
+  const record = loginAttempts.get(ip)
+  if (!record || record.resetAt < now) {
+    loginAttempts.set(ip, { count: 1, resetAt: now + WINDOW_MS })
+    return true
+  }
+  if (record.count >= MAX_ATTEMPTS) return false
+  record.count++
+  return true
+}
+
+export async function POST(request: NextRequest) {
+  const forwarded = request.headers.get('x-forwarded-for') ?? ''
+  const ip = forwarded.split(',')[0].trim() || 'unknown'
+  if (!checkRateLimit(ip)) {
+    return NextResponse.json(
+      { error: 'Too many login attempts. Please try again later.' },
+      { status: 429 }
+    )
+  }
+
   try {
     // Check if Supabase is configured
     if (!isAuthConfigured) {
