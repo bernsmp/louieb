@@ -1939,6 +1939,20 @@ const defaultSalespersonSettings: SalespersonSettings = {
   ctaBottomDescription: 'This blueprint is what Louie teaches. As a Fractional Sales Leader, he brings these systems directly into $1M–$10M companies — building the process, training the team, and getting out of your way.',
 }
 
+/** Strip all HTML tags and comment fragments from a plain-text CMS field */
+function cleanPlainText(value: unknown): string {
+  if (typeof value !== 'string') return ''
+  return value
+    .replace(/<!--[\s\S]*?-->/g, '')   // remove HTML comments (<!--StartFragment--> etc.)
+    .replace(/<[^>]+>/g, '')            // remove all HTML tags
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .trim()
+}
+
 export const getSalespersonSettings = cache(async (): Promise<SalespersonSettings> => {
   if (!USE_SUPABASE_CMS || !isSupabaseConfigured || !supabaseAdmin) {
     return defaultSalespersonSettings
@@ -1954,18 +1968,21 @@ export const getSalespersonSettings = cache(async (): Promise<SalespersonSetting
     if (error || !data) return defaultSalespersonSettings
 
     const content = data.content as Record<string, unknown>
+    const clean = (key: keyof SalespersonSettings) =>
+      cleanPlainText(content[key]) || defaultSalespersonSettings[key]
+
     return {
-      heroTagline: (content.heroTagline as string) || defaultSalespersonSettings.heroTagline,
-      heroHeadline: (content.heroHeadline as string) || defaultSalespersonSettings.heroHeadline,
-      heroDescription: (content.heroDescription as string) || defaultSalespersonSettings.heroDescription,
-      ctaPrimaryText: (content.ctaPrimaryText as string) || defaultSalespersonSettings.ctaPrimaryText,
-      ctaPrimaryUrl: (content.ctaPrimaryUrl as string) || defaultSalespersonSettings.ctaPrimaryUrl,
-      ctaSecondaryText: (content.ctaSecondaryText as string) || defaultSalespersonSettings.ctaSecondaryText,
-      ctaSecondaryUrl: (content.ctaSecondaryUrl as string) || defaultSalespersonSettings.ctaSecondaryUrl,
-      themesHeadline: (content.themesHeadline as string) || defaultSalespersonSettings.themesHeadline,
-      themesDescription: (content.themesDescription as string) || defaultSalespersonSettings.themesDescription,
-      ctaBottomHeadline: (content.ctaBottomHeadline as string) || defaultSalespersonSettings.ctaBottomHeadline,
-      ctaBottomDescription: (content.ctaBottomDescription as string) || defaultSalespersonSettings.ctaBottomDescription,
+      heroTagline: clean('heroTagline'),
+      heroHeadline: clean('heroHeadline'),
+      heroDescription: clean('heroDescription'),
+      ctaPrimaryText: clean('ctaPrimaryText'),
+      ctaPrimaryUrl: clean('ctaPrimaryUrl'),
+      ctaSecondaryText: clean('ctaSecondaryText'),
+      ctaSecondaryUrl: clean('ctaSecondaryUrl'),
+      themesHeadline: clean('themesHeadline'),
+      themesDescription: clean('themesDescription'),
+      ctaBottomHeadline: clean('ctaBottomHeadline'),
+      ctaBottomDescription: clean('ctaBottomDescription'),
     }
   } catch {
     return defaultSalespersonSettings
