@@ -1907,6 +1907,71 @@ export const getFAQsPageFAQs = cache(async (): Promise<FAQItem[]> => {
   ]
 })
 
+// ============================================================================
+// SALESPERSON PAGE
+// ============================================================================
+
+export interface SalespersonSettings {
+  heroTagline: string
+  heroHeadline: string
+  heroDescription: string
+  ctaPrimaryText: string
+  ctaPrimaryUrl: string
+  ctaSecondaryText: string
+  ctaSecondaryUrl: string
+  themesHeadline: string
+  themesDescription: string
+  ctaBottomHeadline: string
+  ctaBottomDescription: string
+}
+
+const defaultSalespersonSettings: SalespersonSettings = {
+  heroTagline: 'The 588-Page Blueprint',
+  heroHeadline: 'How to Be a Professional Salesperson',
+  heroDescription: '210 daily lessons for salespeople + 52 weeks of sales management training. Built from 9+ years in the field — written for reps who want to be great and managers who want to build great teams.',
+  ctaPrimaryText: 'Work With Louie',
+  ctaPrimaryUrl: 'https://calendly.com/louiebernstein/30minutes',
+  ctaSecondaryText: 'Ask a Question',
+  ctaSecondaryUrl: '/#contact',
+  themesHeadline: "What's Inside: 10 Core Themes",
+  themesDescription: 'The 210 daily lessons are organized around the skills every professional salesperson needs to master — from the first cold call to closing the complex deal.',
+  ctaBottomHeadline: 'Want this expertise working inside your company?',
+  ctaBottomDescription: 'This blueprint is what Louie teaches. As a Fractional Sales Leader, he brings these systems directly into $1M–$10M companies — building the process, training the team, and getting out of your way.',
+}
+
+export const getSalespersonSettings = cache(async (): Promise<SalespersonSettings> => {
+  if (!USE_SUPABASE_CMS || !isSupabaseConfigured || !supabaseAdmin) {
+    return defaultSalespersonSettings
+  }
+
+  try {
+    const { data, error } = await supabaseAdmin
+      .from('site_content')
+      .select('content')
+      .eq('section', 'salesperson')
+      .single()
+
+    if (error || !data) return defaultSalespersonSettings
+
+    const content = data.content as Record<string, unknown>
+    return {
+      heroTagline: (content.heroTagline as string) || defaultSalespersonSettings.heroTagline,
+      heroHeadline: (content.heroHeadline as string) || defaultSalespersonSettings.heroHeadline,
+      heroDescription: (content.heroDescription as string) || defaultSalespersonSettings.heroDescription,
+      ctaPrimaryText: (content.ctaPrimaryText as string) || defaultSalespersonSettings.ctaPrimaryText,
+      ctaPrimaryUrl: (content.ctaPrimaryUrl as string) || defaultSalespersonSettings.ctaPrimaryUrl,
+      ctaSecondaryText: (content.ctaSecondaryText as string) || defaultSalespersonSettings.ctaSecondaryText,
+      ctaSecondaryUrl: (content.ctaSecondaryUrl as string) || defaultSalespersonSettings.ctaSecondaryUrl,
+      themesHeadline: (content.themesHeadline as string) || defaultSalespersonSettings.themesHeadline,
+      themesDescription: (content.themesDescription as string) || defaultSalespersonSettings.themesDescription,
+      ctaBottomHeadline: (content.ctaBottomHeadline as string) || defaultSalespersonSettings.ctaBottomHeadline,
+      ctaBottomDescription: (content.ctaBottomDescription as string) || defaultSalespersonSettings.ctaBottomDescription,
+    }
+  } catch {
+    return defaultSalespersonSettings
+  }
+})
+
 // Re-export types for use in components
 export type { SiteSettings, Testimonial, FAQItem, VideoItem, VideoCategory, BlogPost, ServiceItem, ProcessStep, PageLayout, PageSEO }
 

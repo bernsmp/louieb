@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { getSalespersonSettings } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "How to Be a Professional Salesperson — 210-Day Blueprint | Louie Bernstein",
@@ -197,7 +198,9 @@ const managementWeeks = [
   { range: "Weeks 39–52", title: "Coaching, Feedback & Performance", topics: ["Staying positive as a leader", "Hands-off management done right", "Giving immediate feedback", "Releasing a salesperson — the right way", "What motivates each salesperson", "Catching them doing something right", "Working with finance and numbers people", "The sales funnel", "Keeping reps out of support", "Email discipline", "Making training sessions effective", "When to push hard", "Correct the behavior, not the person", "Transparency and integrity as a manager"] },
 ];
 
-export default function SalespersonBlueprintPage() {
+export default async function SalespersonBlueprintPage() {
+  const cms = await getSalespersonSettings();
+
   return (
     <>
       <script
@@ -208,30 +211,28 @@ export default function SalespersonBlueprintPage() {
       {/* Hero */}
       <section className="bg-slate-950 px-6 py-24 text-center">
         <p className="mb-4 font-sans text-sm font-semibold uppercase tracking-widest text-blue-400">
-          The 588-Page Blueprint
+          {cms.heroTagline}
         </p>
         <h1 className="mx-auto max-w-4xl font-serif text-4xl font-medium text-white md:text-5xl lg:text-6xl">
-          How to Be a Professional Salesperson
+          {cms.heroHeadline}
         </h1>
         <p className="mx-auto mt-6 max-w-2xl font-sans text-lg text-neutral-300">
-          210 daily lessons for salespeople + 52 weeks of sales management training.
-          Built from 9+ years in the field — written for reps who want to be great
-          and managers who want to build great teams.
+          {cms.heroDescription}
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
-            href="https://calendly.com/louiebernstein/30minutes"
-            target="_blank"
-            rel="noopener noreferrer"
+            href={cms.ctaPrimaryUrl}
+            target={cms.ctaPrimaryUrl.startsWith('http') ? '_blank' : undefined}
+            rel={cms.ctaPrimaryUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
             className="rounded-lg bg-[#0966c2] px-8 py-3 font-sans text-base font-semibold text-white transition-all hover:bg-[#0855a3] hover:shadow-lg md:px-10 md:py-4"
           >
-            Work With Louie
+            {cms.ctaPrimaryText}
           </Link>
           <Link
-            href="/#contact"
+            href={cms.ctaSecondaryUrl}
             className="rounded-lg border-2 border-white px-8 py-3 font-sans text-base font-semibold text-white transition-all hover:bg-white hover:text-slate-950 md:px-10 md:py-4"
           >
-            Ask a Question
+            {cms.ctaSecondaryText}
           </Link>
         </div>
       </section>
@@ -257,11 +258,10 @@ export default function SalespersonBlueprintPage() {
       <section className="bg-neutral-50 px-6 py-20">
         <div className="mx-auto max-w-5xl">
           <h2 className="mb-4 text-center font-serif text-3xl font-bold text-slate-900 md:text-4xl">
-            What's Inside: 10 Core Themes
+            {cms.themesHeadline}
           </h2>
           <p className="mx-auto mb-14 max-w-2xl text-center font-sans text-base text-neutral-600">
-            The 210 daily lessons are organized around the skills every professional
-            salesperson needs to master — from the first cold call to closing the complex deal.
+            {cms.themesDescription}
           </p>
           <div className="grid gap-6 md:grid-cols-2">
             {themes.map((theme) => (
@@ -470,12 +470,10 @@ export default function SalespersonBlueprintPage() {
       {/* CTA */}
       <section className="bg-white px-6 py-20 text-center">
         <h2 className="mb-4 font-serif text-3xl font-bold text-slate-900 md:text-4xl">
-          Want this expertise working inside your company?
+          {cms.ctaBottomHeadline}
         </h2>
         <p className="mx-auto mb-10 max-w-2xl font-sans text-base text-neutral-600">
-          This blueprint is what Louie teaches. As a Fractional Sales Leader, he brings
-          these systems directly into $1M–$10M companies — building the process, training
-          the team, and getting out of your way.
+          {cms.ctaBottomDescription}
         </p>
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
