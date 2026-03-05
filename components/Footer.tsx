@@ -1,5 +1,10 @@
 import Link from "next/link";
 
+interface QuickLink {
+  label: string;
+  href: string;
+}
+
 interface FooterProps {
   tagline?: string;
   slogan?: string;
@@ -10,7 +15,17 @@ interface FooterProps {
   youtube?: string;
   quickLinksLabel?: string;
   getInTouchLabel?: string;
+  quickLinks?: QuickLink[];
 }
+
+const DEFAULT_QUICK_LINKS: QuickLink[] = [
+  { label: "Home", href: "/" },
+  { label: "Articles", href: "/articles" },
+  { label: "Videos", href: "/videos" },
+  { label: "Newsletter", href: "/newsletter" },
+  { label: "Sales Training", href: "/salesperson" },
+  { label: "Privacy Policy", href: "/privacy" },
+];
 
 export function Footer({
   tagline = "Fractional Sales Leader",
@@ -22,6 +37,7 @@ export function Footer({
   youtube = "https://www.youtube.com/playlist?list=PL7HfhnqHyzRmGDUMDhcSgZW8pR7DhW_Hl",
   quickLinksLabel = "Quick Links",
   getInTouchLabel = "Get In Touch",
+  quickLinks = DEFAULT_QUICK_LINKS,
 }: FooterProps) {
   const phoneLink = `tel:+1${phone.replace(/\D/g, '')}`;
 
@@ -48,31 +64,13 @@ export function Footer({
               {quickLinksLabel}
             </h4>
             <ul className="mt-4 space-y-3">
-              <li>
-                <Link href="/" className="font-sans text-base text-neutral-600 transition-colors hover:text-primary">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/articles" className="font-sans text-base text-neutral-600 transition-colors hover:text-primary">
-                  Articles
-                </Link>
-              </li>
-              <li>
-                <Link href="/videos" className="font-sans text-base text-neutral-600 transition-colors hover:text-primary">
-                  Videos
-                </Link>
-              </li>
-              <li>
-                <Link href="/newsletter" className="font-sans text-base text-neutral-600 transition-colors hover:text-primary">
-                  Newsletter
-                </Link>
-              </li>
-              <li>
-                <Link href="/privacy" className="font-sans text-base text-neutral-600 transition-colors hover:text-primary">
-                  Privacy Policy
-                </Link>
-              </li>
+              {quickLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="font-sans text-base text-neutral-600 transition-colors hover:text-primary">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

@@ -138,7 +138,7 @@ export default async function SiteLayout({
       >
         <FloatingNavWrapper navOrder={settings.navigation.navItemOrder} />
         {children}
-        <Footer 
+        <Footer
           tagline={settings.footer.tagline}
           slogan={settings.footer.slogan}
           copyrightName={settings.footer.copyrightName}
@@ -146,6 +146,9 @@ export default async function SiteLayout({
           phone={settings.contact.phone}
           linkedin={settings.social.linkedin}
           youtube={settings.social.youtube}
+          quickLinksLabel={settings.footer.quickLinksLabel}
+          getInTouchLabel={settings.footer.getInTouchLabel}
+          quickLinks={settings.footer.quickLinks}
         />
       </body>
     </html>

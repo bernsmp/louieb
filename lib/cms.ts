@@ -213,6 +213,7 @@ interface SiteSettings {
     copyrightName: string
     quickLinksLabel: string
     getInTouchLabel: string
+    quickLinks: Array<{ label: string; href: string }>
   }
   newsletter: {
     name: string
@@ -548,6 +549,14 @@ const defaultSettings: SiteSettings = {
     copyrightName: 'Louie Bernstein',
     quickLinksLabel: 'Quick Links',
     getInTouchLabel: 'Get In Touch',
+    quickLinks: [
+      { label: 'Home', href: '/' },
+      { label: 'Articles', href: '/articles' },
+      { label: 'Videos', href: '/videos' },
+      { label: 'Newsletter', href: '/newsletter' },
+      { label: 'Sales Training', href: '/salesperson' },
+      { label: 'Privacy Policy', href: '/privacy' },
+    ],
   },
   newsletter: {
     name: 'The Sunday Starter',
