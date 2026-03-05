@@ -23,6 +23,7 @@ export const FloatingNav = ({
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   return (
+    <nav aria-label="Main navigation">
     <AnimatePresence mode="wait">
       <motion.div
         initial={{ opacity: 0, y: -100 }}
@@ -111,5 +112,6 @@ export const FloatingNav = ({
         })}
       </motion.div>
     </AnimatePresence>
+    </nav>
   );
 };
