@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getUser } from '@/lib/auth'
+import { supabaseAdmin } from '@/lib/supabase'
 import matter from 'gray-matter'
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN
@@ -51,10 +52,31 @@ export async function GET() {
       })
     )
 
-    // Sort newest first
-    articles.sort((a: { date: string }, b: { date: string }) => {
-      return new Date(b.date).getTime() - new Date(a.date).getTime()
-    })
+    // Apply custom order if set, otherwise sort newest first
+    let customOrder: string[] = []
+    if (supabaseAdmin) {
+      const { data: orderData } = await supabaseAdmin
+        .from('site_content')
+        .select('content')
+        .eq('section', 'articlesOrder')
+        .single()
+      customOrder = (orderData?.content as { order?: string[] })?.order || []
+    }
+
+    if (customOrder.length > 0) {
+      articles.sort((a: { slug: string; date: string }, b: { slug: string; date: string }) => {
+        const aIdx = customOrder.indexOf(a.slug)
+        const bIdx = customOrder.indexOf(b.slug)
+        if (aIdx === -1 && bIdx === -1) return new Date(b.date).getTime() - new Date(a.date).getTime()
+        if (aIdx === -1) return 1
+        if (bIdx === -1) return -1
+        return aIdx - bIdx
+      })
+    } else {
+      articles.sort((a: { date: string }, b: { date: string }) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime()
+      })
+    }
 
     return NextResponse.json({ articles })
   } catch (error) {
