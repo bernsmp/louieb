@@ -11,6 +11,7 @@ author: Louie Bernstein
 date: '2026-01-19'
 image: >-
   https://apkwktwnjvspfinrnhmz.supabase.co/storage/v1/object/public/media/articles/1771338457098_sales_rep_vs_sales_manager__1_.png
+category: Sales Management
 ---
 <a href="https://louiebernstein.com/articles/founder-burnout-calculator" target="_self">https://louiebernstein.com/articles/founder-burnout-calculator</a>### **Key Takeaways:**
 
