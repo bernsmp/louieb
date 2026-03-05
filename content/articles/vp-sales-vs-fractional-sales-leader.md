@@ -143,7 +143,7 @@ Deciding between a VP and a Fractional Leader is not just a gut feeling—it is 
 
 **Don't make a $200,000+ bet without seeing the odds.**
 
-[Calculate Your Sales Leadership ROI →](https://www.louiebernstein.com/tools/roi-calculator)&nbsp;<p><a href="https://louiebernstein.com/articles/questions-to-ask-fractional-sales-leader" target="_self">Here's the questions you need to Vet a Fractional Sales Leader</a></p><p>&nbsp;[Schedule a 30-minute consultation call](https://calendly.com/louiebernstein/30minutes) to discuss your specific situation.
+[Calculate Your Sales Leadership ROI →](https://www.louiebernstein.com/tools/roi-calculator)&nbsp;<p><a href="https://louiebernstein.com/articles/questions-to-ask-fractional-sales-leader" target="_self">Here's The 3 Critical Questions You Must Ask Before Hiring a Fractional Sales Leader</a></p><p>&nbsp;[Schedule a 30-minute consultation call](https://calendly.com/louiebernstein/30minutes) to discuss your specific situation.
 
 ---
 
