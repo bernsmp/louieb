@@ -1,10 +1,17 @@
 ---
-title: "VP of Sales vs. Fractional Sales Leader: The $250k Decision You Can't Afford to Get Wrong"
-description: "Why premature executive hiring destroys cash flow and how to bridge the gap between founder-led sales and a full-time executive. Learn when to hire fractional vs full-time."
-keywords: "VP of sales, fractional sales leader, sales executive hiring, sales leadership cost, B2B sales management, founder-led sales, sales hiring decision"
-author: "Louie Bernstein"
-date: "2025-12-21"
-image: "/images/articles/vp-vs-fractional-thumbnail.png"
+title: >-
+  VP of Sales vs. Fractional Sales Leader: The $250k Decision You Can't Afford
+  to Get Wrong
+description: >-
+  Why premature executive hiring destroys cash flow and how to bridge the gap
+  between founder-led sales and a full-time executive. Learn when to hire
+  fractional vs full-time.
+keywords: >-
+  VP of sales, fractional sales leader, sales executive hiring, sales leadership
+  cost, B2B sales management, founder-led sales, sales hiring decision
+author: Louie Bernstein
+date: '2025-12-21'
+image: /images/articles/vp-vs-fractional-thumbnail.png
 ---
 
 ### **Key Takeaways:**
@@ -92,13 +99,13 @@ If you are trying to exit "Founder-Led Sales," do not gamble your runway on an e
 ![The 3-Phase Operational Roadmap](/images/articles/vp-vs-fractional-roadmap.png)
 *Build first, then scale: The risk-free path from founder-led sales to executive leadership.*
 
-### Phase 1: The Audit & Build (Months 1-3)
+### Phase 1: The Audit &amp; Build (Months 1-3)
 
 * Your Fractional Leader audits the CRM and historical data.
 * They define Pipeline Velocity metrics to establish a baseline.
 * They write the V1 Playbook and configure the CRM to match the sales process.
 
-### Phase 2: Stabilization & Hiring (Months 4-9)
+### Phase 2: Stabilization &amp; Hiring (Months 4-9)
 
 * The Fractional Leader acts as the interim manager, running weekly cadences.
 * They hire the first "true" salespeople (not founders).
@@ -136,9 +143,7 @@ Deciding between a VP and a Fractional Leader is not just a gut feeling—it is 
 
 **Don't make a $200,000+ bet without seeing the odds.**
 
-[Calculate Your Sales Leadership ROI →](https://www.louiebernstein.com/tools/roi-calculator)
-
-[Schedule a 30-minute consultation call](https://calendly.com/louiebernstein/30minutes) to discuss your specific situation.
+[Calculate Your Sales Leadership ROI →](https://www.louiebernstein.com/tools/roi-calculator)&nbsp;<p><a href="https://louiebernstein.com/articles/questions-to-ask-fractional-sales-leader" target="_self">Here's the questions you need to Vet a Fractional Sales Leader</a></p><p>&nbsp;[Schedule a 30-minute consultation call](https://calendly.com/louiebernstein/30minutes) to discuss your specific situation.
 
 ---
 
@@ -149,3 +154,4 @@ Louie Bernstein is a Fractional Sales Leader and LinkedIn Top Voice with 9+ year
 * [LinkedIn](https://www.linkedin.com/in/louiebernstein)
 * [Subscribe to The Sunday Starter Newsletter](https://www.louiebernstein.com/newsletter)
 
+</p>
