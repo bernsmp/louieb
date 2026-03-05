@@ -531,9 +531,7 @@ You have two choices:
 1. Bring in help to build the infrastructure your VP needs (if they are salvageable).
 2. Replace them with a Fractional Sales Leader who knows how to build from zero.
 
-Either way, act now.
-
-[Schedule a 30-minute consultation call](https://calendly.com/louiebernstein/30minutes) to discuss your specific situation and get a plan.
+Either way, act now.&nbsp;<p><a href="https://louiebernstein.com/articles/what-is-fractional-sales-leader" target="_self">Click to see what Fractional Sales Leadership is and how you can take advantage of it.</a></p><p><a href="https://louiebernstein.com/articles/what-fractional-sales-leader-does" target="_self">Here's what an Fractional Sales Leader actually does.</a></p><p>&nbsp;&nbsp;[Schedule a 30-minute consultation call](https://calendly.com/louiebernstein/30minutes) to discuss your specific situation and get a plan.
 
 ---
 
@@ -550,3 +548,4 @@ Louie Bernstein is a Fractional Sales Leader with 50 years of sales experience h
 **Share this article:**
 
 [LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url=https://louiebernstein.com/articles/vp-sales-post-mortem) 
+</p>
