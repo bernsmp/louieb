@@ -17,6 +17,7 @@ export default function EditArticlePage({ params }: { params: Promise<{ slug: st
     title: '',
     description: '',
     keywords: '',
+    category: '',
     author: 'Louie Bernstein',
     date: '',
     image: '',
@@ -36,6 +37,7 @@ export default function EditArticlePage({ params }: { params: Promise<{ slug: st
           title: data.article.metadata.title || '',
           description: data.article.metadata.description || '',
           keywords: data.article.metadata.keywords || '',
+          category: data.article.metadata.category || '',
           author: data.article.metadata.author || 'Louie Bernstein',
           date: data.article.metadata.date || '',
           image: data.article.metadata.image || '',
@@ -163,6 +165,20 @@ export default function EditArticlePage({ params }: { params: Promise<{ slug: st
           />
           <p style={{ fontSize: '0.875rem', color: '#737373', marginTop: '0.25rem' }}>
             Comma-separated keywords for SEO
+          </p>
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Category</label>
+          <input
+            type="text"
+            className="form-input"
+            value={form.category}
+            onChange={(e) => setForm({ ...form, category: e.target.value })}
+            placeholder="e.g. Hiring, Pipeline, Compensation"
+          />
+          <p style={{ fontSize: '0.875rem', color: '#737373', marginTop: '0.25rem' }}>
+            Single category shown as a filter pill on the Articles page
           </p>
         </div>
 
