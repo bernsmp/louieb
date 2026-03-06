@@ -10,7 +10,7 @@
 .cms-html-content li { margin-bottom: 0.25rem; }
 .cms-html-content strong, .cms-html-content b { font-weight: 700; }
 .cms-html-content em, .cms-html-content i { font-style: italic; }
-.cms-html-content font { color: inherit !important; font-family: inherit !important; font-size: inherit !important; }
+.cms-html-content font { font-family: inherit !important; font-size: inherit !important; }
 
 /* ── Hero description HTML content (dark bg) ── */
 .hero-html-content a { color: #93c5fd; }
@@ -25,8 +25,8 @@
 .blog-html-content li { margin-bottom: 0.25rem; }
 .blog-html-content strong, .blog-html-content b { font-weight: 700; }
 .blog-html-content em, .blog-html-content i { font-style: italic; }
-/* Neutralise stray inline colours from Word / LinkedIn / Google Docs pastes */
-.blog-html-content font { color: inherit !important; font-family: inherit !important; font-size: inherit !important; }
+/* Font tag overrides — font-family/size from Word pastes are stripped; color is preserved so CMS color picker works */
+.blog-html-content font { font-family: inherit !important; font-size: inherit !important; }
 
 @custom-variant dark (&:is(.dark *));
 
