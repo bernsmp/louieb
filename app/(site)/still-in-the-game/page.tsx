@@ -7,6 +7,10 @@ export const metadata = {
   title: "Still In The Game | Louie Bernstein",
   description:
     "A Resilience Framework for Founders and Entrepreneurs. Five decades. Five decisions. One framework that builds the resilience to get you to the next stage — and keep you there.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 const decisions = [
