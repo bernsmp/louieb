@@ -14,6 +14,13 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Redirect www → non-www (prevents duplicate content in Google)
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.louiebernstein.com' }],
+        destination: 'https://louiebernstein.com/:path*',
+        permanent: true,
+      },
       {
         source: '/featured-videos',
         destination: '/videos',
