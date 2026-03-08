@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface AwardsProps {
   headline?: string;
   subheadline?: string;
@@ -25,10 +27,13 @@ export function Awards({
 
         <div className="mt-20 flex justify-center">
           <div className="relative rounded-3xl border-2 border-neutral-900 bg-white p-8 shadow-2xl lg:p-12">
-            <img
+            <Image
               src={imageUrl}
               alt="Awards"
+              width={900}
+              height={300}
               className="h-auto w-full max-w-3xl"
+              sizes="(max-width: 768px) 100vw, 900px"
             />
             <div className="absolute -right-4 -top-4 h-16 w-16 rounded-full bg-neutral-900 opacity-10 blur-xl"></div>
             <div className="absolute -bottom-4 -left-4 h-20 w-20 rounded-full bg-neutral-900 opacity-10 blur-xl"></div>

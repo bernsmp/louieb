@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
         hostname: '*.supabase.co',
         pathname: '/storage/v1/object/public/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'd1yei2z3i6k35z.cloudfront.net',
+      },
     ],
     unoptimized: false,
   },

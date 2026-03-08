@@ -11,8 +11,8 @@ import { Contact } from "@/components/sections/Contact";
 import { Awards } from "@/components/sections/Awards";
 import { getSiteSettings, getTestimonials } from "@/lib/cms";
 
-// Make this page dynamic so CMS changes are reflected immediately
-export const dynamic = 'force-dynamic';
+// Revalidate every 60 seconds — picks up CMS changes without blocking every request
+export const revalidate = 60;
 
 /** Strip HTML tags from CMS rich-text so schema.org receives plain text */
 function stripHtml(html: string): string {
