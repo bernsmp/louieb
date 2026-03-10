@@ -6,7 +6,7 @@ export default function EditStillInTheGamePage() {
   return (
     <SectionEditor
       section="stillInTheGame"
-      title="Still In The Game"
+      title="Staying In The Game"
       description="Your digital guide sales page at louiebernstein.com/still-in-the-game"
       backHref="/cms"
       backLabel="Back to Dashboard"

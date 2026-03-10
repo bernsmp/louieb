@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BackgroundCells } from "@/components/ui/background-ripple-effect";
+import { getEntrepreneursContent } from "@/lib/cms";
 
 export const metadata = {
   title: "Before You Leave The Dock | Louie Bernstein",
@@ -87,9 +88,10 @@ const whatIsIncluded = [
   "Immediate digital download — completely free",
 ];
 
-export default function BeforeYouLeaveTheDockPage() {
-  const gumroadUrl = "https://louiebernstein.gumroad.com/l/entrepreneurs";
-  const upsellUrl = "https://louiebernstein.gumroad.com/l/staying";
+export default async function BeforeYouLeaveTheDockPage() {
+  const cms = await getEntrepreneursContent();
+  const gumroadUrl = cms.gumroadUrl;
+  const upsellUrl = cms.upsellUrl;
 
   return (
     <main>
@@ -110,15 +112,13 @@ export default function BeforeYouLeaveTheDockPage() {
 
             {/* Headline */}
             <h1 className="mx-auto mt-6 max-w-4xl text-5xl font-bold leading-tight text-white md:text-6xl lg:text-7xl">
-              Are You Ready to Start —
-              <br className="hidden md:block" /> or Just Restless?
+              {cms.heroHeadline}
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-2xl font-medium text-neutral-300 md:text-3xl">
               Before You Leave The Dock™
             </p>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-neutral-400">
-              Five critical questions that surface whether you&apos;re built for
-              founding — before the cost is real.
+              {cms.heroTagline}
             </p>
 
             {/* CTAs */}
@@ -149,14 +149,10 @@ export default function BeforeYouLeaveTheDockPage() {
       <section className="bg-white py-24">
         <div className="container mx-auto max-w-4xl px-6 text-center lg:px-8">
           <h2 className="text-3xl font-bold leading-snug text-neutral-900 md:text-4xl lg:text-5xl">
-            Most founders don&apos;t fail because they worked too hard.
-            <br className="hidden lg:block" /> They fail because they started
-            wrong.
+            {cms.hookHeadline}
           </h2>
           <p className="mx-auto mt-8 max-w-2xl text-xl leading-relaxed text-neutral-600">
-            They started for the wrong reasons. They solved a problem nobody
-            had. They didn&apos;t know what they were signing up for. And by the
-            time they figured it out, the cost was already real.
+            {cms.hookBody}
           </p>
           <div className="mx-auto mt-12 max-w-3xl rounded-2xl border-l-4 border-neutral-900 bg-neutral-50 p-8 text-left">
             <p className="text-xl font-semibold leading-relaxed text-neutral-900 md:text-2xl">
@@ -434,8 +430,7 @@ export default function BeforeYouLeaveTheDockPage() {
           {/* Closing quote */}
           <div className="mt-12 border-t border-neutral-800 pt-10">
             <p className="text-lg font-semibold text-neutral-300">
-              &ldquo;Leaving the dock is not the hard part. Starting right
-              is.&rdquo;
+              &ldquo;{cms.closingQuote}&rdquo;
             </p>
             <p className="mt-2 text-base text-neutral-500">— Louie Bernstein</p>
           </div>

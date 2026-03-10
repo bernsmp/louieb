@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BackgroundCells } from "@/components/ui/background-ripple-effect";
+import { getFoundersContent } from "@/lib/cms";
 
 export const metadata = {
   title: "Staying In The Game | Louie Bernstein",
@@ -157,9 +158,10 @@ const aboutStats = [
   { value: "9+", label: "Years as Fractional Sales Leader" },
 ];
 
-export default function FoundersPage() {
-  const gumroadUrl = "https://louiebernstein.gumroad.com/l/staying";
-  const freeGuideUrl = "https://louiebernstein.gumroad.com/l/entrepreneurs";
+export default async function FoundersPage() {
+  const cms = await getFoundersContent();
+  const gumroadUrl = cms.buyButtonUrl;
+  const freeGuideUrl = cms.freeGuideUrl;
 
   return (
     <main>
@@ -180,14 +182,13 @@ export default function FoundersPage() {
 
             {/* Headline */}
             <h1 className="mx-auto mt-6 max-w-4xl text-5xl font-bold leading-tight text-white md:text-6xl lg:text-7xl">
-              Staying In The Game
+              {cms.heroHeadline}
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-2xl font-medium text-neutral-300 md:text-3xl">
-              Five Decades. Five Decisions. One Framework.
+              {cms.heroSubheadline}
             </p>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-neutral-400">
-              The resilience framework for founders who are already in it — and
-              need to stay standing through what comes next.
+              {cms.heroTagline}
             </p>
 
             {/* CTAs */}
@@ -219,15 +220,10 @@ export default function FoundersPage() {
       <section className="bg-white py-24">
         <div className="container mx-auto max-w-4xl px-6 text-center lg:px-8">
           <h2 className="text-3xl font-bold leading-snug text-neutral-900 md:text-4xl lg:text-5xl">
-            Nobody tells you what the hard parts actually look like
-            <br className="hidden lg:block" /> until you&apos;re already in
-            them.
+            {cms.hookHeadline}
           </h2>
           <p className="mx-auto mt-8 max-w-2xl text-xl leading-relaxed text-neutral-600">
-            The crisis that blindsides you. The burnout you didn&apos;t see
-            coming. The moment you wonder if you should quit or keep going. Most
-            founders walk into every one of these unprepared — because nobody
-            who survived them talks about what they really looked like.
+            {cms.hookBody}
           </p>
           <div className="mx-auto mt-12 max-w-3xl rounded-2xl border-l-4 border-neutral-900 bg-neutral-50 p-8 text-left">
             <p className="text-xl font-semibold leading-relaxed text-neutral-900 md:text-2xl">
@@ -619,21 +615,9 @@ export default function FoundersPage() {
                 About Louie
               </h2>
               <div className="mt-6 space-y-5 text-lg leading-relaxed text-neutral-600">
-                <p>
-                  Louie Bernstein started MindIQ in 1986 — two kids, a broken
-                  vertebra, life savings gone. The company ran for 22 years and
-                  made the INC 500.
-                </p>
-                <p>
-                  He has been through every decision in this framework. Not as
-                  case studies. As his actual life. The crisis, the burnout, the
-                  reinvention, the long game. He built this framework because he
-                  wishes someone had handed it to him thirty years ago.
-                </p>
-                <p>
-                  At 74, he is still building. Still learning. And still telling
-                  the honest version of what it takes.
-                </p>
+                <p>{cms.aboutBio1}</p>
+                <p>{cms.aboutBio2}</p>
+                <p>{cms.aboutBio3}</p>
               </div>
               <div className="mt-8">
                 <Link
@@ -699,7 +683,7 @@ export default function FoundersPage() {
               rel="noopener noreferrer"
               className="block w-full rounded-lg bg-white px-12 py-5 text-lg font-bold text-neutral-900 shadow-xl transition-all hover:scale-105 hover:bg-neutral-100"
             >
-              Get Staying In The Game — $47 →
+              {cms.buyButtonText}
             </Link>
             <p className="mt-4 text-sm text-neutral-600">
               Secure checkout via Gumroad · Instant PDF download
@@ -709,9 +693,7 @@ export default function FoundersPage() {
           {/* Closing quote */}
           <div className="mt-12 border-t border-neutral-800 pt-10">
             <p className="text-lg font-semibold text-neutral-300">
-              &ldquo;Resilience is not a personality trait. It is a skill. And
-              like every skill, it is built — decision by decision, decade by
-              decade.&rdquo;
+              &ldquo;{cms.closingQuote}&rdquo;
             </p>
             <p className="mt-2 text-base text-neutral-500">— Louie Bernstein</p>
             <p className="mt-6 text-base text-neutral-600">

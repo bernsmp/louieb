@@ -23,7 +23,9 @@ const navSections = [
       { name: 'Articles Page', href: '/cms/articles-page', icon: FileTextIcon },
       { name: 'Course', href: '/cms/course', icon: BookIcon },
       { name: 'Tools', href: '/cms/tools', icon: WrenchIcon },
-      { name: 'Still In The Game', href: '/cms/still-in-the-game', icon: BookIcon },
+      { name: 'Staying In The Game', href: '/cms/still-in-the-game', icon: BookIcon },
+      { name: 'Before You Leave The Dock', href: '/cms/entrepreneurs', icon: BookIcon },
+      { name: 'Founders Page', href: '/cms/founders', icon: BookIcon },
     ],
   },
   {

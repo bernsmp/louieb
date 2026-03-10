@@ -2071,6 +2071,102 @@ export const getSalespersonSettings = cache(async (): Promise<SalespersonSetting
   }
 })
 
+// ============================================================================
+// ENTREPRENEURS PAGE (Before You Leave The Dock — /entrepreneurs)
+// ============================================================================
+
+export interface EntrepreneursContent {
+  heroHeadline: string
+  heroTagline: string
+  gumroadUrl: string
+  hookHeadline: string
+  hookBody: string
+  closingQuote: string
+  upsellUrl: string
+}
+
+const defaultEntrepreneurs: EntrepreneursContent = {
+  heroHeadline: 'Are You Ready to Start — or Just Restless?',
+  heroTagline: 'Five critical questions that surface whether you\'re built for founding — before the cost is real.',
+  gumroadUrl: 'https://louiebernstein.gumroad.com/l/entrepreneurs',
+  hookHeadline: 'Most founders don\'t fail because they worked too hard. They fail because they started wrong.',
+  hookBody: 'They started for the wrong reasons. They solved a problem nobody had. They didn\'t know what they were signing up for. And by the time they figured it out, the cost was already real.',
+  closingQuote: 'Leaving the dock is not the hard part. Starting right is.',
+  upsellUrl: 'https://louiebernstein.gumroad.com/l/staying',
+}
+
+export const getEntrepreneursContent = cache(async (): Promise<EntrepreneursContent> => {
+  if (!USE_SUPABASE_CMS || !isSupabaseConfigured || !supabaseAdmin) {
+    return defaultEntrepreneurs
+  }
+  try {
+    const { data, error } = await supabaseAdmin
+      .from('site_content')
+      .select('content')
+      .eq('section', 'entrepreneurs')
+      .single()
+    if (error || !data) return defaultEntrepreneurs
+    const overrides = data.content as Partial<EntrepreneursContent>
+    return { ...defaultEntrepreneurs, ...overrides }
+  } catch {
+    return defaultEntrepreneurs
+  }
+})
+
+// ============================================================================
+// FOUNDERS PAGE (Staying In The Game — /founders)
+// ============================================================================
+
+export interface FoundersContent {
+  heroHeadline: string
+  heroSubheadline: string
+  heroTagline: string
+  price: string
+  buyButtonUrl: string
+  buyButtonText: string
+  hookHeadline: string
+  hookBody: string
+  aboutBio1: string
+  aboutBio2: string
+  aboutBio3: string
+  closingQuote: string
+  freeGuideUrl: string
+}
+
+const defaultFounders: FoundersContent = {
+  heroHeadline: 'Staying In The Game',
+  heroSubheadline: 'Five Decades. Five Decisions. One Framework.',
+  heroTagline: 'The resilience framework for founders who are already in it — and need to stay standing through what comes next.',
+  price: '47',
+  buyButtonUrl: 'https://louiebernstein.gumroad.com/l/staying',
+  buyButtonText: 'Get Staying In The Game — $47 →',
+  hookHeadline: 'Nobody tells you what the hard parts actually look like until you\'re already in them.',
+  hookBody: 'The crisis that blindsides you. The burnout you didn\'t see coming. The moment you wonder if you should quit or keep going. Most founders walk into every one of these unprepared — because nobody who survived them talks about what they really looked like.',
+  aboutBio1: 'Louie Bernstein started MindIQ in 1986 — two kids, a broken vertebra, life savings gone. The company ran for 22 years and made the INC 500.',
+  aboutBio2: 'He has been through every decision in this framework. Not as case studies. As his actual life. The crisis, the burnout, the reinvention, the long game. He built this framework because he wishes someone had handed it to him thirty years ago.',
+  aboutBio3: 'At 74, he is still building. Still learning. And still telling the honest version of what it takes.',
+  closingQuote: 'Resilience is not a personality trait. It is a skill. And like every skill, it is built — decision by decision, decade by decade.',
+  freeGuideUrl: 'https://louiebernstein.gumroad.com/l/entrepreneurs',
+}
+
+export const getFoundersContent = cache(async (): Promise<FoundersContent> => {
+  if (!USE_SUPABASE_CMS || !isSupabaseConfigured || !supabaseAdmin) {
+    return defaultFounders
+  }
+  try {
+    const { data, error } = await supabaseAdmin
+      .from('site_content')
+      .select('content')
+      .eq('section', 'founders')
+      .single()
+    if (error || !data) return defaultFounders
+    const overrides = data.content as Partial<FoundersContent>
+    return { ...defaultFounders, ...overrides }
+  } catch {
+    return defaultFounders
+  }
+})
+
 // Re-export types for use in components
 export type { SiteSettings, Testimonial, FAQItem, VideoItem, VideoCategory, BlogPost, ServiceItem, ProcessStep, PageLayout, PageSEO }
 
