@@ -7,6 +7,26 @@
 
 import { cache } from 'react'
 import { supabaseAdmin, isSupabaseConfigured } from './supabase'
+
+/** Accepts a bare YouTube video ID or any youtube.com / youtu.be URL and returns just the ID. */
+function extractYouTubeId(value: string): string {
+  if (!value) return ''
+  const trimmed = value.trim()
+  // Already a bare ID (no slashes or dots)
+  if (/^[\w-]{11}$/.test(trimmed)) return trimmed
+  try {
+    const url = new URL(trimmed)
+    // youtu.be/<id>
+    if (url.hostname === 'youtu.be') return url.pathname.slice(1).split('?')[0]
+    // youtube.com/shorts/<id>  or  /embed/<id>
+    const shortsMatch = url.pathname.match(/\/(shorts|embed)\/([\w-]{11})/)
+    if (shortsMatch) return shortsMatch[2]
+    // youtube.com/watch?v=<id>
+    return url.searchParams.get('v') ?? trimmed
+  } catch {
+    return trimmed
+  }
+}
 import type {
   SiteContentRow,
   TestimonialRow,
@@ -2109,7 +2129,9 @@ export const getEntrepreneursContent = cache(async (): Promise<EntrepreneursCont
       .single()
     if (error || !data) return defaultEntrepreneurs
     const overrides = data.content as Partial<EntrepreneursContent>
-    return { ...defaultEntrepreneurs, ...overrides }
+    const merged = { ...defaultEntrepreneurs, ...overrides }
+    merged.videoId = extractYouTubeId(merged.videoId)
+    return merged
   } catch {
     return defaultEntrepreneurs
   }
@@ -2165,7 +2187,9 @@ export const getFoundersContent = cache(async (): Promise<FoundersContent> => {
       .single()
     if (error || !data) return defaultFounders
     const overrides = data.content as Partial<FoundersContent>
-    return { ...defaultFounders, ...overrides }
+    const merged = { ...defaultFounders, ...overrides }
+    merged.videoId = extractYouTubeId(merged.videoId)
+    return merged
   } catch {
     return defaultFounders
   }
