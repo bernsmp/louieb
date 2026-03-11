@@ -30,6 +30,13 @@ export default function EditEntrepreneursPage() {
           hint: 'Current: Five critical questions that surface whether you\'re built for founding — before the cost is real.',
           aiRewrite: true,
         },
+        {
+          name: 'videoId',
+          label: 'Hero Video — YouTube Video ID',
+          type: 'text',
+          placeholder: 'e.g. fCVKpcpD8tA',
+          hint: 'Paste just the video ID from the YouTube URL (the part after ?v= or /shorts/). The 16:9 video will appear below the headline and tagline. Leave blank to hide the video.',
+        },
 
         // ── GUMROAD URL ───────────────────────────────────────
         {

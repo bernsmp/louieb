@@ -121,6 +121,22 @@ export default async function BeforeYouLeaveTheDockPage() {
               {cms.heroTagline}
             </p>
 
+            {/* Video */}
+            {cms.videoId && (
+              <div className="mx-auto mt-8 max-w-4xl px-4">
+                <div className="aspect-video w-full overflow-hidden rounded-lg shadow-2xl">
+                  <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${cms.videoId}?rel=0&modestbranding=1`}
+                    title={cms.heroHeadline}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="h-full w-full"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            )}
+
             {/* CTAs */}
             <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Link
