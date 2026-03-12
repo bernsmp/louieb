@@ -1,17 +1,18 @@
 "use client";
 
 import { FloatingNav } from "@/components/ui/floating-navbar";
-import { Home, FileText, Video, Mail, Wrench, BookOpen, GraduationCap, UserCheck, Scale, PenLine, HelpCircle } from "lucide-react";
+import { Home, FileText, Video, Mail, Wrench, BookOpen, GraduationCap, UserCheck, Scale, PenLine, HelpCircle, Layers } from "lucide-react";
 
-export type NavKey = 'home' | 'fsl' | 'learn' | 'faqs' | 'tools' | 'contact';
+export type NavKey = 'home' | 'fsl' | 'learn' | 'faqs' | 'frameworks' | 'tools' | 'contact';
 
-export const DEFAULT_NAV_ORDER: NavKey[] = ['home', 'fsl', 'learn', 'faqs', 'tools', 'contact'];
+export const DEFAULT_NAV_ORDER: NavKey[] = ['home', 'fsl', 'learn', 'faqs', 'frameworks', 'tools', 'contact'];
 
 export const NAV_ITEM_LABELS: Record<NavKey, string> = {
   home: 'Home',
   fsl: 'Fractional Sales Leader',
   learn: 'Learn',
   faqs: 'FAQs',
+  frameworks: 'Frameworks',
   tools: 'Tools',
   contact: 'Contact',
 };
@@ -55,6 +56,14 @@ function buildNavItems(order: NavKey[]) {
       name: "FAQs",
       link: "/faqs",
       icon: <HelpCircle className={ic} />,
+    },
+    frameworks: {
+      name: "Frameworks",
+      icon: <Layers className={ic} />,
+      children: [
+        { name: "Don't Leave the Dock", link: "/entrepreneurs", icon: <Layers className={ic} /> },
+        { name: "Staying In The Game", link: "/founders", icon: <Layers className={ic} /> },
+      ],
     },
     tools: {
       name: "Tools",
