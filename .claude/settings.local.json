@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git checkout:*)",
+      "Bash(git merge:*)",
+      "Bash(git -C /c/Users/louie/louieb merge claude/jovial-maxwell)",
+      "Bash(git -C /c/Users/louie/louieb push origin main)",
+      "Bash(git -C /c/Users/louie/louieb pull origin main --rebase)",
+      "Bash(cmd //c dir /a /c/Users/louie/louieb/)",
+      "Bash(powershell.exe -Command \"Get-ChildItem ''C:\\\\Users\\\\louie\\\\louieb'' -Hidden | Select-Object Name\")",
+      "WebFetch(domain:louiebernstein.com)",
+      "Read(//c/Users/louie/louieb/**)",
+      "Bash(ls /c/Users/louie/louieb/.claude/worktrees/jovial-maxwell/.env*)",
+      "Bash(find /c/Users/louie/louieb -name *.env* -o -name .env*)",
+      "Bash(cp /tmp/delete-still-in-the-game.js /c/Users/louie/louieb/scripts/delete-still-in-the-game.js)",
+      "Bash(node scripts/delete-still-in-the-game.js)",
+      "Bash(printenv)"
+    ]
+  }
+}
