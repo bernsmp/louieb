@@ -720,7 +720,7 @@ Have you witnessed this?`,
     navVideos: 'Videos',
     navNewsletter: 'Newsletter',
     navContact: 'Contact',
-    navItemOrder: ['home', 'fsl', 'learn', 'faqs', 'tools', 'contact'],
+    navItemOrder: ['home', 'fsl', 'learn', 'faqs', 'frameworks', 'tools', 'contact'],
   },
   articlesPage: {
     headline: 'Articles',
