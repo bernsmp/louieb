@@ -2092,10 +2092,11 @@ export const getSalespersonSettings = cache(async (): Promise<SalespersonSetting
 })
 
 // ============================================================================
-// ENTREPRENEURS PAGE (Before You Leave The Dock — /entrepreneurs)
+// ENTREPRENEURS PAGE (Before You Quit Your Day Job — /entrepreneurs)
 // ============================================================================
 
 export interface EntrepreneursContent {
+  guideTitle: string
   heroHeadline: string
   heroTagline: string
   videoId: string
@@ -2107,6 +2108,7 @@ export interface EntrepreneursContent {
 }
 
 const defaultEntrepreneurs: EntrepreneursContent = {
+  guideTitle: 'Before You Quit Your Day Job™',
   heroHeadline: 'Are You Ready to Start — or Just Restless?',
   heroTagline: 'Five critical questions that surface whether you\'re built for founding — before the cost is real.',
   videoId: '',

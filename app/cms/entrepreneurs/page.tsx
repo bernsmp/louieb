@@ -6,11 +6,20 @@ export default function EditEntrepreneursPage() {
   return (
     <SectionEditor
       section="entrepreneurs"
-      title="Before You Leave The Dock"
+      title="Before You Quit Your Day Job"
       description="Your free PDF guide landing page at louiebernstein.com/entrepreneurs"
       backHref="/cms"
       backLabel="Back to Dashboard"
       fields={[
+
+        // ── GUIDE TITLE ───────────────────────────────────────
+        {
+          name: 'guideTitle',
+          label: 'Guide Title',
+          type: 'text',
+          placeholder: 'Before You Quit Your Day Job™',
+          hint: 'Current: Before You Quit Your Day Job™ — Appears below the hero headline, as the CTA section heading, and in the download button. Include ™ at the end.',
+        },
 
         // ── HERO ──────────────────────────────────────────────
         {

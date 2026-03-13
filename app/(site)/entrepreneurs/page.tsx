@@ -3,7 +3,7 @@ import { BackgroundCells } from "@/components/ui/background-ripple-effect";
 import { getEntrepreneursContent } from "@/lib/cms";
 
 export const metadata = {
-  title: "Before You Leave The Dock | Louie Bernstein",
+  title: "Before You Quit Your Day Job | Louie Bernstein",
   description:
     "Are you ready to start a business — or just restless? Five critical questions that surface whether you're built for founding. Free PDF guide for aspiring entrepreneurs.",
 };
@@ -115,7 +115,7 @@ export default async function BeforeYouLeaveTheDockPage() {
               {cms.heroHeadline}
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-2xl font-medium text-neutral-300 md:text-3xl">
-              Before You Leave The Dock™
+              {cms.guideTitle}
             </p>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-neutral-400">
               {cms.heroTagline}
@@ -396,7 +396,7 @@ export default async function BeforeYouLeaveTheDockPage() {
             </span>
           </div>
           <h2 className="mt-6 text-4xl font-bold text-white md:text-5xl lg:text-6xl">
-            Before You Leave The Dock™
+            {cms.guideTitle}
           </h2>
           <p className="mt-4 text-xl text-neutral-400">
             Five questions. One decision. No regrets.
@@ -436,7 +436,7 @@ export default async function BeforeYouLeaveTheDockPage() {
               rel="noopener noreferrer"
               className="block w-full rounded-lg bg-white px-12 py-5 text-lg font-bold text-neutral-900 shadow-xl transition-all hover:scale-105 hover:bg-neutral-100"
             >
-              Get Before You Leave The Dock — Free →
+              Get {cms.guideTitle} — Free →
             </Link>
             <p className="mt-4 text-sm text-neutral-600">
               Delivered via Gumroad · No spam, ever
@@ -484,7 +484,7 @@ export default async function BeforeYouLeaveTheDockPage() {
                 "5-chapter resilience framework — one real decision per decade",
                 "30 Claude AI prompts (Coaching, Advisory, Mindset)",
                 "The honest story — with the details that made it hard",
-                "Includes Before You Leave The Dock — free",
+                "Includes Before You Quit Your Day Job™ — free",
               ].map((item, i) => (
                 <li
                   key={i}
