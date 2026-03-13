@@ -61,7 +61,7 @@ function buildNavItems(order: NavKey[]) {
       name: "Frameworks",
       icon: <Layers className={ic} />,
       children: [
-        { name: "Don't Leave the Dock", link: "/entrepreneurs", icon: <Layers className={ic} /> },
+        { name: "Before You Quit Your Day Job", link: "/entrepreneurs", icon: <Layers className={ic} /> },
         { name: "Staying In The Game", link: "/founders", icon: <Layers className={ic} /> },
       ],
     },
