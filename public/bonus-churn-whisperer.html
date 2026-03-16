@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bonus: The Churn Whisperer — Louie Bernstein</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0f0f0f;
+      --muted: #555;
+      --light: #888;
+      --rule: #e0e0e0;
+      --accent: #1a1a2e;
+      --gold: #c9a84c;
+      --red: #c0392b;
+      --green: #1e7e4f;
+      --bg: #fafaf8;
+      --card: #ffffff;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+      font-size: 15px;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 48px 32px 80px;
+    }
+
+    /* ── HEADER ── */
+    .header-band {
+      background: var(--accent);
+      color: #fff;
+      padding: 36px 40px;
+      border-radius: 4px 4px 0 0;
+      margin-bottom: 0;
+    }
+    .bonus-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .header-band h1 {
+      font-size: 34px;
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+    }
+    .header-band .subtitle {
+      font-size: 15px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.75);
+      max-width: 520px;
+    }
+    .header-bottom {
+      background: var(--gold);
+      padding: 10px 40px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-radius: 0 0 4px 4px;
+      margin-bottom: 40px;
+    }
+
+    /* ── INTRO ── */
+    .intro-box {
+      background: #fff;
+      border-left: 4px solid var(--gold);
+      padding: 22px 24px;
+      margin-bottom: 36px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--ink);
+    }
+    .intro-box p + p { margin-top: 10px; }
+    .intro-box strong { color: var(--accent); }
+
+    /* ── SECTION TITLES ── */
+    h2 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 16px;
+      margin-top: 48px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--rule);
+    }
+    h3 {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 6px;
+      letter-spacing: -0.2px;
+    }
+
+    /* ── SIGNAL CARDS (Part 1) ── */
+    .signal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 8px;
+    }
+    .signal-card {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 18px 20px;
+    }
+    .signal-card .icon { font-size: 22px; margin-bottom: 8px; }
+    .signal-card h4 {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+    .signal-card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .signal-card.danger { border-left: 3px solid var(--red); }
+    .signal-card.warn   { border-left: 3px solid #e67e22; }
+
+    /* ── CONVERSATIONS ── */
+    .convo-block {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      margin-bottom: 22px;
+      overflow: hidden;
+    }
+    .convo-header {
+      background: var(--accent);
+      color: #fff;
+      padding: 14px 22px;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .convo-num {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+    .convo-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .convo-body {
+      padding: 20px 22px;
+    }
+    .convo-situation {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 10px;
+    }
+    .script-line {
+      margin-bottom: 14px;
+    }
+    .script-line .who {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 3px;
+    }
+    .script-line .says {
+      font-size: 14.5px;
+      color: var(--ink);
+      line-height: 1.6;
+      font-style: italic;
+      padding-left: 12px;
+      border-left: 2px solid var(--rule);
+    }
+    .why-it-works {
+      margin-top: 16px;
+      background: #f5f5f0;
+      border-radius: 4px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .why-it-works strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* ── SCORECARD ── */
+    .scorecard-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      margin-bottom: 10px;
+    }
+    .scorecard-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--light);
+      padding: 8px 12px;
+      border-bottom: 2px solid var(--rule);
+    }
+    .scorecard-table td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--rule);
+      vertical-align: top;
+    }
+    .scorecard-table tr:last-child td { border-bottom: none; }
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+    .badge-green { background: #e8f5ee; color: var(--green); }
+    .badge-yellow { background: #fef9ec; color: #b7791f; }
+    .badge-red { background: #fdecea; color: var(--red); }
+
+    /* ── FRAMEWORK BOX ── */
+    .framework-box {
+      background: var(--accent);
+      color: #fff;
+      border-radius: 6px;
+      padding: 28px 30px;
+      margin-bottom: 24px;
+    }
+    .framework-box h3 { color: var(--gold); margin-bottom: 16px; font-size: 18px; }
+    .framework-steps { counter-reset: step; }
+    .framework-step {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 14px;
+      align-items: flex-start;
+    }
+    .framework-step:last-child { margin-bottom: 0; }
+    .step-num {
+      background: var(--gold);
+      color: var(--accent);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-text {
+      font-size: 14px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.9);
+    }
+    .step-text strong { color: #fff; }
+
+    /* ── CHEAT SHEET ── */
+    .cheat-sheet {
+      background: #fff;
+      border: 2px solid var(--accent);
+      border-radius: 6px;
+      padding: 28px 30px;
+      page-break-inside: avoid;
+    }
+    .cheat-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .cheat-sheet h3 {
+      font-size: 21px;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+    .cheat-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .cheat-col h4 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .cheat-list {
+      list-style: none;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .cheat-list li {
+      padding: 5px 0;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      gap: 8px;
+    }
+    .cheat-list li:last-child { border-bottom: none; }
+    .cheat-list .dot {
+      color: var(--gold);
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      margin-top: 52px;
+      padding-top: 20px;
+      border-top: 1px solid var(--rule);
+      font-size: 12px;
+      color: var(--light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer strong { color: var(--muted); }
+
+    @media print {
+      body { padding: 24px; font-size: 13px; }
+      .convo-block { page-break-inside: avoid; }
+      .cheat-sheet { page-break-before: always; }
+    }
+    @media (max-width: 600px) {
+      .signal-grid { grid-template-columns: 1fr; }
+      .cheat-cols { grid-template-columns: 1fr; }
+      body { padding: 20px 18px 60px; }
+      .header-band { padding: 28px 24px; }
+      .header-band h1 { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header-band">
+    <div class="bonus-label">Exclusive Bonus · Staying</div>
+    <h1>The Churn Whisperer</h1>
+    <p class="subtitle">5 word-for-word conversations that save the accounts everyone else writes off as gone — before they ever send the cancellation email.</p>
+  </div>
+  <div class="header-bottom">By Louie Bernstein &nbsp;·&nbsp; Fractional Sales Leader &nbsp;·&nbsp; louiebernstein.com</div>
+
+
+  <!-- INTRO -->
+  <div class="intro-box">
+    <p><strong>Here's the thing nobody talks about in retention:</strong> most accounts don't leave loudly. They go quiet first. Emails slow down. Usage drops. The champion stops showing up to calls. By the time they say "we're cancelling," the decision is already 90% made.</p>
+    <p>This bonus is about catching them in that window — the 60–90 days before the decision solidifies — using five specific conversations I've refined across dozens of sales teams. Each one is designed to do one thing: <strong>make them feel heard before you try to save them.</strong></p>
+    <p>That's the whole game. Listen. Then solve. In that order.</p>
+  </div>
+
+
+  <!-- PART 1: SIGNALS -->
+  <h2>Part One — The 6 Signals You're Ignoring</h2>
+  <p style="margin-bottom:20px; color:var(--muted); font-size:14px;">Before you can use these conversations, you have to know who to have them with. Here are the six signals that consistently precede churn by 30–90 days.</p>
+
+  <div class="signal-grid">
+    <div class="signal-card danger">
+      <div class="icon">📉</div>
+      <h4>Usage has quietly dropped</h4>
+      <p>They're logging in less, sending less, doing less — but nobody flagged it because the contract is still active.</p>
+    </div>
+    <div class="signal-card danger">
+      <div class="icon">🔇</div>
+      <h4>The champion went silent</h4>
+      <p>Your main contact used to reply same-day. Now it's 3–5 days, or not at all. They're avoiding the conversation.</p>
+    </div>
+    <div class="signal-card warn">
+      <div class="icon">👤</div>
+      <h4>New stakeholders appeared</h4>
+      <p>A CFO, a new VP, a new operations lead started asking questions. Somebody is reviewing the tech stack.</p>
+    </div>
+    <div class="signal-card warn">
+      <div class="icon">📋</div>
+      <h4>They skipped QBR prep</h4>
+      <p>Didn't send the agenda, didn't fill out the survey, rescheduled twice. They're not invested in the relationship anymore.</p>
+    </div>
+    <div class="signal-card warn">
+      <div class="icon">💬</div>
+      <h4>Complaints stopped suddenly</h4>
+      <p>They used to push back on things. Now radio silence. That's not satisfaction — that's resignation. They've mentally moved on.</p>
+    </div>
+    <div class="signal-card danger">
+      <div class="icon">💰</div>
+      <h4>Invoice got scrutinized</h4>
+      <p>Finance asked for a breakdown. Somebody questioned line items they never questioned before. Budget review is underway.</p>
+    </div>
+  </div>
+
+  <p style="margin-top:14px; margin-bottom: 0; font-size:13px; color:var(--muted);">
+    <strong style="color:var(--ink);">The rule:</strong> Two signals = schedule a check-in. Three signals = treat it as a fire drill. Don't wait for the fourth.
+  </p>
+
+
+  <!-- PART 2: CONVERSATIONS -->
+  <h2>Part Two — The 5 Conversations</h2>
+  <p style="margin-bottom:24px; color:var(--muted); font-size:14px;">These are scripted starters, not rigid scripts. The goal is to open the door. Once it's open, listen more than you talk.</p>
+
+  <!-- CONVERSATION 1 -->
+  <div class="convo-block">
+    <div class="convo-header">
+      <span class="convo-num">01 OF 05</span>
+      <span class="convo-title">The Honest Check-In</span>
+    </div>
+    <div class="convo-body">
+      <div class="convo-situation">When to use: Champion has gone quiet. Usage dropped. No complaints = bad sign.</div>
+      <div class="script-line">
+        <div class="who">You say</div>
+        <div class="says">"Hey [Name], I'm going to skip the usual update email and just be direct with you. I've noticed we haven't talked in a while, and I want to make sure we're actually delivering value for you — not just holding space on your calendar. Can I ask: on a scale of 1–10, how useful is [product/service] actually feeling right now?"</div>
+      </div>
+      <div class="script-line">
+        <div class="who">If they say 7 or below</div>
+        <div class="says">"That's really helpful — I'd rather know now than six months from now. What would make it an 8?"</div>
+      </div>
+      <div class="script-line">
+        <div class="who">If they hesitate</div>
+        <div class="says">"You can be honest. A real answer helps us more than a polite one."</div>
+      </div>
+      <div class="why-it-works"><strong>Why it works:</strong> Asking for a number forces a real answer. The follow-up question ("what would make it an 8") instantly shifts from problem to solution and signals you're there to fix things, not defend yourself.</div>
+    </div>
+  </div>
+
+  <!-- CONVERSATION 2 -->
+  <div class="convo-block">
+    <div class="convo-header">
+      <span class="convo-num">02 OF 05</span>
+      <span class="convo-title">The New Stakeholder Briefing</span>
+    </div>
+    <div class="convo-body">
+      <div class="convo-situation">When to use: A new exec, CFO, or VP has entered the picture and is reviewing vendors.</div>
+      <div class="script-line">
+        <div class="who">You say to your champion</div>
+        <div class="says">"I heard [new person] is doing a review of your vendor stack — I think that's smart, and I'd love to make their job easier. Can I put together a one-pager that shows exactly what we've done, what it's cost, and what outcomes we've driven? That way if they have questions, [your champion] doesn't have to scramble to answer them."</div>
+      </div>
+      <div class="script-line">
+        <div class="who">Then in the one-pager</div>
+        <div class="says">Lead with outcomes in their language (pipeline generated, hours saved, revenue impacted — not features used). End with: "We'd welcome a 20-minute call with [CFO/VP] to answer any questions directly."</div>
+      </div>
+      <div class="why-it-works"><strong>Why it works:</strong> You make your champion look good by doing their work for them. You also get in front of the decision-maker before competitors do. The offer to brief directly is rarely refused — and it resets the relationship from "vendor" to "partner."</div>
+    </div>
+  </div>
+
+  <!-- CONVERSATION 3 -->
+  <div class="convo-block">
+    <div class="convo-header">
+      <span class="convo-num">03 OF 05</span>
+      <span class="convo-title">The "Say It Out Loud" Save</span>
+    </div>
+    <div class="convo-body">
+      <div class="convo-situation">When to use: You've heard a rumor, or your gut says they're already talking to a competitor.</div>
+      <div class="script-line">
+        <div class="who">You say</div>
+        <div class="says">"I want to be straightforward with you — I've gotten the sense that you might be evaluating alternatives right now, and I don't want to pretend otherwise. I'm not calling to pitch you. I'm calling because I'd genuinely like to know: if you did walk away, what would be the main reason?"</div>
+      </div>
+      <div class="script-line">
+        <div class="who">When they tell you</div>
+        <div class="says">"Thank you for saying that. Honestly. Can I ask — is that something that's already decided, or is there a version of this where we fix that and you stay?"</div>
+      </div>
+      <div class="script-line">
+        <div class="who">If they're open to staying</div>
+        <div class="says">"Then let me come back to you in 48 hours with a specific proposal. Not a generic one — something built around exactly what you just told me."</div>
+      </div>
+      <div class="why-it-works"><strong>Why it works:</strong> Most sales reps avoid this conversation. The fact that you're willing to have it — calmly, directly — is itself disarming. You're treating them like an adult. That alone separates you from 90% of the vendors they deal with.</div>
+    </div>
+  </div>
+
+  <!-- CONVERSATION 4 -->
+  <div class="convo-block">
+    <div class="convo-header">
+      <span class="convo-num">04 OF 05</span>
+      <span class="convo-title">The Mutual Exit Interview</span>
+    </div>
+    <div class="convo-body">
+      <div class="convo-situation">When to use: They've given notice or sent the cancellation email. Most people skip this one. Don't.</div>
+      <div class="script-line">
+        <div class="who">You say</div>
+        <div class="says">"I respect your decision and I'm not going to try to talk you out of it on this call. I do have one ask though: would you give me 15 minutes for an honest exit conversation? Not a save attempt — I genuinely want to understand what we missed so we can do better. And sometimes those conversations end up surprising both of us."</div>
+      </div>
+      <div class="script-line">
+        <div class="who">In the call, ask</div>
+        <div class="says">"At what point did your confidence in us start to slip? What would we have had to do differently — specifically — to still be your partner today?"</div>
+      </div>
+      <div class="script-line">
+        <div class="who">At the end, always ask</div>
+        <div class="says">"Is there any scenario where you'd be open to revisiting this in 90 days, after you've had a chance to see how the alternative performs?"</div>
+      </div>
+      <div class="why-it-works"><strong>Why it works:</strong> This conversation saves roughly 1 in 5 accounts that have already sent the cancellation notice. The "not a save attempt" framing lowers defenses. And the 90-day door is something almost everyone agrees to — because it costs them nothing. Then you set a reminder and actually call.</div>
+    </div>
+  </div>
+
+  <!-- CONVERSATION 5 -->
+  <div class="convo-block">
+    <div class="convo-header">
+      <span class="convo-num">05 OF 05</span>
+      <span class="convo-title">The Founder-to-Founder Call</span>
+    </div>
+    <div class="convo-body">
+      <div class="convo-situation">When to use: High-value account. Your rep has tried. Escalate — personally.</div>
+      <div class="script-line">
+        <div class="who">Louie (or the founder) says</div>
+        <div class="says">"Hey [Name], this is Louie. I know [rep] has been in touch, but I wanted to call you directly — person to person, not vendor to customer. You've been with us for [X time] and I take it personally when we're not delivering. I'd like 20 minutes to hear directly from you what's not working. Not to spin it — just to hear it."</div>
+      </div>
+      <div class="script-line">
+        <div class="who">If they're hesitant</div>
+        <div class="says">"I've built businesses myself. I know what it costs to switch. I'm not asking you to stay — I'm asking you to give us one honest conversation before you make the call."</div>
+      </div>
+      <div class="why-it-works"><strong>Why it works:</strong> A founder-to-founder call carries weight that no account manager call can replicate. It signals: you matter enough that the person at the top called you. That alone saves accounts. Use this sparingly — when you use it, mean it.</div>
+    </div>
+  </div>
+
+
+  <!-- PART 3: FRAMEWORK -->
+  <h2>Part Three — The 30-Day Churn Prevention Sprint</h2>
+
+  <div class="framework-box">
+    <h3>Run this every month. It takes 2 hours.</h3>
+    <div class="framework-steps">
+      <div class="framework-step">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Pull your at-risk list.</strong> Every account renewing in the next 90 days + any account showing 2+ signals from Part One. That's your list.</div>
+      </div>
+      <div class="framework-step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Score each account.</strong> Use the scorecard below. Takes 5 minutes per account. Rank by risk.</div>
+      </div>
+      <div class="framework-step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Assign the right conversation.</strong> Match each at-risk account to one of the 5 conversations above. Schedule the calls this week — not "when there's time."</div>
+      </div>
+      <div class="framework-step">
+        <div class="step-num">4</div>
+        <div class="step-text"><strong>Run a 15-minute debrief.</strong> After each conversation: What did you learn? What's the action? Who owns it? What's the deadline? Log it in your CRM that day.</div>
+      </div>
+      <div class="framework-step">
+        <div class="step-num">5</div>
+        <div class="step-text"><strong>Review in 30 days.</strong> Which accounts moved from red to yellow? Which yellow went green? Track it. You'll start seeing patterns in what saves accounts — and that becomes your playbook.</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- PART 4: SCORECARD -->
+  <h2>Part Four — The 5-Minute Account Health Scorecard</h2>
+  <p style="margin-bottom:16px; color:var(--muted); font-size:14px;">Score each at-risk account on the five dimensions below. Add up the points. Use the key at the bottom.</p>
+
+  <table class="scorecard-table">
+    <thead>
+      <tr>
+        <th style="width:32%">Dimension</th>
+        <th style="width:22%">Green (2pts)</th>
+        <th style="width:22%">Yellow (1pt)</th>
+        <th style="width:22%">Red (0pts)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Engagement</strong><br><span style="color:var(--muted); font-size:12px">Champion responsiveness</span></td>
+        <td><span class="badge badge-green">Replies same-day</span></td>
+        <td><span class="badge badge-yellow">2–3 day lag</span></td>
+        <td><span class="badge badge-red">Gone quiet</span></td>
+      </tr>
+      <tr>
+        <td><strong>Usage / Activity</strong><br><span style="color:var(--muted); font-size:12px">vs. last quarter</span></td>
+        <td><span class="badge badge-green">Same or up</span></td>
+        <td><span class="badge badge-yellow">Down 10–30%</span></td>
+        <td><span class="badge badge-red">Down 30%+</span></td>
+      </tr>
+      <tr>
+        <td><strong>Stakeholder Stability</strong><br><span style="color:var(--muted); font-size:12px">Key contacts & ownership</span></td>
+        <td><span class="badge badge-green">Champion stable</span></td>
+        <td><span class="badge badge-yellow">One change</span></td>
+        <td><span class="badge badge-red">Turnover or new exec</span></td>
+      </tr>
+      <tr>
+        <td><strong>ROI Visibility</strong><br><span style="color:var(--muted); font-size:12px">Can they articulate value?</span></td>
+        <td><span class="badge badge-green">Clear outcomes cited</span></td>
+        <td><span class="badge badge-yellow">Soft/general</span></td>
+        <td><span class="badge badge-red">Can't name one win</span></td>
+      </tr>
+      <tr>
+        <td><strong>Expansion History</strong><br><span style="color:var(--muted); font-size:12px">Growth or contraction?</span></td>
+        <td><span class="badge badge-green">Expanded at renewal</span></td>
+        <td><span class="badge badge-yellow">Flat for 12mo+</span></td>
+        <td><span class="badge badge-red">Pushed back on pricing</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="scorecard-table" style="margin-top: 12px;">
+    <thead>
+      <tr>
+        <th>Score</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>9–10</strong></td>
+        <td><span class="badge badge-green">Healthy</span></td>
+        <td style="font-size:13px;">Standard QBR cycle. Look for expansion opportunity.</td>
+      </tr>
+      <tr>
+        <td><strong>6–8</strong></td>
+        <td><span class="badge badge-yellow">Watch List</span></td>
+        <td style="font-size:13px;">Proactive check-in this month. Use Conversation 1 or 2.</td>
+      </tr>
+      <tr>
+        <td><strong>3–5</strong></td>
+        <td><span class="badge badge-red">At-Risk</span></td>
+        <td style="font-size:13px;">Fire drill. Use Conversation 3 or 5. Escalate if needed.</td>
+      </tr>
+      <tr>
+        <td><strong>0–2</strong></td>
+        <td><span class="badge badge-red" style="background:#fdecea;">Critical</span></td>
+        <td style="font-size:13px;">Assume they're already shopping. Use Conversation 3 or 4 immediately.</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <!-- CHEAT SHEET -->
+  <h2 style="margin-top: 52px;">Quick-Reference Cheat Sheet</h2>
+
+  <div class="cheat-sheet">
+    <div class="cheat-label">Print This. Tape It Up.</div>
+    <h3>The Churn Whisperer — One-Page Reference</h3>
+    <div class="cheat-cols">
+      <div class="cheat-col">
+        <h4>The 6 Signals</h4>
+        <ul class="cheat-list">
+          <li><span class="dot">▸</span>Usage has quietly dropped</li>
+          <li><span class="dot">▸</span>Champion went silent</li>
+          <li><span class="dot">▸</span>New stakeholders appeared</li>
+          <li><span class="dot">▸</span>Skipped QBR prep / rescheduled</li>
+          <li><span class="dot">▸</span>Complaints stopped suddenly</li>
+          <li><span class="dot">▸</span>Invoice got scrutinized</li>
+        </ul>
+        <div style="margin-top:14px; font-size:12px; color:var(--muted);">2 signals = check-in &nbsp;|&nbsp; 3 signals = fire drill</div>
+      </div>
+      <div class="cheat-col">
+        <h4>Match Signal to Conversation</h4>
+        <ul class="cheat-list">
+          <li><span class="dot">01</span>Silent champion / usage drop</li>
+          <li><span class="dot">02</span>New exec reviewing vendors</li>
+          <li><span class="dot">03</span>You suspect they're shopping</li>
+          <li><span class="dot">04</span>They already sent the notice</li>
+          <li><span class="dot">05</span>High-value, needs escalation</li>
+        </ul>
+      </div>
+      <div class="cheat-col" style="margin-top: 16px;">
+        <h4>The Golden Rules</h4>
+        <ul class="cheat-list">
+          <li><span class="dot">▸</span>Listen before you solve</li>
+          <li><span class="dot">▸</span>Name what you see — don't dance around it</li>
+          <li><span class="dot">▸</span>Make the ask specific (not "let me know")</li>
+          <li><span class="dot">▸</span>Log everything in CRM same day</li>
+        </ul>
+      </div>
+      <div class="cheat-col" style="margin-top: 16px;">
+        <h4>The 30-Day Sprint</h4>
+        <ul class="cheat-list">
+          <li><span class="dot">1</span>Pull at-risk list (90-day renewals + signals)</li>
+          <li><span class="dot">2</span>Score with the scorecard (5 min/account)</li>
+          <li><span class="dot">3</span>Match accounts to conversations</li>
+          <li><span class="dot">4</span>Schedule calls this week</li>
+          <li><span class="dot">5</span>Debrief + log within 24 hours</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div><strong>The Churn Whisperer</strong> — Bonus for <em>Staying</em></div>
+    <div>© Louie Bernstein · louiebernstein.com</div>
+  </div>
+
+</body>
+</html>
