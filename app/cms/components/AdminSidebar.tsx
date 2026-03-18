@@ -29,6 +29,12 @@ const pages = [
   { name: 'Replace Founder-Led Sales', href: '/cms/seo-replace-founder-sales', icon: FileTextIcon },
   { name: 'Sales Team Quota', href: '/cms/seo-sales-team-quota', icon: FileTextIcon },
   { name: 'Build Sales Process', href: '/cms/seo-build-sales-process', icon: FileTextIcon },
+  { name: 'SaaS Sales Process', href: '/cms/seo-saas-sales-process', icon: FileTextIcon },
+  { name: 'Founder Sales Not Scaling', href: '/cms/seo-founder-sales-not-scaling', icon: FileTextIcon },
+  { name: 'No Pipeline — What to Do', href: '/cms/seo-no-pipeline', icon: FileTextIcon },
+  { name: 'Sales Team Not Hitting Quota', href: '/cms/seo-sales-team-not-hitting-quota', icon: FileTextIcon },
+  { name: 'Why Sales Reps Fail', href: '/cms/seo-sales-reps-fail', icon: FileTextIcon },
+  { name: 'How to Hire First Sales Rep', href: '/cms/seo-hire-first-sales-rep', icon: FileTextIcon },
 ]
 
 const collections = [
