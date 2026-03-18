@@ -27,8 +27,8 @@ const fullTimeCosts = [
 ];
 
 const fractionalCosts = [
-  { label: "Monthly retainer", value: "$6,000–$12,000/month" },
-  { label: "Annual total", value: "$72,000–$144,000/year" },
+  { label: "Monthly retainer", value: "$6,000–$14,000/month" },
+  { label: "Annual total", value: "$72,000–$168,000/year" },
   { label: "Equity required", value: "None" },
   { label: "Benefits required", value: "None" },
   { label: "Recruiting fees", value: "None" },
@@ -50,7 +50,7 @@ const whatIsIncluded = [
 const faqs = [
   {
     q: "What drives the price toward $6k vs. $12k per month?",
-    a: "Scope and time. A $6k/month engagement typically involves 8–12 hours/week focused on a specific deliverable like building a Sales Playbook or auditing the pipeline. A $12k/month engagement involves more hours, active team management, hiring support, and full strategic oversight. Most engagements start at the lower end and scale as the work deepens.",
+    a: "Scope and time. A $6k/month engagement typically involves 8–12 hours/week focused on a specific deliverable like building a Sales Playbook or auditing the pipeline. A $14k/month engagement involves more hours, active team management, hiring support, and full strategic oversight. Most engagements start at the lower end and scale as the work deepens.",
   },
   {
     q: "Is there a minimum commitment?",
@@ -58,7 +58,7 @@ const faqs = [
   },
   {
     q: "How does this compare to hiring a full-time VP of Sales?",
-    a: "A full-time VP of Sales costs $200k–$300k base, plus equity, benefits, and recruiting fees — $400k–$500k all-in per year. A Fractional CRO costs $72k–$144k per year with no equity, no benefits, and no recruiting fees. That's 60–80% less cost. And you get impact week one instead of after a 6-month ramp.",
+    a: "A full-time VP of Sales costs $200k–$300k base, plus equity, benefits, and recruiting fees — $400k–$500k all-in per year. A Fractional CRO costs $72k–$168k per year with no equity, no benefits, and no recruiting fees. That's 60–80% less cost. And you get impact week one instead of after a 6-month ramp.",
   },
   {
     q: "What if I just need help getting started — not a full engagement?",
@@ -92,7 +92,7 @@ const schemaData = {
       },
       description: "Embedded fractional sales leadership for $1M–$10M founders.",
       areaServed: "United States",
-      priceRange: "$6,000–$12,000/month",
+      priceRange: "$6,000–$14,000/month",
       offers: {
         "@type": "Offer",
         price: "6000",
@@ -143,7 +143,7 @@ export default function FractionalCROPricingPage() {
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
               A full-time VP of Sales costs $400,000–$500,000 all-in per year. A Fractional CRO
-              costs $6,000–$12,000 per month. Same strategic leadership. 60–80% less cost. Here
+              costs $6,000–$14,000 per month. Same strategic leadership. 60–80% less cost. Here
               are the real numbers.
             </motion.p>
             <motion.div variants={itemVariants}>
@@ -211,7 +211,7 @@ export default function FractionalCROPricingPage() {
                   <h3 className="text-xl font-bold text-green-700">Fractional CRO</h3>
                 </div>
                 <p className="mb-6 text-sm text-green-600">
-                  All-in annual cost: <strong>$72,000–$144,000</strong>
+                  All-in annual cost: <strong>$72,000–$168,000</strong>
                 </p>
                 <div className="space-y-3">
                   {fractionalCosts.map((item, i) => (
@@ -360,7 +360,7 @@ export default function FractionalCROPricingPage() {
       </section>
 
       {/* CTA */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 py-16 text-white md:py-24">
+      <section className="relative overflow-hidden bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 py-10 text-white md:py-14">
         <div
           className="absolute inset-0 opacity-5"
           style={{

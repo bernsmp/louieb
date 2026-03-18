@@ -73,7 +73,7 @@ const faqs = [
   },
   {
     q: "How much does a Fractional VP of Sales cost for a small business?",
-    a: "Typically $6,000–$12,000 per month, depending on scope. That's 60–80% less than a full-time VP of Sales (which runs $400k–$500k all-in per year when you include base, OTE, equity, and benefits). You get the same strategic leadership without the full-time cost or commitment.",
+    a: "Typically $6,000–$14,000 per month, depending on scope. That's 60–80% less than a full-time VP of Sales (which runs $400k–$500k all-in per year when you include base, OTE, equity, and benefits). You get the same strategic leadership without the full-time cost or commitment.",
   },
   {
     q: "Do I need a Sales Playbook before hiring salespeople?",
@@ -104,7 +104,7 @@ const schemaData = {
       description:
         "Embedded sales leadership for small businesses — Sales Audits, Sales Playbooks, team management, pipeline systems, and daily training.",
       areaServed: "United States",
-      priceRange: "$6,000–$12,000/month",
+      priceRange: "$6,000–$14,000/month",
     },
   ],
 };
@@ -329,7 +329,7 @@ export default function FractionalVPPage() {
       </section>
 
       {/* CTA */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 py-16 text-white md:py-24">
+      <section className="relative overflow-hidden bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 py-10 text-white md:py-14">
         <div
           className="absolute inset-0 opacity-5"
           style={{

@@ -1,11 +1,13 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { BackgroundCells } from "@/components/ui/background-ripple-effect";
 import { Check, AlertCircle, TrendingUp, Users, FileText, Target } from "lucide-react";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
+const CMS_SECTION = "seoFractionalCRO";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -47,7 +49,7 @@ const deliverables = [
   },
 ];
 
-const faqs = [
+const defaultFaqs = [
   {
     q: "What does a Fractional CRO actually do?",
     a: "A Fractional CRO (Chief Revenue Officer) provides embedded sales leadership — typically 2–3 days per week — without the full-time cost. I run your pipeline reviews, manage your sales team, build your playbook, and own the sales system so you can focus on the business. Think of it as a VP of Sales who is actually in the business, not just advising from the outside.",
@@ -58,7 +60,7 @@ const faqs = [
   },
   {
     q: "How much does a Fractional CRO cost?",
-    a: "Typically $6,000–$12,000 per month depending on the scope and hours needed. Compare that to a full-time VP of Sales at $200k–$300k base plus equity and benefits — which lands at $400k–$500k all-in per year. A Fractional CRO delivers the same strategic leadership at 60–80% less cost, with no long-term commitment.",
+    a: "Typically $6,000–$14,000 per month depending on the scope and hours needed. Compare that to a full-time VP of Sales at $200k–$300k base plus equity and benefits — which lands at $400k–$500k all-in per year. A Fractional CRO delivers the same strategic leadership at 60–80% less cost, with no long-term commitment.",
   },
   {
     q: "Is this right for a company at $1M–$10M ARR?",
@@ -75,7 +77,7 @@ const schemaData = {
   "@graph": [
     {
       "@type": "FAQPage",
-      mainEntity: faqs.map((faq) => ({
+      mainEntity: defaultFaqs.map((faq) => ({
         "@type": "Question",
         name: faq.q,
         acceptedAnswer: { "@type": "Answer", text: faq.a },
@@ -93,12 +95,29 @@ const schemaData = {
       description:
         "Embedded sales leadership for founders with $1M–$10M ARR. Includes Sales Audit, Sales Playbook, team management, and pipeline systems.",
       areaServed: "United States",
-      priceRange: "$6,000–$12,000/month",
+      priceRange: "$6,000–$14,000/month",
     },
   ],
 };
 
 export default function FractionalCROPage() {
+  const [c, setC] = useState<Record<string, string>>({});
+  useEffect(() => {
+    fetch(`/api/cms/section/${CMS_SECTION}`)
+      .then((r) => r.json())
+      .then((d) => { if (d?.content) setC(d.content as Record<string, string>); })
+      .catch(() => {});
+  }, []);
+  const v = (key: string, def: string) => c[key] || def;
+  const faqs = (() => {
+    const list: Array<{ q: string; a: string }> = [];
+    for (let i = 1; i <= 5; i++) {
+      const q = c[`faq${i}Question`]; const a = c[`faq${i}Answer`];
+      if (q && a) list.push({ q, a });
+    }
+    return list.length > 0 ? list : defaultFaqs;
+  })();
+
   return (
     <>
       <script
@@ -125,17 +144,15 @@ export default function FractionalCROPage() {
               variants={itemVariants}
               className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
-              You Built a $1M Business
-              <span className="block text-[#0966c2]">Closing Every Deal Yourself.</span>
-              That&apos;s the Problem.
+              {v("heroLine1", "You Built a $1M Business")}
+              <span className="block text-[#0966c2]">{v("heroAccent", "Closing Every Deal Yourself.")}</span>
+              {v("heroLine3", "That\u2019s the Problem.")}
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
-              A Fractional CRO gives $1M–$10M founders the revenue leadership they need to escape
-              founder-led sales — without the $400,000 full-time hire. Build a real sales system.
-              Build a team that sells without you.
+              {v("heroDescription", "A Fractional CRO gives $1M\u201310M founders the revenue leadership they need to escape founder-led sales \u2014 without the $400,000 full-time hire. Build a real sales system. Build a team that sells without you.")}
             </motion.p>
             <motion.div
               variants={itemVariants}
@@ -294,7 +311,7 @@ export default function FractionalCROPage() {
                 <h3 className="mb-4 text-xl font-bold text-green-700">Fractional CRO</h3>
                 <ul className="space-y-3">
                   {[
-                    "$6,000–$12,000/month",
+                    "$6,000–$14,000/month",
                     "No equity, no benefits overhead",
                     "No recruiting fees",
                     "Immediate impact — week one",
@@ -340,10 +357,9 @@ export default function FractionalCROPage() {
             </motion.h2>
             <motion.div variants={itemVariants} className="space-y-4 text-lg text-neutral-600">
               <p>
-                I&apos;m Louie Bernstein — a 72-year-old Fractional Sales Leader with 50 years in
-                business and 9 years doing this specific work. I started in sales at age 10 at a hot
-                dog stand in Skokie, Illinois. I founded a training company that ran for 22 years
-                and earned a spot on the INC 500 list of fastest-growing companies in America.
+                I&apos;m Louie Bernstein — I have 50 years in business experience, including 22 as
+                a bootstrapped founder. My Fractional Sales Leadership business has been helping
+                founders since 2017.
               </p>
               <p>
                 Since 2016, I&apos;ve been working as a Fractional Sales Executive — helping
@@ -411,7 +427,7 @@ export default function FractionalCROPage() {
       </section>
 
       {/* CTA */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 py-16 text-white md:py-24">
+      <section className="relative overflow-hidden bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 py-10 text-white md:py-14">
         <div
           className="absolute inset-0 opacity-5"
           style={{

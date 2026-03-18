@@ -2,55 +2,56 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useState } from 'react'
 import type { User } from '@supabase/supabase-js'
 
 interface AdminSidebarProps {
   user: User
 }
 
-const navSections = [
-  {
-    title: 'Content',
-    items: [
-      { name: 'Dashboard', href: '/cms', icon: HomeIcon },
-      { name: 'Homepage', href: '/cms/homepage', icon: LayoutIcon },
-      { name: 'FSL Page', href: '/cms/fsl-page', icon: FileTextIcon },
-      { name: 'FSL vs Consultant', href: '/cms/fsl-vs-consultant-page', icon: FileTextIcon },
-      { name: 'Salesperson Blueprint', href: '/cms/salesperson', icon: BookIcon },
-      { name: 'Videos Page', href: '/cms/videos', icon: VideoIcon },
-      { name: 'Newsletter', href: '/cms/newsletter', icon: MailIcon },
-      { name: 'Blog Page', href: '/cms/blog-page', icon: PenIcon },
-      { name: 'Articles Page', href: '/cms/articles-page', icon: FileTextIcon },
-      { name: 'Course', href: '/cms/course', icon: BookIcon },
-      { name: 'Tools', href: '/cms/tools', icon: WrenchIcon },
-      { name: 'Before You Leave The Dock', href: '/cms/entrepreneurs', icon: BookIcon },
-      { name: 'Founders Page', href: '/cms/founders', icon: BookIcon },
-    ],
-  },
-  {
-    title: 'Collections',
-    items: [
-      { name: 'Blog Posts', href: '/cms/blog', icon: PenIcon },
-      { name: 'Articles', href: '/cms/articles', icon: FileTextIcon },
-      { name: 'Testimonials', href: '/cms/testimonials', icon: QuoteIcon },
-      { name: 'FAQ Items', href: '/cms/faq', icon: HelpCircleIcon },
-      { name: 'Videos', href: '/cms/videos-list', icon: PlayIcon },
-      { name: 'Categories', href: '/cms/categories', icon: TagIcon },
-      { name: 'Services', href: '/cms/services', icon: GridIcon },
-      { name: 'Process Steps', href: '/cms/process', icon: ListIcon },
-    ],
-  },
-  {
-    title: 'Settings',
-    items: [
-      { name: 'Site Settings', href: '/cms/settings', icon: SettingsIcon },
-      { name: 'SEO', href: '/cms/seo', icon: SearchIcon },
-    ],
-  },
+const pages = [
+  { name: 'Homepage', href: '/cms/homepage', icon: LayoutIcon },
+  { name: 'FSL Page', href: '/cms/fsl-page', icon: FileTextIcon },
+  { name: 'FSL vs Consultant', href: '/cms/fsl-vs-consultant-page', icon: FileTextIcon },
+  { name: 'Salesperson Blueprint', href: '/cms/salesperson', icon: BookIcon },
+  { name: 'Videos Page', href: '/cms/videos', icon: VideoIcon },
+  { name: 'Newsletter', href: '/cms/newsletter', icon: MailIcon },
+  { name: 'Blog Page', href: '/cms/blog-page', icon: PenIcon },
+  { name: 'Articles Page', href: '/cms/articles-page', icon: FileTextIcon },
+  { name: 'Course', href: '/cms/course', icon: BookIcon },
+  { name: 'Tools', href: '/cms/tools', icon: WrenchIcon },
+  { name: 'Before You Leave The Dock', href: '/cms/entrepreneurs', icon: BookIcon },
+  { name: 'Founders Page', href: '/cms/founders', icon: BookIcon },
+  { name: 'Fractional CRO ($1M–$10M)', href: '/cms/seo-fractional-cro', icon: FileTextIcon },
+  { name: 'Fractional VP of Sales', href: '/cms/seo-fractional-vp', icon: FileTextIcon },
+  { name: 'When to Hire a Fractional CRO', href: '/cms/seo-when-to-hire', icon: FileTextIcon },
+  { name: 'Fractional CRO Pricing', href: '/cms/seo-cro-pricing', icon: FileTextIcon },
+  { name: 'Replace Founder-Led Sales', href: '/cms/seo-replace-founder-sales', icon: FileTextIcon },
+  { name: 'Sales Team Quota', href: '/cms/seo-sales-team-quota', icon: FileTextIcon },
+  { name: 'Build Sales Process', href: '/cms/seo-build-sales-process', icon: FileTextIcon },
+]
+
+const collections = [
+  { name: 'Blog Posts', href: '/cms/blog', icon: PenIcon },
+  { name: 'Articles', href: '/cms/articles', icon: FileTextIcon },
+  { name: 'Testimonials', href: '/cms/testimonials', icon: QuoteIcon },
+  { name: 'FAQ Items', href: '/cms/faq', icon: HelpCircleIcon },
+  { name: 'Videos', href: '/cms/videos-list', icon: PlayIcon },
+  { name: 'Categories', href: '/cms/categories', icon: TagIcon },
+  { name: 'Services', href: '/cms/services', icon: GridIcon },
+  { name: 'Process Steps', href: '/cms/process', icon: ListIcon },
+]
+
+const settings = [
+  { name: 'Site Settings', href: '/cms/settings', icon: SettingsIcon },
+  { name: 'SEO', href: '/cms/seo', icon: SearchIcon },
 ]
 
 export function AdminSidebar({ user }: AdminSidebarProps) {
   const pathname = usePathname()
+  const [pagesOpen, setPagesOpen] = useState(() =>
+    pages.some((p) => pathname === p.href || (p.href !== '/cms' && pathname.startsWith(p.href)))
+  )
 
   const handleLogout = async () => {
     const response = await fetch('/api/auth/logout', { method: 'POST' })
@@ -58,6 +59,9 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
       window.location.href = '/cms/login'
     }
   }
+
+  const isActive = (href: string) =>
+    pathname === href || (href !== '/cms' && pathname.startsWith(href))
 
   return (
     <aside className="admin-sidebar">
@@ -68,27 +72,81 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
       </div>
 
       <nav className="admin-sidebar__nav">
-        {navSections.map((section) => (
-          <div key={section.title} className="admin-sidebar__section">
-            <div className="admin-sidebar__section-title">{section.title}</div>
-            {section.items.map((item) => {
-              const Icon = item.icon
-              const isActive = pathname === item.href || 
-                (item.href !== '/cms' && pathname.startsWith(item.href))
-              
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`admin-sidebar__link ${isActive ? 'admin-sidebar__link--active' : ''}`}
-                >
-                  <Icon />
-                  {item.name}
-                </Link>
-              )
-            })}
-          </div>
-        ))}
+        {/* Dashboard */}
+        <div className="admin-sidebar__section">
+          <Link
+            href="/cms"
+            className={`admin-sidebar__link ${isActive('/cms') && pathname === '/cms' ? 'admin-sidebar__link--active' : ''}`}
+          >
+            <HomeIcon />
+            Dashboard
+          </Link>
+        </div>
+
+        {/* Pages — collapsible */}
+        <div className="admin-sidebar__section">
+          <button
+            onClick={() => setPagesOpen((o) => !o)}
+            className="admin-sidebar__section-title admin-sidebar__section-title--button"
+            aria-expanded={pagesOpen}
+          >
+            <span>Pages</span>
+            <ChevronIcon open={pagesOpen} />
+          </button>
+          {pagesOpen && (
+            <div className="admin-sidebar__collapsible">
+              {pages.map((item) => {
+                const Icon = item.icon
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`admin-sidebar__link admin-sidebar__link--indented ${isActive(item.href) ? 'admin-sidebar__link--active' : ''}`}
+                  >
+                    <Icon />
+                    {item.name}
+                  </Link>
+                )
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Collections */}
+        <div className="admin-sidebar__section">
+          <div className="admin-sidebar__section-title">Collections</div>
+          {collections.map((item) => {
+            const Icon = item.icon
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`admin-sidebar__link ${isActive(item.href) ? 'admin-sidebar__link--active' : ''}`}
+              >
+                <Icon />
+                {item.name}
+              </Link>
+            )
+          })}
+        </div>
+
+        {/* Settings */}
+        <div className="admin-sidebar__section">
+          <div className="admin-sidebar__section-title">Settings</div>
+          {settings.map((item) => {
+            const Icon = item.icon
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`admin-sidebar__link ${isActive(item.href) ? 'admin-sidebar__link--active' : ''}`}
+              >
+                <Icon />
+                {item.name}
+              </Link>
+            )
+          })}
+        </div>
       </nav>
 
       <div className="admin-sidebar__footer">
@@ -104,6 +162,26 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
         </button>
       </div>
     </aside>
+  )
+}
+
+// Chevron for collapse toggle
+function ChevronIcon({ open }: { open: boolean }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      style={{ transition: 'transform 0.2s', transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }}
+    >
+      <polyline points="6 9 12 15 18 9" />
+    </svg>
   )
 }
 
@@ -268,4 +346,3 @@ function LogOutIcon() {
     </svg>
   )
 }
-

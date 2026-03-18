@@ -51,7 +51,7 @@ const signs = [
     number: "06",
     title: "You're burning out running sales and the business",
     detail:
-      "Running both the company and the sales motion is a recipe for burnout. The math is simple: a Fractional CRO costs $6k–$12k/month. Your time is worth far more than that running the business you built. The question isn't whether you can afford a Fractional CRO. It's whether you can afford not to have one.",
+      "Running both the company and the sales motion is a recipe for burnout. The math is simple: a Fractional CRO costs $6k–$14k/month. Your time is worth far more than that running the business you built. The question isn't whether you can afford a Fractional CRO. It's whether you can afford not to have one.",
   },
   {
     number: "07",
@@ -312,7 +312,7 @@ export default function WhenToHirePage() {
       </section>
 
       {/* CTA */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 py-16 text-white md:py-24">
+      <section className="relative overflow-hidden bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 py-10 text-white md:py-14">
         <div
           className="absolute inset-0 opacity-5"
           style={{
