@@ -1,1 +1,1 @@
-{"version":"0.0.1","configurations":[{"name":"louieb","runtimeExecutable":"npm.cmd","runtimeArgs":["run","dev"],"port":3000}]}
+{"version":"0.0.1","configurations":[{"name":"louieb","runtimeExecutable":"C:\\Program Files\\nodejs\\node.exe","runtimeArgs":["C:\\Users\\louie\\louieb\\node_modules\\next\\dist\\bin\\next","dev","--port","3001"],"port":3001}]}

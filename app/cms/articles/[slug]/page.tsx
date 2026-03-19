@@ -170,16 +170,17 @@ export default function EditArticlePage({ params }: { params: Promise<{ slug: st
 
         <div className="form-group">
           <label className="form-label">Category</label>
-          <input
-            type="text"
+          <select
             className="form-input"
             value={form.category}
             onChange={(e) => setForm({ ...form, category: e.target.value })}
-            placeholder="e.g. Hiring, Pipeline, Compensation"
-          />
-          <p style={{ fontSize: '0.875rem', color: '#737373', marginTop: '0.25rem' }}>
-            Single category shown as a filter pill on the Articles page
-          </p>
+          >
+            <option value="">No Category</option>
+            <option value="featured">Featured (Articles Page)</option>
+            <option value="fsl">FSL Page</option>
+            <option value="course">Course</option>
+            <option value="newsletter">Newsletter</option>
+          </select>
         </div>
 
         <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem' }}>

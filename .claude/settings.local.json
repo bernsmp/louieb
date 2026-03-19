@@ -18,7 +18,13 @@
       "Bash(find /c/Users/louie/louieb -name *.env* -o -name .env*)",
       "Bash(cp /tmp/delete-still-in-the-game.js /c/Users/louie/louieb/scripts/delete-still-in-the-game.js)",
       "Bash(node scripts/delete-still-in-the-game.js)",
-      "Bash(printenv)"
+      "Bash(printenv)",
+      "Bash(find /c/Users/louie/louieb/.claude/worktrees/priceless-booth/supabase -type f -name *.sql)",
+      "Bash(xargs grep:*)",
+      "Bash(where npm:*)",
+      "Bash(command -v npm)",
+      "Bash(ls /c/Users/louie/louieb/.claude/worktrees/priceless-booth/node_modules/.bin/next*)",
+      "Bash(ls /c/Users/louie/louieb/node_modules/.bin/next*)"
     ]
   }
 }
