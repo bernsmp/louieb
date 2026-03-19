@@ -575,6 +575,30 @@ export default function FractionalSalesLeaderVsConsultantPage() {
           </div>
         </section>
 
+        {/* Video Callout */}
+        <section className="py-8 bg-white">
+          <div className="container mx-auto max-w-4xl px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
+              className="rounded-xl border border-[#0966c2]/20 bg-blue-50 p-6 text-center"
+            >
+              <p className="mb-1 text-sm font-semibold text-[#0966c2]">Before You Hire an FSL</p>
+              <p className="mb-3 text-neutral-700">
+                Now that you know the difference, here&apos;s the one question you must ask any candidate before signing.
+              </p>
+              <Link
+                href="/videos/ask-this-before-hiring-a-fractional-sales-leader"
+                className="font-semibold text-[#0966c2] underline underline-offset-2 hover:text-[#0855a3]"
+              >
+                Watch: Ask This Before Hiring A Fractional Sales Leader →
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+
         {/* Summary Section */}
         <section className="py-16 md:py-24 bg-neutral-50">
           <div className="container mx-auto max-w-6xl px-6 lg:px-8">

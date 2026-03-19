@@ -421,6 +421,21 @@ export default function FractionalCROPage() {
                   <p className="text-neutral-600">{faq.a}</p>
                 </motion.div>
               ))}
+              <motion.div
+                variants={itemVariants}
+                className="rounded-xl border border-[#0966c2]/20 bg-blue-50 p-6"
+              >
+                <p className="mb-1 text-sm font-semibold text-[#0966c2]">Before You Hire</p>
+                <p className="mb-3 text-neutral-700">
+                  There&apos;s one question you must ask any Fractional CRO candidate before you hire them.
+                </p>
+                <Link
+                  href="/videos/ask-this-before-hiring-a-fractional-sales-leader"
+                  className="font-semibold text-[#0966c2] underline underline-offset-2 hover:text-[#0855a3]"
+                >
+                  Watch: Ask This Before Hiring A Fractional Sales Leader →
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         </div>

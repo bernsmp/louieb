@@ -307,6 +307,21 @@ export default function WhenToHirePage() {
                 Fractional Sales Leader vs. Consultant — what&apos;s the difference? →
               </Link>
             </motion.p>
+            <motion.div
+              variants={itemVariants}
+              className="mt-6 rounded-xl border border-[#0966c2]/20 bg-blue-50 p-6 text-center"
+            >
+              <p className="mb-1 text-sm font-semibold text-[#0966c2]">Ready to Start Vetting?</p>
+              <p className="mb-3 text-neutral-700">
+                Once you&apos;ve decided it&apos;s time, there&apos;s one question you must ask every candidate.
+              </p>
+              <Link
+                href="/videos/ask-this-before-hiring-a-fractional-sales-leader"
+                className="font-semibold text-[#0966c2] underline underline-offset-2 hover:text-[#0855a3]"
+              >
+                Watch: Ask This Before Hiring A Fractional Sales Leader →
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </section>

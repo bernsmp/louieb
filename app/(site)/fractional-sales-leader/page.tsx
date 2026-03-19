@@ -269,6 +269,17 @@ function IntroSection({ pageData }: { pageData: PageData }) {
               Compare: FSL vs Consultant →
             </Link>
           </div>
+          <div className="mt-4 pt-4 border-t border-neutral-200">
+            <p className="text-sm text-neutral-600 mb-4">
+              Ready to vet a Fractional Sales Leader? There&apos;s one question you must ask first:
+            </p>
+            <Link
+              href="/videos/ask-this-before-hiring-a-fractional-sales-leader"
+              className="inline-block rounded-lg border-2 border-neutral-400 px-6 py-3 text-base font-semibold text-neutral-700 transition-all hover:border-[#0966c2] hover:text-[#0966c2]"
+            >
+              Watch: Ask This Before Hiring an FSL →
+            </Link>
+          </div>
         </div>
       </div>
     </section>
