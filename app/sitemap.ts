@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 import { getArticleSlugs, getArticleBySlug } from '@/lib/markdown';
-import { getAllVideoSlugs, getAllBlogPostsWithSlugs } from '@/lib/cms';
+import { getAllVideosWithSlugs, getAllBlogPostsWithSlugs } from '@/lib/cms';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://louiebernstein.com';
@@ -58,7 +58,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${baseUrl}/faqs`,
       lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
+      changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
@@ -88,35 +88,49 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // Dynamic article routes
-  const articleSlugs = getArticleSlugs();
-  const articleRoutes: MetadataRoute.Sitemap = articleSlugs.map((slug) => {
-    const article = getArticleBySlug(slug);
-    return {
-      url: `${baseUrl}/articles/${slug}`,
-      lastModified: article ? new Date(article.metadata.date) : new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    };
-  });
+  let articleRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const articleSlugs = getArticleSlugs();
+    articleRoutes = articleSlugs.map((slug) => {
+      const article = getArticleBySlug(slug);
+      return {
+        url: `${baseUrl}/articles/${slug}`,
+        lastModified: article ? new Date(article.metadata.date) : new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+      };
+    });
+  } catch (e) {
+    console.error('[sitemap] Failed to fetch article slugs:', e);
+  }
 
   // Dynamic blog post routes
-  const blogPosts = await getAllBlogPostsWithSlugs();
-  const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: post.publishedDate ? new Date(post.publishedDate) : new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }));
+  let blogRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const blogPosts = await getAllBlogPostsWithSlugs();
+    blogRoutes = blogPosts.map((post) => ({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: post.publishedDate ? new Date(post.publishedDate) : new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    }));
+  } catch (e) {
+    console.error('[sitemap] Failed to fetch blog posts:', e);
+  }
 
-  // Dynamic video routes
-  const videoSlugs = await getAllVideoSlugs();
-  const videoRoutes: MetadataRoute.Sitemap = videoSlugs.map((slug) => ({
-    url: `${baseUrl}/videos/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }));
+  // Dynamic video routes — uses getAllVideosWithSlugs() to include ALL videos in the DB
+  let videoRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const videos = await getAllVideosWithSlugs();
+    videoRoutes = videos.map((video) => ({
+      url: `${baseUrl}/videos/${video.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    }));
+  } catch (e) {
+    console.error('[sitemap] Failed to fetch video slugs:', e);
+  }
 
   return [...staticRoutes, ...articleRoutes, ...blogRoutes, ...videoRoutes];
 }
-
