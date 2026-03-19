@@ -35,6 +35,10 @@ const pages = [
   { name: 'Sales Team Not Hitting Quota', href: '/cms/seo-sales-team-not-hitting-quota', icon: FileTextIcon },
   { name: 'Why Sales Reps Fail', href: '/cms/seo-sales-reps-fail', icon: FileTextIcon },
   { name: 'How to Hire First Sales Rep', href: '/cms/seo-hire-first-sales-rep', icon: FileTextIcon },
+  { name: 'Fractional CRO vs Full-Time CRO', href: '/cms/seo-cro-vs-full-time', icon: FileTextIcon },
+  { name: 'VP of Sales vs CRO', href: '/cms/seo-vp-vs-cro', icon: FileTextIcon },
+  { name: 'How Much Does a Fractional CRO Cost', href: '/cms/seo-cro-cost', icon: FileTextIcon },
+  { name: 'When to Hire a CRO', href: '/cms/seo-when-to-hire-cro', icon: FileTextIcon },
 ]
 
 const collections = [
