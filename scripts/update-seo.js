@@ -11,7 +11,7 @@ async function updateSEO() {
     {
       section: 'seo',
       field: 'siteTitle',
-      value: 'Louie Bernstein – Fractional Sales Leader | INC 500 Founder',
+      value: 'Fractional Sales Leader | Louie Bernstein',
     },
     {
       section: 'seo',
