@@ -147,8 +147,10 @@ export default async function SiteLayout({
           linkedin={settings.social.linkedin}
           youtube={settings.social.youtube}
           quickLinksLabel={settings.footer.quickLinksLabel}
+          servicesLinksLabel={settings.footer.servicesLinksLabel}
           getInTouchLabel={settings.footer.getInTouchLabel}
           quickLinks={settings.footer.quickLinks}
+          servicesLinks={settings.footer.servicesLinks}
         />
       </body>
     </html>

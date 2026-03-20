@@ -13,8 +13,10 @@ interface FooterContent {
   slogan?: string
   copyrightName?: string
   quickLinksLabel?: string
+  servicesLinksLabel?: string
   getInTouchLabel?: string
   quickLinks?: QuickLink[]
+  servicesLinks?: QuickLink[]
 }
 
 const DEFAULT_LINKS: QuickLink[] = [
@@ -22,27 +24,47 @@ const DEFAULT_LINKS: QuickLink[] = [
   { label: 'Articles', href: '/articles' },
   { label: 'Videos', href: '/videos' },
   { label: 'Newsletter', href: '/newsletter' },
+  { label: 'FAQs', href: '/faqs' },
+  { label: 'Tools', href: '/tools' },
+]
+
+const DEFAULT_SERVICES_LINKS: QuickLink[] = [
+  { label: 'Fractional Sales Leader', href: '/fractional-sales-leader' },
+  { label: 'For Entrepreneurs', href: '/entrepreneurs' },
+  { label: 'For Founders', href: '/founders' },
   { label: 'Sales Training', href: '/salesperson' },
+  { label: 'Course', href: '/course' },
   { label: 'Privacy Policy', href: '/privacy' },
 ]
 
 export default function EditFooterPage() {
   const [content, setContent] = useState<FooterContent>({})
   const [links, setLinks] = useState<QuickLink[]>([])
+  const [servicesLinks, setServicesLinks] = useState<QuickLink[]>([])
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [savedAt, setSavedAt] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
 
-  // Inline edit state
+  // Explore links inline edit state
   const [editingIndex, setEditingIndex] = useState<number | null>(null)
   const [editLabel, setEditLabel] = useState('')
   const [editHref, setEditHref] = useState('')
 
-  // Add new link state
+  // Explore links add state
   const [addingNew, setAddingNew] = useState(false)
   const [newLabel, setNewLabel] = useState('')
   const [newHref, setNewHref] = useState('')
+
+  // Services links inline edit state
+  const [svcEditingIndex, setSvcEditingIndex] = useState<number | null>(null)
+  const [svcEditLabel, setSvcEditLabel] = useState('')
+  const [svcEditHref, setSvcEditHref] = useState('')
+
+  // Services links add state
+  const [svcAddingNew, setSvcAddingNew] = useState(false)
+  const [svcNewLabel, setSvcNewLabel] = useState('')
+  const [svcNewHref, setSvcNewHref] = useState('')
 
   useEffect(() => {
     fetch('/api/cms/section/footer')
@@ -55,15 +77,21 @@ export default function EditFooterPage() {
             ? c.quickLinks
             : DEFAULT_LINKS
         )
+        setServicesLinks(
+          Array.isArray(c.servicesLinks) && c.servicesLinks.length > 0
+            ? c.servicesLinks
+            : DEFAULT_SERVICES_LINKS
+        )
         setSavedAt(data.updated_at)
       })
       .catch(() => {
         setLinks(DEFAULT_LINKS)
+        setServicesLinks(DEFAULT_SERVICES_LINKS)
       })
       .finally(() => setLoading(false))
   }, [])
 
-  const save = async (overrideLinks?: QuickLink[]) => {
+  const save = async (overrideLinks?: QuickLink[], overrideSvcLinks?: QuickLink[]) => {
     setSaving(true)
     setError(null)
     try {
@@ -74,6 +102,7 @@ export default function EditFooterPage() {
           content: {
             ...content,
             quickLinks: overrideLinks ?? links,
+            servicesLinks: overrideSvcLinks ?? servicesLinks,
           },
         }),
       })
@@ -148,6 +177,63 @@ export default function EditFooterPage() {
     setNewHref('')
   }
 
+  // Services links handlers
+  const svcStartEdit = (i: number) => {
+    setSvcEditingIndex(i)
+    setSvcEditLabel(servicesLinks[i].label)
+    setSvcEditHref(servicesLinks[i].href)
+    setSvcAddingNew(false)
+  }
+
+  const svcSaveEdit = () => {
+    if (!svcEditLabel.trim() || !svcEditHref.trim()) return
+    setServicesLinks(servicesLinks.map((l, i) =>
+      i === svcEditingIndex ? { label: svcEditLabel.trim(), href: svcEditHref.trim() } : l
+    ))
+    setSvcEditingIndex(null)
+  }
+
+  const svcCancelEdit = () => setSvcEditingIndex(null)
+
+  const svcRemoveLink = (i: number) => {
+    setServicesLinks(servicesLinks.filter((_, idx) => idx !== i))
+  }
+
+  const svcMoveUp = (i: number) => {
+    if (i === 0) return
+    const updated = [...servicesLinks]
+    ;[updated[i - 1], updated[i]] = [updated[i], updated[i - 1]]
+    setServicesLinks(updated)
+  }
+
+  const svcMoveDown = (i: number) => {
+    if (i === servicesLinks.length - 1) return
+    const updated = [...servicesLinks]
+    ;[updated[i], updated[i + 1]] = [updated[i + 1], updated[i]]
+    setServicesLinks(updated)
+  }
+
+  const svcStartAdd = () => {
+    setSvcAddingNew(true)
+    setSvcNewLabel('')
+    setSvcNewHref('')
+    setSvcEditingIndex(null)
+  }
+
+  const svcConfirmAdd = () => {
+    if (!svcNewLabel.trim() || !svcNewHref.trim()) return
+    setServicesLinks([...servicesLinks, { label: svcNewLabel.trim(), href: svcNewHref.trim() }])
+    setSvcAddingNew(false)
+    setSvcNewLabel('')
+    setSvcNewHref('')
+  }
+
+  const svcCancelAdd = () => {
+    setSvcAddingNew(false)
+    setSvcNewLabel('')
+    setSvcNewHref('')
+  }
+
   if (loading) {
     return (
       <div className="cms-page-container">
@@ -199,7 +285,8 @@ export default function EditFooterPage() {
             { field: 'tagline' as const, label: 'Footer Tagline', placeholder: 'e.g., Fractional Sales Leader' },
             { field: 'slogan' as const, label: 'Footer Slogan', placeholder: 'e.g., Less Spend. More Sales.' },
             { field: 'copyrightName' as const, label: 'Copyright Name', placeholder: 'e.g., Louie Bernstein' },
-            { field: 'quickLinksLabel' as const, label: 'Quick Links Section Label', placeholder: 'e.g., Quick Links' },
+            { field: 'quickLinksLabel' as const, label: 'Explore Links Section Label', placeholder: 'e.g., Explore' },
+            { field: 'servicesLinksLabel' as const, label: 'Services Links Section Label', placeholder: 'e.g., Services' },
             { field: 'getInTouchLabel' as const, label: 'Get In Touch Section Label', placeholder: 'e.g., Get In Touch' },
           ].map(({ field, label, placeholder }) => (
             <div key={field} className="cms-field-group">
@@ -330,6 +417,120 @@ export default function EditFooterPage() {
 
           <p style={{ marginTop: '0.75rem', fontSize: '0.8rem', color: 'var(--muted-foreground)' }}>
             Use relative paths (e.g., <code>/salesperson</code>) for pages on this site, or full URLs for external links.
+          </p>
+        </div>
+
+        {/* Services Links Manager */}
+        <div className="cms-section-card">
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+            <h2 className="cms-section-card__title" style={{ margin: 0 }}>Services Links</h2>
+            <button
+              onClick={svcStartAdd}
+              className="btn btn--primary btn--sm"
+              disabled={svcAddingNew}
+            >
+              + Add Link
+            </button>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            {servicesLinks.map((link, i) => (
+              <div key={i} style={{ border: '1px solid var(--border)', borderRadius: '0.5rem', padding: '0.75rem 1rem', background: 'var(--background)' }}>
+                {svcEditingIndex === i ? (
+                  <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'flex-end' }}>
+                    <div style={{ flex: '1', minWidth: '140px' }}>
+                      <label className="cms-field-label" style={{ fontSize: '0.75rem' }}>Label</label>
+                      <input
+                        type="text"
+                        className="cms-input"
+                        value={svcEditLabel}
+                        onChange={(e) => setSvcEditLabel(e.target.value)}
+                        autoFocus
+                      />
+                    </div>
+                    <div style={{ flex: '2', minWidth: '200px' }}>
+                      <label className="cms-field-label" style={{ fontSize: '0.75rem' }}>URL</label>
+                      <input
+                        type="text"
+                        className="cms-input"
+                        value={svcEditHref}
+                        onChange={(e) => setSvcEditHref(e.target.value)}
+                        placeholder="e.g., /fractional-sales-leader"
+                      />
+                    </div>
+                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                      <button onClick={svcSaveEdit} className="btn btn--primary btn--sm">Save</button>
+                      <button onClick={svcCancelEdit} className="btn btn--secondary btn--sm">Cancel</button>
+                    </div>
+                  </div>
+                ) : (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                      <button
+                        onClick={() => svcMoveUp(i)}
+                        disabled={i === 0}
+                        title="Move up"
+                        style={{ background: 'none', border: 'none', cursor: i === 0 ? 'default' : 'pointer', opacity: i === 0 ? 0.3 : 1, fontSize: '0.7rem', lineHeight: 1, padding: '2px' }}
+                      >▲</button>
+                      <button
+                        onClick={() => svcMoveDown(i)}
+                        disabled={i === servicesLinks.length - 1}
+                        title="Move down"
+                        style={{ background: 'none', border: 'none', cursor: i === servicesLinks.length - 1 ? 'default' : 'pointer', opacity: i === servicesLinks.length - 1 ? 0.3 : 1, fontSize: '0.7rem', lineHeight: 1, padding: '2px' }}
+                      >▼</button>
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{link.label}</span>
+                      <span style={{ marginLeft: '0.75rem', color: 'var(--muted-foreground)', fontSize: '0.8rem' }}>{link.href}</span>
+                    </div>
+                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                      <button onClick={() => svcStartEdit(i)} className="btn btn--secondary btn--sm">Edit</button>
+                      <button
+                        onClick={() => svcRemoveLink(i)}
+                        className="btn btn--sm"
+                        style={{ background: 'none', border: '1px solid #ef4444', color: '#ef4444', borderRadius: '0.375rem', padding: '0.25rem 0.75rem', cursor: 'pointer', fontSize: '0.875rem' }}
+                      >Remove</button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+
+            {svcAddingNew && (
+              <div style={{ border: '2px dashed var(--primary)', borderRadius: '0.5rem', padding: '0.75rem 1rem', background: 'var(--background)' }}>
+                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'flex-end' }}>
+                  <div style={{ flex: '1', minWidth: '140px' }}>
+                    <label className="cms-field-label" style={{ fontSize: '0.75rem' }}>Label</label>
+                    <input
+                      type="text"
+                      className="cms-input"
+                      value={svcNewLabel}
+                      onChange={(e) => setSvcNewLabel(e.target.value)}
+                      placeholder="e.g., Fractional Sales Leader"
+                      autoFocus
+                    />
+                  </div>
+                  <div style={{ flex: '2', minWidth: '200px' }}>
+                    <label className="cms-field-label" style={{ fontSize: '0.75rem' }}>URL</label>
+                    <input
+                      type="text"
+                      className="cms-input"
+                      value={svcNewHref}
+                      onChange={(e) => setSvcNewHref(e.target.value)}
+                      placeholder="e.g., /fractional-sales-leader"
+                    />
+                  </div>
+                  <div style={{ display: 'flex', gap: '0.5rem' }}>
+                    <button onClick={svcConfirmAdd} className="btn btn--primary btn--sm">Add</button>
+                    <button onClick={svcCancelAdd} className="btn btn--secondary btn--sm">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <p style={{ marginTop: '0.75rem', fontSize: '0.8rem', color: 'var(--muted-foreground)' }}>
+            Use relative paths (e.g., <code>/fractional-sales-leader</code>) for pages on this site.
           </p>
         </div>
       </div>

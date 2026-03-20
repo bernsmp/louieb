@@ -232,8 +232,10 @@ interface SiteSettings {
     slogan: string
     copyrightName: string
     quickLinksLabel: string
+    servicesLinksLabel: string
     getInTouchLabel: string
     quickLinks: Array<{ label: string; href: string }>
+    servicesLinks: Array<{ label: string; href: string }>
   }
   newsletter: {
     name: string
@@ -567,14 +569,23 @@ const defaultSettings: SiteSettings = {
     tagline: 'Fractional Sales Leader',
     slogan: 'Less Spend. More Sales.',
     copyrightName: 'Louie Bernstein',
-    quickLinksLabel: 'Quick Links',
+    quickLinksLabel: 'Explore',
+    servicesLinksLabel: 'Services',
     getInTouchLabel: 'Get In Touch',
     quickLinks: [
       { label: 'Home', href: '/' },
       { label: 'Articles', href: '/articles' },
       { label: 'Videos', href: '/videos' },
       { label: 'Newsletter', href: '/newsletter' },
+      { label: 'FAQs', href: '/faqs' },
+      { label: 'Tools', href: '/tools' },
+    ],
+    servicesLinks: [
+      { label: 'Fractional Sales Leader', href: '/fractional-sales-leader' },
+      { label: 'For Entrepreneurs', href: '/entrepreneurs' },
+      { label: 'For Founders', href: '/founders' },
       { label: 'Sales Training', href: '/salesperson' },
+      { label: 'Course', href: '/course' },
       { label: 'Privacy Policy', href: '/privacy' },
     ],
   },
