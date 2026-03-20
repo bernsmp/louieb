@@ -122,7 +122,7 @@ export default function SalesTeamNotHittingQuotaPage() {
       />
 
       {/* Hero */}
-      <HeroBackground pattern="diamond" className="bg-slate-950">
+      <HeroBackground imageSrc="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&fit=crop&auto=format" imageAlt="Sales team reviewing performance metrics and quota attainment" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}

@@ -117,7 +117,7 @@ export default function HireFirstSalesRepPage() {
       />
 
       {/* Hero */}
-      <HeroBackground pattern="large-dots" className="bg-slate-950">
+      <HeroBackground imageSrc="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&q=80&fit=crop&auto=format" imageAlt="Professional interview setting for hiring a first sales representative" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}

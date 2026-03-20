@@ -118,7 +118,7 @@ export default function FractionalVPPage() {
       />
 
       {/* Hero */}
-      <HeroBackground pattern="horizontal-lines" className="bg-slate-950">
+      <HeroBackground imageSrc="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&q=80&fit=crop&auto=format" imageAlt="Small business team collaborating in a modern office space" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}
