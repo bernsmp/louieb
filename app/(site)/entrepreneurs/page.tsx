@@ -5,7 +5,7 @@ import { getEntrepreneursContent } from "@/lib/cms";
 export const metadata = {
   title: "Before You Quit Your Day Job | Louie Bernstein",
   description:
-    "Are you ready to start a business — or just restless? Five critical questions that surface whether you're built for founding. Free PDF guide for aspiring entrepreneurs.",
+    "Five critical questions that reveal whether you're built for founding — or just restless. A free guide for aspiring entrepreneurs.",
 };
 
 const fiveQuestions = [

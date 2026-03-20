@@ -21,8 +21,8 @@ const outfit = Outfit({
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getSEOSettings()
 
-  const defaultTitle = "Louie Bernstein - INC 500 Founder | Fractional Sales Leader for $1M–$10M ARR Companies"
-  const defaultDescription = "Fractional Sales Leader for $1M–$10M ARR companies. INC 500 Founder with 9+ years helping technical and operational founders build repeatable sales systems — and stop being the bottleneck. Ready to break through? Let's talk."
+  const defaultTitle = "Fractional Sales Leader | Louie Bernstein"
+  const defaultDescription = "INC 500 Founder helping $1M–$10M ARR founders since 2017 build repeatable sales systems. Stop being the bottleneck — let's talk."
   const defaultKeywords = "fractional sales leader, fractional sales leadership, sales consulting, sales team optimization, sales process consulting, sales training, $1M-$10M ARR, sales systems, sales team development"
   const defaultOgImage = "https://louiebernstein.com/logo/og-image.png"
 
@@ -45,8 +45,8 @@ export async function generateMetadata(): Promise<Metadata> {
       ],
     },
     openGraph: {
-      title: seo.siteTitle || "Louie Bernstein - INC 500 Founder | Fractional Sales Leader",
-      description: seo.siteDescription || "Fractional Sales Leader for $1M–$10M ARR companies. INC 500 Founder with 9+ years helping founders build repeatable sales systems and stop being the bottleneck.",
+      title: seo.siteTitle || "Fractional Sales Leader | Louie Bernstein",
+      description: seo.siteDescription || "INC 500 Founder helping $1M–$10M ARR founders since 2017 build repeatable sales systems. Stop being the bottleneck — let's talk.",
       url: "https://louiebernstein.com",
       siteName: "Louie Bernstein",
       locale: "en_US",
@@ -62,8 +62,8 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: seo.siteTitle || "Louie Bernstein - INC 500 Founder | Fractional Sales Leader",
-      description: seo.siteDescription || "Fractional Sales Leader for $1M–$10M ARR companies. INC 500 Founder with 9+ years helping founders build repeatable sales systems and stop being the bottleneck.",
+      title: seo.siteTitle || "Fractional Sales Leader | Louie Bernstein",
+      description: seo.siteDescription || "INC 500 Founder helping $1M–$10M ARR founders since 2017 build repeatable sales systems. Stop being the bottleneck — let's talk.",
       images: [ogImage],
     },
   }

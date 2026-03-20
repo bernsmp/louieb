@@ -6,8 +6,8 @@ import { getCoursePageData, getCoursePageSEO } from "@/lib/cms";
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getCoursePageSEO();
 
-  const defaultTitle = "The Founder's and CEO's Sales System | Complete Sales Training Course";
-  const defaultDescription = "Build, optimize, and scale your sales team with this complete 20-step system. Includes hiring system, sales playbook, LinkedIn lead generation, pipeline management, and more. Created by a Fractional Sales Leader with decades of experience.";
+  const defaultTitle = "Sales System for Founders & CEOs | Louie Bernstein";
+  const defaultDescription = "A complete 20-step system to build, optimize, and scale your sales team. Covers hiring, playbook, LinkedIn outreach, and pipeline management.";
 
   return {
     title: seo.seoTitle || defaultTitle,

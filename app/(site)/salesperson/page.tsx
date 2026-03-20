@@ -3,9 +3,9 @@ import Link from "next/link";
 import { getSalespersonSettings } from "@/lib/cms";
 
 export const metadata: Metadata = {
-  title: "How to Be a Professional Salesperson — 210-Day Blueprint | Louie Bernstein",
+  title: "210-Day Sales Training Blueprint | Louie Bernstein",
   description:
-    "A 210-day sales training program + 52-week sales management guide by INC 500 Founder Louie Bernstein. Cold calling, objection handling, closing, prospecting, and building a sales team.",
+    "210 daily sales lessons + 52-week management guide by INC 500 Founder Louie Bernstein. Covers cold calling, objection handling, closing, and prospecting.",
   keywords: [
     "how to be a professional salesperson",
     "sales training program",

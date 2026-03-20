@@ -3,9 +3,9 @@ import { BackgroundCells } from "@/components/ui/background-ripple-effect";
 import { getFoundersContent } from "@/lib/cms";
 
 export const metadata = {
-  title: "Staying In The Game | Louie Bernstein",
+  title: "Resilience Framework for Founders | Louie Bernstein",
   description:
-    "A Resilience Framework for Founders and Entrepreneurs. Five decades. Five decisions. One framework that builds the resilience to get you to the next stage — and keep you there.",
+    "A resilience framework for founders and entrepreneurs. Five decades, five decisions — build the staying power to reach your next stage and keep going.",
 };
 
 const decisions = [

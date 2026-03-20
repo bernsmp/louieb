@@ -5,8 +5,8 @@ import { getFSLPageDataWithLayout, getFSLPageSEO } from "@/lib/cms";
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getFSLPageSEO();
 
-  const defaultTitle = "Fractional Sales Leader | What It Is & How It Works | Louie Bernstein";
-  const defaultDescription = "A Fractional Sales Leader gives you experienced sales leadership at a fraction of the cost. Learn what they do, how to hire one, and if it's right for your $1M-$10M company.";
+  const defaultTitle = "What Is a Fractional Sales Leader? | Louie Bernstein";
+  const defaultDescription = "Get experienced sales leadership at a fraction of the cost. Learn what a Fractional Sales Leader does and whether it's right for your $1M–$10M company.";
 
   return {
     title: seo.seoTitle || defaultTitle,
