@@ -118,7 +118,7 @@ export default function FounderLedSalesNotScalingPage() {
       />
 
       {/* Hero */}
-      <HeroBackground imageSrc="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80&fit=crop&auto=format" imageAlt="Startup team working together to scale their sales operation" className="bg-slate-950">
+      <HeroBackground accentColor="#0891b2" fillColor="rgba(8,145,178,0.3)" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}

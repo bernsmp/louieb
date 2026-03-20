@@ -144,7 +144,7 @@ export default function HowToBuildSalesProcessPage() {
       />
 
       {/* Hero */}
-      <HeroBackground imageSrc="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&q=80&fit=crop&auto=format" imageAlt="Team mapping out a repeatable sales process on a whiteboard" className="bg-slate-950">
+      <HeroBackground accentColor="#4f46e5" fillColor="rgba(79,70,229,0.3)" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}

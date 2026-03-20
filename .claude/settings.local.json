@@ -24,7 +24,11 @@
       "Bash(where npm:*)",
       "Bash(command -v npm)",
       "Bash(ls /c/Users/louie/louieb/.claude/worktrees/priceless-booth/node_modules/.bin/next*)",
-      "Bash(ls /c/Users/louie/louieb/node_modules/.bin/next*)"
+      "Bash(ls /c/Users/louie/louieb/node_modules/.bin/next*)",
+      "Bash(grep -v '^/$')",
+      "Bash(curl -s http://localhost:3001/fractional-cro-for-1m-10m-founders -o /dev/null -w \"%{http_code}\")",
+      "Bash(curl -s http://localhost:3001/fractional-cro-for-1m-10m-founders)",
+      "Bash(node -e \":*)"
     ]
   }
 }

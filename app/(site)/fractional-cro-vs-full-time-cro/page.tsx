@@ -121,7 +121,7 @@ export default function FractionalCroVsFullTimePage() {
       />
 
       {/* Hero */}
-      <HeroBackground imageSrc="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200&q=80&fit=crop&auto=format" imageAlt="Two professionals discussing fractional versus full-time sales leadership" className="bg-slate-950">
+      <HeroBackground accentColor="#0284c7" fillColor="rgba(2,132,199,0.3)" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}

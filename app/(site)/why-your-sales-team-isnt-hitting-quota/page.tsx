@@ -110,7 +110,7 @@ export default function WhySalesTeamPage() {
       />
 
       {/* Hero */}
-      <HeroBackground imageSrc="https://images.unsplash.com/photo-1542744094-3a31f272c490?w=1200&q=80&fit=crop&auto=format" imageAlt="Sales leader analyzing team performance data in a startup office" className="bg-slate-950">
+      <HeroBackground accentColor="#818cf8" fillColor="rgba(129,140,248,0.3)" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}

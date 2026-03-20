@@ -112,7 +112,7 @@ export default function WhenToHirePage() {
       />
 
       {/* Hero */}
-      <HeroBackground imageSrc="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=80&fit=crop&auto=format" imageAlt="Experienced sales executive ready to lead a growing company" className="bg-slate-950">
+      <HeroBackground accentColor="#38bdf8" fillColor="rgba(56,189,248,0.3)" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}
