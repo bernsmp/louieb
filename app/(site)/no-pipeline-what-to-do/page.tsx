@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { BackgroundCells } from "@/components/ui/background-ripple-effect";
+import { HeroBackground } from "@/components/ui/HeroBackground";
 import { AlertTriangle, CheckCircle, Clock } from "lucide-react";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
@@ -118,7 +118,7 @@ export default function NoPipelinePage() {
       />
 
       {/* Hero */}
-      <BackgroundCells className="bg-slate-950">
+      <HeroBackground pattern="vertical-lines" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}
@@ -159,7 +159,7 @@ export default function NoPipelinePage() {
             </motion.div>
           </motion.div>
         </div>
-      </BackgroundCells>
+      </HeroBackground>
 
       {/* Warning */}
       <section className="bg-white py-12 md:py-16">
