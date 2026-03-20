@@ -118,7 +118,7 @@ export default function NoPipelinePage() {
       />
 
       {/* Hero */}
-      <HeroBackground imageSrc="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&q=80&fit=crop&auto=format" imageAlt="Sales analytics dashboard showing pipeline metrics and charts" className="bg-slate-950">
+      <HeroBackground accentColor="#0369a1" fillColor="rgba(3,105,161,0.3)" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}

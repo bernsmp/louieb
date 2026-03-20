@@ -122,7 +122,7 @@ export default function BuildSalesTeamAfter1mArrPage() {
       />
 
       {/* Hero */}
-      <HeroBackground imageSrc="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80&fit=crop&auto=format" imageAlt="Building a high-performance sales team after reaching one million ARR" className="bg-slate-950">
+      <HeroBackground accentColor="#0ea5e9" fillColor="rgba(14,165,233,0.3)" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}

@@ -133,7 +133,7 @@ export default function WhyStartupsFailAtSalesHiringPage() {
       />
 
       {/* Hero */}
-      <HeroBackground imageSrc="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&q=80&fit=crop&auto=format" imageAlt="Startup team in a hiring and recruitment planning session" className="bg-slate-950">
+      <HeroBackground accentColor="#6366f1" fillColor="rgba(99,102,241,0.3)" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}

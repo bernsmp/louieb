@@ -130,7 +130,7 @@ export default function SaaSSalesProcessPage() {
       />
 
       {/* Hero */}
-      <HeroBackground imageSrc="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&q=80&fit=crop&auto=format" imageAlt="SaaS team collaborating on building a scalable sales process" className="bg-slate-950">
+      <HeroBackground accentColor="#06b6d4" fillColor="rgba(6,182,212,0.3)" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}

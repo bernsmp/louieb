@@ -7,12 +7,19 @@ import { cn } from "@/lib/utils";
 interface BackgroundCellsProps {
   children?: React.ReactNode;
   className?: string;
+  accentColor?: string;  // border color of highlighted cells, e.g. "#0966c2"
+  fillColor?: string;    // hover fill color, e.g. "rgba(9,102,194,0.3)"
 }
 
-export const BackgroundCells = ({ children, className }: BackgroundCellsProps) => {
+export const BackgroundCells = ({
+  children,
+  className,
+  accentColor = "#0966c2",
+  fillColor = "rgba(14,165,233,0.3)",
+}: BackgroundCellsProps) => {
   return (
     <div className={cn("relative min-h-screen flex justify-center overflow-hidden pb-16 md:pb-20 lg:pb-24", className)}>
-      <BackgroundCellCore />
+      <BackgroundCellCore accentColor={accentColor} fillColor={fillColor} />
       {children && (
         <div className="relative z-50 mt-40 select-none w-full">
           {children}
@@ -22,7 +29,13 @@ export const BackgroundCells = ({ children, className }: BackgroundCellsProps) =
   );
 };
 
-const BackgroundCellCore = () => {
+const BackgroundCellCore = ({
+  accentColor,
+  fillColor,
+}: {
+  accentColor: string;
+  fillColor: string;
+}) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const ref = useRef<HTMLDivElement>(null);
 
@@ -50,9 +63,7 @@ const BackgroundCellCore = () => {
           style={{
             maskImage: `radial-gradient(${size / 4}px circle at center, white, transparent)`,
             WebkitMaskImage: `radial-gradient(${size / 4}px circle at center, white, transparent)`,
-            WebkitMaskPosition: `${mousePosition.x - size / 2}px ${
-              mousePosition.y - size / 2
-            }px`,
+            WebkitMaskPosition: `${mousePosition.x - size / 2}px ${mousePosition.y - size / 2}px`,
             WebkitMaskSize: `${size}px`,
             maskSize: `${size}px`,
             pointerEvents: "none",
@@ -60,9 +71,9 @@ const BackgroundCellCore = () => {
             WebkitMaskRepeat: "no-repeat",
           }}
         >
-          <Pattern cellClassName="border-[#0966c2] relative z-[100]" />
+          <Pattern accentColor={accentColor} fillColor={fillColor} isAccent />
         </div>
-        <Pattern className="opacity-[0.5]" cellClassName="border-neutral-700" />
+        <Pattern className="opacity-[0.5]" fillColor={fillColor} />
       </div>
     </div>
   );
@@ -70,10 +81,12 @@ const BackgroundCellCore = () => {
 
 interface PatternProps {
   className?: string;
-  cellClassName?: string;
+  accentColor?: string;
+  fillColor?: string;
+  isAccent?: boolean;
 }
 
-const Pattern = ({ className, cellClassName }: PatternProps) => {
+const Pattern = ({ className, accentColor, fillColor = "rgba(14,165,233,0.3)", isAccent }: PatternProps) => {
   const x = new Array(47).fill(0);
   const y = new Array(30).fill(0);
   const matrix = x.map((_, i) => y.map((_, j) => [i, j]));
@@ -105,25 +118,17 @@ const Pattern = ({ className, cellClassName }: PatternProps) => {
             return (
               <div
                 key={`matrix-col-${colIdx}`}
-                className={cn(
-                  "bg-transparent border-l border-b border-neutral-600",
-                  cellClassName
-                )}
+                className="bg-transparent border-l border-b border-neutral-600 relative z-[100]"
+                style={isAccent && accentColor ? { borderColor: accentColor } : undefined}
                 onClick={() => setClickedCell([rowIdx, colIdx])}
               >
                 <motion.div
-                  initial={{
-                    opacity: 0,
-                  }}
-                  whileHover={{
-                    opacity: [0, 1, 0.5],
-                  }}
-                  transition={{
-                    duration: 0.5,
-                    ease: "backOut",
-                  }}
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: [0, 1, 0.5] }}
+                  transition={{ duration: 0.5, ease: "backOut" }}
                   animate={controls}
-                  className="bg-[rgba(14,165,233,0.3)] h-12 w-12"
+                  className="h-12 w-12"
+                  style={{ backgroundColor: fillColor }}
                 />
               </div>
             );
@@ -133,5 +138,3 @@ const Pattern = ({ className, cellClassName }: PatternProps) => {
     </div>
   );
 };
-
-

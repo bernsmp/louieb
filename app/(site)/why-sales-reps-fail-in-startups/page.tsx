@@ -112,7 +112,7 @@ export default function WhySalesRepsFailPage() {
       />
 
       {/* Hero */}
-      <HeroBackground imageSrc="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80&fit=crop&auto=format" imageAlt="Sales professionals in a startup environment discussing challenges" className="bg-slate-950">
+      <HeroBackground accentColor="#a5b4fc" fillColor="rgba(165,180,252,0.3)" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}

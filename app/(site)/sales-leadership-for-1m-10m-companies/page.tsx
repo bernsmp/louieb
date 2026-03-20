@@ -131,7 +131,7 @@ export default function SalesLeadership1m10mPage() {
       />
 
       {/* Hero */}
-      <HeroBackground imageSrc="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80&fit=crop&auto=format" imageAlt="Sales leadership team driving growth for a scaling company" className="bg-slate-950">
+      <HeroBackground accentColor="#93c5fd" fillColor="rgba(147,197,253,0.3)" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}
