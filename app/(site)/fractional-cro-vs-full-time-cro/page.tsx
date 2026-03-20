@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { BackgroundCells } from "@/components/ui/background-ripple-effect";
+import { HeroBackground } from "@/components/ui/HeroBackground";
 import { Check, X } from "lucide-react";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
@@ -121,7 +121,7 @@ export default function FractionalCroVsFullTimePage() {
       />
 
       {/* Hero */}
-      <BackgroundCells className="bg-slate-950">
+      <HeroBackground pattern="double-diagonal" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}
@@ -171,7 +171,7 @@ export default function FractionalCroVsFullTimePage() {
             </motion.div>
           </motion.div>
         </div>
-      </BackgroundCells>
+      </HeroBackground>
 
       {/* Cost Comparison Table */}
       <section className="bg-white py-12 md:py-16">

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { BackgroundCells } from "@/components/ui/background-ripple-effect";
+import { HeroBackground } from "@/components/ui/HeroBackground";
 import { Check, AlertCircle, BookOpen, Target, BarChart3, Users, Zap, ClipboardList } from "lucide-react";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
@@ -130,7 +130,7 @@ export default function SaaSSalesProcessPage() {
       />
 
       {/* Hero */}
-      <BackgroundCells className="bg-slate-950">
+      <HeroBackground pattern="fine-grid" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}
@@ -180,7 +180,7 @@ export default function SaaSSalesProcessPage() {
             </motion.div>
           </motion.div>
         </div>
-      </BackgroundCells>
+      </HeroBackground>
 
       {/* Common Mistakes */}
       <section className="bg-white py-16 md:py-20">
