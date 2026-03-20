@@ -14,8 +14,10 @@ interface FooterProps {
   linkedin?: string;
   youtube?: string;
   quickLinksLabel?: string;
+  servicesLinksLabel?: string;
   getInTouchLabel?: string;
   quickLinks?: QuickLink[];
+  servicesLinks?: QuickLink[];
 }
 
 const DEFAULT_QUICK_LINKS: QuickLink[] = [
@@ -23,7 +25,16 @@ const DEFAULT_QUICK_LINKS: QuickLink[] = [
   { label: "Articles", href: "/articles" },
   { label: "Videos", href: "/videos" },
   { label: "Newsletter", href: "/newsletter" },
+  { label: "FAQs", href: "/faqs" },
+  { label: "Tools", href: "/tools" },
+];
+
+const DEFAULT_SERVICES_LINKS: QuickLink[] = [
+  { label: "Fractional Sales Leader", href: "/fractional-sales-leader" },
+  { label: "For Entrepreneurs", href: "/entrepreneurs" },
+  { label: "For Founders", href: "/founders" },
   { label: "Sales Training", href: "/salesperson" },
+  { label: "Course", href: "/course" },
   { label: "Privacy Policy", href: "/privacy" },
 ];
 
@@ -35,16 +46,18 @@ export function Footer({
   phone = "(404) 808-5326",
   linkedin = "https://www.linkedin.com/in/sales-processes/",
   youtube = "https://www.youtube.com/playlist?list=PL7HfhnqHyzRmGDUMDhcSgZW8pR7DhW_Hl",
-  quickLinksLabel = "Quick Links",
+  quickLinksLabel = "Explore",
+  servicesLinksLabel = "Services",
   getInTouchLabel = "Get In Touch",
   quickLinks = DEFAULT_QUICK_LINKS,
+  servicesLinks = DEFAULT_SERVICES_LINKS,
 }: FooterProps) {
   const phoneLink = `tel:+1${phone.replace(/\D/g, '')}`;
 
   return (
     <footer className="border-t border-border bg-muted/30">
       <div className="container mx-auto max-w-7xl px-6 py-12 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-3">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand & Tagline */}
           <div>
             <h3 className="font-serif text-2xl font-bold text-primary">
@@ -58,7 +71,7 @@ export function Footer({
             </p>
           </div>
 
-          {/* Quick Links */}
+          {/* Explore Links */}
           <div>
             <h4 className="font-sans text-sm font-semibold uppercase tracking-wider text-foreground">
               {quickLinksLabel}
@@ -66,7 +79,23 @@ export function Footer({
             <ul className="mt-4 space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="font-sans text-base text-neutral-600 transition-colors hover:text-primary">
+                  <Link href={link.href} className="font-sans text-sm text-neutral-600 transition-colors hover:text-primary">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Services Links */}
+          <div>
+            <h4 className="font-sans text-sm font-semibold uppercase tracking-wider text-foreground">
+              {servicesLinksLabel}
+            </h4>
+            <ul className="mt-4 space-y-3">
+              {servicesLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="font-sans text-sm text-neutral-600 transition-colors hover:text-primary">
                     {link.label}
                   </Link>
                 </li>
