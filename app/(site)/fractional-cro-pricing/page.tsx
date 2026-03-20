@@ -117,7 +117,7 @@ export default function FractionalCROPricingPage() {
       />
 
       {/* Hero */}
-      <HeroBackground pattern="diagonal-lines" className="bg-slate-950">
+      <HeroBackground imageSrc="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&q=80&fit=crop&auto=format" imageAlt="Business professional reviewing pricing and financial planning documents" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}

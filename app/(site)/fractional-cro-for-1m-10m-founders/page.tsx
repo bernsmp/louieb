@@ -126,7 +126,7 @@ export default function FractionalCROPage() {
       />
 
       {/* Hero */}
-      <HeroBackground pattern="dot-grid" className="bg-slate-950">
+      <HeroBackground imageSrc="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=1200&q=80&fit=crop&auto=format" imageAlt="Startup founders discussing sales strategy around a conference table" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}

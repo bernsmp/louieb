@@ -136,7 +136,7 @@ export default function HowToReplaceFounderLedSalesPage() {
       />
 
       {/* Hero */}
-      <HeroBackground pattern="diagonal-cross" className="bg-slate-950">
+      <HeroBackground imageSrc="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&q=80&fit=crop&auto=format" imageAlt="Sales leadership transition meeting in a modern office" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}

@@ -135,7 +135,7 @@ export default function HowMuchFractionalCroCostPage() {
       />
 
       {/* Hero */}
-      <HeroBackground pattern="tiny-dots" className="bg-slate-950">
+      <HeroBackground imageSrc="https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?w=1200&q=80&fit=crop&auto=format" imageAlt="Business meeting reviewing investment and cost of fractional sales leadership" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}

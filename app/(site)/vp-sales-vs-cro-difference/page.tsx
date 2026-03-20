@@ -131,7 +131,7 @@ export default function VpSalesVsCroPage() {
       />
 
       {/* Hero */}
-      <HeroBackground pattern="large-grid" className="bg-slate-950">
+      <HeroBackground imageSrc="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&q=80&fit=crop&auto=format" imageAlt="Executive sales leaders in a boardroom discussion" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}

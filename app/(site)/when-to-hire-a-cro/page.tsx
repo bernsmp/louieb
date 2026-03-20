@@ -122,7 +122,7 @@ export default function WhenToHireACroPage() {
       />
 
       {/* Hero */}
-      <HeroBackground pattern="reverse-diagonal" className="bg-slate-950">
+      <HeroBackground imageSrc="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=1200&q=80&fit=crop&auto=format" imageAlt="Growing company leadership team planning their next stage of growth" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}
