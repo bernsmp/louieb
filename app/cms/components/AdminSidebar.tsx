@@ -42,6 +42,11 @@ const pages = [
   { name: 'VP of Sales vs CRO', href: '/cms/seo-vp-vs-cro', icon: FileTextIcon },
   { name: 'How Much Does a Fractional CRO Cost', href: '/cms/seo-cro-cost', icon: FileTextIcon },
   { name: 'When to Hire a CRO', href: '/cms/seo-when-to-hire-cro', icon: FileTextIcon },
+  { name: 'FSL vs Consultant (SEO)', href: '/cms/seo-fsl-vs-consultant', icon: FileTextIcon },
+  { name: 'Fractional VP vs Full-Time VP', href: '/cms/seo-vp-sales-vs-full-time', icon: FileTextIcon },
+  { name: 'When to Hire a Fractional Sales Leader', href: '/cms/seo-when-to-hire-fsl', icon: FileTextIcon },
+  { name: 'Cost of Fractional VP Sales', href: '/cms/seo-cost-fractional-vp', icon: FileTextIcon },
+  { name: 'Is Fractional Sales Leadership Worth It', href: '/cms/seo-fsl-worth-it', icon: FileTextIcon },
 ]
 
 const collections = [
