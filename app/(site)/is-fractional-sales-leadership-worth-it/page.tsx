@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { BackgroundCells } from '@/components/ui/background-ripple-effect'
+import { HeroBackground } from '@/components/ui/HeroBackground'
 import { Check, X } from 'lucide-react'
 
 const CALENDLY = 'https://calendly.com/louiebernstein/30minutes?month=2026-03'
@@ -106,8 +106,7 @@ export default function IsFractionalSalesLeadershipWorthItPage() {
       />
 
       {/* Hero */}
-      <section className="bg-slate-950">
-        <BackgroundCells className="bg-slate-950">
+        <HeroBackground accentColor="#1d4ed8" fillColor="rgba(29,78,216,0.3)" className="bg-slate-950">
           <div className="px-6 pb-20 pt-8 text-center">
             <motion.div
               variants={containerVariants}
@@ -156,8 +155,7 @@ export default function IsFractionalSalesLeadershipWorthItPage() {
               </motion.div>
             </motion.div>
           </div>
-        </BackgroundCells>
-      </section>
+        </HeroBackground>
 
       {/* When It Works / Doesn't */}
       <section className="bg-white py-16 md:py-20">
