@@ -4,8 +4,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeroBackground } from "@/components/ui/HeroBackground";
 import { AlertTriangle, CheckCircle } from "lucide-react";
+import { useCmsSection } from "@/lib/useCmsSection";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
+
+const CMS_SECTION = "seoWhenToHire";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -104,6 +107,8 @@ const schemaData = {
 };
 
 export default function WhenToHirePage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION)
+  const displayFaqs = cmsfaqs(4, faqs)
   return (
     <>
       <script
@@ -130,16 +135,14 @@ export default function WhenToHirePage() {
               variants={itemVariants}
               className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
-              When to Hire a Fractional CRO:
-              <span className="block text-[#0966c2]">7 Signs You&apos;re Ready</span>
+              {v("heroLine1", "When to Hire a Fractional CRO:")}
+              <span className="block text-[#0966c2]">{v("heroAccent", "7 Signs You\u2019re Ready")}</span>
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
-              Most founders wait too long. By the time they bring in sales leadership, they&apos;re
-              burned out, pipeline is stalled, and the business is stuck. Here are the 7 signs that
-              now is the right time.
+              {v("heroDescription", "Most founders wait too long. By the time they bring in sales leadership, they\u2019re burned out, pipeline is stalled, and the business is stuck. Here are the 7 signs that now is the right time.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link
@@ -288,7 +291,7 @@ export default function WhenToHirePage() {
               Common Questions
             </motion.h2>
             <div className="space-y-6">
-              {faqs.map((faq, i) => (
+              {displayFaqs.map((faq, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
@@ -348,14 +351,13 @@ export default function WhenToHirePage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Recognize Any of These Signs?
+              {v("ctaHeadline", "Recognize Any of These Signs?")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              Let&apos;s spend 30 minutes together. We&apos;ll look at where your sales are today
-              and figure out the right next step — whether that&apos;s working with me or not.
+              {v("ctaDescription", "Let\u2019s spend 30 minutes together. We\u2019ll look at where your sales are today and figure out the right next step \u2014 whether that\u2019s working with me or not.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

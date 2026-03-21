@@ -4,6 +4,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeroBackground } from "@/components/ui/HeroBackground";
 import { Check, AlertCircle, BookOpen, Target, BarChart3, Users, Zap, ClipboardList } from "lucide-react";
+import { useCmsSection } from "@/lib/useCmsSection";
+
+const CMS_SECTION = "seoSaasSalesProcess";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
 
@@ -122,6 +125,7 @@ const schemaData = {
 };
 
 export default function SaaSSalesProcessPage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION);
   return (
     <>
       <script
@@ -148,16 +152,14 @@ export default function SaaSSalesProcessPage() {
               variants={itemVariants}
               className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
-              How to Build a Sales Process
-              <span className="block text-[#0966c2]">for SaaS</span>
+              {v("heroLine1", "How to Build a Sales Process")}
+              <span className="block text-[#0966c2]">{v("heroAccent", "for SaaS")}</span>
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
-              SaaS sales has unique challenges — trials, expansion revenue, churn risk, product-led
-              vs. sales-led growth. Here&apos;s the exact process for building a repeatable sales
-              system that converts trials and grows ARR.
+              {v("heroDescription", "SaaS sales has unique challenges \u2014 trials, expansion revenue, churn risk, product-led vs. sales-led growth. Here\u2019s the exact process for building a repeatable sales system that converts trials and grows ARR.")}
             </motion.p>
             <motion.div
               variants={itemVariants}
@@ -276,14 +278,10 @@ export default function SaaSSalesProcessPage() {
             </motion.h2>
             <motion.div variants={itemVariants} className="space-y-4 text-lg text-neutral-600">
               <p>
-                I&apos;m Louie Bernstein — I have 50 years in business experience, including 22 as
-                a bootstrapped founder. My Fractional Sales Leadership business has been helping
-                founders since 2017.
+                {v("aboutBio1", "I\u2019m Louie Bernstein \u2014 I have 50 years in business experience, including 22 as a bootstrapped founder. My Fractional Sales Leadership business has been helping founders since 2017.")}
               </p>
               <p>
-                I don&apos;t consult from a distance. I get embedded in your business — running
-                Sales Audits, building Sales Playbooks, managing teams, and building the systems
-                that let founders step out of the daily sales grind.
+                {v("aboutBio2", "I don\u2019t consult from a distance. I get embedded in your business \u2014 running Sales Audits, building Sales Playbooks, managing teams, and building the systems that let founders step out of the daily sales grind.")}
               </p>
             </motion.div>
             <motion.div variants={itemVariants} className="mt-8 border-l-4 border-[#0966c2] pl-6">
@@ -325,7 +323,7 @@ export default function SaaSSalesProcessPage() {
               Frequently Asked Questions
             </motion.h2>
             <div className="space-y-6">
-              {faqs.map((faq, i) => (
+              {cmsfaqs(5, faqs).map((faq, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
@@ -370,14 +368,13 @@ export default function SaaSSalesProcessPage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Ready to Build a SaaS Sales Process That Actually Works?
+              {v("ctaHeadline", "Ready to Build a SaaS Sales Process That Actually Works?")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              Let&apos;s spend 30 minutes together. We&apos;ll look at your current sales motion
-              and figure out the highest-leverage place to start.
+              {v("ctaDescription", "Let\u2019s spend 30 minutes together. We\u2019ll look at your current sales motion and figure out the highest-leverage place to start.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

@@ -4,6 +4,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeroBackground } from "@/components/ui/HeroBackground";
 import { CheckCircle, AlertTriangle } from "lucide-react";
+import { useCmsSection } from "@/lib/useCmsSection";
+
+const CMS_SECTION = "seoReplaceFounderSales";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
 
@@ -128,6 +131,7 @@ const schemaData = {
 };
 
 export default function HowToReplaceFounderLedSalesPage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION);
   return (
     <>
       <script
@@ -154,16 +158,14 @@ export default function HowToReplaceFounderLedSalesPage() {
               variants={itemVariants}
               className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
-              How to Replace Founder-Led Sales
-              <span className="block text-[#0966c2]">Without Losing Momentum</span>
+              {v("heroLine1", "How to Replace Founder-Led Sales")}
+              <span className="block text-[#0966c2]">{v("heroAccent", "Without Losing Momentum")}</span>
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
-              You built a $1M+ business by being your company&apos;s best salesperson. Now
-              it&apos;s time to build the system that lets someone else do it. Here&apos;s the exact
-              framework — in the right order.
+              {v("heroDescription", "You built a $1M+ business by being your company\u2019s best salesperson. Now it\u2019s time to build the system that lets someone else do it. Here\u2019s the exact framework \u2014 in the right order.")}
             </motion.p>
             <motion.div
               variants={itemVariants}
@@ -305,15 +307,10 @@ export default function HowToReplaceFounderLedSalesPage() {
               About Louie Bernstein
             </motion.h2>
             <motion.p variants={itemVariants} className="mb-4 text-lg text-neutral-600">
-              I&apos;m Louie Bernstein — 72 years old, 50 years in business, 9 years as a
-              Fractional Sales Executive. I&apos;ve helped dozens of founders with $1M–$10M ARR
-              make exactly this transition — replacing founder-led sales with a system that scales.
+              {v("aboutBio1", "I\u2019m Louie Bernstein \u2014 72 years old, 50 years in business, 9 years as a Fractional Sales Executive. I\u2019ve helped dozens of founders with $1M\u2013$10M ARR make exactly this transition \u2014 replacing founder-led sales with a system that scales.")}
             </motion.p>
             <motion.p variants={itemVariants} className="mb-6 text-lg text-neutral-600">
-              I also have a free YouTube series — &ldquo;The Founder&apos;s and CEO&apos;s Sales
-              System&rdquo; — that walks through how to build this yourself if you prefer the DIY
-              route. If you want it done faster with someone embedded in the work, that&apos;s where
-              I come in.
+              {v("aboutBio2", "I also have a free YouTube series \u2014 \u201cThe Founder\u2019s and CEO\u2019s Sales System\u201d \u2014 that walks through how to build this yourself if you prefer the DIY route. If you want it done faster with someone embedded in the work, that\u2019s where I come in.")}
             </motion.p>
             <motion.div variants={itemVariants} className="border-l-4 border-[#0966c2] pl-6">
               <p className="text-lg italic text-neutral-600">
@@ -351,7 +348,7 @@ export default function HowToReplaceFounderLedSalesPage() {
               Common Questions
             </motion.h2>
             <div className="space-y-6">
-              {faqs.map((faq, i) => (
+              {cmsfaqs(4, faqs).map((faq, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
@@ -388,14 +385,13 @@ export default function HowToReplaceFounderLedSalesPage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Ready to Build the System That Replaces You?
+              {v("ctaHeadline", "Ready to Build the System That Replaces You?")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              Book a 30-minute working session. We&apos;ll look at where your sales are stuck and
-              figure out the right first step for your specific situation.
+              {v("ctaDescription", "Book a 30-minute working session. We\u2019ll look at where your sales are stuck and figure out the right first step for your specific situation.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

@@ -4,6 +4,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeroBackground } from "@/components/ui/HeroBackground";
 import { ArrowRight } from "lucide-react";
+import { useCmsSection } from "@/lib/useCmsSection";
+
+const CMS_SECTION = "seoSalesTeamQuota";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
 
@@ -102,6 +105,7 @@ const schemaData = {
 };
 
 export default function WhySalesTeamPage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION);
   return (
     <>
       <script
@@ -128,15 +132,14 @@ export default function WhySalesTeamPage() {
               variants={itemVariants}
               className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
-              Why Your Sales Team Isn&apos;t Hitting Quota
-              <span className="block text-[#0966c2]">And How to Fix It</span>
+              {v("heroLine1", "Why Your Sales Team Isn\u2019t Hitting Quota")}
+              <span className="block text-[#0966c2]">{v("heroAccent", "And How to Fix It")}</span>
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
-              It&apos;s almost never the salespeople. Here are the 7 real reasons sales teams miss
-              quota — and the specific fix for each one.
+              {v("heroDescription", "It\u2019s almost never the salespeople. Here are the 7 real reasons sales teams miss quota \u2014 and the specific fix for each one.")}
             </motion.p>
             <motion.div
               variants={itemVariants}
@@ -286,7 +289,7 @@ export default function WhySalesTeamPage() {
               Common Questions
             </motion.h2>
             <div className="space-y-6">
-              {faqs.map((faq, i) => (
+              {cmsfaqs(4, faqs).map((faq, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
@@ -331,14 +334,13 @@ export default function WhySalesTeamPage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Let&apos;s Figure Out Why Your Team Is Missing Quota
+              {v("ctaHeadline", "Let\u2019s Figure Out Why Your Team Is Missing Quota")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              30 minutes. We&apos;ll diagnose the specific issues in your sales system and identify
-              the highest-leverage fix.
+              {v("ctaDescription", "30 minutes. We\u2019ll diagnose the specific issues in your sales system and identify the highest-leverage fix.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

@@ -4,8 +4,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeroBackground } from "@/components/ui/HeroBackground";
 import { Check } from "lucide-react";
+import { useCmsSection } from "@/lib/useCmsSection";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
+
+const CMS_SECTION = "seoVpVsCro";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -123,6 +126,8 @@ const schemaData = {
 };
 
 export default function VpSalesVsCroPage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION)
+  const displayFaqs = cmsfaqs(5, faqs)
   return (
     <>
       <script
@@ -149,16 +154,14 @@ export default function VpSalesVsCroPage() {
               variants={itemVariants}
               className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
-              VP of Sales vs. CRO:
-              <span className="block text-[#0966c2]">What&apos;s the Difference?</span>
+              {v("heroLine1", "VP of Sales vs. CRO:")}
+              <span className="block text-[#0966c2]">{v("heroAccent", "What\u2019s the Difference?")}</span>
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
-              These titles get used interchangeably at startups — but they&apos;re different roles
-              that solve different problems. Hiring the wrong one at the wrong stage is a
-              $200k–$300k mistake.
+              {v("heroDescription", "These titles get used interchangeably at startups \u2014 but they\u2019re different roles that solve different problems. Hiring the wrong one at the wrong stage is a $200k\u2013$300k mistake.")}
             </motion.p>
             <motion.div
               variants={itemVariants}
@@ -321,9 +324,7 @@ export default function VpSalesVsCroPage() {
               Who I Am
             </motion.h2>
             <motion.p variants={itemVariants} className="text-neutral-600">
-              I&apos;m Louie Bernstein — I have 50 years in business experience, including 22 as a
-              bootstrapped founder. My Fractional Sales Leadership business has been helping founders
-              since 2017.
+              {v("aboutBio1", "I\u2019m Louie Bernstein \u2014 I have 50 years in business experience, including 22 as a bootstrapped founder. My Fractional Sales Leadership business has been helping founders since 2017.")}
             </motion.p>
           </motion.div>
         </div>
@@ -345,7 +346,7 @@ export default function VpSalesVsCroPage() {
               Frequently Asked Questions
             </motion.h2>
             <div className="space-y-6">
-              {faqs.map((faq, i) => (
+              {displayFaqs.map((faq, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
@@ -382,15 +383,13 @@ export default function VpSalesVsCroPage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Not Sure Which Role You Need?
+              {v("ctaHeadline", "Not Sure Which Role You Need?")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              Let&apos;s spend 30 minutes together. We&apos;ll look at your revenue org, your stage,
-              and what you actually need — and I&apos;ll give you a straight answer on whether VP of
-              Sales, CRO, or fractional leadership is the right move.
+              {v("ctaDescription", "Let\u2019s spend 30 minutes together. We\u2019ll look at your revenue org, your stage, and what you actually need \u2014 and I\u2019ll give you a straight answer on whether VP of Sales, CRO, or fractional leadership is the right move.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

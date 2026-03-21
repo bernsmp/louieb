@@ -4,6 +4,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeroBackground } from "@/components/ui/HeroBackground";
 import { AlertCircle, Check } from "lucide-react";
+import { useCmsSection } from "@/lib/useCmsSection";
+
+const CMS_SECTION = "seoSalesRepsFail";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
 
@@ -104,6 +107,7 @@ const schemaData = {
 };
 
 export default function WhySalesRepsFailPage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION);
   return (
     <>
       <script
@@ -130,15 +134,14 @@ export default function WhySalesRepsFailPage() {
               variants={itemVariants}
               className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
-              Why Sales Reps Fail
-              <span className="block text-[#0966c2]">in Startups</span>
+              {v("heroLine1", "Why Sales Reps Fail")}
+              <span className="block text-[#0966c2]">{v("heroAccent", "in Startups")}</span>
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
-              Most startup sales reps fail in the first 90 days. The reasons are almost never what
-              founders think. Here are the 6 real causes — and the specific fix for each one.
+              {v("heroDescription", "Most startup sales reps fail in the first 90 days. The reasons are almost never what founders think. Here are the 6 real causes \u2014 and the specific fix for each one.")}
             </motion.p>
             <motion.div
               variants={itemVariants}
@@ -251,7 +254,7 @@ export default function WhySalesRepsFailPage() {
               Common Questions
             </motion.h2>
             <div className="space-y-6">
-              {faqs.map((faq, i) => (
+              {cmsfaqs(4, faqs).map((faq, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
@@ -296,14 +299,13 @@ export default function WhySalesRepsFailPage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Let&apos;s Look at Why Your Reps Are Failing
+              {v("ctaHeadline", "Let\u2019s Look at Why Your Reps Are Failing")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              30 minutes. We&apos;ll diagnose what&apos;s actually happening in your sales
-              environment and identify what needs to be built before you hire again.
+              {v("ctaDescription", "30 minutes. We\u2019ll diagnose what\u2019s actually happening in your sales environment and identify what needs to be built before you hire again.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

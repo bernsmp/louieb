@@ -4,6 +4,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeroBackground } from "@/components/ui/HeroBackground";
 import { Check, X, DollarSign, Clock, TrendingDown, AlertCircle } from "lucide-react";
+import { useCmsSection } from "@/lib/useCmsSection";
+
+const CMS_SECTION = "seoCROPricing";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
 
@@ -109,6 +112,8 @@ const schemaData = {
 };
 
 export default function FractionalCROPricingPage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION);
+  const faqsData = cmsfaqs(5, faqs);
   return (
     <>
       <script
@@ -135,16 +140,14 @@ export default function FractionalCROPricingPage() {
               variants={itemVariants}
               className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
-              Fractional CRO Pricing:
-              <span className="block text-[#0966c2]">Real Numbers. No Surprises.</span>
+              {v("heroLine1", "Fractional CRO Pricing:")}
+              <span className="block text-[#0966c2]">{v("heroAccent", "Real Numbers. No Surprises.")}</span>
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
-              A full-time VP of Sales costs $400,000–$500,000 all-in per year. A Fractional CRO
-              costs $6,000–$14,000 per month. Same strategic leadership. 60–80% less cost. Here
-              are the real numbers.
+              {v("heroDescription", "A full-time VP of Sales costs $400,000\u2013$500,000 all-in per year. A Fractional CRO costs $6,000\u2013$14,000 per month. Same strategic leadership. 60\u201380% less cost. Here are the real numbers.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link
@@ -344,7 +347,7 @@ export default function FractionalCROPricingPage() {
               Pricing Questions
             </motion.h2>
             <div className="space-y-6">
-              {faqs.map((faq, i) => (
+              {faqsData.map((faq, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
@@ -388,14 +391,13 @@ export default function FractionalCROPricingPage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Let&apos;s Talk About Your Specific Situation
+              {v("ctaHeadline", "Let\u2019s Talk About Your Specific Situation")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              30 minutes. We&apos;ll look at your sales situation and figure out what the right
-              scope and investment looks like for your business.
+              {v("ctaDescription", "30 minutes. We\u2019ll look at your sales situation and figure out what the right scope and investment looks like for your business.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

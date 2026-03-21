@@ -4,6 +4,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeroBackground } from "@/components/ui/HeroBackground";
 import { Check, AlertCircle, Search, Wrench } from "lucide-react";
+import { useCmsSection } from "@/lib/useCmsSection";
+
+const CMS_SECTION = "seoSalesTeamNotHittingQuota";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
 
@@ -114,6 +117,7 @@ const schemaData = {
 };
 
 export default function SalesTeamNotHittingQuotaPage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION);
   return (
     <>
       <script
@@ -140,15 +144,14 @@ export default function SalesTeamNotHittingQuotaPage() {
               variants={itemVariants}
               className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
-              Your Sales Team Isn&apos;t Hitting Quota.
-              <span className="block text-[#0966c2]">Here&apos;s How to Diagnose It.</span>
+              {v("heroLine1", "Your Sales Team Isn\u2019t Hitting Quota.")}
+              <span className="block text-[#0966c2]">{v("heroAccent", "Here\u2019s How to Diagnose It.")}</span>
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
-              Before you fire your reps or set new targets, answer five questions. The answers will
-              tell you exactly what&apos;s broken — and what to fix first.
+              {v("heroDescription", "Before you fire your reps or set new targets, answer five questions. The answers will tell you exactly what\u2019s broken \u2014 and what to fix first.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link
@@ -281,7 +284,7 @@ export default function SalesTeamNotHittingQuotaPage() {
               Common Questions
             </motion.h2>
             <div className="space-y-6">
-              {faqs.map((faq, i) => (
+              {cmsfaqs(4, faqs).map((faq, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
@@ -326,14 +329,13 @@ export default function SalesTeamNotHittingQuotaPage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Let&apos;s Diagnose Your Specific Quota Problem
+              {v("ctaHeadline", "Let\u2019s Diagnose Your Specific Quota Problem")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              30 minutes. We&apos;ll work through the diagnostic together and identify the root
-              cause — so you&apos;re fixing the right thing, not just the most obvious thing.
+              {v("ctaDescription", "30 minutes. We\u2019ll work through the diagnostic together and identify the root cause \u2014 so you\u2019re fixing the right thing, not just the most obvious thing.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

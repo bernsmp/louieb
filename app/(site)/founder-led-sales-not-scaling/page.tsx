@@ -4,8 +4,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeroBackground } from "@/components/ui/HeroBackground";
 import { AlertTriangle, CheckCircle, TrendingDown } from "lucide-react";
+import { useCmsSection } from "@/lib/useCmsSection";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
+
+const CMS_SECTION = "seoFounderSalesNotScaling";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -67,7 +70,7 @@ const fixes = [
   },
 ];
 
-const faqs = [
+const defaultFaqs = [
   {
     q: "How do I know if founder-led sales is the actual problem vs. something else?",
     a: "Run a Sales Audit. Most of the time, the root cause isn't the founder or the reps — it's the absence of infrastructure. No Sales Playbook means every rep invents their own approach. No pipeline architecture means the forecast is fiction. The audit tells you exactly where to look.",
@@ -91,7 +94,7 @@ const schemaData = {
   "@graph": [
     {
       "@type": "FAQPage",
-      mainEntity: faqs.map((faq) => ({
+      mainEntity: defaultFaqs.map((faq) => ({
         "@type": "Question",
         name: faq.q,
         acceptedAnswer: { "@type": "Answer", text: faq.a },
@@ -110,6 +113,8 @@ const schemaData = {
 };
 
 export default function FounderLedSalesNotScalingPage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION);
+  const faqs = cmsfaqs(4, defaultFaqs);
   return (
     <>
       <script
@@ -136,17 +141,15 @@ export default function FounderLedSalesNotScalingPage() {
               variants={itemVariants}
               className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
-              Founder-Led Sales
-              <span className="block text-[#0966c2]">Isn&apos;t Scaling.</span>
-              Here&apos;s Why — and What to Do.
+              {v("heroLine1", "Founder-Led Sales")}
+              <span className="block text-[#0966c2]">{v("heroAccent", "Isn't Scaling.")}</span>
+              {v("heroLine3", "Here's Why — and What to Do.")}
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
-              You&apos;re still the best salesperson in your company. That was an asset at $500k ARR.
-              At $2M ARR, it&apos;s the ceiling. Here&apos;s the exact process for replacing yourself
-              — without losing momentum.
+              {v("heroDescription", "You're still the best salesperson in your company. That was an asset at $500k ARR. At $2M ARR, it's the ceiling. Here's the exact process for replacing yourself — without losing momentum.")}
             </motion.p>
             <motion.div
               variants={itemVariants}
@@ -301,15 +304,10 @@ export default function FounderLedSalesNotScalingPage() {
             </motion.h2>
             <motion.div variants={itemVariants} className="space-y-4 text-lg text-neutral-600">
               <p>
-                I&apos;m Louie Bernstein — I have 50 years in business experience, including 22 as
-                a bootstrapped founder. My Fractional Sales Leadership business has been helping
-                founders since 2017.
+                {v("aboutBio1", "I'm Louie Bernstein — I have 50 years in business experience, including 22 as a bootstrapped founder. My Fractional Sales Leadership business has been helping founders since 2017.")}
               </p>
               <p>
-                I understand founder-led sales from both sides of the table — having lived it for
-                over two decades, and now having helped dozens of founders make the transition out
-                of it. I don&apos;t consult from a distance. I get embedded, build the system, and
-                stay until it works.
+                {v("aboutBio2", "I understand founder-led sales from both sides of the table — having lived it for over two decades, and now having helped dozens of founders make the transition out of it. I don't consult from a distance. I get embedded, build the system, and stay until it works.")}
               </p>
             </motion.div>
             <motion.div variants={itemVariants} className="mt-8 border-l-4 border-[#0966c2] pl-6">
@@ -393,14 +391,13 @@ export default function FounderLedSalesNotScalingPage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Ready to Stop Being Your Company&apos;s Only Salesperson?
+              {v("ctaHeadline", "Ready to Stop Being Your Company's Only Salesperson?")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              Book a 30-minute working session. We&apos;ll look at where your sales are stuck and
-              map out the right path forward for your specific situation.
+              {v("ctaDescription", "Book a 30-minute working session. We'll look at where your sales are stuck and map out the right path forward for your specific situation.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

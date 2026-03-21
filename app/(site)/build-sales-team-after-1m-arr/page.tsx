@@ -4,8 +4,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeroBackground } from "@/components/ui/HeroBackground";
 import { Check, AlertTriangle, Users } from "lucide-react";
+import { useCmsSection } from "@/lib/useCmsSection";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
+
+const CMS_SECTION = "seoBuildSalesTeam1mArr";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -114,6 +117,8 @@ const schemaData = {
 };
 
 export default function BuildSalesTeamAfter1mArrPage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION)
+  const displayFaqs = cmsfaqs(5, faqs)
   return (
     <>
       <script
@@ -140,16 +145,14 @@ export default function BuildSalesTeamAfter1mArrPage() {
               variants={itemVariants}
               className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
-              How to Build a Sales Team
-              <span className="block text-[#0966c2]">After $1M ARR</span>
+              {v("heroLine1", "How to Build a Sales Team")}
+              <span className="block text-[#0966c2]">{v("heroAccent", "After $1M ARR")}</span>
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
-              Hitting $1M is proof of concept. Building a team to get to $5M is a completely
-              different challenge — and most founders approach it wrong. Here&apos;s what to build
-              first, who to hire, and how to make the transition without losing momentum.
+              {v("heroDescription", "Hitting $1M is proof of concept. Building a team to get to $5M is a completely different challenge \u2014 and most founders approach it wrong. Here\u2019s what to build first, who to hire, and how to make the transition without losing momentum.")}
             </motion.p>
             <motion.div
               variants={itemVariants}
@@ -268,15 +271,10 @@ export default function BuildSalesTeamAfter1mArrPage() {
             </motion.div>
             <motion.div variants={itemVariants} className="space-y-4 text-neutral-700">
               <p>
-                I&apos;m Louie Bernstein — I have 50 years in business experience, including 22 as
-                a bootstrapped founder. My Fractional Sales Leadership business has been helping
-                founders since 2017.
+                {v("aboutBio1", "I\u2019m Louie Bernstein \u2014 I have 50 years in business experience, including 22 as a bootstrapped founder. My Fractional Sales Leadership business has been helping founders since 2017.")}
               </p>
               <p>
-                I made every mistake on this list in my own businesses. I hired too fast. I hired
-                too senior. I handed off relationships before the rep was ready. I watched good
-                people fail because the system wasn&apos;t there to support them. That experience —
-                plus 9 years of helping other founders — is what I bring to this work.
+                {v("aboutBio2", "I made every mistake on this list in my own businesses. I hired too fast. I hired too senior. I handed off relationships before the rep was ready. I watched good people fail because the system wasn\u2019t there to support them. That experience \u2014 plus 9 years of helping other founders \u2014 is what I bring to this work.")}
               </p>
             </motion.div>
           </motion.div>
@@ -299,7 +297,7 @@ export default function BuildSalesTeamAfter1mArrPage() {
               Frequently Asked Questions
             </motion.h2>
             <div className="space-y-6">
-              {faqs.map((faq, i) => (
+              {displayFaqs.map((faq, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
@@ -344,15 +342,13 @@ export default function BuildSalesTeamAfter1mArrPage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Ready to Build Your Sales Team the Right Way?
+              {v("ctaHeadline", "Ready to Build Your Sales Team the Right Way?")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              Let&apos;s spend 30 minutes together. We&apos;ll look at where your sales system is
-              today, what needs to be built before you hire, and what the right first hire looks
-              like for your business.
+              {v("ctaDescription", "Let\u2019s spend 30 minutes together. We\u2019ll look at where your sales system is today, what needs to be built before you hire, and what the right first hire looks like for your business.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

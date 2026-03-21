@@ -4,6 +4,9 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { HeroBackground } from '@/components/ui/HeroBackground'
 import { Check } from 'lucide-react'
+import { useCmsSection } from '@/lib/useCmsSection'
+
+const CMS_SECTION = 'seoCostFractionalVp'
 
 const CALENDLY = 'https://calendly.com/louiebernstein/30minutes?month=2026-03'
 
@@ -92,6 +95,8 @@ const schemaData = {
 }
 
 export default function CostOfFractionalVpSalesPage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION)
+  const faqsData = cmsfaqs(5, faqs)
   return (
     <>
       <script
@@ -118,15 +123,14 @@ export default function CostOfFractionalVpSalesPage() {
                 variants={itemVariants}
                 className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
               >
-                What Does a
-                <span className="block text-blue-400">Fractional VP of Sales Cost?</span>
+                {v('heroLine1', 'What Does a')}
+                <span className="block text-blue-400">{v('heroAccent', 'Fractional VP of Sales Cost?')}</span>
               </motion.h1>
               <motion.p
                 variants={itemVariants}
                 className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
               >
-                The short answer: $6,000–$14,000/month. Here&apos;s what drives that range, what&apos;s
-                included, and how it stacks up against the full-time alternative.
+                {v('heroDescription', 'The short answer: $6,000\u2013$14,000/month. Here\u2019s what drives that range, what\u2019s included, and how it stacks up against the full-time alternative.')}
               </motion.p>
               <motion.div
                 variants={itemVariants}
@@ -257,14 +261,10 @@ export default function CostOfFractionalVpSalesPage() {
               About Louie Bernstein
             </motion.h2>
             <motion.p variants={itemVariants} className="mb-3 text-neutral-700">
-              I&apos;m Louie Bernstein — I have 50 years in business experience, including 22 as a
-              bootstrapped founder. My Fractional Sales Leadership business has been helping
-              founders since 2017.
+              {v('aboutBio1', 'I\u2019m Louie Bernstein \u2014 I have 50 years in business experience, including 22 as a bootstrapped founder. My Fractional Sales Leadership business has been helping founders since 2017.')}
             </motion.p>
             <motion.p variants={itemVariants} className="text-neutral-700">
-              I work with founders at $1M–$15M ARR who need real sales leadership without the full-time
-              VP cost. No equity, no ramp time, no severance. Just a senior leader who&apos;s been in
-              the seat before and knows how to build what you need.
+              {v('aboutBio2', 'I work with founders at $1M\u2013$15M ARR who need real sales leadership without the full-time VP cost. No equity, no ramp time, no severance. Just a senior leader who\u2019s been in the seat before and knows how to build what you need.')}
             </motion.p>
           </motion.div>
         </div>
@@ -286,7 +286,7 @@ export default function CostOfFractionalVpSalesPage() {
               Frequently Asked Questions
             </motion.h2>
             <div className="space-y-6">
-              {faqs.map((faq, i) => (
+              {faqsData.map((faq, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
@@ -314,14 +314,13 @@ export default function CostOfFractionalVpSalesPage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Want to Talk Through the Numbers?
+              {v('ctaHeadline', 'Want to Talk Through the Numbers?')}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              Let&apos;s spend 30 minutes together. I&apos;ll walk you through what an engagement
-              would actually look like for your business and what it would cost.
+              {v('ctaDescription', 'Let\u2019s spend 30 minutes together. I\u2019ll walk you through what an engagement would actually look like for your business and what it would cost.')}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

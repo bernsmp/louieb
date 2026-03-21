@@ -4,8 +4,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeroBackground } from "@/components/ui/HeroBackground";
 import { Check, Users, BookOpen, BarChart3, Target, Zap, Shield } from "lucide-react";
+import { useCmsSection } from "@/lib/useCmsSection";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
+
+const CMS_SECTION = "seoFractionalVP";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -58,7 +61,7 @@ const whoThisIsFor = [
   "You're ready to stop being the bottleneck in your own growth",
 ];
 
-const faqs = [
+const defaultFaqs = [
   {
     q: "What exactly is a Fractional VP of Sales?",
     a: "A Fractional VP of Sales is an experienced sales leader who works with your company part-time — typically 2–3 days per week — embedded in your business rather than advising from the outside. They build your sales system, manage your team, run pipeline reviews, and own the sales function so the founder doesn't have to.",
@@ -86,7 +89,7 @@ const schemaData = {
   "@graph": [
     {
       "@type": "FAQPage",
-      mainEntity: faqs.map((faq) => ({
+      mainEntity: defaultFaqs.map((faq) => ({
         "@type": "Question",
         name: faq.q,
         acceptedAnswer: { "@type": "Answer", text: faq.a },
@@ -110,6 +113,8 @@ const schemaData = {
 };
 
 export default function FractionalVPPage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION);
+  const faqs = cmsfaqs(5, defaultFaqs);
   return (
     <>
       <script
@@ -136,17 +141,15 @@ export default function FractionalVPPage() {
               variants={itemVariants}
               className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
-              Your Small Business Deserves
-              <span className="block text-[#0966c2]">Enterprise-Grade Sales Leadership.</span>
-              Without the Enterprise Price Tag.
+              {v("heroLine1", "Your Small Business Deserves")}
+              <span className="block text-[#0966c2]">{v("heroAccent", "Enterprise-Grade Sales Leadership.")}</span>
+              {v("heroLine3", "Without the Enterprise Price Tag.")}
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
-              A Fractional VP of Sales gives small businesses the system, the team management, and
-              the predictable pipeline that only large companies used to afford — at 60–80% less
-              than a full-time hire.
+              {v("heroDescription", "A Fractional VP of Sales gives small businesses the system, the team management, and the predictable pipeline that only large companies used to afford — at 60–80% less than a full-time hire.")}
             </motion.p>
             <motion.div
               variants={itemVariants}
@@ -350,14 +353,13 @@ export default function FractionalVPPage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Let&apos;s Talk About Your Sales Situation
+              {v("ctaHeadline", "Let's Talk About Your Sales Situation")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              30 minutes. No pitch, no pressure. Just a real conversation about whether a Fractional
-              VP of Sales is the right move for your small business.
+              {v("ctaDescription", "30 minutes. No pitch, no pressure. Just a real conversation about whether a Fractional VP of Sales is the right move for your small business.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

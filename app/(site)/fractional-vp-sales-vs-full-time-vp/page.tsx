@@ -4,8 +4,11 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { HeroBackground } from '@/components/ui/HeroBackground'
 import { Check, X } from 'lucide-react'
+import { useCmsSection } from '@/lib/useCmsSection'
 
 const CALENDLY = 'https://calendly.com/louiebernstein/30minutes?month=2026-03'
+
+const CMS_SECTION = 'seoVpSalesVsFullTime'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -96,6 +99,8 @@ const schemaData = {
 }
 
 export default function FractionalVpSalesVsFullTimePage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION)
+  const displayFaqs = cmsfaqs(4, faqs)
   return (
     <>
       <script
@@ -122,15 +127,14 @@ export default function FractionalVpSalesVsFullTimePage() {
                 variants={itemVariants}
                 className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
               >
-                Fractional VP of Sales
-                <span className="block text-blue-400">vs. Full-Time VP</span>
+                {v('heroLine1', 'Fractional VP of Sales')}
+                <span className="block text-blue-400">{v('heroAccent', 'vs. Full-Time VP')}</span>
               </motion.h1>
               <motion.p
                 variants={itemVariants}
                 className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
               >
-                The question isn&apos;t which is better. It&apos;s which is right for where you are now.
-                At $1M–$10M ARR, the answer is almost always fractional — and here&apos;s why.
+                {v('heroDescription', "The question isn\u2019t which is better. It\u2019s which is right for where you are now. At $1M\u2013$10M ARR, the answer is almost always fractional \u2014 and here\u2019s why.")}
               </motion.p>
               <motion.div
                 variants={itemVariants}
@@ -268,14 +272,10 @@ export default function FractionalVpSalesVsFullTimePage() {
               About Louie Bernstein
             </motion.h2>
             <motion.p variants={itemVariants} className="mb-3 text-neutral-700">
-              I&apos;m Louie Bernstein — I have 50 years in business experience, including 22 as a
-              bootstrapped founder. My Fractional Sales Leadership business has been helping
-              founders since 2017.
+              {v('aboutBio1', "I\u2019m Louie Bernstein \u2014 I have 50 years in business experience, including 22 as a bootstrapped founder. My Fractional Sales Leadership business has been helping founders since 2017.")}
             </motion.p>
             <motion.p variants={itemVariants} className="text-neutral-700">
-              I work with founders at $1M–$15M ARR who need real sales leadership but aren&apos;t ready
-              for a full-time VP. I&apos;ve lived both sides of this — as a founder who built and sold
-              without a VP, and as the fractional leader who comes in and builds what was missing.
+              {v('aboutBio2', "I work with founders at $1M\u2013$15M ARR who need real sales leadership but aren\u2019t ready for a full-time VP. I\u2019ve lived both sides of this \u2014 as a founder who built and sold without a VP, and as the fractional leader who comes in and builds what was missing.")}
             </motion.p>
           </motion.div>
         </div>
@@ -297,7 +297,7 @@ export default function FractionalVpSalesVsFullTimePage() {
               Frequently Asked Questions
             </motion.h2>
             <div className="space-y-6">
-              {faqs.map((faq, i) => (
+              {displayFaqs.map((faq, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
@@ -325,14 +325,13 @@ export default function FractionalVpSalesVsFullTimePage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Not Sure Which Is Right for You?
+              {v('ctaHeadline', 'Not Sure Which Is Right for You?')}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              Let&apos;s spend 30 minutes together. I&apos;ll tell you honestly whether you need
-              fractional leadership or a full-time hire — and what to build before you do either.
+              {v('ctaDescription', "Let\u2019s spend 30 minutes together. I\u2019ll tell you honestly whether you need fractional leadership or a full-time hire \u2014 and what to build before you do either.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

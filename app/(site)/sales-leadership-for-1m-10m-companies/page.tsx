@@ -4,8 +4,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeroBackground } from "@/components/ui/HeroBackground";
 import { Check, TrendingUp, AlertCircle } from "lucide-react";
+import { useCmsSection } from "@/lib/useCmsSection";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
+
+const CMS_SECTION = "seoSalesLeadership1m10m";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -123,6 +126,8 @@ const schemaData = {
 };
 
 export default function SalesLeadership1m10mPage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION)
+  const displayFaqs = cmsfaqs(5, faqs)
   return (
     <>
       <script
@@ -149,17 +154,14 @@ export default function SalesLeadership1m10mPage() {
               variants={itemVariants}
               className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
-              Sales Leadership Built for
-              <span className="block text-[#0966c2]">$1M–$10M Companies</span>
+              {v("heroLine1", "Sales Leadership Built for")}
+              <span className="block text-[#0966c2]">{v("heroAccent", "$1M\u2013$10M Companies")}</span>
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
-              The $1M–$10M stage is where most sales systems break. You&apos;ve outgrown
-              founder-led sales but you&apos;re not big enough for a $250k VP. I install the
-              systems, coach the team, and build the infrastructure that gets you to $10M and
-              beyond.
+              {v("heroDescription", "The $1M\u2013$10M stage is where most sales systems break. You\u2019ve outgrown founder-led sales but you\u2019re not big enough for a $250k VP. I install the systems, coach the team, and build the infrastructure that gets you to $10M and beyond.")}
             </motion.p>
             <motion.div
               variants={itemVariants}
@@ -276,15 +278,10 @@ export default function SalesLeadership1m10mPage() {
             </motion.h2>
             <motion.div variants={itemVariants} className="space-y-4 text-neutral-700">
               <p>
-                I&apos;m Louie Bernstein — I have 50 years in business experience, including 22 as
-                a bootstrapped founder. My Fractional Sales Leadership business has been helping
-                founders since 2017.
+                {v("aboutBio1", "I\u2019m Louie Bernstein \u2014 I have 50 years in business experience, including 22 as a bootstrapped founder. My Fractional Sales Leadership business has been helping founders since 2017.")}
               </p>
               <p>
-                I&apos;ve been in the $1M–$10M trench myself. I know what it feels like to have
-                hired the wrong rep, to have watched deals die for reasons you can&apos;t diagnose,
-                and to have a pipeline full of numbers that don&apos;t mean anything. I built my
-                way out of those problems — and now I help founders do the same thing, faster.
+                {v("aboutBio2", "I\u2019ve been in the $1M\u2013$10M trench myself. I know what it feels like to have hired the wrong rep, to have watched deals die for reasons you can\u2019t diagnose, and to have a pipeline full of numbers that don\u2019t mean anything. I built my way out of those problems \u2014 and now I help founders do the same thing, faster.")}
               </p>
               <p>
                 Most of my competitors have advice. I have scar tissue.
@@ -324,7 +321,7 @@ export default function SalesLeadership1m10mPage() {
               Frequently Asked Questions
             </motion.h2>
             <div className="space-y-6">
-              {faqs.map((faq, i) => (
+              {displayFaqs.map((faq, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
@@ -369,15 +366,13 @@ export default function SalesLeadership1m10mPage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Ready to Build a Sales System That Scales?
+              {v("ctaHeadline", "Ready to Build a Sales System That Scales?")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              Let&apos;s spend 30 minutes together. We&apos;ll look at where you are now, what
-              the gaps are, and what a fractional sales leadership engagement would actually do in
-              your business.
+              {v("ctaDescription", "Let\u2019s spend 30 minutes together. We\u2019ll look at where you are now, what the gaps are, and what a fractional sales leadership engagement would actually do in your business.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

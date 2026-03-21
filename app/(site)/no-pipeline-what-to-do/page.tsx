@@ -4,8 +4,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeroBackground } from "@/components/ui/HeroBackground";
 import { AlertTriangle, CheckCircle, Clock } from "lucide-react";
+import { useCmsSection } from "@/lib/useCmsSection";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
+
+const CMS_SECTION = "seoNoPipeline";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -67,7 +70,7 @@ const immediateSteps = [
   },
 ];
 
-const faqs = [
+const defaultFaqs = [
   {
     q: "How long does it take to rebuild pipeline from zero?",
     a: "If you're starting from scratch with cold outbound, expect 60–90 days before you see meaningful new pipeline with qualified buyers. That's the reality of sales cycles. The faster path in the short term is re-engaging warm relationships — past customers, dormant leads, referral sources. Both need to run simultaneously.",
@@ -91,7 +94,7 @@ const schemaData = {
   "@graph": [
     {
       "@type": "FAQPage",
-      mainEntity: faqs.map((faq) => ({
+      mainEntity: defaultFaqs.map((faq) => ({
         "@type": "Question",
         name: faq.q,
         acceptedAnswer: { "@type": "Answer", text: faq.a },
@@ -110,6 +113,8 @@ const schemaData = {
 };
 
 export default function NoPipelinePage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION);
+  const faqs = cmsfaqs(4, defaultFaqs);
   return (
     <>
       <script
@@ -136,16 +141,14 @@ export default function NoPipelinePage() {
               variants={itemVariants}
               className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
-              No Pipeline.
-              <span className="block text-[#0966c2]">What to Do Right Now.</span>
+              {v("heroLine1", "No Pipeline.")}
+              <span className="block text-[#0966c2]">{v("heroAccent", "What to Do Right Now.")}</span>
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
-              An empty pipeline today means no revenue in 60–90 days. Here&apos;s why it happened,
-              what to do this week, and how to build a prospecting engine that keeps the pipeline
-              full.
+              {v("heroDescription", "An empty pipeline today means no revenue in 60–90 days. Here's why it happened, what to do this week, and how to build a prospecting engine that keeps the pipeline full.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link
@@ -332,14 +335,13 @@ export default function NoPipelinePage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Let&apos;s Figure Out What&apos;s Killing Your Pipeline
+              {v("ctaHeadline", "Let's Figure Out What's Killing Your Pipeline")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              30 minutes. We&apos;ll look at your specific situation — why pipeline dried up and
-              what the fastest path to rebuilding it looks like.
+              {v("ctaDescription", "30 minutes. We'll look at your specific situation — why pipeline dried up and what the fastest path to rebuilding it looks like.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

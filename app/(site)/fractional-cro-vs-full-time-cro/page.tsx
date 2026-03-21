@@ -4,6 +4,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeroBackground } from "@/components/ui/HeroBackground";
 import { Check, X } from "lucide-react";
+import { useCmsSection } from "@/lib/useCmsSection";
+
+const CMS_SECTION = "seoCroVsFullTime";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
 
@@ -113,6 +116,8 @@ const schemaData = {
 };
 
 export default function FractionalCroVsFullTimePage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION);
+  const faqsData = cmsfaqs(5, faqs);
   return (
     <>
       <script
@@ -139,16 +144,14 @@ export default function FractionalCroVsFullTimePage() {
               variants={itemVariants}
               className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
-              Fractional CRO vs.
-              <span className="block text-[#0966c2]">Full-Time CRO</span>
+              {v("heroLine1", "Fractional CRO vs.")}
+              <span className="block text-[#0966c2]">{v("heroAccent", "Full-Time CRO")}</span>
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
-              The right answer depends on your ARR, your sales org complexity, and what you actually
-              need right now. Here&apos;s how to think through the decision — and avoid the
-              expensive mistake of hiring wrong.
+              {v("heroDescription", "The right answer depends on your ARR, your sales org complexity, and what you actually need right now. Here\u2019s how to think through the decision \u2014 and avoid the expensive mistake of hiring wrong.")}
             </motion.p>
             <motion.div
               variants={itemVariants}
@@ -301,9 +304,7 @@ export default function FractionalCroVsFullTimePage() {
               Who I Am
             </motion.h2>
             <motion.p variants={itemVariants} className="text-neutral-600">
-              I&apos;m Louie Bernstein — I have 50 years in business experience, including 22 as a
-              bootstrapped founder. My Fractional Sales Leadership business has been helping founders
-              since 2017.
+              {v("aboutBio1", "I\u2019m Louie Bernstein \u2014 I have 50 years in business experience, including 22 as a bootstrapped founder. My Fractional Sales Leadership business has been helping founders since 2017.")}
             </motion.p>
           </motion.div>
         </div>
@@ -325,7 +326,7 @@ export default function FractionalCroVsFullTimePage() {
               Frequently Asked Questions
             </motion.h2>
             <div className="space-y-6">
-              {faqs.map((faq, i) => (
+              {faqsData.map((faq, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
@@ -362,15 +363,13 @@ export default function FractionalCroVsFullTimePage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Not Sure Which Model Fits Your Stage?
+              {v("ctaHeadline", "Not Sure Which Model Fits Your Stage?")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              Let&apos;s spend 30 minutes together. We&apos;ll look at your ARR, your sales org,
-              and what you actually need right now — and I&apos;ll give you a straight answer on
-              whether fractional or full-time is the right next move.
+              {v("ctaDescription", "Let\u2019s spend 30 minutes together. We\u2019ll look at your ARR, your sales org, and what you actually need right now \u2014 and I\u2019ll give you a straight answer on whether fractional or full-time is the right next move.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

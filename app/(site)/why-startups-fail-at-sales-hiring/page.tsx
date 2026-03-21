@@ -4,8 +4,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeroBackground } from "@/components/ui/HeroBackground";
 import { Check, AlertCircle, XCircle } from "lucide-react";
+import { useCmsSection } from "@/lib/useCmsSection";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
+
+const CMS_SECTION = "seoStartupsFailSalesHiring";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -125,6 +128,8 @@ const schemaData = {
 };
 
 export default function WhyStartupsFailAtSalesHiringPage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION)
+  const displayFaqs = cmsfaqs(5, faqs)
   return (
     <>
       <script
@@ -151,16 +156,14 @@ export default function WhyStartupsFailAtSalesHiringPage() {
               variants={itemVariants}
               className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
-              Why Startups Fail
-              <span className="block text-[#0966c2]">at Sales Hiring</span>
+              {v("heroLine1", "Why Startups Fail")}
+              <span className="block text-[#0966c2]">{v("heroAccent", "at Sales Hiring")}</span>
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
-              Most startup sales hires fail within 12 months. The reasons are almost always the
-              same — and almost always preventable. Here are the six root causes, and exactly
-              what to do differently.
+              {v("heroDescription", "Most startup sales hires fail within 12 months. The reasons are almost always the same — and almost always preventable. Here are the six root causes, and exactly what to do differently.")}
             </motion.p>
             <motion.div
               variants={itemVariants}
@@ -279,16 +282,10 @@ export default function WhyStartupsFailAtSalesHiringPage() {
             </motion.h2>
             <motion.div variants={itemVariants} className="space-y-4 text-neutral-700">
               <p>
-                I&apos;m Louie Bernstein — I have 50 years in business experience, including 22 as
-                a bootstrapped founder. My Fractional Sales Leadership business has been helping
-                founders since 2017.
+                {v("aboutBio1", "I\u2019m Louie Bernstein \u2014 I have 50 years in business experience, including 22 as a bootstrapped founder. My Fractional Sales Leadership business has been helping founders since 2017.")}
               </p>
               <p>
-                I&apos;ve made most of these mistakes myself. I hired the impressive resume that
-                couldn&apos;t sell without support. I brought on reps before the system was built.
-                I gave feedback once a quarter and wondered why nothing changed. That experience —
-                plus 9 years of watching founders make the same mistakes — is what I bring to this
-                work.
+                {v("aboutBio2", "I\u2019ve made most of these mistakes myself. I hired the impressive resume that couldn\u2019t sell without support. I brought on reps before the system was built. I gave feedback once a quarter and wondered why nothing changed. That experience \u2014 plus 9 years of watching founders make the same mistakes \u2014 is what I bring to this work.")}
               </p>
               <p>
                 The difference between a sales hire that works and one that doesn&apos;t is almost
@@ -315,7 +312,7 @@ export default function WhyStartupsFailAtSalesHiringPage() {
               Frequently Asked Questions
             </motion.h2>
             <div className="space-y-6">
-              {faqs.map((faq, i) => (
+              {displayFaqs.map((faq, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
@@ -360,15 +357,13 @@ export default function WhyStartupsFailAtSalesHiringPage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Ready to Get the Next Hire Right?
+              {v("ctaHeadline", "Ready to Get the Next Hire Right?")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              Let&apos;s spend 30 minutes together. We&apos;ll look at your current situation —
-              whether you&apos;re pre-hire, mid-hire, or recovering from a bad one — and figure
-              out exactly what needs to happen next.
+              {v("ctaDescription", "Let\u2019s spend 30 minutes together. We\u2019ll look at your current situation \u2014 whether you\u2019re pre-hire, mid-hire, or recovering from a bad one \u2014 and figure out exactly what needs to happen next.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

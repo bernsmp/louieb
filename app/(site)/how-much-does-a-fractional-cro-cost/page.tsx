@@ -4,6 +4,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeroBackground } from "@/components/ui/HeroBackground";
 import { Check, DollarSign } from "lucide-react";
+import { useCmsSection } from "@/lib/useCmsSection";
+
+const CMS_SECTION = "seoCroCost";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
 
@@ -127,6 +130,8 @@ const schemaData = {
 };
 
 export default function HowMuchFractionalCroCostPage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION);
+  const faqsData = cmsfaqs(5, faqs);
   return (
     <>
       <script
@@ -153,16 +158,14 @@ export default function HowMuchFractionalCroCostPage() {
               variants={itemVariants}
               className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
-              How Much Does a
-              <span className="block text-[#0966c2]">Fractional CRO Cost?</span>
+              {v("heroLine1", "How Much Does a")}
+              <span className="block text-[#0966c2]">{v("heroAccent", "Fractional CRO Cost?")}</span>
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
-              The range is $6,000–$14,000/month depending on scope and hours. Here&apos;s exactly
-              what each level includes, what drives the price, and how it compares to a full-time
-              hire.
+              {v("heroDescription", "The range is $6,000\u2013$14,000/month depending on scope and hours. Here\u2019s exactly what each level includes, what drives the price, and how it compares to a full-time hire.")}
             </motion.p>
             <motion.div
               variants={itemVariants}
@@ -286,9 +289,7 @@ export default function HowMuchFractionalCroCostPage() {
               Who I Am
             </motion.h2>
             <motion.p variants={itemVariants} className="text-neutral-600">
-              I&apos;m Louie Bernstein — I have 50 years in business experience, including 22 as a
-              bootstrapped founder. My Fractional Sales Leadership business has been helping founders
-              since 2017.
+              {v("aboutBio1", "I\u2019m Louie Bernstein \u2014 I have 50 years in business experience, including 22 as a bootstrapped founder. My Fractional Sales Leadership business has been helping founders since 2017.")}
             </motion.p>
           </motion.div>
         </div>
@@ -310,7 +311,7 @@ export default function HowMuchFractionalCroCostPage() {
               Frequently Asked Questions
             </motion.h2>
             <div className="space-y-6">
-              {faqs.map((faq, i) => (
+              {faqsData.map((faq, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
@@ -347,15 +348,13 @@ export default function HowMuchFractionalCroCostPage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Want to Know What the Right Scope Looks Like for You?
+              {v("ctaHeadline", "Want to Know What the Right Scope Looks Like for You?")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              Let&apos;s spend 30 minutes together. We&apos;ll look at your ARR, your team, and
-              your specific revenue challenges — and I&apos;ll give you a straight answer on what
-              the right engagement scope looks like and what it would cost.
+              {v("ctaDescription", "Let\u2019s spend 30 minutes together. We\u2019ll look at your ARR, your team, and your specific revenue challenges \u2014 and I\u2019ll give you a straight answer on what the right engagement scope looks like and what it would cost.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

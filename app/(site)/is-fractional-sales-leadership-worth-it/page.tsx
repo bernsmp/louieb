@@ -4,8 +4,11 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { HeroBackground } from '@/components/ui/HeroBackground'
 import { Check, X } from 'lucide-react'
+import { useCmsSection } from '@/lib/useCmsSection'
 
 const CALENDLY = 'https://calendly.com/louiebernstein/30minutes?month=2026-03'
+
+const CMS_SECTION = "seoFslWorthIt"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -56,7 +59,7 @@ const outcomes = [
   'A sales operation that a future full-time VP can step into and run',
 ]
 
-const faqs = [
+const defaultFaqs = [
   {
     q: 'How do I know if fractional sales leadership will actually work for my company?',
     a: 'Ask yourself three questions: Have you closed 10–20 customers yourself? Do you have at least one sales rep (or are ready to hire)? Are you willing to commit 6+ months to building the system? If yes to all three, fractional sales leadership will almost certainly move the needle. The model fails when founders expect magic in 30 days or aren\'t willing to stay involved.',
@@ -80,7 +83,7 @@ const schemaData = {
   '@graph': [
     {
       '@type': 'FAQPage',
-      mainEntity: faqs.map((faq) => ({
+      mainEntity: defaultFaqs.map((faq) => ({
         '@type': 'Question',
         name: faq.q,
         acceptedAnswer: { '@type': 'Answer', text: faq.a },
@@ -98,6 +101,8 @@ const schemaData = {
 }
 
 export default function IsFractionalSalesLeadershipWorthItPage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION);
+  const faqs = cmsfaqs(4, defaultFaqs);
   return (
     <>
       <script
@@ -124,15 +129,14 @@ export default function IsFractionalSalesLeadershipWorthItPage() {
                 variants={itemVariants}
                 className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
               >
-                Is Fractional Sales Leadership
-                <span className="block text-blue-400">Worth It?</span>
+                {v("heroLine1", "Is Fractional Sales Leadership")}
+                <span className="block text-blue-400">{v("heroAccent", "Worth It?")}</span>
               </motion.h1>
               <motion.p
                 variants={itemVariants}
                 className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
               >
-                The honest answer: it depends on where you are and what you&apos;re willing to commit to.
-                Here&apos;s when it works, when it doesn&apos;t, and what you should realistically expect.
+                {v("heroDescription", "The honest answer: it depends on where you are and what you're willing to commit to. Here's when it works, when it doesn't, and what you should realistically expect.")}
               </motion.p>
               <motion.div
                 variants={itemVariants}
@@ -266,14 +270,10 @@ export default function IsFractionalSalesLeadershipWorthItPage() {
               About Louie Bernstein
             </motion.h2>
             <motion.p variants={itemVariants} className="mb-3 text-neutral-700">
-              I&apos;m Louie Bernstein — I have 50 years in business experience, including 22 as a
-              bootstrapped founder. My Fractional Sales Leadership business has been helping
-              founders since 2017.
+              {v("aboutBio1", "I'm Louie Bernstein — I have 50 years in business experience, including 22 as a bootstrapped founder. My Fractional Sales Leadership business has been helping founders since 2017.")}
             </motion.p>
             <motion.p variants={itemVariants} className="text-neutral-700">
-              I&apos;ve had founders tell me upfront it won&apos;t work at their company. Some were right.
-              Most weren&apos;t. If you want an honest answer about whether fractional sales leadership
-              makes sense for your situation, book 30 minutes and I&apos;ll tell you straight.
+              {v("aboutBio2", "I've had founders tell me upfront it won't work at their company. Some were right. Most weren't. If you want an honest answer about whether fractional sales leadership makes sense for your situation, book 30 minutes and I'll tell you straight.")}
             </motion.p>
           </motion.div>
         </div>
@@ -323,14 +323,13 @@ export default function IsFractionalSalesLeadershipWorthItPage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Let&apos;s Find Out If It&apos;s Worth It for You
+              {v("ctaHeadline", "Let's Find Out If It's Worth It for You")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              30 minutes. I&apos;ll ask you about where you are, what&apos;s working and what isn&apos;t,
-              and tell you honestly whether fractional sales leadership is the right next move.
+              {v("ctaDescription", "30 minutes. I'll ask you about where you are, what's working and what isn't, and tell you honestly whether fractional sales leadership is the right next move.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

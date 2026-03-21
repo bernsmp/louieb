@@ -4,8 +4,11 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { HeroBackground } from '@/components/ui/HeroBackground'
 import { Check, AlertCircle } from 'lucide-react'
+import { useCmsSection } from '@/lib/useCmsSection'
 
 const CALENDLY = 'https://calendly.com/louiebernstein/30minutes?month=2026-03'
+
+const CMS_SECTION = 'seoWhenToHireFsl'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -88,6 +91,8 @@ const schemaData = {
 }
 
 export default function WhenToHireFractionalSalesLeaderPage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION)
+  const displayFaqs = cmsfaqs(4, faqs)
   return (
     <>
       <script
@@ -114,15 +119,14 @@ export default function WhenToHireFractionalSalesLeaderPage() {
                 variants={itemVariants}
                 className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
               >
-                When to Hire a
-                <span className="block text-blue-400">Fractional Sales Leader</span>
+                {v('heroLine1', 'When to Hire a')}
+                <span className="block text-blue-400">{v('heroAccent', 'Fractional Sales Leader')}</span>
               </motion.h1>
               <motion.p
                 variants={itemVariants}
                 className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
               >
-                Most founders wait too long — or move too early. Here are the specific signals that
-                tell you it&apos;s time to bring in a fractional sales leader.
+                {v('heroDescription', "Most founders wait too long \u2014 or move too early. Here are the specific signals that tell you it\u2019s time to bring in a fractional sales leader.")}
               </motion.p>
               <motion.div
                 variants={itemVariants}
@@ -226,13 +230,10 @@ export default function WhenToHireFractionalSalesLeaderPage() {
               About Louie Bernstein
             </motion.h2>
             <motion.p variants={itemVariants} className="mb-3 text-neutral-700">
-              I&apos;m Louie Bernstein — I have 50 years in business experience, including 22 as a
-              bootstrapped founder. My Fractional Sales Leadership business has been helping
-              founders since 2017.
+              {v('aboutBio1', "I\u2019m Louie Bernstein \u2014 I have 50 years in business experience, including 22 as a bootstrapped founder. My Fractional Sales Leadership business has been helping founders since 2017.")}
             </motion.p>
             <motion.p variants={itemVariants} className="text-neutral-700">
-              I&apos;ve seen founders hire fractional leadership too early and too late. Both are costly.
-              If you&apos;re not sure which camp you&apos;re in, let&apos;s talk — I&apos;ll tell you honestly.
+              {v('aboutBio2', "I\u2019ve seen founders hire fractional leadership too early and too late. Both are costly. If you\u2019re not sure which camp you\u2019re in, let\u2019s talk \u2014 I\u2019ll tell you honestly.")}
             </motion.p>
           </motion.div>
         </div>
@@ -254,7 +255,7 @@ export default function WhenToHireFractionalSalesLeaderPage() {
               Frequently Asked Questions
             </motion.h2>
             <div className="space-y-6">
-              {faqs.map((faq, i) => (
+              {displayFaqs.map((faq, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
@@ -282,15 +283,13 @@ export default function WhenToHireFractionalSalesLeaderPage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Ready to Talk About Whether It&apos;s Time?
+              {v('ctaHeadline', "Ready to Talk About Whether It\u2019s Time?")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              Let&apos;s spend 30 minutes together. I&apos;ll look at where you are and tell you
-              honestly whether fractional sales leadership makes sense right now — or what needs to
-              be in place first.
+              {v('ctaDescription', "Let\u2019s spend 30 minutes together. I\u2019ll look at where you are and tell you honestly whether fractional sales leadership makes sense right now \u2014 or what needs to be in place first.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

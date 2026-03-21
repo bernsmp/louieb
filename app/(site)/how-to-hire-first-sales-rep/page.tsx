@@ -4,8 +4,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeroBackground } from "@/components/ui/HeroBackground";
 import { Check, AlertCircle, AlertTriangle } from "lucide-react";
+import { useCmsSection } from "@/lib/useCmsSection";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
+
+const CMS_SECTION = "seoHireFirstSalesRep";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -62,7 +65,7 @@ const greenFlags = [
   "They've been coached and improved — they can name specific things they changed",
 ];
 
-const faqs = [
+const defaultFaqs = [
   {
     q: "When is the right time to hire my first salesperson?",
     a: "When you've closed 10–20 customers yourself and you understand the repeatable pattern. That means you know who buys (ICP), why they buy (pain + trigger), and how the conversation goes from first contact to close. If you haven't closed those deals yourself, you don't have enough pattern to hire into. You'll just be funding someone else's guessing.",
@@ -90,7 +93,7 @@ const schemaData = {
   "@graph": [
     {
       "@type": "FAQPage",
-      mainEntity: faqs.map((faq) => ({
+      mainEntity: defaultFaqs.map((faq) => ({
         "@type": "Question",
         name: faq.q,
         acceptedAnswer: { "@type": "Answer", text: faq.a },
@@ -109,6 +112,8 @@ const schemaData = {
 };
 
 export default function HireFirstSalesRepPage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION);
+  const faqs = cmsfaqs(5, defaultFaqs);
   return (
     <>
       <script
@@ -135,16 +140,14 @@ export default function HireFirstSalesRepPage() {
               variants={itemVariants}
               className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
-              How to Hire Your
-              <span className="block text-[#0966c2]">First Sales Rep</span>
+              {v("heroLine1", "How to Hire Your")}
+              <span className="block text-[#0966c2]">{v("heroAccent", "First Sales Rep")}</span>
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
-              Most founders hire their first salesperson too early, into a company with no system,
-              and then wonder why it didn&apos;t work. Here&apos;s what to build before you hire,
-              what to look for, and how to set your first rep up to succeed.
+              {v("heroDescription", "Most founders hire their first salesperson too early, into a company with no system, and then wonder why it didn't work. Here's what to build before you hire, what to look for, and how to set your first rep up to succeed.")}
             </motion.p>
             <motion.div
               variants={itemVariants}
@@ -345,15 +348,13 @@ export default function HireFirstSalesRepPage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Ready to Hire Your First Rep the Right Way?
+              {v("ctaHeadline", "Ready to Hire Your First Rep the Right Way?")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              Let&apos;s spend 30 minutes together. We&apos;ll look at where you are now, what
-              needs to be built before you hire, and what the right first hire profile looks like
-              for your specific business.
+              {v("ctaDescription", "Let's spend 30 minutes together. We'll look at where you are now, what needs to be built before you hire, and what the right first hire profile looks like for your specific business.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

@@ -4,6 +4,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeroBackground } from "@/components/ui/HeroBackground";
 import { Check, BookOpen, Target, Users, BarChart3, Zap, ClipboardList, TrendingUp } from "lucide-react";
+import { useCmsSection } from "@/lib/useCmsSection";
+
+const CMS_SECTION = "seoBuildSalesProcess";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
 
@@ -136,6 +139,8 @@ const schemaData = {
 };
 
 export default function HowToBuildSalesProcessPage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION);
+  const faqsData = cmsfaqs(5, faqs);
   return (
     <>
       <script
@@ -162,16 +167,14 @@ export default function HowToBuildSalesProcessPage() {
               variants={itemVariants}
               className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
-              How to Build a Sales Process
-              <span className="block text-[#0966c2]">After $1M ARR</span>
+              {v("heroLine1", "How to Build a Sales Process")}
+              <span className="block text-[#0966c2]">{v("heroAccent", "After $1M ARR")}</span>
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
-              Hitting $1M ARR means your product works. The next challenge is building a sales
-              system that scales without you closing every deal. Here&apos;s the exact framework —
-              in the right order.
+              {v("heroDescription", "Hitting $1M ARR means your product works. The next challenge is building a sales system that scales without you closing every deal. Here\u2019s the exact framework \u2014 in the right order.")}
             </motion.p>
             <motion.div
               variants={itemVariants}
@@ -372,7 +375,7 @@ export default function HowToBuildSalesProcessPage() {
               Frequently Asked Questions
             </motion.h2>
             <div className="space-y-6">
-              {faqs.map((faq, i) => (
+              {faqsData.map((faq, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
@@ -427,14 +430,13 @@ export default function HowToBuildSalesProcessPage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Ready to Build the Sales Process That Gets You to $5M?
+              {v("ctaHeadline", "Ready to Build the Sales Process That Gets You to $5M?")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              Let&apos;s spend 30 minutes together. We&apos;ll look at where your sales process is
-              today and figure out the right first step to build toward the next level.
+              {v("ctaDescription", "Let\u2019s spend 30 minutes together. We\u2019ll look at where your sales process is today and figure out the right first step to build toward the next level.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link

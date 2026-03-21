@@ -4,8 +4,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeroBackground } from "@/components/ui/HeroBackground";
 import { Check, AlertCircle } from "lucide-react";
+import { useCmsSection } from "@/lib/useCmsSection";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
+
+const CMS_SECTION = "seoWhenToHireCro";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -114,6 +117,8 @@ const schemaData = {
 };
 
 export default function WhenToHireACroPage() {
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION)
+  const displayFaqs = cmsfaqs(5, faqs)
   return (
     <>
       <script
@@ -140,15 +145,14 @@ export default function WhenToHireACroPage() {
               variants={itemVariants}
               className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
-              When to Hire
-              <span className="block text-[#0966c2]">a CRO</span>
+              {v("heroLine1", "When to Hire")}
+              <span className="block text-[#0966c2]">{v("heroAccent", "a CRO")}</span>
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
-              Most companies hire a CRO either too early or too late. Here are the signals that
-              tell you it&apos;s time — and the ones that tell you you&apos;re not ready yet.
+              {v("heroDescription", "Most companies hire a CRO either too early or too late. Here are the signals that tell you it\u2019s time \u2014 and the ones that tell you you\u2019re not ready yet.")}
             </motion.p>
             <motion.div
               variants={itemVariants}
@@ -262,9 +266,7 @@ export default function WhenToHireACroPage() {
               Who I Am
             </motion.h2>
             <motion.p variants={itemVariants} className="text-neutral-600">
-              I&apos;m Louie Bernstein — I have 50 years in business experience, including 22 as a
-              bootstrapped founder. My Fractional Sales Leadership business has been helping founders
-              since 2017.
+              {v("aboutBio1", "I\u2019m Louie Bernstein \u2014 I have 50 years in business experience, including 22 as a bootstrapped founder. My Fractional Sales Leadership business has been helping founders since 2017.")}
             </motion.p>
           </motion.div>
         </div>
@@ -286,7 +288,7 @@ export default function WhenToHireACroPage() {
               Frequently Asked Questions
             </motion.h2>
             <div className="space-y-6">
-              {faqs.map((faq, i) => (
+              {displayFaqs.map((faq, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
@@ -331,15 +333,13 @@ export default function WhenToHireACroPage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              Not Sure if You&apos;re Ready?
+              {v("ctaHeadline", "Not Sure if You\u2019re Ready?")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              Let&apos;s spend 30 minutes together. We&apos;ll look at your revenue org, your stage,
-              and what you actually need — and I&apos;ll give you a straight answer on whether a
-              CRO is the right move, or whether something else should come first.
+              {v("ctaDescription", "Let\u2019s spend 30 minutes together. We\u2019ll look at your revenue org, your stage, and what you actually need \u2014 and I\u2019ll give you a straight answer on whether a CRO is the right move, or whether something else should come first.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link
