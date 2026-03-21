@@ -145,10 +145,11 @@ export default function NewArticlePage() {
             onChange={(e) => setForm({ ...form, category: e.target.value })}
           >
             <option value="">No Category</option>
-            <option value="featured">Featured (Articles Page)</option>
-            <option value="fsl">FSL Page</option>
-            <option value="course">Course</option>
-            <option value="newsletter">Newsletter</option>
+            <option value="fractional-sales-leadership">Fractional Sales Leadership</option>
+            <option value="hiring">Hiring</option>
+            <option value="founder-growth">Founder Growth</option>
+            <option value="sales-management">Sales Management</option>
+            <option value="featured">Featured</option>
           </select>
         </div>
 
