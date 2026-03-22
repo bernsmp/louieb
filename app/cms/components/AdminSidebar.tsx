@@ -53,6 +53,11 @@ const pages = [
   { name: 'Sales Forecasting for Small Business', href: '/cms/seo-sales-forecasting', icon: FileTextIcon },
   { name: 'What Is a Sales Audit', href: '/cms/seo-sales-audit', icon: FileTextIcon },
   { name: 'How to Build Outbound Sales System', href: '/cms/seo-outbound-sales-system', icon: FileTextIcon },
+  { name: 'What Is a Sales Playbook', href: '/cms/seo-sales-playbook', icon: FileTextIcon },
+  { name: 'How to Set Up HubSpot', href: '/cms/seo-hubspot-setup', icon: FileTextIcon },
+  { name: 'How to Run Weekly Sales Meeting', href: '/cms/seo-weekly-sales-meeting', icon: FileTextIcon },
+  { name: 'How to Onboard a New Sales Rep', href: '/cms/seo-onboard-sales-rep', icon: FileTextIcon },
+  { name: 'Sales Compensation Plan', href: '/cms/seo-sales-comp-plan', icon: FileTextIcon },
 ]
 
 const collections = [
