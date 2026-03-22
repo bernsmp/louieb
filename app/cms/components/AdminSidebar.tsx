@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import type { User } from '@supabase/supabase-js'
 
@@ -73,9 +73,18 @@ const settings = [
 
 export function AdminSidebar({ user }: AdminSidebarProps) {
   const pathname = usePathname()
+  const router = useRouter()
   const [pagesOpen, setPagesOpen] = useState(() =>
     pages.some((p) => pathname === p.href || (p.href !== '/cms' && pathname.startsWith(p.href)))
   )
+  const [searchValue, setSearchValue] = useState('')
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    const q = searchValue.trim()
+    if (q.length < 2) return
+    router.push(`/cms/search?q=${encodeURIComponent(q)}`)
+  }
 
   const handleLogout = async () => {
     const response = await fetch('/api/auth/logout', { method: 'POST' })
@@ -94,6 +103,23 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
           Louie<span>CMS</span>
         </Link>
       </div>
+
+      <form onSubmit={handleSearchSubmit} className="admin-sidebar__search">
+        <div className="admin-sidebar__search-wrap">
+          <svg className="admin-sidebar__search-icon" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.3-4.3"/>
+          </svg>
+          <input
+            type="text"
+            className="admin-sidebar__search-input"
+            placeholder="Search CMS…"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            aria-label="Search CMS"
+          />
+        </div>
+      </form>
 
       <nav className="admin-sidebar__nav">
         {/* Dashboard */}
