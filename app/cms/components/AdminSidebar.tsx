@@ -47,6 +47,12 @@ const pages = [
   { name: 'When to Hire a Fractional Sales Leader', href: '/cms/seo-when-to-hire-fsl', icon: FileTextIcon },
   { name: 'Cost of Fractional VP Sales', href: '/cms/seo-cost-fractional-vp', icon: FileTextIcon },
   { name: 'Is Fractional Sales Leadership Worth It', href: '/cms/seo-fsl-worth-it', icon: FileTextIcon },
+  { name: 'What Is Founder-Led Sales', href: '/cms/seo-what-is-founder-led-sales', icon: FileTextIcon },
+  { name: 'How to Get Out of Founder-Led Sales', href: '/cms/seo-get-out-founder-led-sales', icon: FileTextIcon },
+  { name: 'Why Sales Team Not Growing Revenue', href: '/cms/seo-sales-team-not-growing', icon: FileTextIcon },
+  { name: 'Sales Forecasting for Small Business', href: '/cms/seo-sales-forecasting', icon: FileTextIcon },
+  { name: 'What Is a Sales Audit', href: '/cms/seo-sales-audit', icon: FileTextIcon },
+  { name: 'How to Build Outbound Sales System', href: '/cms/seo-outbound-sales-system', icon: FileTextIcon },
 ]
 
 const collections = [
