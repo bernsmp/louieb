@@ -63,6 +63,10 @@ const pages = [
   { name: 'Hire One or Two Salespeople?', href: '/cms/seo-hire-one-or-two-salespeople', icon: FileTextIcon },
   { name: 'FSL vs. Sales Coach', href: '/cms/seo-fsl-vs-sales-coach', icon: FileTextIcon },
   { name: 'FSL vs. Sales Consultant', href: '/cms/seo-fsl-vs-sales-consultant', icon: FileTextIcon },
+  { name: 'Case Study: 61% Sales Growth', href: '/cms/seo-case-study-61-growth', icon: FileTextIcon },
+  { name: '5 Warning Signs Sales Process Breaking', href: '/cms/seo-warning-signs-sales-process', icon: FileTextIcon },
+  { name: 'What Does a FSL Do Week to Week?', href: '/cms/seo-what-fsl-does', icon: FileTextIcon },
+  { name: 'Transition Out of Founder-Led Sales', href: '/cms/seo-transition-founder-led-sales', icon: FileTextIcon },
 ]
 
 const collections = [
