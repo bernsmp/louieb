@@ -110,10 +110,10 @@ export default async function VideosPage() {
                       />
                     </div>
                     <div className="mt-4">
-                      <h3 className="font-sans text-lg font-semibold text-foreground">
+                      <h3 className="font-sans text-base font-semibold text-foreground line-clamp-2">
                         {video.title}
                       </h3>
-                      <p className="mt-2 font-sans text-sm text-muted-foreground whitespace-pre-line">
+                      <p className="mt-1 font-sans text-sm text-muted-foreground line-clamp-4">
                         {video.description}
                       </p>
                       <Link
