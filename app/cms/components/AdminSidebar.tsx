@@ -58,6 +58,11 @@ const pages = [
   { name: 'How to Run Weekly Sales Meeting', href: '/cms/seo-weekly-sales-meeting', icon: FileTextIcon },
   { name: 'How to Onboard a New Sales Rep', href: '/cms/seo-onboard-sales-rep', icon: FileTextIcon },
   { name: 'Sales Compensation Plan', href: '/cms/seo-sales-comp-plan', icon: FileTextIcon },
+  { name: 'The $250K VP of Sales Mistake', href: '/cms/seo-250k-vp-sales-mistake', icon: FileTextIcon },
+  { name: 'When Ready to Hire First Sales Rep', href: '/cms/seo-when-ready-hire-sales-rep', icon: FileTextIcon },
+  { name: 'Hire One or Two Salespeople?', href: '/cms/seo-hire-one-or-two-salespeople', icon: FileTextIcon },
+  { name: 'FSL vs. Sales Coach', href: '/cms/seo-fsl-vs-sales-coach', icon: FileTextIcon },
+  { name: 'FSL vs. Sales Consultant', href: '/cms/seo-fsl-vs-sales-consultant', icon: FileTextIcon },
 ]
 
 const collections = [
