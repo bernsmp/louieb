@@ -1692,18 +1692,27 @@ export async function getAllVideoSlugs(): Promise<string[]> {
  * Get all videos with their slugs (includes category data)
  */
 export async function getAllVideosWithSlugs(): Promise<VideoWithSlug[]> {
-  // Try fetching from Supabase with category join
+  // Try fetching from Supabase
   if (USE_SUPABASE_CMS && isSupabaseConfigured && supabaseAdmin) {
     try {
-      const { data, error } = await supabaseAdmin
-        .from('videos')
-        .select('*, video_categories(id, name, slug)')
-        .eq('page', 'featured')
-        .order('display_order', { ascending: true })
+      // Fetch videos and categories separately to avoid schema cache join issues
+      const [videosResult, categoriesResult] = await Promise.all([
+        supabaseAdmin
+          .from('videos')
+          .select('*')
+          .eq('page', 'featured')
+          .order('display_order', { ascending: true }),
+        supabaseAdmin
+          .from('video_categories')
+          .select('id, name, slug'),
+      ])
 
-      if (!error && data && data.length > 0) {
-        return data.map((row: Record<string, unknown>) => {
-          const cat = row.video_categories as { id: string; name: string; slug: string } | null
+      if (!videosResult.error && videosResult.data && videosResult.data.length > 0) {
+        const catMap = new Map(
+          (categoriesResult.data || []).map((c: { id: string; name: string; slug: string }) => [c.id, c])
+        )
+        return videosResult.data.map((row: Record<string, unknown>) => {
+          const cat = catMap.get(row.category_id as string)
           return {
             videoId: row.youtube_id as string,
             title: row.title as string,
