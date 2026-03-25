@@ -21,12 +21,12 @@ export function MobileNav({ navItems }: { navItems: NavItem[] }) {
     setOpenAccordion(null);
   };
 
-  const handleLinkClick = (href: string) => {
+  const handleHashScroll = (href: string) => {
     close();
-    if (href === "/#contact") {
+    const hash = href.split("#")[1];
+    if (hash) {
       setTimeout(() => {
-        const el = document.querySelector("#contact");
-        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        document.querySelector(`#${hash}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 100);
     }
   };
@@ -88,11 +88,27 @@ export function MobileNav({ navItems }: { navItems: NavItem[] }) {
                 );
               }
 
+              const href = item.link || "/";
+              const isHashLink = href.includes("#");
+
+              if (isHashLink) {
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => handleHashScroll(href)}
+                    className="flex w-full items-center gap-2 px-5 py-3 text-base font-medium text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900"
+                  >
+                    {item.icon}
+                    {item.name}
+                  </button>
+                );
+              }
+
               return (
                 <Link
                   key={idx}
-                  href={item.link || "/"}
-                  onClick={() => handleLinkClick(item.link || "/")}
+                  href={href}
+                  onClick={close}
                   className="flex items-center gap-2 px-5 py-3 text-base font-medium text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900"
                 >
                   {item.icon}
