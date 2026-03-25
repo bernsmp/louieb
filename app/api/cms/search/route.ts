@@ -275,11 +275,11 @@ export async function GET(request: Request) {
       })
     }
 
-    // Page registry results — match title or slug against query
+    // Page registry results — match title or slug against query (either direction)
     const qLower = q.toLowerCase()
     for (const page of PAGE_REGISTRY) {
       const searchable = `${page.title} ${page.slug.replace(/-/g, ' ')}`.toLowerCase()
-      if (searchable.includes(qLower)) {
+      if (searchable.includes(qLower) || qLower.includes(page.title.toLowerCase())) {
         results.unshift({
           type: 'Page',
           label: page.title,
