@@ -1,6 +1,7 @@
 "use client";
 
 import { FloatingNav } from "@/components/ui/floating-navbar";
+import { MobileNav } from "@/components/MobileNav";
 import { Home, FileText, Video, Mail, Wrench, BookOpen, GraduationCap, UserCheck, Scale, PenLine, HelpCircle, Layers } from "lucide-react";
 
 export type NavKey = 'home' | 'fsl' | 'learn' | 'faqs' | 'frameworks' | 'tools' | 'contact';
@@ -83,5 +84,14 @@ function buildNavItems(order: NavKey[]) {
 export function FloatingNavWrapper({ navOrder }: { navOrder?: string[] }) {
   const order = (navOrder?.length ? navOrder : DEFAULT_NAV_ORDER) as NavKey[];
   const navItems = buildNavItems(order);
-  return <FloatingNav navItems={navItems} />;
+  return (
+    <div>
+      <div className="md:hidden">
+        <MobileNav navItems={navItems} />
+      </div>
+      <div className="hidden md:block">
+        <FloatingNav navItems={navItems} />
+      </div>
+    </div>
+  );
 }

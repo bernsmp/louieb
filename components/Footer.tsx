@@ -124,7 +124,7 @@ export function Footer({
                 alt="Inc. 500 Winner"
                 width={40}
                 height={40}
-                className="rounded-lg object-contain"
+                className="object-contain"
               />
               <a
                 href={linkedin}
