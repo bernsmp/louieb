@@ -117,7 +117,7 @@ export function Testimonials({
 
         {/* Carousel */}
         <div className="mt-20 relative pt-12">
-          <div className="relative min-h-[500px] lg:min-h-[550px] overflow-visible rounded-3xl">
+          <div className="relative min-h-[500px] lg:min-h-[550px] overflow-hidden rounded-3xl">
             <AnimatePresence initial={false} custom={direction}>
               <motion.div
                 key={currentIndex}
@@ -133,6 +133,7 @@ export function Testimonials({
                 drag="x"
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={1}
+                style={{ touchAction: "pan-y" }}
                 onDragEnd={(e, { offset, velocity }) => {
                   const swipe = swipePower(offset.x, velocity.x);
 
