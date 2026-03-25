@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 interface QuickLink {
@@ -117,7 +118,14 @@ export function Footer({
             </ul>
 
             {/* Social Links */}
-            <div className="mt-6 flex gap-4">
+            <div className="mt-6 flex items-center gap-4">
+              <Image
+                src="/images/Inc500.jpg"
+                alt="Inc. 500 Winner"
+                width={40}
+                height={40}
+                className="rounded-lg object-contain"
+              />
               <a
                 href={linkedin}
                 target="_blank"
