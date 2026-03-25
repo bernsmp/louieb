@@ -12,6 +12,7 @@ interface SearchResult {
 }
 
 const TYPE_COLORS: Record<string, string> = {
+  'Page': '#22c55e',
   'Page Content': '#3b82f6',
   'FAQ': '#8b5cf6',
   'Testimonial': '#10b981',
@@ -75,7 +76,7 @@ function SearchContent() {
     <div className="admin-content">
       <div style={{ marginBottom: '2rem' }}>
         <h1 className="edit-page__title">Search CMS</h1>
-        <p className="edit-page__description">Search across all pages, FAQs, testimonials, blog posts, services, and more.</p>
+        <p className="edit-page__description">Search across all site pages, FAQs, testimonials, blog posts, services, and more.</p>
       </div>
 
       <form onSubmit={handleSubmit} className="cms-search-form">

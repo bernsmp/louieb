@@ -2,6 +2,80 @@ import { NextResponse } from 'next/server'
 import { getUser } from '@/lib/auth'
 import { supabaseAdmin } from '@/lib/supabase'
 
+// Registry of all public site pages — searched by title/slug
+const PAGE_REGISTRY: { title: string; slug: string; editUrl: string }[] = [
+  // Homepage
+  { title: 'Homepage', slug: '', editUrl: '/cms/homepage' },
+  // Core pages
+  { title: 'Fractional Sales Leader', slug: 'fractional-sales-leader', editUrl: '/cms/fsl-page' },
+  { title: 'Fractional Sales Leader vs Consultant', slug: 'fractional-sales-leader-vs-consultant', editUrl: '/cms/fsl-vs-consultant-page' },
+  { title: 'Fractional Sales Leader vs Sales Coach', slug: 'fractional-sales-leader-vs-sales-coach', editUrl: '/cms/seo-fsl-vs-consultant' },
+  { title: 'Fractional Sales Leader vs Sales Consultant', slug: 'fractional-sales-leader-vs-sales-consultant', editUrl: '/cms/seo-fsl-vs-consultant' },
+  { title: 'What Does a Fractional Sales Leader Do', slug: 'what-does-fractional-sales-leader-do', editUrl: '/cms/fsl-page' },
+  { title: 'Is Fractional Sales Leadership Worth It', slug: 'is-fractional-sales-leadership-worth-it', editUrl: '/cms/seo-fsl-worth-it' },
+  { title: 'When to Hire a Fractional Sales Leader', slug: 'when-to-hire-a-fractional-sales-leader', editUrl: '/cms/seo-when-to-hire-fsl' },
+  { title: 'Cost of Fractional VP of Sales', slug: 'cost-of-fractional-vp-sales', editUrl: '/cms/seo-cost-fractional-vp' },
+  { title: 'Fractional VP of Sales for Small Businesses', slug: 'fractional-vp-of-sales-for-small-businesses', editUrl: '/cms/seo-cost-fractional-vp' },
+  { title: 'Fractional VP Sales vs Full-Time VP', slug: 'fractional-vp-sales-vs-full-time-vp', editUrl: '/cms/seo-vp-sales-vs-full-time' },
+  // Fractional CRO
+  { title: 'Fractional CRO for $1M–$10M Founders', slug: 'fractional-cro-for-1m-10m-founders', editUrl: '/cms/seo-fractional-cro' },
+  { title: 'Fractional CRO Pricing', slug: 'fractional-cro-pricing', editUrl: '/cms/seo-cro-pricing' },
+  { title: 'Fractional CRO vs Full-Time CRO', slug: 'fractional-cro-vs-full-time-cro', editUrl: '/cms/seo-cro-vs-full-time' },
+  { title: 'How Much Does a Fractional CRO Cost', slug: 'how-much-does-a-fractional-cro-cost', editUrl: '/cms/seo-cro-cost' },
+  { title: 'When to Hire a Fractional CRO', slug: 'when-to-hire-a-fractional-cro', editUrl: '/cms/seo-when-to-hire-cro' },
+  { title: 'When to Hire a CRO', slug: 'when-to-hire-a-cro', editUrl: '/cms/seo-when-to-hire-cro' },
+  { title: 'VP of Sales vs CRO: What\'s the Difference', slug: 'vp-sales-vs-cro-difference', editUrl: '/cms/seo-vp-vs-cro' },
+  // Founder-led sales
+  { title: 'What Is Founder-Led Sales', slug: 'what-is-founder-led-sales', editUrl: '/cms/seo-what-is-founder-led-sales' },
+  { title: 'How to Get Out of Founder-Led Sales', slug: 'how-to-get-out-of-founder-led-sales', editUrl: '/cms/seo-get-out-founder-led-sales' },
+  { title: 'Transition Out of Founder-Led Sales', slug: 'transition-out-of-founder-led-sales', editUrl: '/cms/seo-get-out-founder-led-sales' },
+  { title: 'How to Replace Founder-Led Sales', slug: 'how-to-replace-founder-led-sales', editUrl: '/cms/seo-replace-founder-sales' },
+  { title: 'Founder-Led Sales Not Scaling', slug: 'founder-led-sales-not-scaling', editUrl: '/cms/seo-founder-sales-not-scaling' },
+  // Sales leadership & process
+  { title: 'Sales Leadership for $1M–$10M Companies', slug: 'sales-leadership-for-1m-10m-companies', editUrl: '/cms/seo-sales-leadership-1m-10m' },
+  { title: 'How to Build a Sales Process After $1M ARR', slug: 'how-to-build-a-sales-process-after-1m-arr', editUrl: '/cms/seo-build-sales-process' },
+  { title: 'How to Build a Sales Process for SaaS', slug: 'how-to-build-a-sales-process-for-saas', editUrl: '/cms/seo-saas-sales-process' },
+  { title: 'How to Build an Outbound Sales System', slug: 'how-to-build-outbound-sales-system', editUrl: '/cms/seo-outbound-sales-system' },
+  { title: 'Build a Sales Team After $1M ARR', slug: 'build-sales-team-after-1m-arr', editUrl: '/cms/seo-build-sales-team-1m-arr' },
+  { title: 'Sales Forecasting for Small Business', slug: 'sales-forecasting-for-small-business', editUrl: '/cms/seo-sales-forecasting' },
+  { title: 'What Is a Sales Audit', slug: 'what-is-a-sales-audit', editUrl: '/cms/seo-sales-audit' },
+  { title: 'What Is a Sales Playbook', slug: 'what-is-a-sales-playbook', editUrl: '/cms/seo-build-sales-process' },
+  { title: 'How to Build a Sales Compensation Plan', slug: 'how-to-build-sales-compensation-plan', editUrl: '/cms/seo-build-sales-process' },
+  // Hiring & team
+  { title: 'How to Hire Your First Sales Rep', slug: 'how-to-hire-first-sales-rep', editUrl: '/cms/seo-hire-first-sales-rep' },
+  { title: 'When Ready to Hire Your First Sales Rep', slug: 'when-ready-hire-first-sales-rep', editUrl: '/cms/seo-hire-first-sales-rep' },
+  { title: 'Hire One Salesperson or Two', slug: 'hire-one-salesperson-or-two', editUrl: '/cms/salesperson' },
+  { title: 'How to Onboard a New Sales Rep', slug: 'how-to-onboard-new-sales-rep', editUrl: '/cms/seo-hire-first-sales-rep' },
+  { title: 'Why Startups Fail at Sales Hiring', slug: 'why-startups-fail-at-sales-hiring', editUrl: '/cms/seo-startups-fail-sales-hiring' },
+  { title: 'The $250K Mistake: Hiring VP of Sales Too Early', slug: '250k-mistake-vp-sales-hire-too-early', editUrl: '/cms/seo-startups-fail-sales-hiring' },
+  // Sales team problems
+  { title: 'Sales Team Not Hitting Quota', slug: 'sales-team-not-hitting-quota', editUrl: '/cms/seo-sales-team-not-hitting-quota' },
+  { title: 'Why Your Sales Team Isn\'t Hitting Quota', slug: 'why-your-sales-team-isnt-hitting-quota', editUrl: '/cms/seo-sales-team-not-hitting-quota' },
+  { title: 'Why Sales Team Not Growing Revenue', slug: 'why-sales-team-not-growing-revenue', editUrl: '/cms/seo-sales-team-not-growing' },
+  { title: 'Why Sales Reps Fail in Startups', slug: 'why-sales-reps-fail-in-startups', editUrl: '/cms/seo-sales-reps-fail' },
+  { title: 'No Pipeline: What to Do', slug: 'no-pipeline-what-to-do', editUrl: '/cms/seo-no-pipeline' },
+  { title: '5 Warning Signs Your Sales Process Is Breaking', slug: '5-warning-signs-sales-process-breaking', editUrl: '/cms/seo-sales-team-not-hitting-quota' },
+  // Operations
+  { title: 'How to Run a Weekly Sales Meeting', slug: 'how-to-run-weekly-sales-meeting', editUrl: '/cms/seo-build-sales-process' },
+  { title: 'How to Set Up HubSpot for a Small Sales Team', slug: 'how-to-set-up-hubspot-for-small-sales-team', editUrl: '/cms/seo-build-sales-process' },
+  // Audience pages
+  { title: 'For Founders', slug: 'founders', editUrl: '/cms/founders' },
+  { title: 'For Entrepreneurs', slug: 'entrepreneurs', editUrl: '/cms/entrepreneurs' },
+  { title: 'For Salesperson', slug: 'salesperson', editUrl: '/cms/salesperson' },
+  // Case study
+  { title: 'Case Study: 61% Sales Growth', slug: 'case-study-61-percent-sales-growth', editUrl: '/cms/homepage' },
+  // Content pages
+  { title: 'Blog', slug: 'blog', editUrl: '/cms/blog-page' },
+  { title: 'Articles', slug: 'articles', editUrl: '/cms/articles-page' },
+  { title: 'Videos', slug: 'videos', editUrl: '/cms/videos' },
+  { title: 'Newsletter', slug: 'newsletter', editUrl: '/cms/newsletter' },
+  { title: 'FAQs', slug: 'faqs', editUrl: '/cms/faq' },
+  { title: 'Course', slug: 'course', editUrl: '/cms/course' },
+  // Tools
+  { title: 'Tools', slug: 'tools', editUrl: '/cms/tools/landing' },
+  { title: 'ROI Calculator', slug: 'tools/roi-calculator', editUrl: '/cms/tools/roi-calculator' },
+]
+
 // Maps site_content section keys → CMS edit URLs
 const SECTION_URLS: Record<string, string> = {
   // Homepage sections
@@ -199,6 +273,20 @@ export async function GET(request: Request) {
         snippet: extractSnippet(full, q),
         editUrl: `/cms/process`,
       })
+    }
+
+    // Page registry results — match title or slug against query
+    const qLower = q.toLowerCase()
+    for (const page of PAGE_REGISTRY) {
+      const searchable = `${page.title} ${page.slug.replace(/-/g, ' ')}`.toLowerCase()
+      if (searchable.includes(qLower)) {
+        results.unshift({
+          type: 'Page',
+          label: page.title,
+          snippet: `/${page.slug}`,
+          editUrl: page.editUrl,
+        })
+      }
     }
 
     return NextResponse.json({ results, query: q })
