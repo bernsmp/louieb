@@ -75,7 +75,7 @@ export function MobileNav({ navItems }: { navItems: NavItem[] }) {
                           <Link
                             key={childIdx}
                             href={child.link}
-                            onClick={() => handleLinkClick(child.link)}
+                            onClick={close}
                             className="flex items-center gap-2 py-2.5 pl-10 pr-5 text-sm text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900"
                           >
                             {child.icon}
