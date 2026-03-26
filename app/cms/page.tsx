@@ -54,6 +54,22 @@ export default async function AdminDashboard() {
     },
   ]
 
+  const seoPages = [
+    { title: 'How to Build a Sales Pipeline', description: '/how-to-build-a-sales-pipeline', href: '/cms/seo-build-sales-pipeline', icon: FileTextIcon },
+    { title: 'Sales Forecasting for Investors', description: '/sales-forecasting-for-investors', href: '/cms/seo-sales-forecasting-investors', icon: FileTextIcon },
+    { title: 'How to Run a Pipeline Review', description: '/how-to-run-a-sales-pipeline-review', href: '/cms/seo-run-sales-pipeline-review', icon: FileTextIcon },
+    { title: 'Sales Tech Stack for Small Business', description: '/sales-tech-stack-for-small-business', href: '/cms/seo-sales-tech-stack', icon: FileTextIcon },
+    { title: 'Diagnose Sales Team Problems', description: '/diagnose-sales-team-problems', href: '/cms/seo-diagnose-sales-team', icon: FileTextIcon },
+    { title: 'How to Set Sales Quota', description: '/how-to-set-sales-quota', href: '/cms/seo-set-sales-quota', icon: FileTextIcon },
+    { title: 'How to Create an ICP', description: '/how-to-create-an-ideal-customer-profile', href: '/cms/seo-how-to-create-icp', icon: FileTextIcon },
+    { title: 'Sales KPIs for Small Business', description: '/sales-kpis-for-small-business', href: '/cms/seo-sales-kpis-small-business', icon: FileTextIcon },
+    { title: 'What Is a Sales Cadence', description: '/what-is-a-sales-cadence', href: '/cms/seo-what-is-a-sales-cadence', icon: FileTextIcon },
+    { title: 'How to Write a Cold Email', description: '/how-to-write-a-cold-email', href: '/cms/seo-how-to-write-cold-email', icon: FileTextIcon },
+    { title: 'How to Run a Discovery Call', description: '/how-to-run-a-discovery-call', href: '/cms/seo-how-to-run-discovery-call', icon: FileTextIcon },
+    { title: 'Close Deals Without Discounting', description: '/how-to-close-deals-without-discounting', href: '/cms/seo-close-deals-no-discount', icon: FileTextIcon },
+    { title: 'Sales Accountability Document', description: '/sales-accountability-document', href: '/cms/seo-sales-accountability-document', icon: FileTextIcon },
+  ]
+
   const collections = [
     {
       title: 'Testimonials',
@@ -112,6 +128,29 @@ export default async function AdminDashboard() {
               </div>
               <p className="dashboard-card__description">{section.description}</p>
               <Link href={section.href} className="dashboard-card__link">
+                Edit content →
+              </Link>
+            </div>
+          )
+        })}
+      </div>
+
+      <h2 style={{ fontSize: '1rem', fontWeight: 600, color: '#a3a3a3', marginBottom: '1rem', marginTop: '2rem' }}>
+        SEO Content Pages
+      </h2>
+      <div className="dashboard__grid">
+        {seoPages.map((page) => {
+          const Icon = page.icon
+          return (
+            <div key={page.href} className="dashboard-card">
+              <div className="dashboard-card__header">
+                <div className="dashboard-card__icon">
+                  <Icon />
+                </div>
+                <h3 className="dashboard-card__title">{page.title}</h3>
+              </div>
+              <p className="dashboard-card__description">{page.description}</p>
+              <Link href={page.href} className="dashboard-card__link">
                 Edit content →
               </Link>
             </div>
