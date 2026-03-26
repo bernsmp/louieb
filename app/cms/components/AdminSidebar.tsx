@@ -67,6 +67,19 @@ const pages = [
   { name: '5 Warning Signs Sales Process Breaking', href: '/cms/seo-warning-signs-sales-process', icon: FileTextIcon },
   { name: 'What Does a FSL Do Week to Week?', href: '/cms/seo-what-fsl-does', icon: FileTextIcon },
   { name: 'Transition Out of Founder-Led Sales', href: '/cms/seo-transition-founder-led-sales', icon: FileTextIcon },
+  { name: 'How to Build a Sales Pipeline', href: '/cms/seo-build-sales-pipeline', icon: FileTextIcon },
+  { name: 'Sales Forecasting for Investors', href: '/cms/seo-sales-forecasting-investors', icon: FileTextIcon },
+  { name: 'How to Run a Pipeline Review', href: '/cms/seo-run-sales-pipeline-review', icon: FileTextIcon },
+  { name: 'Sales Tech Stack for Small Business', href: '/cms/seo-sales-tech-stack', icon: FileTextIcon },
+  { name: 'Diagnose Sales Team Problems', href: '/cms/seo-diagnose-sales-team', icon: FileTextIcon },
+  { name: 'How to Set Sales Quota', href: '/cms/seo-set-sales-quota', icon: FileTextIcon },
+  { name: 'How to Create an ICP', href: '/cms/seo-how-to-create-icp', icon: FileTextIcon },
+  { name: 'Sales KPIs for Small Business', href: '/cms/seo-sales-kpis-small-business', icon: FileTextIcon },
+  { name: 'What Is a Sales Cadence', href: '/cms/seo-what-is-a-sales-cadence', icon: FileTextIcon },
+  { name: 'How to Write a Cold Email', href: '/cms/seo-how-to-write-cold-email', icon: FileTextIcon },
+  { name: 'How to Run a Discovery Call', href: '/cms/seo-how-to-run-discovery-call', icon: FileTextIcon },
+  { name: 'Close Deals Without Discounting', href: '/cms/seo-close-deals-no-discount', icon: FileTextIcon },
+  { name: 'Sales Accountability Document', href: '/cms/seo-sales-accountability-document', icon: FileTextIcon },
 ]
 
 const collections = [
