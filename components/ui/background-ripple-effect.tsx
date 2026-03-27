@@ -1,14 +1,18 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { motion, useAnimation } from "framer-motion";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
+
+// Pre-computed outside component — avoids recreation on every render
+const matrix = Array.from({ length: 47 }, (_, i) =>
+  Array.from({ length: 30 }, (_, j) => ({ row: i, col: j }))
+);
 
 interface BackgroundCellsProps {
   children?: React.ReactNode;
   className?: string;
-  accentColor?: string;  // border color of highlighted cells, e.g. "#0966c2"
-  fillColor?: string;    // hover fill color, e.g. "rgba(9,102,194,0.3)"
+  accentColor?: string;
+  fillColor?: string;
 }
 
 export const BackgroundCells = ({
@@ -38,24 +42,36 @@ const BackgroundCellCore = ({
 }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const ref = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number | null>(null);
+  const rectRef = useRef<DOMRect | null>(null);
 
-  const handleMouseMove = (event: React.MouseEvent) => {
-    const rect = ref.current?.getBoundingClientRect();
-    if (rect) {
-      setMousePosition({
-        x: event.clientX - rect.left,
-        y: event.clientY - rect.top,
-      });
-    }
-  };
+  // Cache the bounding rect — only recalculate on resize, not every mouse move
+  useEffect(() => {
+    const updateRect = () => {
+      rectRef.current = ref.current?.getBoundingClientRect() ?? null;
+    };
+    updateRect();
+    window.addEventListener("resize", updateRect);
+    return () => window.removeEventListener("resize", updateRect);
+  }, []);
+
+  // Throttle mouse move to one update per animation frame
+  const handleMouseMove = useCallback((event: React.MouseEvent) => {
+    if (rafRef.current !== null) return;
+    const clientX = event.clientX;
+    const clientY = event.clientY;
+    rafRef.current = requestAnimationFrame(() => {
+      const rect = rectRef.current;
+      if (rect) {
+        setMousePosition({ x: clientX - rect.left, y: clientY - rect.top });
+      }
+      rafRef.current = null;
+    });
+  }, []);
 
   const size = 300;
   return (
-    <div
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      className="h-full absolute inset-0"
-    >
+    <div ref={ref} onMouseMove={handleMouseMove} className="h-full absolute inset-0">
       <div className="absolute h-[20rem] inset-y-0 overflow-hidden">
         <div className="absolute h-full w-full pointer-events-none -bottom-2 z-40 bg-slate-950 [mask-image:linear-gradient(to_bottom,transparent,black)]" />
         <div
@@ -87,52 +103,49 @@ interface PatternProps {
 }
 
 const Pattern = ({ className, accentColor, fillColor = "rgba(14,165,233,0.3)", isAccent }: PatternProps) => {
-  const x = new Array(47).fill(0);
-  const y = new Array(30).fill(0);
-  const matrix = x.map((_, i) => y.map((_, j) => [i, j]));
-  const [clickedCell, setClickedCell] = useState<[number, number] | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Imperative click ripple — no React re-renders, direct DOM animation
+  const handleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const target = (e.target as HTMLElement).closest<HTMLElement>("[data-row]");
+    if (!target || !containerRef.current) return;
+
+    const clickRow = parseInt(target.dataset.row!, 10);
+    const clickCol = parseInt(target.dataset.col!, 10);
+    const inners = containerRef.current.querySelectorAll<HTMLElement>("[data-inner]");
+
+    // Remove all animations first, then force a single reflow, then set new animations
+    inners.forEach((el) => { el.style.animation = "none"; });
+    void containerRef.current.offsetHeight; // single reflow to restart animations
+    inners.forEach((el) => {
+      const r = parseInt(el.dataset.row!, 10);
+      const c = parseInt(el.dataset.col!, 10);
+      const dist = Math.sqrt(Math.pow(clickRow - r, 2) + Math.pow(clickCol - c, 2));
+      el.style.animation = `bgCellRipple ${Math.min(dist * 0.2 + 0.3, 2)}s ease-out ${dist * 0.05}s forwards`;
+    });
+  }, []);
 
   return (
-    <div className={cn("flex flex-row relative z-30", className)}>
+    <div ref={containerRef} className={cn("flex flex-row relative z-30", className)} onClick={handleClick}>
       {matrix.map((row, rowIdx) => (
-        <div
-          key={`matrix-row-${rowIdx}`}
-          className="flex flex-col relative z-20 border-b"
-        >
-          {row.map((column, colIdx) => {
-            const controls = useAnimation();
-
-            useEffect(() => {
-              if (clickedCell) {
-                const distance = Math.sqrt(
-                  Math.pow(clickedCell[0] - rowIdx, 2) +
-                    Math.pow(clickedCell[1] - colIdx, 2)
-                );
-                controls.start({
-                  opacity: [0, 1 - distance * 0.1, 0],
-                  transition: { duration: distance * 0.2 },
-                });
-              }
-            }, [clickedCell]);
-
-            return (
+        <div key={rowIdx} className="flex flex-col relative z-20 border-b">
+          {row.map((_, colIdx) => (
+            <div
+              key={colIdx}
+              data-row={rowIdx}
+              data-col={colIdx}
+              className="bg-transparent border-l border-b border-neutral-600 relative z-[100] group"
+              style={isAccent && accentColor ? { borderColor: accentColor } : undefined}
+            >
               <div
-                key={`matrix-col-${colIdx}`}
-                className="bg-transparent border-l border-b border-neutral-600 relative z-[100]"
-                style={isAccent && accentColor ? { borderColor: accentColor } : undefined}
-                onClick={() => setClickedCell([rowIdx, colIdx])}
-              >
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: [0, 1, 0.5] }}
-                  transition={{ duration: 0.5, ease: "backOut" }}
-                  animate={controls}
-                  className="h-12 w-12"
-                  style={{ backgroundColor: fillColor }}
-                />
-              </div>
-            );
-          })}
+                data-inner
+                data-row={rowIdx}
+                data-col={colIdx}
+                className="h-12 w-12 opacity-0 group-hover:opacity-50 transition-opacity duration-500"
+                style={{ backgroundColor: fillColor }}
+              />
+            </div>
+          ))}
         </div>
       ))}
     </div>

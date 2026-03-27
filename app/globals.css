@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@keyframes bgCellRipple {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
 /* ── CMS HTML content — public section components (light bg) ── */
 .cms-html-content a { color: #0966c2; text-decoration: underline; text-underline-offset: 2px; }
 .cms-html-content a:hover { color: #0855a3; }
