@@ -236,7 +236,7 @@ export default async function BlogPostPage({ params }: Props) {
                     href={`/blog/${otherPost.slug}`}
                     className="group overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all hover:border-[#0966c2] hover:shadow-md"
                   >
-                    {otherPost.image ? (
+                    {otherPost.image && (
                       <div className="aspect-video w-full overflow-hidden">
                         <Image
                           src={otherPost.image}
@@ -245,10 +245,6 @@ export default async function BlogPostPage({ params }: Props) {
                           height={225}
                           className="h-full w-full object-cover transition-transform group-hover:scale-105"
                         />
-                      </div>
-                    ) : (
-                      <div className="aspect-video w-full bg-gradient-to-br from-[#0966c2]/10 to-[#0966c2]/5 flex items-center justify-center">
-                        <span className="text-3xl text-[#0966c2]/30">📝</span>
                       </div>
                     )}
                     <div className="p-4">
