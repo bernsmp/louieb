@@ -80,6 +80,12 @@ const pages = [
   { name: 'How to Run a Discovery Call', href: '/cms/seo-how-to-run-discovery-call', icon: FileTextIcon },
   { name: 'Close Deals Without Discounting', href: '/cms/seo-close-deals-no-discount', icon: FileTextIcon },
   { name: 'Sales Accountability Document', href: '/cms/seo-sales-accountability-document', icon: FileTextIcon },
+  { name: 'What Is Sales Enablement', href: '/cms/seo-what-is-sales-enablement', icon: FileTextIcon },
+  { name: 'Scale Revenue $1M to $10M', href: '/cms/seo-scale-revenue-1m-to-10m', icon: FileTextIcon },
+  { name: 'What Is Revenue Operations (RevOps)', href: '/cms/seo-what-is-revops', icon: FileTextIcon },
+  { name: 'Fractional Sales Leadership ROI', href: '/cms/seo-fsl-roi', icon: FileTextIcon },
+  { name: 'How to Build a GTM Strategy', href: '/cms/seo-go-to-market-strategy', icon: FileTextIcon },
+  { name: 'B2B Sales Objection Handling', href: '/cms/seo-b2b-objection-handling', icon: FileTextIcon },
 ]
 
 const collections = [
