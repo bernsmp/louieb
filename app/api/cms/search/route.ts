@@ -77,6 +77,18 @@ const PAGE_REGISTRY: { title: string; slug: string; editUrl: string }[] = [
   // Operations
   { title: 'How to Run a Weekly Sales Meeting', slug: 'how-to-run-weekly-sales-meeting', editUrl: '/cms/seo-weekly-sales-meeting' },
   { title: 'How to Set Up HubSpot for a Small Sales Team', slug: 'how-to-set-up-hubspot-for-small-sales-team', editUrl: '/cms/seo-hubspot-setup' },
+  // New batch — growth, RevOps, enablement, GTM, ROI, objections
+  { title: 'What Is Sales Enablement', slug: 'what-is-sales-enablement', editUrl: '/cms/seo-what-is-sales-enablement' },
+  { title: 'How to Scale Revenue from $1M to $10M', slug: 'how-to-scale-revenue-1m-to-10m', editUrl: '/cms/seo-scale-revenue-1m-to-10m' },
+  { title: 'Scale Revenue $1M to $10M Roadmap', slug: 'how-to-scale-revenue-1m-to-10m', editUrl: '/cms/seo-scale-revenue-1m-to-10m' },
+  { title: 'What Is Revenue Operations (RevOps)', slug: 'what-is-revenue-operations-revops', editUrl: '/cms/seo-what-is-revops' },
+  { title: 'RevOps for Founders', slug: 'what-is-revenue-operations-revops', editUrl: '/cms/seo-what-is-revops' },
+  { title: 'Fractional Sales Leadership ROI', slug: 'fractional-sales-leadership-roi', editUrl: '/cms/seo-fsl-roi' },
+  { title: 'What Does Fractional Sales Leadership Cost and Return', slug: 'fractional-sales-leadership-roi', editUrl: '/cms/seo-fsl-roi' },
+  { title: 'How to Build a Go-to-Market Strategy', slug: 'how-to-build-a-go-to-market-strategy', editUrl: '/cms/seo-go-to-market-strategy' },
+  { title: 'GTM Strategy for B2B Companies', slug: 'how-to-build-a-go-to-market-strategy', editUrl: '/cms/seo-go-to-market-strategy' },
+  { title: 'B2B Sales Objection Handling', slug: 'b2b-sales-objection-handling', editUrl: '/cms/seo-b2b-objection-handling' },
+  { title: 'How to Handle Sales Objections', slug: 'b2b-sales-objection-handling', editUrl: '/cms/seo-b2b-objection-handling' },
   // Audience pages
   { title: 'For Founders', slug: 'founders', editUrl: '/cms/founders' },
   { title: 'For Entrepreneurs', slug: 'entrepreneurs', editUrl: '/cms/entrepreneurs' },
@@ -162,6 +174,13 @@ const SECTION_URLS: Record<string, string> = {
   seoSalesForecastingSmallBusiness: '/cms/seo-sales-forecasting',
   seoWhatIsASalesAudit: '/cms/seo-sales-audit',
   seoBuildOutboundSalesSystem: '/cms/seo-outbound-sales-system',
+  // New batch
+  seoWhatIsSalesEnablement: '/cms/seo-what-is-sales-enablement',
+  seoScaleRevenue1mTo10m: '/cms/seo-scale-revenue-1m-to-10m',
+  seoWhatIsRevOps: '/cms/seo-what-is-revops',
+  seoFractionalSalesLeadershipRoi: '/cms/seo-fsl-roi',
+  seoBuildGoToMarketStrategy: '/cms/seo-go-to-market-strategy',
+  seoB2bSalesObjectionHandling: '/cms/seo-b2b-objection-handling',
 }
 
 function extractSnippet(text: string, query: string, maxLen = 120): string {
