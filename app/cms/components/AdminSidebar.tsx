@@ -86,6 +86,12 @@ const pages = [
   { name: 'Fractional Sales Leadership ROI', href: '/cms/seo-fsl-roi', icon: FileTextIcon },
   { name: 'How to Build a GTM Strategy', href: '/cms/seo-go-to-market-strategy', icon: FileTextIcon },
   { name: 'B2B Sales Objection Handling', href: '/cms/seo-b2b-objection-handling', icon: FileTextIcon },
+  { name: 'Sales Velocity (B2B)', href: '/cms/seo-sales-velocity', icon: FileTextIcon },
+  { name: 'Win-Loss Analysis', href: '/cms/seo-win-loss-analysis', icon: FileTextIcon },
+  { name: 'How to Shorten the Sales Cycle', href: '/cms/seo-shorten-sales-cycle', icon: FileTextIcon },
+  { name: 'Sales Qualified Lead (SQL)', href: '/cms/seo-sales-qualified-lead', icon: FileTextIcon },
+  { name: 'B2B Referral Program', href: '/cms/seo-b2b-referral-program', icon: FileTextIcon },
+  { name: 'Sales Pipeline Stages', href: '/cms/seo-sales-pipeline-stages', icon: FileTextIcon },
 ]
 
 const collections = [
