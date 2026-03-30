@@ -18,96 +18,125 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const } },
 }
 
-const gtmComponents = [
-  {
-    number: '01',
-    title: 'Ideal Customer Profile (ICP)',
-    body: 'Your ICP is not your target market. It\'s the specific company type — defined by firmographics, trigger events, pain points, and internal buyer profile — that closes fastest, pays best, and stays longest. Vague ICPs produce long sales cycles and low conversion rates. A precise ICP built from your last 30 closed-won deals is the foundation every other GTM decision is built on.',
-    question: 'Test: Can you describe your ICP in one sentence and have every rep agree on it?',
-  },
-  {
-    number: '02',
-    title: 'Value Proposition and Messaging',
-    body: 'Your value proposition must answer one question for the buyer: "Why should I change what I\'m doing right now, for this?" It\'s not about features. It\'s about the specific business outcome the buyer gets — quantified, grounded in their situation, and differentiated from alternatives. Most companies at the $1M–$10M stage have a product, not a message. The GTM strategy forces that message to be built.',
-    question: 'Test: If a rep describes your value proposition to a cold prospect, does it make them want to learn more?',
-  },
-  {
-    number: '03',
-    title: 'Sales Motion',
-    body: 'Your sales motion is how you go from first contact to closed-won. That includes: which channel you use to find buyers (outbound, inbound, partner, referral), what the discovery process looks like, how you structure the evaluation, and what the handoff to onboarding looks like. Different ICPs require different motions. A land-and-expand SaaS sale looks nothing like a professional services engagement.',
-    question: 'Test: Can a new rep understand your sales motion from a one-page document on day one?',
-  },
-  {
-    number: '04',
-    title: 'Channel Strategy',
-    body: 'Where do your best buyers live? Most $1M–$10M companies stumble into their first customers through founder networks and warm referrals — which doesn\'t tell you where to find the next 100. Channel strategy forces you to answer: which acquisition channels produce the right buyers at a sustainable cost. It also prevents the expensive mistake of investing in channels that produce volume but not quality.',
-    question: 'Test: Do you know your customer acquisition cost and sales cycle length by channel?',
-  },
-  {
-    number: '05',
-    title: 'Launch and Iteration Plan',
-    body: 'A GTM strategy is a hypothesis, not a plan. It needs defined milestones and feedback loops: pipeline coverage targets, conversion rate benchmarks, ICP validation checkpoints. The companies that execute GTM successfully are the ones that treat the first 90 days as a test, not a commitment. Adjust the ICP, the messaging, or the channel based on what the data says — not what the original plan assumed.',
-    question: 'Test: Do you have defined metrics that would tell you the GTM strategy isn\'t working?',
-  },
-]
-
-const gtmComparison = [
-  { wrong: 'ICP defined as "companies between $1M and $50M that could use our product"', right: 'ICP defined as "B2B SaaS companies at $2M–$8M ARR with a sales team of 3–10 reps experiencing quota miss"' },
-  { wrong: 'Value prop is a list of features: "Our platform does X, Y, and Z"', right: 'Value prop is an outcome: "We cut sales ramp time by 40% for growing B2B teams"' },
-  { wrong: 'Sales motion is: "however we closed the last deal"', right: 'Sales motion is documented: outbound sequence → discovery → demo → proposal → close' },
-  { wrong: 'Channel strategy is: "post on LinkedIn and hope for referrals"', right: 'Channel strategy has two tested channels with CAC and conversion rate data for each' },
-  { wrong: 'No defined success metrics — GTM is "working" if revenue goes up', right: 'Weekly pipeline coverage, stage conversion rates, and ICP match rate measured from day one' },
-]
-
-const gtmMistakes = [
-  { mistake: 'Building the GTM around what you want to sell, not what buyers want to buy', why: 'GTM that starts with the product fails in the field. Start with the buyer\'s problem and work backward.' },
-  { mistake: 'Targeting too broad an ICP to avoid leaving revenue on the table', why: 'Broad targeting produces long cycles, high churn, and unclear messaging. Narrow to win — then expand.' },
-  { mistake: 'Defining the GTM strategy in a conference room without sales data', why: 'Your last 30 deals contain the real GTM. Build from closed-won patterns, not internal conviction.' },
-  { mistake: 'Treating the GTM as a launch event instead of an ongoing process', why: 'Markets move. ICPs shift. What works in Q1 may not work in Q3. GTM requires quarterly reviews.' },
-]
-
-const faqs = [
-  {
-    q: 'Do I need a go-to-market strategy if I already have $3M in ARR?',
-    a: 'Yes — more than ever. At $3M ARR, you\'ve validated that some version of your GTM works. The question is whether it\'s built on repeatable fundamentals (clear ICP, documented process, known channels) or on founder relationships and luck. If it\'s the latter, scaling past $5M will be much harder than it should be. A formal GTM review at $3M–$5M ARR is one of the highest-leverage investments a founder can make.',
-  },
-  {
-    q: 'How often should a go-to-market strategy be revised?',
-    a: 'The core ICP and value proposition should be reviewed quarterly and updated when the data changes — when close rates shift, when win/loss patterns change, or when a new segment starts outperforming the original. The channel strategy should be reviewed monthly. Most companies under $10M are running on a GTM built in the first year and never updated — which means they\'re often selling to the wrong buyers with the wrong message through the wrong channels.',
-  },
-  {
-    q: 'What\'s the relationship between a go-to-market strategy and a sales playbook?',
-    a: 'The GTM strategy defines the "what" and "who" — which buyers to target, with what message, through what channels. The sales playbook defines the "how" — the specific process reps use to convert those buyers into customers. The GTM strategy should be built before the playbook, because the playbook is built around the buyer journey the GTM strategy defines. Most companies build the playbook first and wonder why it doesn\'t work.',
-  },
-  {
-    q: 'Can a fractional sales leader help build a go-to-market strategy?',
-    a: 'Yes — and this is one of the highest-value applications of fractional sales leadership. Building a GTM strategy requires both strategic clarity (ICP, value prop, motion) and operational execution (configuring the CRM, training reps, running pipeline reviews against the new framework). Consultants can deliver the strategy document. A fractional sales leader builds the strategy and then implements it.',
-  },
-]
-
-const schemaData = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'FAQPage',
-      mainEntity: faqs.map((faq) => ({
-        '@type': 'Question',
-        name: faq.q,
-        acceptedAnswer: { '@type': 'Answer', text: faq.a },
-      })),
-    },
-    {
-      '@type': 'Article',
-      headline: 'How to Build a Go-to-Market Strategy for a $1M–$10M B2B Business',
-      author: { '@type': 'Person', name: 'Louie Bernstein', url: 'https://louiebernstein.com' },
-      url: 'https://louiebernstein.com/how-to-build-a-go-to-market-strategy',
-    },
-  ],
-}
-
 export default function HowToBuildGtmStrategyPage() {
   const { v, cmsfaqs } = useCmsSection(CMS_SECTION)
-  const displayFaqs = cmsfaqs(4, faqs)
+
+  const gtmComponents = [
+    {
+      number: '01',
+      title: v('gtm1Title', 'Ideal Customer Profile (ICP)'),
+      body: v('gtm1Body', "Your ICP is not your target market. It's the specific company type — defined by firmographics, trigger events, pain points, and internal buyer profile — that closes fastest, pays best, and stays longest. Vague ICPs produce long sales cycles and low conversion rates. A precise ICP built from your last 30 closed-won deals is the foundation every other GTM decision is built on."),
+      question: v('gtm1Question', 'Test: Can you describe your ICP in one sentence and have every rep agree on it?'),
+    },
+    {
+      number: '02',
+      title: v('gtm2Title', 'Value Proposition and Messaging'),
+      body: v('gtm2Body', "Your value proposition must answer one question for the buyer: \"Why should I change what I'm doing right now, for this?\" It's not about features. It's about the specific business outcome the buyer gets — quantified, grounded in their situation, and differentiated from alternatives. Most companies at the $1M–$10M stage have a product, not a message. The GTM strategy forces that message to be built."),
+      question: v('gtm2Question', 'Test: If a rep describes your value proposition to a cold prospect, does it make them want to learn more?'),
+    },
+    {
+      number: '03',
+      title: v('gtm3Title', 'Sales Motion'),
+      body: v('gtm3Body', "Your sales motion is how you go from first contact to closed-won. That includes: which channel you use to find buyers (outbound, inbound, partner, referral), what the discovery process looks like, how you structure the evaluation, and what the handoff to onboarding looks like. Different ICPs require different motions. A land-and-expand SaaS sale looks nothing like a professional services engagement."),
+      question: v('gtm3Question', 'Test: Can a new rep understand your sales motion from a one-page document on day one?'),
+    },
+    {
+      number: '04',
+      title: v('gtm4Title', 'Channel Strategy'),
+      body: v('gtm4Body', "Where do your best buyers live? Most $1M–$10M companies stumble into their first customers through founder networks and warm referrals — which doesn't tell you where to find the next 100. Channel strategy forces you to answer: which acquisition channels produce the right buyers at a sustainable cost. It also prevents the expensive mistake of investing in channels that produce volume but not quality."),
+      question: v('gtm4Question', 'Test: Do you know your customer acquisition cost and sales cycle length by channel?'),
+    },
+    {
+      number: '05',
+      title: v('gtm5Title', 'Launch and Iteration Plan'),
+      body: v('gtm5Body', "A GTM strategy is a hypothesis, not a plan. It needs defined milestones and feedback loops: pipeline coverage targets, conversion rate benchmarks, ICP validation checkpoints. The companies that execute GTM successfully are the ones that treat the first 90 days as a test, not a commitment. Adjust the ICP, the messaging, or the channel based on what the data says — not what the original plan assumed."),
+      question: v('gtm5Question', "Test: Do you have defined metrics that would tell you the GTM strategy isn't working?"),
+    },
+  ]
+
+  const gtmComparison = [
+    {
+      wrong: v('comparison1Wrong', 'ICP defined as "companies between $1M and $50M that could use our product"'),
+      right: v('comparison1Right', 'ICP defined as "B2B SaaS companies at $2M–$8M ARR with a sales team of 3–10 reps experiencing quota miss"'),
+    },
+    {
+      wrong: v('comparison2Wrong', 'Value prop is a list of features: "Our platform does X, Y, and Z"'),
+      right: v('comparison2Right', 'Value prop is an outcome: "We cut sales ramp time by 40% for growing B2B teams"'),
+    },
+    {
+      wrong: v('comparison3Wrong', 'Sales motion is: "however we closed the last deal"'),
+      right: v('comparison3Right', 'Sales motion is documented: outbound sequence → discovery → demo → proposal → close'),
+    },
+    {
+      wrong: v('comparison4Wrong', 'Channel strategy is: "post on LinkedIn and hope for referrals"'),
+      right: v('comparison4Right', 'Channel strategy has two tested channels with CAC and conversion rate data for each'),
+    },
+    {
+      wrong: v('comparison5Wrong', 'No defined success metrics — GTM is "working" if revenue goes up'),
+      right: v('comparison5Right', 'Weekly pipeline coverage, stage conversion rates, and ICP match rate measured from day one'),
+    },
+  ]
+
+  const gtmMistakes = [
+    {
+      mistake: v('mistake1', "Building the GTM around what you want to sell, not what buyers want to buy"),
+      why: v('mistake1Why', "GTM that starts with the product fails in the field. Start with the buyer's problem and work backward."),
+    },
+    {
+      mistake: v('mistake2', "Targeting too broad an ICP to avoid leaving revenue on the table"),
+      why: v('mistake2Why', "Broad targeting produces long cycles, high churn, and unclear messaging. Narrow to win — then expand."),
+    },
+    {
+      mistake: v('mistake3', "Defining the GTM strategy in a conference room without sales data"),
+      why: v('mistake3Why', "Your last 30 deals contain the real GTM. Build from closed-won patterns, not internal conviction."),
+    },
+    {
+      mistake: v('mistake4', "Treating the GTM as a launch event instead of an ongoing process"),
+      why: v('mistake4Why', "Markets move. ICPs shift. What works in Q1 may not work in Q3. GTM requires quarterly reviews."),
+    },
+  ]
+
+  const defaultFaqs = [
+    {
+      q: 'Do I need a go-to-market strategy if I already have $3M in ARR?',
+      a: "Yes — more than ever. At $3M ARR, you've validated that some version of your GTM works. The question is whether it's built on repeatable fundamentals (clear ICP, documented process, known channels) or on founder relationships and luck. If it's the latter, scaling past $5M will be much harder than it should be. A formal GTM review at $3M–$5M ARR is one of the highest-leverage investments a founder can make.",
+    },
+    {
+      q: 'How often should a go-to-market strategy be revised?',
+      a: "The core ICP and value proposition should be reviewed quarterly and updated when the data changes — when close rates shift, when win/loss patterns change, or when a new segment starts outperforming the original. The channel strategy should be reviewed monthly. Most companies under $10M are running on a GTM built in the first year and never updated — which means they're often selling to the wrong buyers with the wrong message through the wrong channels.",
+    },
+    {
+      q: "What's the relationship between a go-to-market strategy and a sales playbook?",
+      a: "The GTM strategy defines the \"what\" and \"who\" — which buyers to target, with what message, through what channels. The sales playbook defines the \"how\" — the specific process reps use to convert those buyers into customers. The GTM strategy should be built before the playbook, because the playbook is built around the buyer journey the GTM strategy defines. Most companies build the playbook first and wonder why it doesn't work.",
+    },
+    {
+      q: 'Can a fractional sales leader help build a go-to-market strategy?',
+      a: "Yes — and this is one of the highest-value applications of fractional sales leadership. Building a GTM strategy requires both strategic clarity (ICP, value prop, motion) and operational execution (configuring the CRM, training reps, running pipeline reviews against the new framework). Consultants can deliver the strategy document. A fractional sales leader builds the strategy and then implements it.",
+    },
+  ]
+
+  const displayFaqs = cmsfaqs(4, defaultFaqs)
+
+  const schemaData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'FAQPage',
+        mainEntity: displayFaqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.q,
+          acceptedAnswer: { '@type': 'Answer', text: faq.a },
+        })),
+      },
+      {
+        '@type': 'Article',
+        headline: 'How to Build a Go-to-Market Strategy for a $1M–$10M B2B Business',
+        author: { '@type': 'Person', name: 'Louie Bernstein', url: 'https://louiebernstein.com' },
+        url: 'https://louiebernstein.com/how-to-build-a-go-to-market-strategy',
+      },
+    ],
+  }
+
   return (
     <>
       <script
@@ -179,10 +208,10 @@ export default function HowToBuildGtmStrategyPage() {
               variants={itemVariants}
               className="mb-4 text-center font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
             >
-              The 5 Components of a GTM Strategy
+              {v('sectionGtmHeading', 'The 5 Components of a GTM Strategy')}
             </motion.h2>
             <motion.p variants={itemVariants} className="mb-10 text-center text-neutral-600">
-              Each component has a test you can run right now to assess where you stand.
+              {v('sectionGtmSubheading', 'Each component has a test you can run right now to assess where you stand.')}
             </motion.p>
             <div className="space-y-6">
               {gtmComponents.map((item, i) => (
@@ -218,14 +247,14 @@ export default function HowToBuildGtmStrategyPage() {
             viewport={{ once: true }}
           >
             <motion.p variants={itemVariants} className="mb-5 text-lg leading-relaxed text-neutral-700">
-              A go-to-market strategy is not a marketing plan, a pitch deck, or a set of quarterly revenue targets. It's the operational framework that defines who you sell to, what you say to them, how you reach them, and how you close them — documented clearly enough that a rep can execute it without the founder in the room. Most $1M–$10M companies don't have one. They have a collection of things that have worked and a founder who knows how to sell. That distinction is what makes growth hard to sustain.
+              {v('seoPara1', "A go-to-market strategy is not a marketing plan, a pitch deck, or a set of quarterly revenue targets. It's the operational framework that defines who you sell to, what you say to them, how you reach them, and how you close them — documented clearly enough that a rep can execute it without the founder in the room. Most $1M–$10M companies don't have one. They have a collection of things that have worked and a founder who knows how to sell. That distinction is what makes growth hard to sustain.")}
             </motion.p>
             <motion.p variants={itemVariants} className="text-lg leading-relaxed text-neutral-700">
-              Building a GTM strategy starts with your data, not with a blank whiteboard. The ICP comes from your last 30 closed-won deals. The value proposition comes from your win/loss analysis. The channel strategy comes from your CAC by source. If you don't have that data today, the first step is building the tracking system that generates it. If you're not sure{' '}
+              {v('seoPara2', "Building a GTM strategy starts with your data, not with a blank whiteboard. The ICP comes from your last 30 closed-won deals. The value proposition comes from your win/loss analysis. The channel strategy comes from your CAC by source. If you don't have that data today, the first step is building the tracking system that generates it.")}{' '}
               <Link href="/what-is-a-sales-audit" className="font-semibold text-blue-700 underline underline-offset-2 hover:text-blue-900">
-                what a sales audit covers →
+                What a sales audit covers →
               </Link>{' '}
-              that's typically the right place to start before building the GTM strategy.
+              is typically the right place to start before building the GTM strategy.
             </motion.p>
           </motion.div>
         </div>
@@ -244,10 +273,10 @@ export default function HowToBuildGtmStrategyPage() {
               variants={itemVariants}
               className="mb-4 text-center font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
             >
-              GTM Done Right vs. GTM Done Wrong
+              {v('sectionComparisonHeading', 'GTM Done Right vs. GTM Done Wrong')}
             </motion.h2>
             <motion.p variants={itemVariants} className="mb-10 text-center text-neutral-600">
-              The difference is specificity. Vague GTM produces vague results.
+              {v('sectionComparisonSubheading', 'The difference is specificity. Vague GTM produces vague results.')}
             </motion.p>
             <div className="overflow-hidden rounded-xl border border-neutral-200">
               <div className="grid grid-cols-2 bg-neutral-900 text-white">
@@ -288,10 +317,10 @@ export default function HowToBuildGtmStrategyPage() {
               variants={itemVariants}
               className="mb-4 text-center font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
             >
-              4 GTM Mistakes That Kill Traction
+              {v('sectionMistakesHeading', '4 GTM Mistakes That Kill Traction')}
             </motion.h2>
             <motion.p variants={itemVariants} className="mb-10 text-center text-neutral-600">
-              Each one is common at the $1M–$10M stage. Each one is avoidable.
+              {v('sectionMistakesSubheading', 'Each one is common at the $1M–$10M stage. Each one is avoidable.')}
             </motion.p>
             <div className="grid gap-5 md:grid-cols-2">
               {gtmMistakes.map((item, i) => (

@@ -18,94 +18,114 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const } },
 }
 
-const components = [
-  {
-    number: '01',
-    title: 'Content & Messaging',
-    body: 'The materials reps use to move deals forward — one-pagers, case studies, competitive battle cards, email templates, and talk tracks. Without this, every rep invents their own pitch. Some win. Most lose inconsistently and nobody knows why.',
-  },
-  {
-    number: '02',
-    title: 'Training & Onboarding',
-    body: 'A structured program that gets new reps to their first close in 60–90 days, not 6 months. It includes product knowledge, ICP understanding, discovery frameworks, and live call practice — not a stack of PDFs and a Zoom login.',
-  },
-  {
-    number: '03',
-    title: 'Playbooks & Process',
-    body: 'Documented stage-by-stage guidance on how to move deals from first contact to closed-won. A real playbook tells reps what to do at each stage, what questions to ask, what objections to expect, and what constitutes a real exit criterion.',
-  },
-  {
-    number: '04',
-    title: 'CRM & Technology',
-    body: 'Tools that make reps faster, not slower. A well-configured CRM that reflects the actual sales process, not the default demo setup. Sequences that automate follow-up. Dashboards that surface real pipeline health rather than vanity metrics.',
-  },
-  {
-    number: '05',
-    title: 'Coaching & Feedback Loops',
-    body: 'Regular call reviews, deal reviews, and one-on-ones that surface what\'s actually happening in the field. The best sales enablement isn\'t a document — it\'s a system that continuously improves how reps sell based on real data from real deals.',
-  },
-]
-
-const comparison = [
-  { without: 'Every rep pitches differently — wins feel random', with: 'Consistent messaging across the team — wins are repeatable' },
-  { without: 'New hires take 5–6 months to close their first deal', with: 'Structured onboarding produces first close in 60–90 days' },
-  { without: 'Deal stage definitions are vague or ignored', with: 'Clear exit criteria drive accurate pipeline and forecasting' },
-  { without: 'Reps create their own content — quality varies wildly', with: 'Approved materials that work are used consistently' },
-  { without: 'Coaching is reactive — after a deal is already lost', with: 'Proactive coaching based on call reviews and stage data' },
-  { without: 'CRM is a burden reps avoid filling in', with: 'CRM is a tool reps use because it helps them sell' },
-]
-
-const signals = [
-  { signal: 'New reps take longer than 90 days to close their first deal', yes: false },
-  { signal: 'Your best rep\'s departure would significantly hurt the number', yes: false },
-  { signal: 'Reps handle the same objection differently every time', yes: false },
-  { signal: 'You don\'t know your stage-to-stage conversion rates', yes: false },
-  { signal: 'Content creation falls on the founder or one senior rep', yes: false },
-  { signal: 'Your CRM data is incomplete, stale, or not trusted', yes: false },
-]
-
-const faqs = [
-  {
-    q: 'Is sales enablement only for large companies with dedicated teams?',
-    a: 'No — and this is the most expensive misconception in B2B sales. The companies that benefit most from sales enablement are $1M–$10M businesses where every rep\'s performance matters and there\'s no margin for a slow ramp or an inconsistent pitch. You don\'t need a dedicated enablement team. You need documented processes, real training, and a playbook. A fractional sales leader can build all three.',
-  },
-  {
-    q: 'What\'s the difference between sales enablement and sales training?',
-    a: 'Sales training is one component of sales enablement. Enablement is the full system: content, training, playbooks, tools, and coaching loops. Training tells reps what to do. Enablement ensures they have everything they need to do it consistently — and a feedback loop to keep improving.',
-  },
-  {
-    q: 'How long does it take to build a sales enablement system?',
-    a: 'The core infrastructure — playbook, onboarding program, basic content library, and CRM setup — can be built in 60–90 days. The coaching and feedback loops take longer to mature because they require data from real deals. Most companies see measurable improvement in ramp time and close rates within 90 days of having the basics in place.',
-  },
-  {
-    q: 'Can a founder build sales enablement without hiring a VP of Sales?',
-    a: 'Yes — and this is often the right sequence. Build the enablement system first: document how you sell, create the playbook, set up the CRM properly, and define what good looks like. Then hire. A rep onboarded into a functioning system closes faster and stays longer than a rep hired into chaos. A fractional sales leader can build this system at a fraction of the cost of a VP hire.',
-  },
-]
-
-const schemaData = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'FAQPage',
-      mainEntity: faqs.map((faq) => ({
-        '@type': 'Question',
-        name: faq.q,
-        acceptedAnswer: { '@type': 'Answer', text: faq.a },
-      })),
-    },
-    {
-      '@type': 'Article',
-      headline: 'What Is Sales Enablement? And Why Your Small Team Desperately Needs It',
-      author: { '@type': 'Person', name: 'Louie Bernstein', url: 'https://louiebernstein.com' },
-      url: 'https://louiebernstein.com/what-is-sales-enablement',
-    },
-  ],
-}
-
 export default function WhatIsSalesEnablementPage() {
   const { v, cmsfaqs } = useCmsSection(CMS_SECTION)
-  const displayFaqs = cmsfaqs(4, faqs)
+
+  const components = [
+    {
+      number: '01',
+      title: v('component1Title', 'Content & Messaging'),
+      body: v('component1Body', 'The materials reps use to move deals forward — one-pagers, case studies, competitive battle cards, email templates, and talk tracks. Without this, every rep invents their own pitch. Some win. Most lose inconsistently and nobody knows why.'),
+    },
+    {
+      number: '02',
+      title: v('component2Title', 'Training & Onboarding'),
+      body: v('component2Body', 'A structured program that gets new reps to their first close in 60–90 days, not 6 months. It includes product knowledge, ICP understanding, discovery frameworks, and live call practice — not a stack of PDFs and a Zoom login.'),
+    },
+    {
+      number: '03',
+      title: v('component3Title', 'Playbooks & Process'),
+      body: v('component3Body', 'Documented stage-by-stage guidance on how to move deals from first contact to closed-won. A real playbook tells reps what to do at each stage, what questions to ask, what objections to expect, and what constitutes a real exit criterion.'),
+    },
+    {
+      number: '04',
+      title: v('component4Title', 'CRM & Technology'),
+      body: v('component4Body', 'Tools that make reps faster, not slower. A well-configured CRM that reflects the actual sales process, not the default demo setup. Sequences that automate follow-up. Dashboards that surface real pipeline health rather than vanity metrics.'),
+    },
+    {
+      number: '05',
+      title: v('component5Title', 'Coaching & Feedback Loops'),
+      body: v('component5Body', "Regular call reviews, deal reviews, and one-on-ones that surface what's actually happening in the field. The best sales enablement isn't a document — it's a system that continuously improves how reps sell based on real data from real deals."),
+    },
+  ]
+
+  const comparison = [
+    {
+      without: v('comparison1Without', 'Every rep pitches differently — wins feel random'),
+      with: v('comparison1With', 'Consistent messaging across the team — wins are repeatable'),
+    },
+    {
+      without: v('comparison2Without', 'New hires take 5–6 months to close their first deal'),
+      with: v('comparison2With', 'Structured onboarding produces first close in 60–90 days'),
+    },
+    {
+      without: v('comparison3Without', 'Deal stage definitions are vague or ignored'),
+      with: v('comparison3With', 'Clear exit criteria drive accurate pipeline and forecasting'),
+    },
+    {
+      without: v('comparison4Without', 'Reps create their own content — quality varies wildly'),
+      with: v('comparison4With', 'Approved materials that work are used consistently'),
+    },
+    {
+      without: v('comparison5Without', 'Coaching is reactive — after a deal is already lost'),
+      with: v('comparison5With', 'Proactive coaching based on call reviews and stage data'),
+    },
+    {
+      without: v('comparison6Without', 'CRM is a burden reps avoid filling in'),
+      with: v('comparison6With', 'CRM is a tool reps use because it helps them sell'),
+    },
+  ]
+
+  const signals = [
+    v('signal1', 'New reps take longer than 90 days to close their first deal'),
+    v('signal2', "Your best rep's departure would significantly hurt the number"),
+    v('signal3', 'Reps handle the same objection differently every time'),
+    v('signal4', "You don't know your stage-to-stage conversion rates"),
+    v('signal5', 'Content creation falls on the founder or one senior rep'),
+    v('signal6', 'Your CRM data is incomplete, stale, or not trusted'),
+  ]
+
+  const defaultFaqs = [
+    {
+      q: 'Is sales enablement only for large companies with dedicated teams?',
+      a: "No — and this is the most expensive misconception in B2B sales. The companies that benefit most from sales enablement are $1M–$10M businesses where every rep's performance matters and there's no margin for a slow ramp or an inconsistent pitch. You don't need a dedicated enablement team. You need documented processes, real training, and a playbook. A fractional sales leader can build all three.",
+    },
+    {
+      q: "What's the difference between sales enablement and sales training?",
+      a: "Sales training is one component of sales enablement. Enablement is the full system: content, training, playbooks, tools, and coaching loops. Training tells reps what to do. Enablement ensures they have everything they need to do it consistently — and a feedback loop to keep improving.",
+    },
+    {
+      q: 'How long does it take to build a sales enablement system?',
+      a: 'The core infrastructure — playbook, onboarding program, basic content library, and CRM setup — can be built in 60–90 days. The coaching and feedback loops take longer to mature because they require data from real deals. Most companies see measurable improvement in ramp time and close rates within 90 days of having the basics in place.',
+    },
+    {
+      q: 'Can a founder build sales enablement without hiring a VP of Sales?',
+      a: "Yes — and this is often the right sequence. Build the enablement system first: document how you sell, create the playbook, set up the CRM properly, and define what good looks like. Then hire. A rep onboarded into a functioning system closes faster and stays longer than a rep hired into chaos. A fractional sales leader can build this system at a fraction of the cost of a VP hire.",
+    },
+  ]
+
+  const displayFaqs = cmsfaqs(4, defaultFaqs)
+
+  const schemaData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'FAQPage',
+        mainEntity: displayFaqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.q,
+          acceptedAnswer: { '@type': 'Answer', text: faq.a },
+        })),
+      },
+      {
+        '@type': 'Article',
+        headline: 'What Is Sales Enablement? And Why Your Small Team Desperately Needs It',
+        author: { '@type': 'Person', name: 'Louie Bernstein', url: 'https://louiebernstein.com' },
+        url: 'https://louiebernstein.com/what-is-sales-enablement',
+      },
+    ],
+  }
+
   return (
     <>
       <script
@@ -177,10 +197,10 @@ export default function WhatIsSalesEnablementPage() {
               variants={itemVariants}
               className="mb-4 text-center font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
             >
-              The 5 Components of Sales Enablement
+              {v('sectionComponentsHeading', 'The 5 Components of Sales Enablement')}
             </motion.h2>
             <motion.p variants={itemVariants} className="mb-10 text-center text-neutral-600">
-              Sales enablement isn't a single thing. It's a system with five interconnected parts — each one breaks without the others.
+              {v('sectionComponentsSubheading', "Sales enablement isn't a single thing. It's a system with five interconnected parts — each one breaks without the others.")}
             </motion.p>
             <div className="space-y-6">
               {components.map((item, i) => (
@@ -211,12 +231,12 @@ export default function WhatIsSalesEnablementPage() {
             viewport={{ once: true }}
           >
             <motion.p variants={itemVariants} className="mb-5 text-lg leading-relaxed text-neutral-700">
-              Sales enablement is one of the most misunderstood concepts in B2B sales — and one of the most consequential. Most founders assume it's a large-company problem: something you build after you have 20 reps and a dedicated operations team. The reality is the opposite. The companies that benefit most from sales enablement are small teams where every rep's performance matters and there's no budget to absorb a bad ramp or a string of inconsistent closes.
+              {v('seoPara1', "Sales enablement is one of the most misunderstood concepts in B2B sales — and one of the most consequential. Most founders assume it's a large-company problem: something you build after you have 20 reps and a dedicated operations team. The reality is the opposite. The companies that benefit most from sales enablement are small teams where every rep's performance matters and there's no budget to absorb a bad ramp or a string of inconsistent closes.")}
             </motion.p>
             <motion.p variants={itemVariants} className="text-lg leading-relaxed text-neutral-700">
-              At the $1M–$10M ARR stage, most sales enablement failures aren't about lack of effort — they're about lack of system. Reps are selling differently, pitching inconsistently, and onboarding slowly because nobody has built the infrastructure that makes selling teachable. That's what enablement fixes. If your team isn't performing the way you expect, a{' '}
+              {v('seoPara2', "At the $1M–$10M ARR stage, most sales enablement failures aren't about lack of effort — they're about lack of system. Reps are selling differently, pitching inconsistently, and onboarding slowly because nobody has built the infrastructure that makes selling teachable. That's what enablement fixes.")}{' '}
               <Link href="/diagnose-sales-team-problems" className="font-semibold text-blue-700 underline underline-offset-2 hover:text-blue-900">
-                sales team diagnostic →
+                A sales team diagnostic →
               </Link>{' '}
               is the fastest way to identify which component is missing.
             </motion.p>
@@ -237,10 +257,10 @@ export default function WhatIsSalesEnablementPage() {
               variants={itemVariants}
               className="mb-4 text-center font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
             >
-              With Sales Enablement vs. Without
+              {v('sectionComparisonHeading', 'With Sales Enablement vs. Without')}
             </motion.h2>
             <motion.p variants={itemVariants} className="mb-10 text-center text-neutral-600">
-              The difference shows up in every part of the sales operation — not just in the number.
+              {v('sectionComparisonSubheading', 'The difference shows up in every part of the sales operation — not just in the number.')}
             </motion.p>
             <div className="overflow-hidden rounded-xl border border-neutral-200">
               <div className="grid grid-cols-2 bg-neutral-900 text-white">
@@ -281,13 +301,13 @@ export default function WhatIsSalesEnablementPage() {
               variants={itemVariants}
               className="mb-4 text-center font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
             >
-              6 Signs Your Team Needs Sales Enablement Now
+              {v('sectionSignalsHeading', '6 Signs Your Team Needs Sales Enablement Now')}
             </motion.h2>
             <motion.p variants={itemVariants} className="mb-8 text-center text-neutral-600">
-              If any of these are true, the problem isn't the people — it's the system.
+              {v('sectionSignalsSubheading', "If any of these are true, the problem isn't the people — it's the system.")}
             </motion.p>
             <div className="grid gap-3 md:grid-cols-2">
-              {signals.map((item, i) => (
+              {signals.map((signal, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
@@ -296,7 +316,7 @@ export default function WhatIsSalesEnablementPage() {
                   <div className="mt-0.5 shrink-0 rounded-full bg-red-100 p-1 text-red-700">
                     <X className="h-4 w-4" />
                   </div>
-                  <p className="text-sm font-medium text-red-900">{item.signal}</p>
+                  <p className="text-sm font-medium text-red-900">{signal}</p>
                 </motion.div>
               ))}
             </div>

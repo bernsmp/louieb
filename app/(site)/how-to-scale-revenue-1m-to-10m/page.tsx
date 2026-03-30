@@ -18,91 +18,105 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const } },
 }
 
-const phases = [
-  {
-    range: '$1M–$2M',
-    title: 'Validate and Document',
-    body: 'At this stage, the founder is closing most deals personally. The priority isn\'t scaling — it\'s extracting what\'s working. Record 10 calls. Map your actual ICP from closed-won data (not who you think you sell to). Write down the discovery questions that reliably surface urgency. This documentation becomes the foundation everything else is built on. Skip it and the next phase fails.',
-    focus: 'Documentation, ICP validation, first playbook draft',
-  },
-  {
-    range: '$2M–$4M',
-    title: 'Hire and Systemize',
-    body: 'You now have enough proof that the sale works to bring in your first dedicated rep. But hire into a documented process — not chaos. The rep should have a playbook on day one, a ramp timeline, and a founder who stays involved through the first 10 deals. Simultaneously: configure the CRM to match your actual stages, establish a weekly pipeline review, and set the first quota based on real conversion data.',
-    focus: 'First hire, CRM setup, weekly cadence, quota framework',
-  },
-  {
-    range: '$4M–$6M',
-    title: 'Build the Management Layer',
-    body: 'You can\'t personally manage 3–4 reps and also run the company. This is the stage where you bring in sales leadership — either a fractional sales leader or a sales manager. The leadership layer runs pipeline reviews, coaches reps, handles escalations, and owns the forecast. The founder\'s role shifts from closer to occasional strategic seller and deal sponsor.',
-    focus: 'Sales leadership, rep coaching cadence, forecasting system',
-  },
-  {
-    range: '$6M–$10M',
-    title: 'Specialize and Scale',
-    body: 'At this stage, a generalist sales motion starts to break. SDRs and AEs need to operate separately. The ICP needs to be more precisely targeted to protect margins and shorten cycles. Marketing and sales need to be aligned on pipeline coverage targets. Compensation plans need to reward the right behaviors. The systems you built at $2M–$4M need to be stress-tested and upgraded for the next tier.',
-    focus: 'Role specialization, SDR/AE split, marketing alignment, comp plan revision',
-  },
-]
-
-const mistakes = [
-  { mistake: 'Hiring a VP of Sales before the process is documented', why: 'A VP scales what exists. If nothing exists, they spend 6+ months recreating it — and usually quit.' },
-  { mistake: 'Adding headcount before fixing conversion rates', why: 'More reps in a broken process just produce more losses, faster. Fix the funnel before adding people.' },
-  { mistake: 'Moving too fast past the $1M–$2M documentation phase', why: 'Everything downstream depends on knowing exactly how you sell. Founders who skip this hire wrong and onboard wrong.' },
-  { mistake: 'Treating the ICP as a marketing problem, not a sales problem', why: 'The ICP determines your entire go-to-market. Wrong ICP = long cycles, low conversion, and reps selling to people who can\'t buy.' },
-]
-
-const readinessSignals = [
-  { signal: 'You know your stage-to-stage conversion rates', ready: true },
-  { signal: 'Your last 20 deals have a documented close reason', ready: true },
-  { signal: 'You have a playbook a new rep could use on day one', ready: true },
-  { signal: 'Your CRM data reflects what\'s actually happening in deals', ready: true },
-  { signal: 'Revenue is entirely dependent on the founder being in deals', ready: false },
-  { signal: 'You\'re adding reps without knowing why the current ones are underperforming', ready: false },
-]
-
-const faqs = [
-  {
-    q: 'How long does it realistically take to scale from $1M to $10M?',
-    a: 'For B2B businesses with strong product-market fit: 3–5 years. The companies that do it faster have usually done the infrastructure work early — documented ICP, functioning CRM, trained reps, clear process. The companies that stall in the $2M–$4M range are almost always founder-dependent and lack the systems to delegate sales without losing revenue.',
-  },
-  {
-    q: 'When should I stop closing deals myself as the founder?',
-    a: 'Not all at once — and probably not fully until $4M–$6M ARR. The goal isn\'t to remove yourself from sales. It\'s to ensure your involvement isn\'t required for deals to close. Stay active on strategic accounts and high-value prospects. Step back from everything else once reps are ramped and the process is documented. A fractional sales leader can manage this transition so revenue doesn\'t dip.',
-  },
-  {
-    q: 'What\'s the biggest mistake founders make between $1M and $3M ARR?',
-    a: 'Hiring before documenting. They bring in a rep or a VP of Sales, hand over the pipeline, and watch it stall because no one has ever written down how deals actually get closed. The rep improvises. Conversion rates drop. The hire fails. The mistake wasn\'t the hire — it was skipping the documentation step that would have made the hire successful.',
-  },
-  {
-    q: 'Do I need a full-time VP of Sales to scale past $5M?',
-    a: 'Not necessarily — not yet. A fractional sales leader can build the infrastructure and manage the team through the $5M–$7M stage. A full-time VP makes sense when the team has 4+ reps and the processes are stable enough that you\'re scaling something that works. Hiring a VP before that is paying VP-level compensation to build what a fractional leader would build for a fraction of the cost.',
-  },
-]
-
-const schemaData = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'FAQPage',
-      mainEntity: faqs.map((faq) => ({
-        '@type': 'Question',
-        name: faq.q,
-        acceptedAnswer: { '@type': 'Answer', text: faq.a },
-      })),
-    },
-    {
-      '@type': 'Article',
-      headline: 'How to Scale Revenue from $1M to $10M: The Founder\'s Roadmap',
-      author: { '@type': 'Person', name: 'Louie Bernstein', url: 'https://louiebernstein.com' },
-      url: 'https://louiebernstein.com/how-to-scale-revenue-1m-to-10m',
-    },
-  ],
-}
-
 export default function ScaleRevenue1mTo10mPage() {
   const { v, cmsfaqs } = useCmsSection(CMS_SECTION)
-  const displayFaqs = cmsfaqs(4, faqs)
+
+  const phases = [
+    {
+      range: v('phase1Range', '$1M–$2M'),
+      title: v('phase1Title', 'Validate and Document'),
+      body: v('phase1Body', "At this stage, the founder is closing most deals personally. The priority isn't scaling — it's extracting what's working. Record 10 calls. Map your actual ICP from closed-won data (not who you think you sell to). Write down the discovery questions that reliably surface urgency. This documentation becomes the foundation everything else is built on. Skip it and the next phase fails."),
+      focus: v('phase1Focus', 'Documentation, ICP validation, first playbook draft'),
+    },
+    {
+      range: v('phase2Range', '$2M–$4M'),
+      title: v('phase2Title', 'Hire and Systemize'),
+      body: v('phase2Body', "You now have enough proof that the sale works to bring in your first dedicated rep. But hire into a documented process — not chaos. The rep should have a playbook on day one, a ramp timeline, and a founder who stays involved through the first 10 deals. Simultaneously: configure the CRM to match your actual stages, establish a weekly pipeline review, and set the first quota based on real conversion data."),
+      focus: v('phase2Focus', 'First hire, CRM setup, weekly cadence, quota framework'),
+    },
+    {
+      range: v('phase3Range', '$4M–$6M'),
+      title: v('phase3Title', 'Build the Management Layer'),
+      body: v('phase3Body', "You can't personally manage 3–4 reps and also run the company. This is the stage where you bring in sales leadership — either a fractional sales leader or a sales manager. The leadership layer runs pipeline reviews, coaches reps, handles escalations, and owns the forecast. The founder's role shifts from closer to occasional strategic seller and deal sponsor."),
+      focus: v('phase3Focus', 'Sales leadership, rep coaching cadence, forecasting system'),
+    },
+    {
+      range: v('phase4Range', '$6M–$10M'),
+      title: v('phase4Title', 'Specialize and Scale'),
+      body: v('phase4Body', "At this stage, a generalist sales motion starts to break. SDRs and AEs need to operate separately. The ICP needs to be more precisely targeted to protect margins and shorten cycles. Marketing and sales need to be aligned on pipeline coverage targets. Compensation plans need to reward the right behaviors. The systems you built at $2M–$4M need to be stress-tested and upgraded for the next tier."),
+      focus: v('phase4Focus', 'Role specialization, SDR/AE split, marketing alignment, comp plan revision'),
+    },
+  ]
+
+  const mistakes = [
+    {
+      mistake: v('mistake1', 'Hiring a VP of Sales before the process is documented'),
+      why: v('mistake1Why', "A VP scales what exists. If nothing exists, they spend 6+ months recreating it — and usually quit."),
+    },
+    {
+      mistake: v('mistake2', 'Adding headcount before fixing conversion rates'),
+      why: v('mistake2Why', 'More reps in a broken process just produce more losses, faster. Fix the funnel before adding people.'),
+    },
+    {
+      mistake: v('mistake3', 'Moving too fast past the $1M–$2M documentation phase'),
+      why: v('mistake3Why', 'Everything downstream depends on knowing exactly how you sell. Founders who skip this hire wrong and onboard wrong.'),
+    },
+    {
+      mistake: v('mistake4', 'Treating the ICP as a marketing problem, not a sales problem'),
+      why: v('mistake4Why', "The ICP determines your entire go-to-market. Wrong ICP = long cycles, low conversion, and reps selling to people who can't buy."),
+    },
+  ]
+
+  const readinessSignals = [
+    { signal: v('readiness1', 'You know your stage-to-stage conversion rates'), ready: true },
+    { signal: v('readiness2', 'Your last 20 deals have a documented close reason'), ready: true },
+    { signal: v('readiness3', 'You have a playbook a new rep could use on day one'), ready: true },
+    { signal: v('readiness4', "Your CRM data reflects what's actually happening in deals"), ready: true },
+    { signal: v('readiness5', 'Revenue is entirely dependent on the founder being in deals'), ready: false },
+    { signal: v('readiness6', "You're adding reps without knowing why the current ones are underperforming"), ready: false },
+  ]
+
+  const defaultFaqs = [
+    {
+      q: 'How long does it realistically take to scale from $1M to $10M?',
+      a: "For B2B businesses with strong product-market fit: 3–5 years. The companies that do it faster have usually done the infrastructure work early — documented ICP, functioning CRM, trained reps, clear process. The companies that stall in the $2M–$4M range are almost always founder-dependent and lack the systems to delegate sales without losing revenue.",
+    },
+    {
+      q: 'When should I stop closing deals myself as the founder?',
+      a: "Not all at once — and probably not fully until $4M–$6M ARR. The goal isn't to remove yourself from sales. It's to ensure your involvement isn't required for deals to close. Stay active on strategic accounts and high-value prospects. Step back from everything else once reps are ramped and the process is documented. A fractional sales leader can manage this transition so revenue doesn't dip.",
+    },
+    {
+      q: "What's the biggest mistake founders make between $1M and $3M ARR?",
+      a: "Hiring before documenting. They bring in a rep or a VP of Sales, hand over the pipeline, and watch it stall because no one has ever written down how deals actually get closed. The rep improvises. Conversion rates drop. The hire fails. The mistake wasn't the hire — it was skipping the documentation step that would have made the hire successful.",
+    },
+    {
+      q: 'Do I need a full-time VP of Sales to scale past $5M?',
+      a: "Not necessarily — not yet. A fractional sales leader can build the infrastructure and manage the team through the $5M–$7M stage. A full-time VP makes sense when the team has 4+ reps and the processes are stable enough that you're scaling something that works. Hiring a VP before that is paying VP-level compensation to build what a fractional leader would build for a fraction of the cost.",
+    },
+  ]
+
+  const displayFaqs = cmsfaqs(4, defaultFaqs)
+
+  const schemaData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'FAQPage',
+        mainEntity: displayFaqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.q,
+          acceptedAnswer: { '@type': 'Answer', text: faq.a },
+        })),
+      },
+      {
+        '@type': 'Article',
+        headline: "How to Scale Revenue from $1M to $10M: The Founder's Roadmap",
+        author: { '@type': 'Person', name: 'Louie Bernstein', url: 'https://louiebernstein.com' },
+        url: 'https://louiebernstein.com/how-to-scale-revenue-1m-to-10m',
+      },
+    ],
+  }
+
   return (
     <>
       <script
@@ -174,10 +188,10 @@ export default function ScaleRevenue1mTo10mPage() {
               variants={itemVariants}
               className="mb-4 text-center font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
             >
-              The Four-Phase Revenue Roadmap
+              {v('sectionPhasesHeading', 'The Four-Phase Revenue Roadmap')}
             </motion.h2>
             <motion.p variants={itemVariants} className="mb-10 text-center text-neutral-600">
-              Each phase has a different primary challenge. The mistake is applying phase 3 thinking to a phase 1 problem.
+              {v('sectionPhasesSubheading', 'Each phase has a different primary challenge. The mistake is applying phase 3 thinking to a phase 1 problem.')}
             </motion.p>
             <div className="space-y-6">
               {phases.map((phase, i) => (
@@ -212,12 +226,12 @@ export default function ScaleRevenue1mTo10mPage() {
             viewport={{ once: true }}
           >
             <motion.p variants={itemVariants} className="mb-5 text-lg leading-relaxed text-neutral-700">
-              Scaling revenue from $1M to $10M is one of the most studied — and most misunderstood — transitions in B2B business. The founders who stall in the $2M–$4M range aren't failing because they have the wrong product or the wrong market. They're failing because they're applying the tactics that got them to $1M to a problem that requires a different approach. What works in founder-led sales — relationships, instinct, personal credibility — doesn't translate into a system that reps can execute consistently.
+              {v('seoPara1', "Scaling revenue from $1M to $10M is one of the most studied — and most misunderstood — transitions in B2B business. The founders who stall in the $2M–$4M range aren't failing because they have the wrong product or the wrong market. They're failing because they're applying the tactics that got them to $1M to a problem that requires a different approach. What works in founder-led sales — relationships, instinct, personal credibility — doesn't translate into a system that reps can execute consistently.")}
             </motion.p>
             <motion.p variants={itemVariants} className="text-lg leading-relaxed text-neutral-700">
-              The companies that break through to $10M have one thing in common: they built the infrastructure before they scaled the headcount. That means documented ICP, a functioning playbook, a CRM that reflects reality, and a management layer that coaches and holds reps accountable. If you're trying to figure out where your revenue growth is actually stalling, start with{' '}
+              {v('seoPara2', "The companies that break through to $10M have one thing in common: they built the infrastructure before they scaled the headcount. That means documented ICP, a functioning playbook, a CRM that reflects reality, and a management layer that coaches and holds reps accountable.")}{' '}
               <Link href="/why-sales-team-not-growing-revenue" className="font-semibold text-blue-700 underline underline-offset-2 hover:text-blue-900">
-                a diagnosis of why your sales team isn't growing revenue →
+                A diagnosis of why your sales team isn't growing revenue →
               </Link>
             </motion.p>
           </motion.div>
@@ -237,10 +251,10 @@ export default function ScaleRevenue1mTo10mPage() {
               variants={itemVariants}
               className="mb-4 text-center font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
             >
-              4 Mistakes That Stall Growth Between $1M and $10M
+              {v('sectionMistakesHeading', '4 Mistakes That Stall Growth Between $1M and $10M')}
             </motion.h2>
             <motion.p variants={itemVariants} className="mb-10 text-center text-neutral-600">
-              These are the patterns that kill momentum — almost always in the $2M–$5M range.
+              {v('sectionMistakesSubheading', 'These are the patterns that kill momentum — almost always in the $2M–$5M range.')}
             </motion.p>
             <div className="grid gap-5 md:grid-cols-2">
               {mistakes.map((item, i) => (
@@ -271,10 +285,10 @@ export default function ScaleRevenue1mTo10mPage() {
               variants={itemVariants}
               className="mb-4 text-center font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
             >
-              Is Your Sales Org Ready to Scale?
+              {v('sectionReadinessHeading', 'Is Your Sales Org Ready to Scale?')}
             </motion.h2>
             <motion.p variants={itemVariants} className="mb-8 text-center text-neutral-600">
-              Check yourself honestly against these signals before adding headcount or infrastructure.
+              {v('sectionReadinessSubheading', 'Check yourself honestly against these signals before adding headcount or infrastructure.')}
             </motion.p>
             <div className="grid gap-3 md:grid-cols-2">
               {readinessSignals.map((item, i) => (

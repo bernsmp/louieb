@@ -18,121 +18,143 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const } },
 }
 
-const roiMetrics = [
-  {
-    metric: 'Cost vs. Full-Time VP of Sales',
-    value: '60–75% less',
-    detail: 'A full-time VP of Sales at the $1M–$10M stage costs $180,000–$300,000 in base salary, plus benefits, equity, and a 12–18 month ramp period where they\'re building rather than scaling. A fractional engagement runs $4,000–$12,000 per month. For most companies, that\'s $50,000–$120,000 per year against $300,000+ fully loaded.',
-  },
-  {
-    metric: 'Time to First Results',
-    value: '30–60 days',
-    detail: 'A full-time VP of Sales typically takes 6–12 months to produce measurable results — partly because of ramp, partly because of the inherent risk of a bad fit. A fractional sales leader produces leading indicators (pipeline health, rep accountability, forecast accuracy) within the first 30–60 days, with revenue impact at 90 days.',
-  },
-  {
-    metric: 'Revenue Impact',
-    value: '20–35% increase',
-    detail: 'Companies that implement fractional sales leadership consistently report 20–35% revenue growth in the 12 months following engagement. The primary drivers: fewer deals falling through the cracks, faster rep ramp, higher close rates through better qualification, and a founder who can focus on the business rather than closing every deal.',
-  },
-  {
-    metric: 'Risk Profile',
-    value: 'Near zero',
-    detail: 'Hiring a full-time VP of Sales is one of the highest-risk hires a company can make. A bad hire costs $200,000–$400,000 in salary and lost momentum. A fractional engagement can be adjusted or ended with 30 days notice. The downside is bounded. The upside — a revenue system that works without the founder — is not.',
-  },
-]
-
-const costComparison = [
-  { item: 'Annual cost', fractional: '$60K–$120K/year', fullTime: '$250K–$400K fully loaded' },
-  { item: 'Ramp to results', fractional: '30–90 days', fullTime: '6–18 months' },
-  { item: 'Risk of bad fit', fractional: 'Low — 30-day exit', fullTime: 'High — 6-12 months to realize' },
-  { item: 'Focus', fractional: 'Revenue outcomes', fullTime: 'Building team + political capital' },
-  { item: 'Right stage for', fractional: '$1M–$10M ARR', fullTime: '$10M+ with a working system' },
-]
-
-const roiTimeline = [
-  {
-    phase: 'Days 1–30',
-    title: 'Diagnosis and Infrastructure',
-    outcomes: [
-      'Pipeline audit complete — real pipeline vs. wishful pipeline identified',
-      'CRM configured to reflect actual sales process',
-      'First pipeline review cadence established',
-      'Rep accountability baseline set',
-    ],
-  },
-  {
-    phase: 'Days 31–90',
-    title: 'Process and Performance',
-    outcomes: [
-      'Sales playbook drafted or updated',
-      'Stage conversion rates being tracked',
-      'Rep performance improving through weekly coaching',
-      'Founder beginning to step back from individual deals',
-    ],
-  },
-  {
-    phase: 'Month 4–6',
-    title: 'Revenue Impact',
-    outcomes: [
-      'Forecast accuracy measurably improved',
-      'Close rates up through better qualification',
-      'Ramp timeline for new hires shortened',
-      'Revenue growing without requiring founder in every deal',
-    ],
-  },
-]
-
-const whenRoiIsReal = [
-  { signal: 'Founder is the primary bottleneck in the current sales motion', real: true },
-  { signal: 'Reps are losing deals they should be winning', real: true },
-  { signal: 'Pipeline data is inaccurate and forecasting is unreliable', real: true },
-  { signal: 'The company is ready to hire but hasn\'t built the system yet', real: true },
-  { signal: 'The founder wants to skip the engagement and hire a VP directly', real: false },
-  { signal: 'Revenue processes are already working — just need more reps', real: false },
-]
-
-const faqs = [
-  {
-    q: 'How do I calculate the ROI of a fractional sales leader for my specific business?',
-    a: 'Start with what a bad outcome costs you: a VP of Sales hired too early ($200,000–$400,000 fully loaded, often wasted), or two years of founder-dependent sales instead of a scalable process. Then estimate what a 20% improvement in close rate would mean for your revenue. For a company at $3M ARR with a 25% close rate, improving close rate to 30% on the same pipeline adds $600,000 in annual revenue. Against a $72,000–$96,000 annual fractional investment, the math is straightforward.',
-  },
-  {
-    q: 'What if the engagement doesn\'t produce the results expected?',
-    a: 'There should be measurable leading indicators within 60 days: pipeline accuracy improves, reps are more accountable, the founder is less involved in individual deals. If these signals aren\'t present by day 60, something is wrong with the engagement design — not the model. A well-structured fractional engagement has clear 30/60/90-day milestones. If you\'re evaluating one, ask for those milestones upfront.',
-  },
-  {
-    q: 'Is the ROI different for early-stage companies versus companies at $8M–$10M ARR?',
-    a: 'Yes — but it\'s high at both ends for different reasons. At $1M–$3M, the primary ROI is speed: building infrastructure that would take a founder 12–18 months to build alone gets done in 60–90 days. At $5M–$10M, the ROI shifts to scale: fixing the process and management gaps that are preventing a working sales team from performing at its potential. The economic impact is larger at higher ARR — but the leverage is real at every stage.',
-  },
-  {
-    q: 'How does fractional sales leadership ROI compare to sales coaching?',
-    a: 'Sales coaching improves individual rep performance. Fractional sales leadership improves the entire revenue system. A coach helps reps handle objections better. A fractional sales leader fixes the pipeline, the process, the forecast, the hiring, and the coaching — simultaneously. For most companies, coaching alone won\'t move the number because the constraint isn\'t rep skill — it\'s system quality.',
-  },
-]
-
-const schemaData = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'FAQPage',
-      mainEntity: faqs.map((faq) => ({
-        '@type': 'Question',
-        name: faq.q,
-        acceptedAnswer: { '@type': 'Answer', text: faq.a },
-      })),
-    },
-    {
-      '@type': 'Article',
-      headline: 'Fractional Sales Leadership ROI: What Does the Investment Actually Return?',
-      author: { '@type': 'Person', name: 'Louie Bernstein', url: 'https://louiebernstein.com' },
-      url: 'https://louiebernstein.com/fractional-sales-leadership-roi',
-    },
-  ],
-}
-
 export default function FractionalSalesLeadershipRoiPage() {
   const { v, cmsfaqs } = useCmsSection(CMS_SECTION)
-  const displayFaqs = cmsfaqs(4, faqs)
+
+  const roiMetrics = [
+    {
+      metric: v('roi1Metric', 'Cost vs. Full-Time VP of Sales'),
+      value: v('roi1Value', '60–75% less'),
+      detail: v('roi1Detail', "A full-time VP of Sales at the $1M–$10M stage costs $180,000–$300,000 in base salary, plus benefits, equity, and a 12–18 month ramp period where they're building rather than scaling. A fractional engagement runs $4,000–$12,000 per month. For most companies, that's $50,000–$120,000 per year against $300,000+ fully loaded."),
+    },
+    {
+      metric: v('roi2Metric', 'Time to First Results'),
+      value: v('roi2Value', '30–60 days'),
+      detail: v('roi2Detail', "A full-time VP of Sales typically takes 6–12 months to produce measurable results — partly because of ramp, partly because of the inherent risk of a bad fit. A fractional sales leader produces leading indicators (pipeline health, rep accountability, forecast accuracy) within the first 30–60 days, with revenue impact at 90 days."),
+    },
+    {
+      metric: v('roi3Metric', 'Revenue Impact'),
+      value: v('roi3Value', '20–35% increase'),
+      detail: v('roi3Detail', "Companies that implement fractional sales leadership consistently report 20–35% revenue growth in the 12 months following engagement. The primary drivers: fewer deals falling through the cracks, faster rep ramp, higher close rates through better qualification, and a founder who can focus on the business rather than closing every deal."),
+    },
+    {
+      metric: v('roi4Metric', 'Risk Profile'),
+      value: v('roi4Value', 'Near zero'),
+      detail: v('roi4Detail', "Hiring a full-time VP of Sales is one of the highest-risk hires a company can make. A bad hire costs $200,000–$400,000 in salary and lost momentum. A fractional engagement can be adjusted or ended with 30 days notice. The downside is bounded. The upside — a revenue system that works without the founder — is not."),
+    },
+  ]
+
+  const costComparison = [
+    {
+      item: v('cost1Item', 'Annual cost'),
+      fractional: v('cost1Fractional', '$60K–$120K/year'),
+      fullTime: v('cost1FullTime', '$250K–$400K fully loaded'),
+    },
+    {
+      item: v('cost2Item', 'Ramp to results'),
+      fractional: v('cost2Fractional', '30–90 days'),
+      fullTime: v('cost2FullTime', '6–18 months'),
+    },
+    {
+      item: v('cost3Item', 'Risk of bad fit'),
+      fractional: v('cost3Fractional', 'Low — 30-day exit'),
+      fullTime: v('cost3FullTime', 'High — 6-12 months to realize'),
+    },
+    {
+      item: v('cost4Item', 'Focus'),
+      fractional: v('cost4Fractional', 'Revenue outcomes'),
+      fullTime: v('cost4FullTime', 'Building team + political capital'),
+    },
+    {
+      item: v('cost5Item', 'Right stage for'),
+      fractional: v('cost5Fractional', '$1M–$10M ARR'),
+      fullTime: v('cost5FullTime', '$10M+ with a working system'),
+    },
+  ]
+
+  const roiTimeline = [
+    {
+      phase: v('timeline1Phase', 'Days 1–30'),
+      title: v('timeline1Title', 'Diagnosis and Infrastructure'),
+      outcomes: [
+        v('timeline1O1', 'Pipeline audit complete — real pipeline vs. wishful pipeline identified'),
+        v('timeline1O2', 'CRM configured to reflect actual sales process'),
+        v('timeline1O3', 'First pipeline review cadence established'),
+        v('timeline1O4', 'Rep accountability baseline set'),
+      ],
+    },
+    {
+      phase: v('timeline2Phase', 'Days 31–90'),
+      title: v('timeline2Title', 'Process and Performance'),
+      outcomes: [
+        v('timeline2O1', 'Sales playbook drafted or updated'),
+        v('timeline2O2', 'Stage conversion rates being tracked'),
+        v('timeline2O3', 'Rep performance improving through weekly coaching'),
+        v('timeline2O4', 'Founder beginning to step back from individual deals'),
+      ],
+    },
+    {
+      phase: v('timeline3Phase', 'Month 4–6'),
+      title: v('timeline3Title', 'Revenue Impact'),
+      outcomes: [
+        v('timeline3O1', 'Forecast accuracy measurably improved'),
+        v('timeline3O2', 'Close rates up through better qualification'),
+        v('timeline3O3', 'Ramp timeline for new hires shortened'),
+        v('timeline3O4', 'Revenue growing without requiring founder in every deal'),
+      ],
+    },
+  ]
+
+  const whenRoiIsReal = [
+    { signal: v('when1', 'Founder is the primary bottleneck in the current sales motion'), real: true },
+    { signal: v('when2', 'Reps are losing deals they should be winning'), real: true },
+    { signal: v('when3', 'Pipeline data is inaccurate and forecasting is unreliable'), real: true },
+    { signal: v('when4', "The company is ready to hire but hasn't built the system yet"), real: true },
+    { signal: v('when5', 'The founder wants to skip the engagement and hire a VP directly'), real: false },
+    { signal: v('when6', 'Revenue processes are already working — just need more reps'), real: false },
+  ]
+
+  const defaultFaqs = [
+    {
+      q: 'How do I calculate the ROI of a fractional sales leader for my specific business?',
+      a: "Start with what a bad outcome costs you: a VP of Sales hired too early ($200,000–$400,000 fully loaded, often wasted), or two years of founder-dependent sales instead of a scalable process. Then estimate what a 20% improvement in close rate would mean for your revenue. For a company at $3M ARR with a 25% close rate, improving close rate to 30% on the same pipeline adds $600,000 in annual revenue. Against a $72,000–$96,000 annual fractional investment, the math is straightforward.",
+    },
+    {
+      q: "What if the engagement doesn't produce the results expected?",
+      a: "There should be measurable leading indicators within 60 days: pipeline accuracy improves, reps are more accountable, the founder is less involved in individual deals. If these signals aren't present by day 60, something is wrong with the engagement design — not the model. A well-structured fractional engagement has clear 30/60/90-day milestones. If you're evaluating one, ask for those milestones upfront.",
+    },
+    {
+      q: "Is the ROI different for early-stage companies versus companies at $8M–$10M ARR?",
+      a: "Yes — but it's high at both ends for different reasons. At $1M–$3M, the primary ROI is speed: building infrastructure that would take a founder 12–18 months to build alone gets done in 60–90 days. At $5M–$10M, the ROI shifts to scale: fixing the process and management gaps that are preventing a working sales team from performing at its potential. The economic impact is larger at higher ARR — but the leverage is real at every stage.",
+    },
+    {
+      q: 'How does fractional sales leadership ROI compare to sales coaching?',
+      a: "Sales coaching improves individual rep performance. Fractional sales leadership improves the entire revenue system. A coach helps reps handle objections better. A fractional sales leader fixes the pipeline, the process, the forecast, the hiring, and the coaching — simultaneously. For most companies, coaching alone won't move the number because the constraint isn't rep skill — it's system quality.",
+    },
+  ]
+
+  const displayFaqs = cmsfaqs(4, defaultFaqs)
+
+  const schemaData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'FAQPage',
+        mainEntity: displayFaqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.q,
+          acceptedAnswer: { '@type': 'Answer', text: faq.a },
+        })),
+      },
+      {
+        '@type': 'Article',
+        headline: 'Fractional Sales Leadership ROI: What Does the Investment Actually Return?',
+        author: { '@type': 'Person', name: 'Louie Bernstein', url: 'https://louiebernstein.com' },
+        url: 'https://louiebernstein.com/fractional-sales-leadership-roi',
+      },
+    ],
+  }
+
   return (
     <>
       <script
@@ -204,10 +226,10 @@ export default function FractionalSalesLeadershipRoiPage() {
               variants={itemVariants}
               className="mb-4 text-center font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
             >
-              The Four ROI Dimensions
+              {v('sectionRoiHeading', 'The Four ROI Dimensions')}
             </motion.h2>
             <motion.p variants={itemVariants} className="mb-10 text-center text-neutral-600">
-              ROI isn't just revenue. It's cost savings, speed, and risk reduction — all three matter.
+              {v('sectionRoiSubheading', "ROI isn't just revenue. It's cost savings, speed, and risk reduction — all three matter.")}
             </motion.p>
             <div className="space-y-6">
               {roiMetrics.map((item, i) => (
@@ -238,12 +260,12 @@ export default function FractionalSalesLeadershipRoiPage() {
             viewport={{ once: true }}
           >
             <motion.p variants={itemVariants} className="mb-5 text-lg leading-relaxed text-neutral-700">
-              The ROI question for fractional sales leadership is straightforward when you set the right baseline. The correct comparison isn't "fractional vs. nothing" — it's "fractional vs. the alternatives": hiring a VP of Sales too early, continuing founder-led sales for another 12 months, or trying to fix the sales process while also running the company. Against any of those alternatives, fractional sales leadership is dramatically more cost-effective and significantly lower risk.
+              {v('seoPara1', "The ROI question for fractional sales leadership is straightforward when you set the right baseline. The correct comparison isn't \"fractional vs. nothing\" — it's \"fractional vs. the alternatives\": hiring a VP of Sales too early, continuing founder-led sales for another 12 months, or trying to fix the sales process while also running the company. Against any of those alternatives, fractional sales leadership is dramatically more cost-effective and significantly lower risk.")}
             </motion.p>
             <motion.p variants={itemVariants} className="text-lg leading-relaxed text-neutral-700">
-              The companies that get the highest ROI from fractional engagements share one characteristic: the founder is genuinely willing to step back and let the process be built. When founders remain deeply involved in every deal and treat the fractional leader as an advisor rather than an operator, results take longer. When they commit to the model, the revenue impact is measurable within 90 days. For a detailed look at what that engagement looks like in practice,{' '}
+              {v('seoPara2', "The companies that get the highest ROI from fractional engagements share one characteristic: the founder is genuinely willing to step back and let the process be built. When founders remain deeply involved in every deal and treat the fractional leader as an advisor rather than an operator, results take longer. When they commit to the model, the revenue impact is measurable within 90 days.")}{' '}
               <Link href="/case-study-61-percent-sales-growth" className="font-semibold text-blue-700 underline underline-offset-2 hover:text-blue-900">
-                read the case study →
+                Read the case study →
               </Link>
             </motion.p>
           </motion.div>
@@ -263,10 +285,10 @@ export default function FractionalSalesLeadershipRoiPage() {
               variants={itemVariants}
               className="mb-4 text-center font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
             >
-              Fractional vs. Full-Time: The Real Numbers
+              {v('sectionCostHeading', 'Fractional vs. Full-Time: The Real Numbers')}
             </motion.h2>
             <motion.p variants={itemVariants} className="mb-10 text-center text-neutral-600">
-              The cost difference is significant. But the more important difference is risk and timing.
+              {v('sectionCostSubheading', 'The cost difference is significant. But the more important difference is risk and timing.')}
             </motion.p>
             <div className="overflow-hidden rounded-xl border border-neutral-200">
               <div className="grid grid-cols-3 bg-neutral-900 text-white">
@@ -305,10 +327,10 @@ export default function FractionalSalesLeadershipRoiPage() {
               variants={itemVariants}
               className="mb-4 text-center font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
             >
-              How ROI Builds Over Time
+              {v('sectionTimelineHeading', 'How ROI Builds Over Time')}
             </motion.h2>
             <motion.p variants={itemVariants} className="mb-10 text-center text-neutral-600">
-              The investment pays back in three phases — leading indicators first, revenue impact by month 3.
+              {v('sectionTimelineSubheading', 'The investment pays back in three phases — leading indicators first, revenue impact by month 3.')}
             </motion.p>
             <div className="grid gap-6 md:grid-cols-3">
               {roiTimeline.map((phase, i) => (
@@ -347,10 +369,10 @@ export default function FractionalSalesLeadershipRoiPage() {
               variants={itemVariants}
               className="mb-4 text-center font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
             >
-              When the ROI Is Real — and When It's Not
+              {v('sectionWhenHeading', "When the ROI Is Real — and When It's Not")}
             </motion.h2>
             <motion.p variants={itemVariants} className="mb-8 text-center text-neutral-600">
-              Fractional sales leadership works in specific conditions. Here's the honest read.
+              {v('sectionWhenSubheading', "Fractional sales leadership works in specific conditions. Here's the honest read.")}
             </motion.p>
             <div className="grid gap-3 md:grid-cols-2">
               {whenRoiIsReal.map((item, i) => (
