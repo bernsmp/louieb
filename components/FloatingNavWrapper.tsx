@@ -2,11 +2,11 @@
 
 import { FloatingNav } from "@/components/ui/floating-navbar";
 import { MobileNav } from "@/components/MobileNav";
-import { Home, FileText, Video, Mail, Wrench, BookOpen, GraduationCap, UserCheck, Scale, PenLine, HelpCircle, Layers } from "lucide-react";
+import { Home, FileText, Video, Mail, Wrench, BookOpen, GraduationCap, UserCheck, Scale, PenLine, HelpCircle, Layers, Map } from "lucide-react";
 
-export type NavKey = 'home' | 'fsl' | 'learn' | 'faqs' | 'frameworks' | 'tools' | 'contact';
+export type NavKey = 'home' | 'fsl' | 'learn' | 'faqs' | 'frameworks' | 'tools' | 'sitemap' | 'contact';
 
-export const DEFAULT_NAV_ORDER: NavKey[] = ['home', 'fsl', 'learn', 'faqs', 'frameworks', 'tools', 'contact'];
+export const DEFAULT_NAV_ORDER: NavKey[] = ['home', 'fsl', 'learn', 'faqs', 'frameworks', 'tools', 'sitemap', 'contact'];
 
 export const NAV_ITEM_LABELS: Record<NavKey, string> = {
   home: 'Home',
@@ -15,6 +15,7 @@ export const NAV_ITEM_LABELS: Record<NavKey, string> = {
   faqs: 'FAQs',
   frameworks: 'Frameworks',
   tools: 'Tools',
+  sitemap: 'Site Map',
   contact: 'Contact',
 };
 
@@ -70,6 +71,11 @@ function buildNavItems(order: NavKey[]) {
       name: "Tools",
       link: "/tools",
       icon: <Wrench className={ic} />,
+    },
+    sitemap: {
+      name: "Site Map",
+      link: "/site-map",
+      icon: <Map className={ic} />,
     },
     contact: {
       name: "Contact",
