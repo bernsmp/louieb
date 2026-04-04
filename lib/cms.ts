@@ -2217,6 +2217,53 @@ export const getFoundersContent = cache(async (): Promise<FoundersContent> => {
   }
 })
 
+// ============================================================================
+// SITE MAP PAGE
+// ============================================================================
+
+interface SiteMapPageData {
+  seoTitle: string
+  seoDescription: string
+  pageHeadline: string
+  pageSubheadline: string
+}
+
+/**
+ * Get meta/SEO data for the Site Map page
+ */
+export const getSiteMapPageData = cache(async (): Promise<SiteMapPageData> => {
+  const defaults: SiteMapPageData = {
+    seoTitle: 'Site Map | Louie Bernstein',
+    seoDescription: 'A complete directory of all pages on louiebernstein.com — organized by category including Fractional Sales Leader resources, sales guides, blog posts, videos, tools, and frameworks.',
+    pageHeadline: 'Site Map',
+    pageSubheadline: 'A complete directory of every page on louiebernstein.com, organized by category.',
+  }
+
+  if (!USE_SUPABASE_CMS || !isSupabaseConfigured || !supabaseAdmin) {
+    return defaults
+  }
+
+  try {
+    const { data, error } = await supabaseAdmin
+      .from('site_content')
+      .select('content')
+      .eq('section', 'siteMapPage')
+      .single()
+
+    if (error || !data) return defaults
+
+    const content = data.content as Record<string, unknown>
+    return {
+      seoTitle: (content?.seoTitle as string) || defaults.seoTitle,
+      seoDescription: (content?.seoDescription as string) || defaults.seoDescription,
+      pageHeadline: (content?.pageHeadline as string) || defaults.pageHeadline,
+      pageSubheadline: (content?.pageSubheadline as string) || defaults.pageSubheadline,
+    }
+  } catch {
+    return defaults
+  }
+})
+
 // Re-export types for use in components
 export type { SiteSettings, Testimonial, FAQItem, VideoItem, VideoCategory, BlogPost, ServiceItem, ProcessStep, PageLayout, PageSEO }
 
