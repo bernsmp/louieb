@@ -1,4 +1,5 @@
-import type { Metadata, ReactNode } from "next";
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import {
   UserCheck,
