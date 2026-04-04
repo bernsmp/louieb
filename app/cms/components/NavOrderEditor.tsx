@@ -21,9 +21,18 @@ export function NavOrderEditor() {
         const res = await fetch('/api/cms/section/navigation')
         if (res.ok) {
           const data = await res.json()
-          const order: string[] = data.navItemOrder?.length
+          const storedOrder: string[] = data.navItemOrder?.length
             ? data.navItemOrder
             : DEFAULT_NAV_ORDER
+          // Merge in any new keys from DEFAULT_NAV_ORDER that aren't saved yet
+          const missingKeys = DEFAULT_NAV_ORDER.filter(k => !storedOrder.includes(k))
+          let order = storedOrder
+          if (missingKeys.length > 0) {
+            const contactIdx = storedOrder.indexOf('contact')
+            order = contactIdx >= 0
+              ? [...storedOrder.slice(0, contactIdx), ...missingKeys, ...storedOrder.slice(contactIdx)]
+              : [...storedOrder, ...missingKeys]
+          }
           setItems(
             order
               .filter((key): key is NavKey => key in NAV_ITEM_LABELS)

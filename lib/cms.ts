@@ -751,7 +751,7 @@ Have you witnessed this?`,
     navVideos: 'Videos',
     navNewsletter: 'Newsletter',
     navContact: 'Contact',
-    navItemOrder: ['home', 'fsl', 'learn', 'faqs', 'frameworks', 'tools', 'contact'],
+    navItemOrder: ['home', 'fsl', 'learn', 'faqs', 'frameworks', 'tools', 'sitemap', 'contact'],
   },
   articlesPage: {
     headline: 'Articles',
@@ -1325,7 +1325,22 @@ function mergeSettings(
       previewVideos: courseVideos.length > 0 ? courseVideos : defaults.coursePage.previewVideos,
     },
     seo: deepMerge(defaults.seo, (siteContent.seo || {}) as Partial<SiteSettings['seo']>),
-    navigation: deepMerge(defaults.navigation, (siteContent.navigation || {}) as Partial<SiteSettings['navigation']>),
+    navigation: (() => {
+      const merged = deepMerge(defaults.navigation, (siteContent.navigation || {}) as Partial<SiteSettings['navigation']>)
+      // Ensure any new keys added to the default order are included in the stored order
+      const storedOrder: string[] = merged.navItemOrder || []
+      const defaultOrder: string[] = defaults.navigation.navItemOrder || []
+      const missingKeys = defaultOrder.filter(k => !storedOrder.includes(k))
+      if (missingKeys.length > 0) {
+        // Insert missing keys before 'contact', or append at end
+        const contactIdx = storedOrder.indexOf('contact')
+        const updatedOrder = contactIdx >= 0
+          ? [...storedOrder.slice(0, contactIdx), ...missingKeys, ...storedOrder.slice(contactIdx)]
+          : [...storedOrder, ...missingKeys]
+        merged.navItemOrder = updatedOrder
+      }
+      return merged
+    })(),
     articlesPage: deepMerge(defaults.articlesPage, (siteContent.articlesPage || {}) as Partial<SiteSettings['articlesPage']>),
     roiCalculatorText: deepMerge(defaults.roiCalculatorText, (siteContent.roiCalculatorText || {}) as Partial<SiteSettings['roiCalculatorText']>),
     fslVsConsultantPage: deepMerge(defaults.fslVsConsultantPage, (siteContent.fslVsConsultantPage || {}) as Partial<SiteSettings['fslVsConsultantPage']>),
