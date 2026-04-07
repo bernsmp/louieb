@@ -93,6 +93,7 @@ const pages = [
   { name: 'Sales Qualified Lead (SQL)', href: '/cms/seo-sales-qualified-lead', icon: FileTextIcon },
   { name: 'B2B Referral Program', href: '/cms/seo-b2b-referral-program', icon: FileTextIcon },
   { name: 'Sales Pipeline Stages', href: '/cms/seo-sales-pipeline-stages', icon: FileTextIcon },
+  { name: 'How to Interview a Fractional Sales Leader', href: '/cms/seo-interview-fractional-sales-leader', icon: FileTextIcon },
 ]
 
 const collections = [
