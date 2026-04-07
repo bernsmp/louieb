@@ -63,6 +63,7 @@ const FSL_PAGES = [
   { title: "When to Hire a Fractional Sales Leader", url: "/when-to-hire-a-fractional-sales-leader" },
   { title: "When Are You Ready to Hire a Fractional CRO?", url: "/when-to-hire-a-fractional-cro" },
   { title: "What Does a Fractional Sales Leader Do Week to Week?", url: "/what-does-fractional-sales-leader-do" },
+  { title: "How to Interview a Fractional Sales Leader", url: "/how-to-interview-a-fractional-sales-leader" },
   { title: "VP of Sales vs. CRO: What's the Difference?", url: "/vp-sales-vs-cro-difference" },
   { title: "When Are You Ready to Hire a CRO?", url: "/when-to-hire-a-cro" },
   { title: "The $250K Mistake: Hiring a VP of Sales Too Early", url: "/250k-mistake-vp-sales-hire-too-early" },
@@ -84,6 +85,7 @@ const SALES_GUIDES = [
   { title: "How to Get Out of Founder-Led Sales", url: "/how-to-get-out-of-founder-led-sales" },
   { title: "How to Replace Founder-Led Sales Without Losing Momentum", url: "/how-to-replace-founder-led-sales" },
   { title: "How to Transition Out of Founder-Led Sales", url: "/transition-out-of-founder-led-sales" },
+  { title: "Founder-Led Sales Exit Checklist", url: "/founder-led-sales-exit-checklist" },
   // Sales Process & Pipeline
   { title: "How to Build a Sales Process After $1M ARR", url: "/how-to-build-a-sales-process-after-1m-arr" },
   { title: "How to Build a Sales Process for SaaS", url: "/how-to-build-a-sales-process-for-saas" },
