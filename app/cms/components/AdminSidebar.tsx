@@ -94,6 +94,7 @@ const pages = [
   { name: 'B2B Referral Program', href: '/cms/seo-b2b-referral-program', icon: FileTextIcon },
   { name: 'Sales Pipeline Stages', href: '/cms/seo-sales-pipeline-stages', icon: FileTextIcon },
   { name: 'How to Interview a Fractional Sales Leader', href: '/cms/seo-interview-fractional-sales-leader', icon: FileTextIcon },
+  { name: 'Founder-Led Sales Exit Checklist', href: '/cms/seo-founder-led-sales-exit-checklist', icon: FileTextIcon },
 ]
 
 const collections = [
