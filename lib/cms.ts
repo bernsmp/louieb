@@ -157,6 +157,7 @@ interface SiteSettings {
   about: {
     headline: string
     headlineAccent: string
+    imageUrl?: string
     paragraph1: string
     paragraph2: string
     paragraph3: string

@@ -12,7 +12,7 @@ export default async function AboutPage() {
       <About
         headline={settings.about.headline}
         headlineAccent={settings.about.headlineAccent}
-        imageUrl={settings.about.imageUrl as string | undefined}
+        imageUrl={settings.about.imageUrl}
         paragraph1={settings.about.paragraph1}
         paragraph2={settings.about.paragraph2}
         paragraph3={settings.about.paragraph3}
