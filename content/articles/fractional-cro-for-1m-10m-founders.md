@@ -4,11 +4,13 @@ description: >-
   A Fractional CRO gives $1M–$10M founders the revenue leadership they need to
   escape founder-led sales — without the $400k full-time hire.
 keywords: >-
-  fractional CRO, fractional chief revenue officer, founder-led sales,
-  $1M-$10M ARR, revenue leadership, fractional sales leadership, VP of sales
-  alternative, B2B sales scaling
+  fractional CRO, fractional chief revenue officer, founder-led sales, $1M-$10M
+  ARR, revenue leadership, fractional sales leadership, VP of sales alternative,
+  B2B sales scaling
 author: Louie Bernstein
 date: '2026-04-06'
+image: >-
+  https://ckffpnbnpvwmecwzovxf.supabase.co/storage/v1/object/public/media/articles/1775657679687_fractional_CRO.png
 category: fractional-sales-leadership
 ---
 
