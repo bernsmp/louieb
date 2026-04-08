@@ -387,6 +387,17 @@ export default async function SiteMapPage() {
                 <PageLink title="Frequently Asked Questions" url="/faqs" />
               </ul>
             </Section>
+
+            <Section
+              icon={<UserCheck className="h-5 w-5 text-neutral-600" />}
+              title="About & Contact"
+              colorClass="border-neutral-600"
+              count={1}
+            >
+              <ul className="space-y-0.5">
+                <PageLink title="About Louie Bernstein / Let's Talk" url="/about" />
+              </ul>
+            </Section>
           </div>
 
           {/* ── Frameworks ── */}

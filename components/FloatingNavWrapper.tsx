@@ -79,7 +79,7 @@ function buildNavItems(order: NavKey[]) {
     },
     contact: {
       name: "About/Contact",
-      link: "/#about",
+      link: "/about",
       icon: <Mail className={ic} />,
     },
   };
