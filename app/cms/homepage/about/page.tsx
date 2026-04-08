@@ -27,6 +27,13 @@ export default function EditAboutPage() {
           aiRewrite: true,
         },
         {
+          name: 'imageUrl',
+          label: 'Photo (paste image URL)',
+          type: 'text',
+          placeholder: 'https://louiebernstein.com/images/louie.jpg',
+          hint: 'Appears below the headline. Leave blank to hide.',
+        },
+        {
           name: 'paragraph1',
           label: 'First Paragraph',
           type: 'textarea',

@@ -1,6 +1,7 @@
 interface AboutProps {
   headline?: string;
   headlineAccent?: string;
+  imageUrl?: string;
   paragraph1?: string;
   paragraph2?: string;
   paragraph3?: string;
@@ -16,6 +17,7 @@ interface AboutProps {
 export function About({
   headline = "Fractional Sales Leadership",
   headlineAccent = "for $1M–$10M ARR Companies",
+  imageUrl,
   paragraph1 = "With over 9 years of experience as a Fractional Sales Leader, I specialize in helping technical and operational founders of companies with $1M–$10M ARR build repeatable sales systems and transition from leading sales themselves to managing high-performing sales teams.",
   paragraph2 = "My focus is on delivering systematic frameworks tailored for the critical growth stage where founders must document sales processes, onboard their first sales reps, and scale effectively without becoming a bottleneck.",
   paragraph3 = "I bring extensive expertise in sales leadership, sales and marketing alignment, and sales team development. My mission is to empower founders to optimize their time and resources while building scalable sales teams capable of generating predictable revenue.",
@@ -42,6 +44,15 @@ export function About({
               {headline}{" "}
               <span className="text-neutral-500">{headlineAccent}</span>
             </h2>
+            {imageUrl && (
+              <div className="mt-8">
+                <img
+                  src={imageUrl}
+                  alt={`${headline} ${headlineAccent}`}
+                  className="w-full max-w-sm rounded-2xl object-cover shadow-md"
+                />
+              </div>
+            )}
             <div className="mt-8 space-y-6 text-lg leading-relaxed text-neutral-600 md:text-xl">
               {/<[a-z][\s\S]*?>/i.test(paragraph1) ? (
                 <div className="cms-html-content" dangerouslySetInnerHTML={{ __html: paragraph1 }} />
