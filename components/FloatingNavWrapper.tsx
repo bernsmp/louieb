@@ -16,7 +16,7 @@ export const NAV_ITEM_LABELS: Record<NavKey, string> = {
   frameworks: 'Frameworks',
   tools: 'Tools',
   sitemap: 'Site Map',
-  contact: 'Contact',
+  contact: 'About/Contact',
 };
 
 function buildNavItems(order: NavKey[]) {
@@ -78,8 +78,8 @@ function buildNavItems(order: NavKey[]) {
       icon: <Map className={ic} />,
     },
     contact: {
-      name: "Contact",
-      link: "/#contact",
+      name: "About/Contact",
+      link: "/#about",
       icon: <Mail className={ic} />,
     },
   };
