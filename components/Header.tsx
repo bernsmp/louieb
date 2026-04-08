@@ -104,7 +104,7 @@ export function Header() {
             Newsletter
           </Link>
           <Link
-            href="/#contact"
+            href="/#about"
             className={cn(
               "ml-2 rounded-lg px-5 py-2 text-sm font-semibold transition-all hover:shadow-md",
               scrolled
@@ -112,7 +112,7 @@ export function Header() {
                 : "bg-white text-neutral-900 hover:bg-neutral-100"
             )}
           >
-            Contact
+            About/Contact
           </Link>
         </div>
 
@@ -179,11 +179,11 @@ export function Header() {
               Newsletter
             </Link>
             <Link
-              href="/#contact"
+              href="/#about"
               className="mx-4 mt-2 rounded-lg bg-neutral-900 px-6 py-3 text-center text-base font-semibold text-white transition-all hover:bg-neutral-800"
               onClick={() => setIsMenuOpen(false)}
             >
-              Contact
+              About/Contact
             </Link>
           </div>
         </div>
