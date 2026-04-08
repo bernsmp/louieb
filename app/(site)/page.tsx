@@ -1,10 +1,8 @@
 import { Hero } from "@/components/Hero";
 import { FractionalSalesLeader } from "@/components/sections/FractionalSalesLeader";
-import { Transformation } from "@/components/sections/Transformation";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Process } from "@/components/sections/Process";
 import { ValueProposition } from "@/components/sections/ValueProposition";
-import { SecondaryCTA } from "@/components/sections/SecondaryCTA";
 import { FAQ } from "@/components/sections/FAQ";
 import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
@@ -115,7 +113,6 @@ export default async function Home() {
           ctaUrl={settings.fractionalSalesLeader.ctaUrl}
         />
       )}
-      <Transformation />
       {isVisible(settings.testimonialsSection) && (
         <Testimonials
           headline={settings.testimonialsSection.headline}
@@ -138,7 +135,6 @@ export default async function Home() {
           ctaText={settings.valueProposition.ctaText}
         />
       )}
-      <SecondaryCTA />
       {isVisible(settings.faq) && (
         <FAQ
           headline={settings.faq.headline}
