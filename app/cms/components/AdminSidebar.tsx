@@ -96,6 +96,8 @@ const pages = [
   { name: 'How to Interview a Fractional Sales Leader', href: '/cms/seo-interview-fractional-sales-leader', icon: FileTextIcon },
   { name: 'Founder-Led Sales Exit Checklist', href: '/cms/seo-founder-led-sales-exit-checklist', icon: FileTextIcon },
   { name: 'Fractional Sales Leadership for Private Equity', href: '/cms/seo-fractional-sales-leadership-pe', icon: FileTextIcon },
+  { name: 'FSL for Series A Companies', href: '/cms/seo-series-a', icon: FileTextIcon },
+  { name: 'Key Benefits of Hiring a FSL', href: '/cms/seo-benefits-fsl', icon: FileTextIcon },
 ]
 
 const collections = [
