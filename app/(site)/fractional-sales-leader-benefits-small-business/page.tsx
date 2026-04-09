@@ -154,7 +154,7 @@ export default function BenefitsPage() {
       />
 
       {/* Hero */}
-      <HeroBackground accentColor="#059669" fillColor="rgba(5,150,105,0.3)" className="bg-slate-950">
+      <HeroBackground accentColor="#2563eb" fillColor="rgba(37,99,235,0.3)" className="bg-slate-950">
         <div className="px-6 pb-20 pt-8 text-center">
           <motion.div
             variants={containerVariants}
@@ -164,7 +164,7 @@ export default function BenefitsPage() {
           >
             <motion.p
               variants={itemVariants}
-              className="mb-4 text-sm font-semibold uppercase tracking-widest text-emerald-400"
+              className="mb-4 text-sm font-semibold uppercase tracking-widest text-[#0966c2]"
             >
               Fractional Sales Leadership for Small Businesses
             </motion.p>
@@ -173,7 +173,7 @@ export default function BenefitsPage() {
               className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
             >
               {v("heroLine1", "10 Key Benefits of Hiring a")}
-              <span className="block text-emerald-400">{v("heroAccent", "Fractional Sales Leader")}</span>
+              <span className="block text-[#0966c2]">{v("heroAccent", "Fractional Sales Leader")}</span>
               {v("heroLine3", "for Your Small Business")}
             </motion.h1>
             <motion.p
@@ -193,7 +193,7 @@ export default function BenefitsPage() {
                 href={CALENDLY}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block rounded-lg bg-emerald-600 px-10 py-4 text-lg font-bold text-white shadow-xl transition-all hover:scale-105 hover:bg-emerald-700"
+                className="inline-block rounded-lg bg-[#0966c2] px-10 py-4 text-lg font-bold text-white shadow-xl transition-all hover:scale-105 hover:bg-[#0855a3]"
               >
                 Book a Working Session
               </Link>
@@ -230,7 +230,7 @@ export default function BenefitsPage() {
                   variants={itemVariants}
                   className="flex items-start gap-3 rounded-lg border border-neutral-200 bg-neutral-50 p-4"
                 >
-                  <Check className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
+                  <Check className="mt-0.5 h-5 w-5 shrink-0 text-[#0966c2]" />
                   <span className="text-neutral-800">{item}</span>
                 </motion.li>
               ))}
@@ -269,8 +269,8 @@ export default function BenefitsPage() {
                   className="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm"
                 >
                   <div className="mb-4 flex items-start gap-4">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-600/10">
-                      <item.icon className="h-5 w-5 text-emerald-600" />
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#0966c2]/10">
+                      <item.icon className="h-5 w-5 text-[#0966c2]" />
                     </div>
                     <span className="text-3xl font-bold text-neutral-200">{item.number}</span>
                   </div>
@@ -359,7 +359,7 @@ export default function BenefitsPage() {
               Curious about cost?{" "}
               <Link
                 href="/cost-of-fractional-vp-sales"
-                className="font-semibold text-emerald-600 underline underline-offset-2 hover:text-emerald-700"
+                className="font-semibold text-[#0966c2] underline underline-offset-2 hover:text-[#0855a3]"
               >
                 See fractional sales leadership pricing →
               </Link>
@@ -378,7 +378,7 @@ export default function BenefitsPage() {
             backgroundSize: "48px 48px",
           }}
         />
-        <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-emerald-600/10 blur-3xl" />
+        <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-[#0966c2]/10 blur-3xl" />
         <div className="relative mx-auto max-w-3xl px-6 text-center">
           <motion.div
             variants={containerVariants}
