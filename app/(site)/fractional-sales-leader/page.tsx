@@ -94,7 +94,7 @@ function generateVideoListSchema(videos: VideoItem[]) {
     name: video.title,
     description: video.description || "",
     thumbnailUrl: `https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`,
-    uploadDate: "2024-12-01",
+    uploadDate: "2024-12-01T00:00:00Z",
     contentUrl: `https://www.youtube.com/watch?v=${video.videoId}`,
     embedUrl: `https://www.youtube-nocookie.com/embed/${video.videoId}`,
     publisher: {
