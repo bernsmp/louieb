@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeroBackground } from "@/components/ui/HeroBackground";
-import { Check, TrendingUp, AlertTriangle, DollarSign, Users, Target, BarChart3, Zap } from "lucide-react";
+import { Check, AlertTriangle, DollarSign, Users, Target, BarChart3, Zap } from "lucide-react";
 import { useCmsSection } from "@/lib/useCmsSection";
 
 const CALENDLY = "https://calendly.com/louiebernstein/30minutes?month=2026-03";
-
 const CMS_SECTION = "seoSeriesAFSL";
+
+const reasonIcons = [AlertTriangle, DollarSign, BarChart3, Users, Target, Zap];
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -18,89 +19,6 @@ const itemVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const } },
 };
-
-const investorReasons = [
-  {
-    icon: AlertTriangle,
-    title: "Founder-Led Sales Doesn't Scale",
-    desc: "At Series A, the founder is still the best salesperson — and that's a liability. A fractional sales leader documents what the founder does, builds the playbook, and creates a system that works without the founder in every deal.",
-  },
-  {
-    icon: DollarSign,
-    title: "You Can't Afford a Mis-Hire at This Stage",
-    desc: "A full-time VP of Sales at Series A costs $400k–$500k all-in — and the average tenure is 19 months. A bad hire sets you back two years. A fractional sales leader gives you senior leadership for $8k–$15k/month with a 30-day exit clause.",
-  },
-  {
-    icon: BarChart3,
-    title: "Investors Need a Repeatable Revenue Model",
-    desc: "Series B diligence will ask: is this revenue repeatable? Can it be replicated by new hires? A fractional sales leader builds the documented system — the Sales Playbook, pipeline architecture, and KPIs — that answers yes.",
-  },
-  {
-    icon: Users,
-    title: "You Need Someone Who Can Hire and Manage",
-    desc: "Scaling from 2 to 5 reps at Series A is where most companies fall apart. A fractional sales leader writes scorecards, runs the interviews, onboards new hires, and manages performance — so the founders can focus on product and fundraising.",
-  },
-  {
-    icon: Target,
-    title: "Accountability Starts Before You Scale",
-    desc: "Position Contracts and activity-based KPIs aren't a Series B initiative. They need to be built at Series A, while the team is small enough to install them cleanly. Fractional sales leaders do this from day one.",
-  },
-  {
-    icon: Zap,
-    title: "Speed to Repeatability Is Competitive Advantage",
-    desc: "The company that builds a repeatable sales system fastest wins. A fractional sales leader has done this 10+ times. They skip the learning curve your first full-time VP would take two years to climb.",
-  },
-];
-
-const whatTheyBuild = [
-  "Sales Audit to understand the current reality — not just the founder's version of it",
-  "Documented Sales Playbook: ICP, discovery scripts, objection handling, pipeline stages",
-  "Hiring scorecard and onboarding process for the first 1–3 sales reps",
-  "Position Contracts that define exactly what each rep is accountable for",
-  "Activity-based KPIs tied to the actual sales motion, not vanity metrics",
-  "Weekly pipeline review rhythm the team can run independently",
-  "Daily training structure (15–33 min) that shortens rep ramp time",
-  "CRM setup and hygiene standards so data is actionable",
-];
-
-const vsFullTime = [
-  {
-    category: "Cost",
-    fractional: "$8,000–$15,000/month",
-    fullTime: "$400,000–$500,000/year all-in",
-    fslWins: true,
-  },
-  {
-    category: "Time to start",
-    fractional: "2–4 weeks",
-    fullTime: "3–6 months to hire + 90-day ramp",
-    fslWins: true,
-  },
-  {
-    category: "Risk",
-    fractional: "30-day exit clause",
-    fullTime: "6–12 months severance exposure",
-    fslWins: true,
-  },
-  {
-    category: "Experience",
-    fractional: "Has built sales systems at 10+ companies",
-    fullTime: "May have led one or two at scale",
-    fslWins: true,
-  },
-  {
-    category: "Focus",
-    fractional: "System-building and team management",
-    fullTime: "Often spends first year figuring out the company",
-    fslWins: true,
-  },
-  {
-    category: "Right time to hire full-time",
-    fractional: "When you hit $10M–$15M ARR and need full-time focus",
-    fullTime: "Too early at Series A for most companies",
-    fslWins: false,
-  },
-];
 
 const defaultFaqs = [
   {
@@ -157,6 +75,73 @@ export default function SeriesAPage() {
   const { v, cmsfaqs } = useCmsSection(CMS_SECTION);
   const faqs = cmsfaqs(5, defaultFaqs);
 
+  const reasonTitles = [
+    v("reason1Title", "Founder-Led Sales Doesn't Scale"),
+    v("reason2Title", "You Can't Afford a Mis-Hire at This Stage"),
+    v("reason3Title", "Investors Need a Repeatable Revenue Model"),
+    v("reason4Title", "You Need Someone Who Can Hire and Manage"),
+    v("reason5Title", "Accountability Starts Before You Scale"),
+    v("reason6Title", "Speed to Repeatability Is Competitive Advantage"),
+  ];
+  const reasonDescs = [
+    v("reason1Desc", "At Series A, the founder is still the best salesperson — and that's a liability. A fractional sales leader documents what the founder does, builds the playbook, and creates a system that works without the founder in every deal."),
+    v("reason2Desc", "A full-time VP of Sales at Series A costs $400k–$500k all-in — and the average tenure is 19 months. A bad hire sets you back two years. A fractional sales leader gives you senior leadership for $8k–$15k/month with a 30-day exit clause."),
+    v("reason3Desc", "Series B diligence will ask: is this revenue repeatable? Can it be replicated by new hires? A fractional sales leader builds the documented system — the Sales Playbook, pipeline architecture, and KPIs — that answers yes."),
+    v("reason4Desc", "Scaling from 2 to 5 reps at Series A is where most companies fall apart. A fractional sales leader writes scorecards, runs the interviews, onboards new hires, and manages performance — so the founders can focus on product and fundraising."),
+    v("reason5Desc", "Position Contracts and activity-based KPIs aren't a Series B initiative. They need to be built at Series A, while the team is small enough to install them cleanly. Fractional sales leaders do this from day one."),
+    v("reason6Desc", "The company that builds a repeatable sales system fastest wins. A fractional sales leader has done this 10+ times. They skip the learning curve your first full-time VP would take two years to climb."),
+  ];
+
+  const buildItems = [
+    v("buildItem1", "Sales Audit to understand the current reality — not just the founder's version of it"),
+    v("buildItem2", "Documented Sales Playbook: ICP, discovery scripts, objection handling, pipeline stages"),
+    v("buildItem3", "Hiring scorecard and onboarding process for the first 1–3 sales reps"),
+    v("buildItem4", "Position Contracts that define exactly what each rep is accountable for"),
+    v("buildItem5", "Activity-based KPIs tied to the actual sales motion, not vanity metrics"),
+    v("buildItem6", "Weekly pipeline review rhythm the team can run independently"),
+    v("buildItem7", "Daily training structure (15–33 min) that shortens rep ramp time"),
+    v("buildItem8", "CRM setup and hygiene standards so data is actionable"),
+  ];
+
+  const compRows = [
+    {
+      category: v("comp1Category", "Cost"),
+      fractional: v("comp1Fractional", "$8,000–$15,000/month"),
+      fullTime: v("comp1FullTime", "$400,000–$500,000/year all-in"),
+      fslWins: true,
+    },
+    {
+      category: v("comp2Category", "Time to start"),
+      fractional: v("comp2Fractional", "2–4 weeks"),
+      fullTime: v("comp2FullTime", "3–6 months to hire + 90-day ramp"),
+      fslWins: true,
+    },
+    {
+      category: v("comp3Category", "Risk"),
+      fractional: v("comp3Fractional", "30-day exit clause"),
+      fullTime: v("comp3FullTime", "6–12 months severance exposure"),
+      fslWins: true,
+    },
+    {
+      category: v("comp4Category", "Experience"),
+      fractional: v("comp4Fractional", "Has built sales systems at 10+ companies"),
+      fullTime: v("comp4FullTime", "May have led one or two at scale"),
+      fslWins: true,
+    },
+    {
+      category: v("comp5Category", "Focus"),
+      fractional: v("comp5Fractional", "System-building and team management"),
+      fullTime: v("comp5FullTime", "Often spends first year figuring out the company"),
+      fslWins: true,
+    },
+    {
+      category: v("comp6Category", "Right time to hire full-time"),
+      fractional: v("comp6Fractional", "When you hit $10M–$15M ARR and need full-time focus"),
+      fullTime: v("comp6FullTime", "Too early at Series A for most companies"),
+      fslWins: false,
+    },
+  ];
+
   return (
     <>
       <script
@@ -191,10 +176,7 @@ export default function SeriesAPage() {
               variants={itemVariants}
               className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
             >
-              {v(
-                "heroDescription",
-                "A fractional sales leader gives Series A companies a documented sales system, a managed team, and a repeatable revenue model — before you bet $400k on a full-time VP hire that may not work out."
-              )}
+              {v("heroDescription", "A fractional sales leader gives Series A companies a documented sales system, a managed team, and a repeatable revenue model — before you bet $400k on a full-time VP hire that may not work out.")}
             </motion.p>
             <motion.div
               variants={itemVariants}
@@ -206,7 +188,7 @@ export default function SeriesAPage() {
                 rel="noopener noreferrer"
                 className="inline-block rounded-lg bg-blue-600 px-10 py-4 text-lg font-bold text-white shadow-xl transition-all hover:scale-105 hover:bg-blue-700"
               >
-                Book a Working Session
+                {v("ctaButtonText", "Book a Working Session")}
               </Link>
               <Link
                 href="/fractional-sales-leader"
@@ -232,29 +214,31 @@ export default function SeriesAPage() {
               variants={itemVariants}
               className="mb-4 text-center font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
             >
-              Why Smart Investors Insist on Fractional Sales Leadership at Series A
+              {v("investorsHeading", "Why Smart Investors Insist on Fractional Sales Leadership at Series A")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-12 max-w-2xl text-center text-lg text-neutral-600"
             >
-              Series B diligence asks one question: is this revenue repeatable? The answer gets built
-              at Series A — or not at all.
+              {v("investorsSubheading", "Series B diligence asks one question: is this revenue repeatable? The answer gets built at Series A — or not at all.")}
             </motion.p>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {investorReasons.map((item, i) => (
-                <motion.div
-                  key={i}
-                  variants={itemVariants}
-                  className="rounded-xl border border-neutral-200 bg-neutral-50 p-6 shadow-sm"
-                >
-                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600/10">
-                    <item.icon className="h-5 w-5 text-blue-600" />
-                  </div>
-                  <h3 className="mb-2 text-lg font-bold text-neutral-900">{item.title}</h3>
-                  <p className="text-sm text-neutral-600">{item.desc}</p>
-                </motion.div>
-              ))}
+              {reasonTitles.map((title, i) => {
+                const Icon = reasonIcons[i];
+                return (
+                  <motion.div
+                    key={i}
+                    variants={itemVariants}
+                    className="rounded-xl border border-neutral-200 bg-neutral-50 p-6 shadow-sm"
+                  >
+                    <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600/10">
+                      <Icon className="h-5 w-5 text-blue-600" />
+                    </div>
+                    <h3 className="mb-2 text-lg font-bold text-neutral-900">{title}</h3>
+                    <p className="text-sm text-neutral-600">{reasonDescs[i]}</p>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.div>
         </div>
@@ -273,17 +257,16 @@ export default function SeriesAPage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
             >
-              What a Fractional Sales Leader Builds at Series A
+              {v("buildHeading", "What a Fractional Sales Leader Builds at Series A")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mb-10 text-lg text-neutral-600"
             >
-              This is not consulting. This is hands-on system installation — the infrastructure your
-              sales team needs to operate without the founder in every conversation.
+              {v("buildIntro", "This is not consulting. This is hands-on system installation — the infrastructure your sales team needs to operate without the founder in every conversation.")}
             </motion.p>
             <motion.ul variants={containerVariants} className="space-y-4">
-              {whatTheyBuild.map((item, i) => (
+              {buildItems.map((item, i) => (
                 <motion.li
                   key={i}
                   variants={itemVariants}
@@ -311,13 +294,13 @@ export default function SeriesAPage() {
               variants={itemVariants}
               className="mb-4 text-center font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
             >
-              Fractional Sales Leader vs. Full-Time VP at Series A
+              {v("compHeading", "Fractional Sales Leader vs. Full-Time VP at Series A")}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-12 max-w-2xl text-center text-lg text-neutral-600"
             >
-              At $1M–$10M ARR, the math strongly favors fractional leadership. Here&apos;s why.
+              {v("compSubheading", "At $1M–$10M ARR, the math strongly favors fractional leadership. Here's why.")}
             </motion.p>
             <div className="overflow-hidden rounded-xl border border-neutral-200 shadow-sm">
               <table className="w-full text-sm">
@@ -329,7 +312,7 @@ export default function SeriesAPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {vsFullTime.map((row, i) => (
+                  {compRows.map((row, i) => (
                     <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-neutral-50"}>
                       <td className="px-6 py-4 font-semibold text-neutral-900">{row.category}</td>
                       <td className="px-6 py-4 text-neutral-700">
@@ -361,21 +344,19 @@ export default function SeriesAPage() {
               variants={itemVariants}
               className="mb-10 text-center font-serif text-3xl font-bold text-neutral-900"
             >
-              What Founders Say
+              {v("testimonialsHeading", "What Founders Say")}
             </motion.h2>
             <div className="grid gap-8 md:grid-cols-2">
               {[
                 {
-                  quote:
-                    "When Louie came on board he wrote and organized our outbound scripts and emails. We now had everyone working off the same playbook, and it gave us consistency. Results were much easier to measure. Onboarding, and getting a new BDR productive, happen quicker too.",
-                  name: "Neal Reynolds",
-                  title: "CEO, BankMarketingCenter.com",
+                  quote: v("testimonial1Quote", "When Louie came on board he wrote and organized our outbound scripts and emails. We now had everyone working off the same playbook, and it gave us consistency. Results were much easier to measure. Onboarding, and getting a new BDR productive, happen quicker too."),
+                  name: v("testimonial1Name", "Neal Reynolds"),
+                  title: v("testimonial1Title", "CEO, BankMarketingCenter.com"),
                 },
                 {
-                  quote:
-                    "Louie, your fresh perspective and hard work have been instrumental in driving our sales results. You've helped us establish a solid foundation with documented processes, better pipeline management, and a more accountable sales culture.",
-                  name: "Brian Torrence",
-                  title: "CEO, Strategic Sales & Marketing",
+                  quote: v("testimonial2Quote", "Louie, your fresh perspective and hard work have been instrumental in driving our sales results. You've helped us establish a solid foundation with documented processes, better pipeline management, and a more accountable sales culture."),
+                  name: v("testimonial2Name", "Brian Torrence"),
+                  title: v("testimonial2Title", "CEO, Strategic Sales & Marketing"),
                 },
               ].map((t, i) => (
                 <motion.div
@@ -461,10 +442,7 @@ export default function SeriesAPage() {
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              {v(
-                "ctaDescription",
-                "30 minutes. I'll ask about your current sales motion and tell you exactly what needs to be built first. No pitch, no pressure."
-              )}
+              {v("ctaDescription", "30 minutes. I'll ask about your current sales motion and tell you exactly what needs to be built first. No pitch, no pressure.")}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link
@@ -473,7 +451,7 @@ export default function SeriesAPage() {
                 rel="noopener noreferrer"
                 className="inline-block rounded-lg bg-white px-10 py-4 text-lg font-bold text-neutral-900 shadow-xl transition-all hover:scale-105 hover:bg-neutral-100"
               >
-                Book a Working Session
+                {v("ctaButtonText", "Book a Working Session")}
               </Link>
             </motion.div>
             <motion.p variants={itemVariants} className="mt-4 text-sm text-neutral-400">
