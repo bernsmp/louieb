@@ -68,6 +68,7 @@ const FSL_PAGES = [
   { title: "VP of Sales vs. CRO: What's the Difference?", url: "/vp-sales-vs-cro-difference" },
   { title: "When Are You Ready to Hire a CRO?", url: "/when-to-hire-a-cro" },
   { title: "The $250K Mistake: Hiring a VP of Sales Too Early", url: "/250k-mistake-vp-sales-hire-too-early" },
+  { title: "Fractional Sales Leadership for Series A Companies", url: "/fractional-sales-leadership-series-a" },
 ];
 
 const SALES_GUIDES = [
@@ -136,6 +137,7 @@ const SALES_GUIDES = [
   { title: "How to Create an Ideal Customer Profile", url: "/how-to-create-an-ideal-customer-profile" },
   { title: "How to Set Up HubSpot for a Small Sales Team", url: "/how-to-set-up-hubspot-for-small-sales-team" },
   { title: "Sales Tech Stack for Small Business: The Minimum Setup", url: "/sales-tech-stack-for-small-business" },
+  { title: "Key Benefits of Hiring a Fractional Sales Leader for Small Businesses", url: "/fractional-sales-leader-benefits-small-business" },
 ];
 
 const FRAMEWORK_PAGES = [
