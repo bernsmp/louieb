@@ -68,6 +68,8 @@ export default async function AdminDashboard() {
     { title: 'How to Run a Discovery Call', description: '/how-to-run-a-discovery-call', href: '/cms/seo-how-to-run-discovery-call', icon: FileTextIcon },
     { title: 'Close Deals Without Discounting', description: '/how-to-close-deals-without-discounting', href: '/cms/seo-close-deals-no-discount', icon: FileTextIcon },
     { title: 'Sales Accountability Document', description: '/sales-accountability-document', href: '/cms/seo-sales-accountability-document', icon: FileTextIcon },
+    { title: 'Why Does My Sales Pipeline Depend on Me?', description: '/why-does-my-sales-pipeline-depend-on-me', href: '/cms/seo-founder-pipeline-dependency', icon: FileTextIcon },
+    { title: 'What Breaks First When a Founder Stops Selling?', description: '/what-breaks-first-when-founder-stops-selling', href: '/cms/seo-what-breaks-founder-selling', icon: FileTextIcon },
   ]
 
   const collections = [

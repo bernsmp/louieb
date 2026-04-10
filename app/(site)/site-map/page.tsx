@@ -88,6 +88,8 @@ const SALES_GUIDES = [
   { title: "How to Replace Founder-Led Sales Without Losing Momentum", url: "/how-to-replace-founder-led-sales" },
   { title: "How to Transition Out of Founder-Led Sales", url: "/transition-out-of-founder-led-sales" },
   { title: "Founder-Led Sales Exit Checklist", url: "/founder-led-sales-exit-checklist" },
+  { title: "Why Does My Sales Pipeline Depend Entirely on Me?", url: "/why-does-my-sales-pipeline-depend-on-me" },
+  { title: "What Breaks First When a Founder Stops Selling?", url: "/what-breaks-first-when-founder-stops-selling" },
   // Sales Process & Pipeline
   { title: "How to Build a Sales Process After $1M ARR", url: "/how-to-build-a-sales-process-after-1m-arr" },
   { title: "How to Build a Sales Process for SaaS", url: "/how-to-build-a-sales-process-for-saas" },
