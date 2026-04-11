@@ -70,6 +70,7 @@ export default async function AdminDashboard() {
     { title: 'Sales Accountability Document', description: '/sales-accountability-document', href: '/cms/seo-sales-accountability-document', icon: FileTextIcon },
     { title: 'Why Does My Sales Pipeline Depend on Me?', description: '/why-does-my-sales-pipeline-depend-on-me', href: '/cms/seo-founder-pipeline-dependency', icon: FileTextIcon },
     { title: 'What Breaks First When a Founder Stops Selling?', description: '/what-breaks-first-when-founder-stops-selling', href: '/cms/seo-what-breaks-founder-selling', icon: FileTextIcon },
+    { title: 'Why Do My Salespeople Underperform Without Me Involved?', description: '/why-do-my-salespeople-underperform-without-me', href: '/cms/seo-salespeople-underperform-without-me', icon: FileTextIcon },
     { title: 'Site Map Page', description: '/site-map', href: '/cms/site-map-page', icon: FileTextIcon },
   ]
 
