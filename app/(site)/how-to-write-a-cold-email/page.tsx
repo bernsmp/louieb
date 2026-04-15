@@ -17,71 +17,11 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const } },
 }
 
-const emailFormula = [
-  {
-    line: 'Line 1',
-    label: 'The Hook — Make It Specific to Them',
-    detail: 'The first sentence determines whether the rest of the email gets read. Generic openers ("I hope this finds you well," "I\'m reaching out because...") destroy open rates before you even make your point. A strong hook references something specific to the recipient: a recent funding announcement, a job posting that signals a problem, a piece of content they published, or a mutual connection. It proves you did your homework and didn\'t spray-and-pray.',
-    example: '"Saw that you just expanded your sales team to 6 reps — congrats. Rapid growth at that stage usually surfaces some interesting process challenges."',
-  },
-  {
-    line: 'Line 2',
-    label: 'The Problem — Name the Pain Without Overstating It',
-    detail: 'The second line names the problem your prospect is likely experiencing, based on their situation. Don\'t diagnose them — hypothesize. "Companies at your stage often find that..." is more effective than "You probably have this problem." The former invites a conversation. The latter presumes you know their business better than they do, which creates resistance even when you\'re right.',
-    example: '"Companies scaling from 3 to 7 reps often find the founder is still the closer on the biggest deals — pipeline fills up but conversion slows down."',
-  },
-  {
-    line: 'Line 3',
-    label: 'The Solution — One Sentence, Not a Pitch',
-    detail: 'Describe what you do in a single, plain-English sentence focused on the outcome, not the features. Avoid jargon, superlatives, and anything that sounds like marketing copy. "We help" or "I work with" is fine. "Revolutionary platform that leverages AI to transform your go-to-market strategy" will get you deleted. The goal of this line is to be understandable in 5 seconds — not impressive.',
-    example: '"I work with B2B founders at $2M–$8M ARR to build the sales processes that let them step back from day-to-day selling."',
-  },
-  {
-    line: 'Line 4',
-    label: 'The Proof — One Specific Result',
-    detail: 'One concrete result is more powerful than three vague ones. "Helped increase revenue" says nothing. "Helped a SaaS company at $3.2M ARR grow 61% in 12 months by rebuilding their pipeline process" says something you can check. Specificity creates credibility. If you don\'t have a named case study you can share, use an anonymized result with enough detail to be believable.',
-    example: '"One of my clients — a B2B SaaS company at $3.2M ARR — grew 61% in the first year of working together."',
-  },
-  {
-    line: 'Line 5',
-    label: 'The CTA — One Ask, Low Friction',
-    detail: 'Most cold emails fail at the ask. "Would you be open to a quick call sometime?" is not an ask — it\'s a vague possibility. A strong CTA is a specific, low-friction request with a clear yes/no answer. Offer two time options. Keep the meeting short (20 minutes). Make it easy to say yes by naming the agenda. And make it easy to say no by acknowledging that you understand if the timing isn\'t right.',
-    example: '"Worth a 20-minute call to see if this is relevant? I have Tuesday at 2pm or Thursday at 10am — or just reply with a time that works better."',
-  },
-]
-
-const beforeAfter = [
-  {
-    label: 'Subject Line',
-    bad: '"Quick question about your sales process"',
-    good: '"Your Series A + 6 reps — a question"',
-  },
-  {
-    label: 'Opening Line',
-    bad: '"I hope this email finds you well. I\'m reaching out because I came across your company..."',
-    good: '"Saw that you just expanded to 6 reps — that stage usually surfaces some interesting process questions."',
-  },
-  {
-    label: 'Problem Statement',
-    bad: '"Many companies struggle with sales productivity and revenue growth."',
-    good: '"Companies scaling from 3 to 7 reps often find the founder is still the closer on the biggest deals."',
-  },
-  {
-    label: 'What You Do',
-    bad: '"Our innovative platform leverages proven methodologies to optimize your revenue engine."',
-    good: '"I work with B2B founders at $2M–$8M ARR to build the sales processes that let them step back from day-to-day selling."',
-  },
-  {
-    label: 'CTA',
-    bad: '"Would love to connect and share more about how we might be able to help. Let me know if you\'d like to chat!"',
-    good: '"Worth 20 minutes? Tuesday at 2pm or Thursday at 10am — or reply with a time that works."',
-  },
-]
-
+// Static fallback FAQs (used for schema and as CMS defaults)
 const faqs = [
   {
-    q: 'What\'s the right length for a cold email?',
-    a: 'Between 75 and 125 words. Short enough to read in 30 seconds on a phone, long enough to include all five lines of the formula. Every word beyond 125 is statistically decreasing your reply rate. If you find yourself writing longer, it\'s usually because you\'re trying to explain too much before earning the right to a conversation. The goal of a cold email is not to close a deal — it\'s to earn a meeting.',
+    q: "What's the right length for a cold email?",
+    a: "Between 75 and 125 words. Short enough to read in 30 seconds on a phone, long enough to include all five lines of the formula. Every word beyond 125 is statistically decreasing your reply rate. If you find yourself writing longer, it's usually because you're trying to explain too much before earning the right to a conversation. The goal of a cold email is not to close a deal — it's to earn a meeting.",
   },
   {
     q: 'Should I personalize every cold email or use templates?',
@@ -93,7 +33,7 @@ const faqs = [
   },
   {
     q: 'How does cold email fit into a broader outbound system?',
-    a: 'Cold email is one channel in a multi-touch cadence — typically the highest-volume touchpoint because it\'s the lowest-effort to execute at scale. It works best when combined with phone calls and LinkedIn touchpoints, not as a standalone channel. A prospect who gets a relevant email, sees your LinkedIn comment on their post two days later, and receives a voicemail the following week is far more likely to respond than one who only receives emails.',
+    a: "Cold email is one channel in a multi-touch cadence — typically the highest-volume touchpoint because it's the lowest-effort to execute at scale. It works best when combined with phone calls and LinkedIn touchpoints, not as a standalone channel. A prospect who gets a relevant email, sees your LinkedIn comment on their post two days later, and receives a voicemail the following week is far more likely to respond than one who only receives emails.",
   },
 ]
 
@@ -120,6 +60,68 @@ const schemaData = {
 export default function HowToWriteColdEmailPage() {
   const { v, cmsfaqs } = useCmsSection(CMS_SECTION)
   const displayFaqs = cmsfaqs(4, faqs)
+
+  const emailFormula = [
+    {
+      line: 'Line 1',
+      label: v('formulaLine1Label', 'The Hook — Make It Specific to Them'),
+      detail: v('formulaLine1Detail', "The first sentence determines whether the rest of the email gets read. Generic openers (\"I hope this finds you well,\" \"I'm reaching out because...\") destroy open rates before you even make your point. A strong hook references something specific to the recipient: a recent funding announcement, a job posting that signals a problem, a piece of content they published, or a mutual connection. It proves you did your homework and didn't spray-and-pray."),
+      example: v('formulaLine1Example', '"Saw that you just expanded your sales team to 6 reps — congrats. Rapid growth at that stage usually surfaces some interesting process challenges."'),
+    },
+    {
+      line: 'Line 2',
+      label: v('formulaLine2Label', 'The Problem — Name the Pain Without Overstating It'),
+      detail: v('formulaLine2Detail', "The second line names the problem your prospect is likely experiencing, based on their situation. Don't diagnose them — hypothesize. \"Companies at your stage often find that...\" is more effective than \"You probably have this problem.\" The former invites a conversation. The latter presumes you know their business better than they do, which creates resistance even when you're right."),
+      example: v('formulaLine2Example', '"Companies scaling from 3 to 7 reps often find the founder is still the closer on the biggest deals — pipeline fills up but conversion slows down."'),
+    },
+    {
+      line: 'Line 3',
+      label: v('formulaLine3Label', 'The Solution — One Sentence, Not a Pitch'),
+      detail: v('formulaLine3Detail', 'Describe what you do in a single, plain-English sentence focused on the outcome, not the features. Avoid jargon, superlatives, and anything that sounds like marketing copy. "We help" or "I work with" is fine. "Revolutionary platform that leverages AI to transform your go-to-market strategy" will get you deleted. The goal of this line is to be understandable in 5 seconds — not impressive.'),
+      example: v('formulaLine3Example', '"I work with B2B founders at $2M–$8M ARR to build the sales processes that let them step back from day-to-day selling."'),
+    },
+    {
+      line: 'Line 4',
+      label: v('formulaLine4Label', 'The Proof — One Specific Result'),
+      detail: v('formulaLine4Detail', 'One concrete result is more powerful than three vague ones. "Helped increase revenue" says nothing. "Helped a SaaS company at $3.2M ARR grow 61% in 12 months by rebuilding their pipeline process" says something you can check. Specificity creates credibility. If you don\'t have a named case study you can share, use an anonymized result with enough detail to be believable.'),
+      example: v('formulaLine4Example', '"One of my clients — a B2B SaaS company at $3.2M ARR — grew 61% in the first year of working together."'),
+    },
+    {
+      line: 'Line 5',
+      label: v('formulaLine5Label', 'The CTA — One Ask, Low Friction'),
+      detail: v('formulaLine5Detail', "Most cold emails fail at the ask. \"Would you be open to a quick call sometime?\" is not an ask — it's a vague possibility. A strong CTA is a specific, low-friction request with a clear yes/no answer. Offer two time options. Keep the meeting short (20 minutes). Make it easy to say yes by naming the agenda. And make it easy to say no by acknowledging that you understand if the timing isn't right."),
+      example: v('formulaLine5Example', '"Worth a 20-minute call to see if this is relevant? I have Tuesday at 2pm or Thursday at 10am — or just reply with a time that works better."'),
+    },
+  ]
+
+  const beforeAfter = [
+    {
+      label: v('beforeAfterRow1Label', 'Subject Line'),
+      bad: v('beforeAfterRow1Bad', '"Quick question about your sales process"'),
+      good: v('beforeAfterRow1Good', '"Your Series A + 6 reps — a question"'),
+    },
+    {
+      label: v('beforeAfterRow2Label', 'Opening Line'),
+      bad: v('beforeAfterRow2Bad', "\"I hope this email finds you well. I'm reaching out because I came across your company...\""),
+      good: v('beforeAfterRow2Good', '"Saw that you just expanded to 6 reps — that stage usually surfaces some interesting process questions."'),
+    },
+    {
+      label: v('beforeAfterRow3Label', 'Problem Statement'),
+      bad: v('beforeAfterRow3Bad', '"Many companies struggle with sales productivity and revenue growth."'),
+      good: v('beforeAfterRow3Good', '"Companies scaling from 3 to 7 reps often find the founder is still the closer on the biggest deals."'),
+    },
+    {
+      label: v('beforeAfterRow4Label', 'What You Do'),
+      bad: v('beforeAfterRow4Bad', '"Our innovative platform leverages proven methodologies to optimize your revenue engine."'),
+      good: v('beforeAfterRow4Good', '"I work with B2B founders at $2M–$8M ARR to build the sales processes that let them step back from day-to-day selling."'),
+    },
+    {
+      label: v('beforeAfterRow5Label', 'CTA'),
+      bad: v('beforeAfterRow5Bad', "\"Would love to connect and share more about how we might be able to help. Let me know if you'd like to chat!\""),
+      good: v('beforeAfterRow5Good', '"Worth 20 minutes? Tuesday at 2pm or Thursday at 10am — or reply with a time that works."'),
+    },
+  ]
+
   return (
     <>
       <script
@@ -140,7 +142,7 @@ export default function HowToWriteColdEmailPage() {
               variants={itemVariants}
               className="mb-4 text-sm font-semibold uppercase tracking-widest text-blue-400"
             >
-              Outbound Sales
+              {v('heroLabel', 'Outbound Sales')}
             </motion.p>
             <motion.h1
               variants={itemVariants}
@@ -165,13 +167,13 @@ export default function HowToWriteColdEmailPage() {
                 rel="noopener noreferrer"
                 className="inline-block rounded-lg bg-blue-700 px-10 py-4 text-lg font-bold text-white shadow-xl transition-all hover:scale-105 hover:bg-blue-800"
               >
-                Talk to Louie — 30 Minutes
+                {v('heroPrimaryButton', 'Talk to Louie — 30 Minutes')}
               </Link>
               <Link
                 href="/what-is-a-sales-cadence"
                 className="text-base font-semibold text-neutral-300 underline underline-offset-2 hover:text-white"
               >
-                How cold email fits into a cadence →
+                {v('heroSecondaryLink', 'How cold email fits into a cadence →')}
               </Link>
             </motion.div>
           </motion.div>
@@ -191,10 +193,10 @@ export default function HowToWriteColdEmailPage() {
               variants={itemVariants}
               className="mb-4 text-center font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
             >
-              The 5-Line Cold Email Formula
+              {v('formulaHeading', 'The 5-Line Cold Email Formula')}
             </motion.h2>
             <motion.p variants={itemVariants} className="mb-10 text-center text-neutral-600">
-              75–125 words. One ask. Earns the meeting — doesn't try to close it.
+              {v('formulaSubheading', "75–125 words. One ask. Earns the meeting — doesn't try to close it.")}
             </motion.p>
             <div className="space-y-8">
               {emailFormula.map((item, i) => (
@@ -229,12 +231,12 @@ export default function HowToWriteColdEmailPage() {
             viewport={{ once: true }}
           >
             <motion.p variants={itemVariants} className="mb-5 text-lg leading-relaxed text-neutral-700">
-              Cold email is the most scalable outbound channel available to a $1M–$10M ARR sales team — and the most commonly abused. The inbox is crowded, and buyers have developed a fast filter for anything that feels templated, self-congratulatory, or irrelevant. The emails that get replies aren't the most clever or the longest — they're the most relevant. Relevance comes from specificity: knowing enough about the prospect to name a real problem in a way that makes them think "how did they know that?"
+              {v('seoParagraph1', "Cold email is the most scalable outbound channel available to a $1M–$10M ARR sales team — and the most commonly abused. The inbox is crowded, and buyers have developed a fast filter for anything that feels templated, self-congratulatory, or irrelevant. The emails that get replies aren't the most clever or the longest — they're the most relevant. Relevance comes from specificity: knowing enough about the prospect to name a real problem in a way that makes them think \"how did they know that?\"")}
             </motion.p>
             <motion.p variants={itemVariants} className="text-lg leading-relaxed text-neutral-700">
-              The 5-line formula above is designed to create that relevance at scale. Lines 2–5 can be templated for a segment. Line 1 must be personalized for the individual. That split — 80% template, 20% personalization — is how you run outbound efficiently without sounding like a robot. And cold email only reaches its full potential when it's part of a multi-touch cadence. To see how email fits alongside phone and LinkedIn in a systematic sequence,{' '}
+              {v('seoParagraph2', "The 5-line formula above is designed to create that relevance at scale. Lines 2–5 can be templated for a segment. Line 1 must be personalized for the individual. That split — 80% template, 20% personalization — is how you run outbound efficiently without sounding like a robot. And cold email only reaches its full potential when it's part of a multi-touch cadence. To see how email fits alongside phone and LinkedIn in a systematic sequence,")}{' '}
               <Link href="/what-is-a-sales-cadence" className="font-semibold text-blue-700 underline underline-offset-2 hover:text-blue-900">
-                read the full cadence guide →
+                {v('seoParagraph2LinkText', 'read the full cadence guide →')}
               </Link>
             </motion.p>
           </motion.div>
@@ -254,10 +256,10 @@ export default function HowToWriteColdEmailPage() {
               variants={itemVariants}
               className="mb-4 text-center font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
             >
-              Before and After: Real Cold Email Rewrites
+              {v('beforeAfterHeading', 'Before and After: Real Cold Email Rewrites')}
             </motion.h2>
             <motion.p variants={itemVariants} className="mb-10 text-center text-neutral-600">
-              The difference between a deleted email and a replied-to one is usually these changes.
+              {v('beforeAfterSubheading', 'The difference between a deleted email and a replied-to one is usually these changes.')}
             </motion.p>
             <div className="overflow-hidden rounded-xl border border-neutral-200">
               <div className="grid grid-cols-3 bg-neutral-900 text-white">
@@ -347,13 +349,13 @@ export default function HowToWriteColdEmailPage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              {v('ctaHeadline', "Want Me to Audit Your Cold Emails?")}
+              {v('ctaHeadline', 'Want Me to Audit Your Cold Emails?')}
             </motion.h2>
             <motion.p
               variants={itemVariants}
               className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              {v('ctaDescription', "In 30 minutes I can review your current outbound emails, identify the specific lines killing your reply rate, and rewrite them using the formula that consistently earns meetings.")}
+              {v('ctaDescription', 'In 30 minutes I can review your current outbound emails, identify the specific lines killing your reply rate, and rewrite them using the formula that consistently earns meetings.')}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Link
@@ -362,7 +364,7 @@ export default function HowToWriteColdEmailPage() {
                 rel="noopener noreferrer"
                 className="inline-block rounded-lg bg-white px-10 py-4 text-lg font-bold text-neutral-900 shadow-xl transition-all hover:scale-105 hover:bg-neutral-100"
               >
-                Book a Free 30-Minute Call
+                {v('ctaButton', 'Book a Free 30-Minute Call')}
               </Link>
             </motion.div>
           </motion.div>
