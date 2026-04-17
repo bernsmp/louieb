@@ -66,6 +66,7 @@ export default async function AdminDashboard() {
     { title: 'What Is a Sales Cadence', description: '/what-is-a-sales-cadence', href: '/cms/seo-what-is-a-sales-cadence', icon: FileTextIcon },
     { title: 'How to Write a Cold Email', description: '/how-to-write-a-cold-email', href: '/cms/seo-how-to-write-cold-email', icon: FileTextIcon },
     { title: 'How to Make a Cold Call', description: '/how-to-make-a-cold-call', href: '/cms/seo-how-to-make-cold-call', icon: FileTextIcon },
+    { title: 'B2B Sales Process of Small Companies', description: '/b2b-sales-process-small-companies', href: '/cms/seo-b2b-sales-process-small-companies', icon: FileTextIcon },
     { title: 'How to Run a Discovery Call', description: '/how-to-run-a-discovery-call', href: '/cms/seo-how-to-run-discovery-call', icon: FileTextIcon },
     { title: 'Close Deals Without Discounting', description: '/how-to-close-deals-without-discounting', href: '/cms/seo-close-deals-no-discount', icon: FileTextIcon },
     { title: 'Sales Accountability Document', description: '/sales-accountability-document', href: '/cms/seo-sales-accountability-document', icon: FileTextIcon },
