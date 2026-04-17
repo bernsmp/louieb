@@ -102,6 +102,7 @@ const SALES_GUIDES = [
   // Outbound & Lead Gen
   { title: "How to Build an Outbound Sales System From Scratch", url: "/how-to-build-outbound-sales-system" },
   { title: "How to Write a Cold Email That Gets Replies", url: "/how-to-write-a-cold-email" },
+  { title: "How to Make a Cold Call That Actually Books Meetings", url: "/how-to-make-a-cold-call" },
   { title: "How to Build a B2B Referral Program That Works", url: "/b2b-referral-program-sales" },
   { title: "B2B Sales Objection Handling: 7 Common Objections", url: "/b2b-sales-objection-handling" },
   { title: "How to Run a Sales Discovery Call That Moves Deals Forward", url: "/how-to-run-a-discovery-call" },
