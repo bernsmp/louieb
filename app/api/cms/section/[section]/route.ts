@@ -3,6 +3,26 @@ import { revalidatePath } from 'next/cache'
 import { getUser } from '@/lib/auth'
 import { supabaseAdmin } from '@/lib/supabase'
 
+function deepMerge(
+  target: Record<string, unknown>,
+  source: Record<string, unknown>
+): Record<string, unknown> {
+  const result = { ...target }
+  for (const key of Object.keys(source)) {
+    const src = source[key]
+    const tgt = target[key]
+    if (
+      src !== null && typeof src === 'object' && !Array.isArray(src) &&
+      tgt !== null && typeof tgt === 'object' && !Array.isArray(tgt)
+    ) {
+      result[key] = deepMerge(tgt as Record<string, unknown>, src as Record<string, unknown>)
+    } else {
+      result[key] = src
+    }
+  }
+  return result
+}
+
 // GET: Fetch a specific section's content
 export async function GET(
   request: Request,
@@ -84,10 +104,10 @@ export async function PUT(
       .single()
 
     // Deep merge: existing content + new content (new values override)
-    const mergedContent = {
-      ...(existing?.content || {}),
-      ...content,
-    }
+    const mergedContent = deepMerge(
+      (existing?.content as Record<string, unknown>) || {},
+      content as Record<string, unknown>
+    )
 
     // Upsert the merged content
     const { data, error } = await supabaseAdmin

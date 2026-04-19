@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { sanitizeHtml } from "@/lib/sanitize";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
@@ -159,7 +160,7 @@ export function Testimonials({
 
                   <blockquote className="text-lg leading-relaxed text-neutral-200 lg:text-xl xl:text-2xl flex-1">
                     {/<[a-z][\s\S]*?>/i.test(testimonials[currentIndex].quote) ? (
-                      <span dangerouslySetInnerHTML={{ __html: `\u201C${testimonials[currentIndex].quote}\u201D` }} className="cms-html-content" />
+                      <span dangerouslySetInnerHTML={{ __html: sanitizeHtml(`\u201C${testimonials[currentIndex].quote}\u201D`) }} className="cms-html-content" />
                     ) : (
                       <>&ldquo;{renderInlineLinks(testimonials[currentIndex].quote)}&rdquo;</>
                     )}

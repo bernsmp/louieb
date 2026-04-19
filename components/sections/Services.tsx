@@ -1,4 +1,5 @@
 import { Icon } from "@/components/ui/Icon";
+import { sanitizeHtml } from "@/lib/sanitize";
 
 interface ServiceItem {
   title: string;
@@ -63,7 +64,7 @@ export function Services({
                   {service.title}
                 </h3>
                 {/<[a-z][\s\S]*?>/i.test(service.description) ? (
-                  <div className="mt-4 text-base leading-relaxed text-neutral-600 cms-html-content" dangerouslySetInnerHTML={{ __html: service.description }} />
+                  <div className="mt-4 text-base leading-relaxed text-neutral-600 cms-html-content" dangerouslySetInnerHTML={{ __html: sanitizeHtml(service.description) }} />
                 ) : (
                   <p className="mt-4 text-base leading-relaxed text-neutral-600 whitespace-pre-line">
                     {service.description}

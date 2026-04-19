@@ -9,10 +9,13 @@ export function sanitizeHtml(html: string | undefined | null): string {
   if (!html) return ''
 
   return html
-    // Remove <script> tags entirely
+    // Remove dangerous tags entirely (including their content)
     .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-    // Remove <style> tags (can hide content or override layout)
     .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '')
+    .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '')
+    .replace(/<object\b[^<]*(?:(?!<\/object>)<[^<]*)*<\/object>/gi, '')
+    .replace(/<embed\b[^>]*\/?>/gi, '')
+    .replace(/<form\b[^<]*(?:(?!<\/form>)<[^<]*)*<\/form>/gi, '')
     // Remove all event handler attributes (onclick, onerror, onload, onmouseover, etc.)
     .replace(/\s+on\w+\s*=\s*"[^"]*"/gi, '')
     .replace(/\s+on\w+\s*=\s*'[^']*'/gi, '')

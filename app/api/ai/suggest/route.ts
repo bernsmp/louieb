@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { getUser } from '@/lib/auth'
 
 // OpenRouter API configuration
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions'
@@ -38,6 +39,11 @@ interface SuggestRequest {
 }
 
 export async function POST(request: Request) {
+  const user = await getUser()
+  if (!user) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
   // Check for API key
   const apiKey = process.env.OPENROUTER_API_KEY
   if (!apiKey) {

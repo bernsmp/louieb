@@ -1,3 +1,5 @@
+import { sanitizeHtml } from "@/lib/sanitize";
+
 interface AboutProps {
   headline?: string;
   headlineAccent?: string;
@@ -55,24 +57,24 @@ export function About({
             )}
             <div className="mt-8 space-y-6 text-lg leading-relaxed text-neutral-600 md:text-xl">
               {/<[a-z][\s\S]*?>/i.test(paragraph1) ? (
-                <div className="cms-html-content" dangerouslySetInnerHTML={{ __html: paragraph1 }} />
+                <div className="cms-html-content" dangerouslySetInnerHTML={{ __html: sanitizeHtml(paragraph1) }} />
               ) : (
                 <p className="whitespace-pre-line">{paragraph1}</p>
               )}
               {/<[a-z][\s\S]*?>/i.test(paragraph2) ? (
-                <div className="cms-html-content" dangerouslySetInnerHTML={{ __html: paragraph2 }} />
+                <div className="cms-html-content" dangerouslySetInnerHTML={{ __html: sanitizeHtml(paragraph2) }} />
               ) : (
                 <p className="whitespace-pre-line">{paragraph2}</p>
               )}
               {/<[a-z][\s\S]*?>/i.test(paragraph3) ? (
-                <div className="cms-html-content" dangerouslySetInnerHTML={{ __html: paragraph3 }} />
+                <div className="cms-html-content" dangerouslySetInnerHTML={{ __html: sanitizeHtml(paragraph3) }} />
               ) : (
                 <p className="whitespace-pre-line">{paragraph3}</p>
               )}
             </div>
             <div className="mt-10 rounded-2xl border-l-4 border-neutral-900 bg-neutral-50 p-6">
               {/<[a-z][\s\S]*?>/i.test(calloutText) ? (
-                <div className="text-lg font-semibold leading-relaxed text-neutral-900 md:text-xl cms-html-content" dangerouslySetInnerHTML={{ __html: calloutText }} />
+                <div className="text-lg font-semibold leading-relaxed text-neutral-900 md:text-xl cms-html-content" dangerouslySetInnerHTML={{ __html: sanitizeHtml(calloutText) }} />
               ) : (
                 <p className="text-lg font-semibold leading-relaxed text-neutral-900 md:text-xl whitespace-pre-line">
                   {calloutText}

@@ -1,3 +1,5 @@
+import { sanitizeHtml } from "@/lib/sanitize";
+
 interface ProcessStep {
   number: string;
   title: string;
@@ -52,7 +54,7 @@ export function Process({
                   {step.title}
                 </h3>
                 {/<[a-z][\s\S]*?>/i.test(step.description) ? (
-                  <div className="mt-4 text-base leading-relaxed text-neutral-600 lg:text-lg cms-html-content" dangerouslySetInnerHTML={{ __html: step.description }} />
+                  <div className="mt-4 text-base leading-relaxed text-neutral-600 lg:text-lg cms-html-content" dangerouslySetInnerHTML={{ __html: sanitizeHtml(step.description) }} />
                 ) : (
                   <p className="mt-4 text-base leading-relaxed text-neutral-600 lg:text-lg whitespace-pre-line">
                     {step.description}

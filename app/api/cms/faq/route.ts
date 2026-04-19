@@ -17,6 +17,7 @@ export async function GET(request: Request) {
       .from('faq_items')
       .select('*')
       .order('display_order', { ascending: true })
+      .limit(500)
 
     if (page) {
       query = query.eq('page', page)
