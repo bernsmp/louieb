@@ -91,6 +91,7 @@ const SALES_GUIDES = [
   { title: "Why Does My Sales Pipeline Depend Entirely on Me?", url: "/why-does-my-sales-pipeline-depend-on-me" },
   { title: "What Breaks First When a Founder Stops Selling?", url: "/what-breaks-first-when-founder-stops-selling" },
   { title: "Why Do My Salespeople Underperform Without Me Involved?", url: "/why-do-my-salespeople-underperform-without-me" },
+  { title: "5 Signs You're Not Ready to Give Up Founder-Led Sales", url: "/5-signs-not-ready-to-give-up-founder-led-sales" },
   // Sales Process & Pipeline
   { title: "How to Build a Sales Process After $1M ARR", url: "/how-to-build-a-sales-process-after-1m-arr" },
   { title: "How to Build a Sales Process for SaaS", url: "/how-to-build-a-sales-process-for-saas" },
