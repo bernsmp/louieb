@@ -39,7 +39,7 @@ import type {
 } from './supabase'
 
 // Feature flag to enable/disable Supabase CMS
-const USE_SUPABASE_CMS = process.env.USE_SUPABASE_CMS === 'true'
+const USE_SUPABASE_CMS = process.env.USE_SUPABASE_CMS !== 'false'
 
 // ============================================================================
 // TYPE DEFINITIONS
