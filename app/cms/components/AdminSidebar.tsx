@@ -60,6 +60,7 @@ const pages = [
   { name: 'How to Onboard a New Sales Rep', href: '/cms/seo-onboard-sales-rep', icon: FileTextIcon },
   { name: 'Sales Compensation Plan', href: '/cms/seo-sales-comp-plan', icon: FileTextIcon },
   { name: 'The $250K VP of Sales Mistake', href: '/cms/seo-250k-vp-sales-mistake', icon: FileTextIcon },
+  { name: 'Build Sales System Without Full-Time VP', href: '/cms/seo-build-sales-system-without-vp', icon: FileTextIcon },
   { name: 'When Ready to Hire First Sales Rep', href: '/cms/seo-when-ready-hire-sales-rep', icon: FileTextIcon },
   { name: 'Hire One or Two Salespeople?', href: '/cms/seo-hire-one-or-two-salespeople', icon: FileTextIcon },
   { name: 'FSL vs. Sales Coach', href: '/cms/seo-fsl-vs-sales-coach', icon: FileTextIcon },
