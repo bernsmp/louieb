@@ -90,6 +90,7 @@ const SALES_GUIDES = [
   { title: "How to Transition Out of Founder-Led Sales", url: "/transition-out-of-founder-led-sales" },
   { title: "Founder-Led Sales Exit Checklist", url: "/founder-led-sales-exit-checklist" },
   { title: "Why Does My Sales Pipeline Depend Entirely on Me?", url: "/why-does-my-sales-pipeline-depend-on-me" },
+  { title: "Why Does My Revenue Feel Unpredictable Month to Month?", url: "/why-does-my-revenue-feel-unpredictable-month-to-month" },
   { title: "What Breaks First When a Founder Stops Selling?", url: "/what-breaks-first-when-founder-stops-selling" },
   { title: "Why Do My Salespeople Underperform Without Me Involved?", url: "/why-do-my-salespeople-underperform-without-me" },
   { title: "5 Signs You're Not Ready to Give Up Founder-Led Sales", url: "/5-signs-not-ready-to-give-up-founder-led-sales" },
