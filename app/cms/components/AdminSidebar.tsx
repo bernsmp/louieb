@@ -101,6 +101,7 @@ const pages = [
   { name: 'Fractional Sales Leadership for Private Equity', href: '/cms/seo-fractional-sales-leadership-pe', icon: FileTextIcon },
   { name: 'FSL for Series A Companies', href: '/cms/seo-series-a', icon: FileTextIcon },
   { name: 'Key Benefits of Hiring a FSL', href: '/cms/seo-benefits-fsl', icon: FileTextIcon },
+  { name: 'Is My CRM Data Accurate?', href: '/cms/seo-crm-data-accuracy', icon: FileTextIcon },
 ]
 
 const collections = [

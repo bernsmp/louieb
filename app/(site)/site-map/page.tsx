@@ -131,6 +131,7 @@ const SALES_GUIDES = [
   { title: "The 7 Sales KPIs Every $1M–$10M Business Should Track", url: "/sales-kpis-for-small-business" },
   { title: "Sales Forecasting for Small Business", url: "/sales-forecasting-for-small-business" },
   { title: "How to Create a Sales Forecast Investors Will Believe", url: "/sales-forecasting-for-investors" },
+  { title: "How Do I Know If My CRM Data Is Actually Accurate?", url: "/how-do-i-know-if-my-crm-data-is-actually-accurate" },
   { title: "What Is Sales Velocity? The Metric That Predicts Revenue", url: "/sales-velocity-b2b" },
   { title: "How to Run a Win/Loss Analysis", url: "/win-loss-analysis-sales" },
   { title: "Case Study: 61% Sales Growth in One Year", url: "/case-study-61-percent-sales-growth" },
