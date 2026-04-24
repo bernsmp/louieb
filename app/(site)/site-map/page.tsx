@@ -252,7 +252,7 @@ export default async function SiteMapPage() {
         <div className="container mx-auto max-w-6xl px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 mb-5">
             <Map className="h-4 w-4 text-primary" />
-            <span className="text-sm font-semibold text-primary uppercase tracking-wide">Site Map</span>
+            <span className="text-sm font-semibold text-primary uppercase tracking-wide">Site Map &amp; Library</span>
           </div>
           <h1 className="text-4xl font-bold text-neutral-900 md:text-5xl lg:text-6xl">
             {pageData.pageHeadline}
