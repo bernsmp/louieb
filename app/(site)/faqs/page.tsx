@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { getFAQsPageFAQs } from "@/lib/cms";
 import { FAQPageContent } from "./FAQPageContent";
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
