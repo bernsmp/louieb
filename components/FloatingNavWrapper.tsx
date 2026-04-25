@@ -15,7 +15,7 @@ export const NAV_ITEM_LABELS: Record<NavKey, string> = {
   faqs: 'FAQs',
   frameworks: 'Frameworks',
   tools: 'Tools',
-  sitemap: 'Site Map',
+  sitemap: 'Library',
   contact: 'About/Contact',
 };
 
@@ -73,7 +73,7 @@ function buildNavItems(order: NavKey[]) {
       icon: <Wrench className={ic} />,
     },
     sitemap: {
-      name: "Site Map",
+      name: "Library",
       link: "/site-map",
       icon: <Map className={ic} />,
     },
