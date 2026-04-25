@@ -30,7 +30,9 @@
       "Bash(curl -s http://localhost:3001/fractional-cro-for-1m-10m-founders)",
       "Bash(node -e \":*)",
       "Read(//c/Users/louie/AppData/Roaming/**)",
-      "Bash(gh auth *)"
+      "Bash(gh auth *)",
+      "Read(//c/Users/louie/OneDrive/**)",
+      "Read(//tmp/**)"
     ]
   }
 }
