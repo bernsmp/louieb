@@ -70,6 +70,7 @@ const FSL_PAGES = [
   { title: "The $250K Mistake: Hiring a VP of Sales Too Early", url: "/250k-mistake-vp-sales-hire-too-early" },
   { title: "How to Build a Sales System Without Hiring a Full-Time VP of Sales", url: "/how-to-build-sales-system-without-full-time-vp" },
   { title: "Fractional Sales Leadership for Series A Companies", url: "/fractional-sales-leadership-series-a" },
+  { title: "Can Hiring a Fractional Sales Leader Relieve the Stress of Doing Everything?", url: "/can-hiring-a-fractional-sales-leader-relieve-some-of-the-stress-of-doing-everything" },
 ];
 
 const SALES_GUIDES = [
