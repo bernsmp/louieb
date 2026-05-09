@@ -104,6 +104,7 @@ const SALES_GUIDES = [
   { title: "How to Run a Sales Pipeline Review", url: "/how-to-run-a-sales-pipeline-review" },
   { title: "No Pipeline: What to Do When Your Pipeline Is Empty", url: "/no-pipeline-what-to-do" },
   { title: "5 Warning Signs Your Sales Process Is Breaking", url: "/5-warning-signs-sales-process-breaking" },
+  { title: "Is Your Sales Process Actually Hurting Your B2B Growth?", url: "/is-your-sales-process-actually-hurting-your-b2b-growth" },
   { title: "B2B Sales Process of Small Companies", url: "/b2b-sales-process-small-companies" },
   // Outbound & Lead Gen
   { title: "How to Build an Outbound Sales System From Scratch", url: "/how-to-build-outbound-sales-system" },

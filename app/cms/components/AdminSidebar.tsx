@@ -103,6 +103,7 @@ const pages = [
   { name: 'Key Benefits of Hiring a FSL', href: '/cms/seo-benefits-fsl', icon: FileTextIcon },
   { name: 'Is My CRM Data Accurate?', href: '/cms/seo-crm-data-accuracy', icon: FileTextIcon },
   { name: 'Step Out of Day-to-Day Sales', href: '/cms/seo-step-out-day-to-day-sales', icon: FileTextIcon },
+  { name: 'Is Your Sales Process Hurting Growth?', href: '/cms/seo-is-your-sales-process-actually-hurting-your-b2b-growth', icon: FileTextIcon },
 ]
 
 const collections = [
