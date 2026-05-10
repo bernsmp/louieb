@@ -34,6 +34,11 @@ const nextConfig: NextConfig = {
         destination: '/videos',
         permanent: true,
       },
+      {
+        source: '/can-hiring-a-fractional-sales-leader-relieve-some-of-the-stress-of-doing-everything',
+        destination: '/articles/can-hiring-a-fractional-sales-leader-relieve-some-of-the-stress-of-doing-everything',
+        permanent: true,
+      },
     ];
   },
 };
