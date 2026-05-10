@@ -39,6 +39,28 @@ const nextConfig: NextConfig = {
         destination: '/articles/can-hiring-a-fractional-sales-leader-relieve-some-of-the-stress-of-doing-everything',
         permanent: true,
       },
+      // Old-site URLs Google still has indexed — redirect to closest live equivalent
+      // so Google replaces the dead entries with the canonical pages.
+      {
+        source: '/ceo',
+        destination: '/about',
+        permanent: true,
+      },
+      {
+        source: '/fractional',
+        destination: '/fractional-sales-leader',
+        permanent: true,
+      },
+      {
+        source: '/articles/accountabilities-document',
+        destination: '/sales-accountability-document',
+        permanent: true,
+      },
+      {
+        source: '/confidence',
+        destination: '/',
+        permanent: true,
+      },
     ];
   },
 };

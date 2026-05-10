@@ -1,168 +1,95 @@
+import fs from 'fs';
+import path from 'path';
 import { MetadataRoute } from 'next';
 import { getArticleSlugs, getArticleBySlug } from '@/lib/markdown';
 import { getAllVideosWithSlugs, getAllBlogPostsWithSlugs } from '@/lib/cms';
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://louiebernstein.com';
+const baseUrl = 'https://louiebernstein.com';
 
-  // Static routes
+// Routes whose children are added dynamically (we still keep the index page).
+const DYNAMIC_PARENTS = new Set(['articles', 'blog', 'videos']);
+
+// Routes that should never appear in the sitemap.
+const EXCLUDED_ROUTES = new Set<string>([]);
+
+// Per-route priority overrides. Anything not listed gets DEFAULT_PRIORITY.
+const PRIORITY_OVERRIDES: Record<string, number> = {
+  '': 1.0,
+  'fractional-sales-leader': 0.9,
+  'fractional-cro-for-1m-10m-founders': 0.9,
+  'fractional-vp-of-sales-for-small-businesses': 0.9,
+  'fractional-sales-leader-vs-consultant': 0.9,
+  articles: 0.9,
+  blog: 0.8,
+  videos: 0.8,
+  tools: 0.8,
+  'tools/roi-calculator': 0.8,
+  'tools/assessment': 0.7,
+  course: 0.8,
+  faqs: 0.8,
+  newsletter: 0.7,
+  about: 0.7,
+  privacy: 0.3,
+  'site-map': 0.5,
+};
+
+const DEFAULT_PRIORITY = 0.7;
+
+function discoverStaticRoutes(): string[] {
+  const siteDir = path.join(process.cwd(), 'app', '(site)');
+  try {
+    return fs
+      .readdirSync(siteDir, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name)
+      .filter(
+        (name) =>
+          !name.startsWith('[') && // dynamic segment
+          !name.startsWith('(') && // route group
+          !name.startsWith('_') && // private folder
+          !EXCLUDED_ROUTES.has(name) &&
+          fs.existsSync(path.join(siteDir, name, 'page.tsx'))
+      )
+      .sort();
+  } catch (e) {
+    console.error('[sitemap] Failed to read (site) directory:', e);
+    return [];
+  }
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const now = new Date();
+
+  const staticSlugs = discoverStaticRoutes();
+
+  // Homepage + every static (site) directory that has a page.tsx
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: new Date(),
+      lastModified: now,
       changeFrequency: 'weekly',
-      priority: 1.0,
+      priority: PRIORITY_OVERRIDES[''] ?? DEFAULT_PRIORITY,
     },
-    {
-      url: `${baseUrl}/fractional-sales-leader`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/articles`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/tools`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
+    ...staticSlugs.map((slug) => ({
+      url: `${baseUrl}/${slug}`,
+      lastModified: now,
+      changeFrequency: DYNAMIC_PARENTS.has(slug)
+        ? ('weekly' as const)
+        : ('monthly' as const),
+      priority: PRIORITY_OVERRIDES[slug] ?? DEFAULT_PRIORITY,
+    })),
+    // Tool sub-pages (not auto-discovered by the top-level scan)
     {
       url: `${baseUrl}/tools/roi-calculator`,
-      lastModified: new Date(),
+      lastModified: now,
       changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/videos`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/course`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/newsletter`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/faqs`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/fractional-sales-leader-vs-consultant`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
+      priority: PRIORITY_OVERRIDES['tools/roi-calculator'] ?? DEFAULT_PRIORITY,
     },
     {
       url: `${baseUrl}/tools/assessment`,
-      lastModified: new Date(),
+      lastModified: now,
       changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/salesperson`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    // SEO landing pages
-    {
-      url: `${baseUrl}/fractional-cro-for-1m-10m-founders`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/fractional-cro-pricing`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/fractional-vp-of-sales-for-small-businesses`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/founder-led-sales-not-scaling`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/how-to-replace-founder-led-sales`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/how-to-hire-first-sales-rep`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/how-to-build-a-sales-process-after-1m-arr`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/how-to-build-a-sales-process-for-saas`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/no-pipeline-what-to-do`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/sales-team-not-hitting-quota`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/why-your-sales-team-isnt-hitting-quota`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/why-sales-reps-fail-in-startups`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/when-to-hire-a-fractional-cro`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
+      priority: PRIORITY_OVERRIDES['tools/assessment'] ?? DEFAULT_PRIORITY,
     },
   ];
 
@@ -174,7 +101,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const article = getArticleBySlug(slug);
       return {
         url: `${baseUrl}/articles/${slug}`,
-        lastModified: article ? new Date(article.metadata.date) : new Date(),
+        lastModified: article ? new Date(article.metadata.date) : now,
         changeFrequency: 'monthly' as const,
         priority: 0.7,
       };
@@ -189,7 +116,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const blogPosts = await getAllBlogPostsWithSlugs();
     blogRoutes = blogPosts.map((post) => ({
       url: `${baseUrl}/blog/${post.slug}`,
-      lastModified: post.publishedDate ? new Date(post.publishedDate) : new Date(),
+      lastModified: post.publishedDate ? new Date(post.publishedDate) : now,
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     }));
@@ -197,13 +124,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('[sitemap] Failed to fetch blog posts:', e);
   }
 
-  // Dynamic video routes — uses getAllVideosWithSlugs() to include ALL videos in the DB
+  // Dynamic video routes
   let videoRoutes: MetadataRoute.Sitemap = [];
   try {
     const videos = await getAllVideosWithSlugs();
     videoRoutes = videos.map((video) => ({
       url: `${baseUrl}/videos/${video.slug}`,
-      lastModified: new Date(),
+      lastModified: now,
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     }));
