@@ -51,6 +51,9 @@ export default async function FAQsPage() {
           <p className="mx-auto mt-6 max-w-2xl text-xl text-neutral-600">
             Everything you need to know about founder-led sales, fractional sales leadership, and working with Louie Bernstein.
           </p>
+          <p className="mt-4 text-sm text-neutral-500">
+            Last Updated: May 2026
+          </p>
         </div>
         <FAQPageContent faqs={faqs} />
       </div>
