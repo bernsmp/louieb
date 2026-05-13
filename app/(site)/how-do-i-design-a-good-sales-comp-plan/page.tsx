@@ -102,7 +102,7 @@ export default function SalesCompPlanDesignPage() {
     {
       number: '03',
       title: v('phase3Title', 'Pick the Trigger and the Behavior It Rewards'),
-      detail: v('phase3Detail', "Decide what you are paying for: bookings, revenue, gross margin, new logos, or expansion. Each one drives a different rep behavior. Founders frequently default to "pay on revenue" without thinking through the consequences — which is why their best rep keeps closing low-margin, hard-to-deliver deals. Choose the trigger that maps to what the business actually needs right now, write it into the plan, and resist the temptation to pay on multiple things simultaneously. Reps cannot optimize for three competing incentives. Pick one."),
+      detail: v('phase3Detail', "Decide what you are paying for: bookings, revenue, gross margin, new logos, or expansion. Each one drives a different rep behavior. Founders frequently default to 'pay on revenue' without thinking through the consequences — which is why their best rep keeps closing low-margin, hard-to-deliver deals. Choose the trigger that maps to what the business actually needs right now, write it into the plan, and resist the temptation to pay on multiple things simultaneously. Reps cannot optimize for three competing incentives. Pick one."),
     },
     {
       number: '04',
