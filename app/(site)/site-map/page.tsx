@@ -123,6 +123,7 @@ const SALES_GUIDES = [
   { title: "How to Run a Weekly Sales Meeting That Works", url: "/how-to-run-weekly-sales-meeting" },
   { title: "How to Set Quota for a Small Sales Team", url: "/how-to-set-sales-quota" },
   { title: "How to Build a Sales Compensation Plan", url: "/how-to-build-sales-compensation-plan" },
+  { title: "How Do I Design a Good Sales Comp Plan?", url: "/how-do-i-design-a-good-sales-comp-plan" },
   { title: "How to Build a Sales Culture at a Small B2B Company", url: "/how-to-build-sales-culture" },
   { title: "Sales Accountability Document: Why Every Team Needs One", url: "/sales-accountability-document" },
   // Diagnostics & Analytics
