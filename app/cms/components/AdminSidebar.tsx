@@ -105,6 +105,7 @@ const pages = [
   { name: 'Step Out of Day-to-Day Sales', href: '/cms/seo-step-out-day-to-day-sales', icon: FileTextIcon },
   { name: 'Is Your Sales Process Hurting Growth?', href: '/cms/seo-is-your-sales-process-actually-hurting-your-b2b-growth', icon: FileTextIcon },
   { name: 'Can a FSL Relieve Founder Stress?', href: '/cms/seo-can-hiring-fsl-relieve-stress', icon: FileTextIcon },
+  { name: 'Design a Good Sales Comp Plan', href: '/cms/seo-sales-comp-plan-design', icon: FileTextIcon },
 ]
 
 const collections = [

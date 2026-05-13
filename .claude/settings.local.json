@@ -32,7 +32,11 @@
       "Read(//c/Users/louie/AppData/Roaming/**)",
       "Bash(gh auth *)",
       "Read(//c/Users/louie/OneDrive/**)",
-      "Read(//tmp/**)"
+      "Read(//tmp/**)",
+      "WebFetch(domain:www.chiefoutsiders.com)",
+      "WebFetch(domain:www.vendux.org)",
+      "WebFetch(domain:www.activatedscale.com)",
+      "WebFetch(domain:www.salesqb.com)"
     ]
   }
 }
