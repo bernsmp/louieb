@@ -46,7 +46,7 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json()
-    const { question, answer, page, display_order } = body
+    const { question, answer, page, display_order, category } = body
 
     if (!question || !answer) {
       return NextResponse.json({ error: 'Question and answer are required' }, { status: 400 })
@@ -59,6 +59,7 @@ export async function POST(request: Request) {
         answer,
         page: page || 'homepage',
         display_order: display_order || 0,
+        category: category || null,
       })
       .select()
       .single()

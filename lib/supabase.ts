@@ -80,6 +80,7 @@ export interface FAQItemRow {
   answer: string
   display_order: number
   page: string
+  category: string | null
   created_at: string
   updated_at: string
 }

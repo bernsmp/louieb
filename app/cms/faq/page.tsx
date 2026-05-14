@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { SortableList } from '../components/SortableList'
+import { getFAQCategoryLabel } from '@/lib/faqCategories'
 
 interface FAQItem {
   id: string
@@ -10,6 +11,7 @@ interface FAQItem {
   answer: string
   page: string
   display_order: number
+  category?: string | null
 }
 
 export default function FAQAdmin() {
@@ -142,6 +144,9 @@ export default function FAQAdmin() {
                   <p className="sortable-block-card__title">{item.question}</p>
                   <p className="sortable-block-card__meta">
                     {item.answer.substring(0, 80)}... • {item.page}
+                    {item.page === 'faqsPage' && (
+                      <> • <strong>{getFAQCategoryLabel(item.category)}</strong></>
+                    )}
                   </p>
                 </div>
                 <div className="sortable-block-card__actions">

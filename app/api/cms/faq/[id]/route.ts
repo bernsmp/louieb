@@ -53,7 +53,7 @@ export async function PUT(
 
   try {
     const body = await request.json()
-    const { question, answer, page, display_order } = body
+    const { question, answer, page, display_order, category } = body
 
     const { data, error } = await supabaseAdmin
       .from('faq_items')
@@ -62,6 +62,7 @@ export async function PUT(
         answer,
         page: page || 'homepage',
         display_order: display_order || 0,
+        category: category || null,
       })
       .eq('id', id)
       .select()

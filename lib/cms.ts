@@ -61,6 +61,7 @@ interface ProcessStep {
 interface FAQItem {
   question: string
   answer: string
+  category?: string | null
 }
 
 interface BenefitItem {
@@ -1015,6 +1016,7 @@ async function fetchFAQItemsFromSupabase(page?: string): Promise<FAQItem[]> {
     return (data as FAQItemRow[]).map(row => ({
       question: row.question,
       answer: row.answer,
+      category: row.category ?? null,
     }))
   } catch (error) {
     console.warn('[CMS] Failed to fetch FAQ items:', error)

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { RichTextEditor } from '../../components/RichTextEditor'
+import { FAQ_CATEGORIES } from '@/lib/faqCategories'
 
 export default function NewFAQPage() {
   const router = useRouter()
@@ -15,6 +16,7 @@ export default function NewFAQPage() {
     answer: '',
     page: 'homepage',
     display_order: 0,
+    category: '' as string,
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -82,6 +84,19 @@ export default function NewFAQPage() {
               <option value="homepage">Homepage</option>
               <option value="fslPage">FSL Page</option>
               <option value="faqsPage">FAQs Page</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label className="form-label">Category (FAQs page only)</label>
+            <select
+              className="form-input"
+              value={form.category}
+              onChange={(e) => setForm({ ...form, category: e.target.value })}
+            >
+              <option value="">— Uncategorized —</option>
+              {FAQ_CATEGORIES.map((c) => (
+                <option key={c.slug} value={c.slug}>{c.label}</option>
+              ))}
             </select>
           </div>
           <div className="form-group">
