@@ -23,7 +23,7 @@ export default function FractionalLeaderPartTimePage() {
   const takeaways = [
     v(
       'takeaway1',
-      "A 'two days a week' fractional leader is not part-time management — it is full-time systems. The team is led by the operating cadence, the playbook, and the accountability document, not by whether someone is sitting at the next desk."
+      "A '25 hours a week' fractional leader is not part-time management — it is full-time systems. The team is led by the operating cadence, the playbook, and the accountability document, not by whether someone is sitting at the next desk."
     ),
     v(
       'takeaway2',
@@ -31,7 +31,7 @@ export default function FractionalLeaderPartTimePage() {
     ),
     v(
       'takeaway3',
-      'The two on-site days are structured deliberately: pipeline review, 1:1 coaching, deal strategy, hiring and ramping. The other five days, the team runs the cadence the fractional leader built — and the founder is no longer the manager.'
+      'The 25 on-site hours are structured deliberately: pipeline review, 1:1 coaching, deal strategy, hiring and ramping. The other five days, the team runs the cadence the fractional leader built — and the founder is no longer the manager.'
     ),
     v(
       'takeaway4',
@@ -150,12 +150,12 @@ export default function FractionalLeaderPartTimePage() {
 
   const defaultFaqs = [
     {
-      q: 'How do you maintain credibility with the team when you are only on-site two days a week?',
+      q: 'How do you maintain credibility with the team when you are only on-site 25 hours a week?',
       a: 'Credibility comes from outcomes and the quality of the systems you install — not from time in the chair. By the end of the first two weeks, the team is running a weekly cadence they did not have before, every rep has a written accountability document on their desk, and the playbook is being filled in. That is what builds credibility. The team sees a leader who is making their job clearer and easier, not someone who is around for show.',
     },
     {
       q: 'What happens when a rep has an urgent deal question on a day you are not on-site?',
-      a: 'Three things happen, in order. First, the rep checks the playbook — and 80 percent of recurring questions are already answered there. Second, if it is a real exception, the rep messages me, and I respond inside the same business day, usually inside an hour. Third, if it is a strategic call (a deal over a defined size, a non-standard term, a competitive escalation), I get on a quick call with the rep, and with the prospect if needed. Two days on-site does not mean five days unavailable.',
+      a: 'Three things happen, in order. First, the rep checks the playbook — and 80 percent of recurring questions are already answered there. Second, if it is a real exception, the rep messages me, and I respond inside the same business day, usually inside an hour. Third, if it is a strategic call (a deal over a defined size, a non-standard term, a competitive escalation), I get on a quick call with the rep, and with the prospect if needed. 25 hours on-site does not mean five days unavailable.',
     },
     {
       q: 'How is this different from hiring a sales consultant who just advises and leaves?',
@@ -187,7 +187,7 @@ export default function FractionalLeaderPartTimePage() {
       {
         '@type': 'Article',
         headline:
-          "How Can a Fractional Sales Leader Lead My Team If They're Only Here Two Days a Week?",
+          "How Can a Fractional Sales Leader Lead My Team If They're Only Here 25 Hours a Week?",
         author: { '@type': 'Person', name: 'Louie Bernstein', url: 'https://louiebernstein.com' },
         url: 'https://louiebernstein.com/can-fractional-sales-leader-lead-team-part-time',
         datePublished: '2026-05-15',
@@ -228,7 +228,7 @@ export default function FractionalLeaderPartTimePage() {
             >
               {v('heroLine1', 'How Can They Lead My Team')}
               <span className="block text-blue-400">
-                {v('heroAccent', "If They're Only Here Two Days a Week?")}
+                {v('heroAccent', "If They're Only Here 25 Hours a Week?")}
               </span>
             </motion.h1>
             <motion.p
@@ -243,7 +243,7 @@ export default function FractionalLeaderPartTimePage() {
             >
               {v(
                 'heroDescription',
-                'The objection is real — but it is pointed at the wrong thing. Leadership is not presence. It is the system that runs when no one is in the room. Here is how a Fractional Sales Leader actually leads a team they see two days a week — and why it often works better than a full-time manager who is always there.'
+                'The objection is real — but it is pointed at the wrong thing. Leadership is not presence. It is the system that runs when no one is in the room. Here is how a Fractional Sales Leader actually leads a team they see 25 hours a week — and why it often works better than a full-time manager who is always there.'
               )}
             </motion.p>
             <motion.div
@@ -416,7 +416,7 @@ export default function FractionalLeaderPartTimePage() {
                   {v('compareColLeft', 'Full-Time Manager (5 days, always available)')}
                 </div>
                 <div className="border-l border-neutral-700 px-6 py-4 text-center text-sm font-bold uppercase tracking-wide text-blue-400">
-                  {v('compareColRight', 'Fractional Sales Leader (2 days, fully systemized)')}
+                  {v('compareColRight', 'Fractional Sales Leader (25 hours, fully systemized)')}
                 </div>
               </div>
               {comparisonRows.map((row, i) => (
@@ -439,7 +439,7 @@ export default function FractionalLeaderPartTimePage() {
         </div>
       </section>
 
-      {/* What Two Days Actually Looks Like — sequence */}
+      {/* What 25 Hours Actually Looks Like — sequence */}
       <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-6">
           <motion.div
@@ -452,12 +452,12 @@ export default function FractionalLeaderPartTimePage() {
               variants={itemVariants}
               className="mb-4 text-center font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
             >
-              {v('sectionSequenceHeading', 'What Two Days a Week Actually Looks Like')}
+              {v('sectionSequenceHeading', 'What 25 Hours a Week Actually Looks Like')}
             </motion.h2>
             <motion.p variants={itemVariants} className="mb-10 text-center text-neutral-600">
               {v(
                 'sectionSequenceSubheading',
-                "Most founders picture 'two days' as twelve hours of vague consulting. Here is how those hours are actually allocated — and what the leader is doing on the other five days."
+                "Most founders picture '25 hours a week' as scattered, unstructured consulting time. Here is how those hours are actually allocated — and what the leader is doing the rest of the week."
               )}
             </motion.p>
             <div className="space-y-8">
@@ -504,7 +504,7 @@ export default function FractionalLeaderPartTimePage() {
             <motion.p variants={itemVariants} className="text-neutral-700">
               {v(
                 'aboutBio2',
-                'Every engagement starts the same way: I install the operating cadence, the written accountability document, the playbook, and the decision authority map in the first 30 to 60 days. After that, the team runs whether I am on-site or not — and the founder is no longer the manager. That is the deliverable. The two days a week are just when I show up to enforce and improve it.'
+                'Every engagement starts the same way: I install the operating cadence, the written accountability document, the playbook, and the decision authority map in the first 30 to 60 days. After that, the team runs whether I am on-site or not — and the founder is no longer the manager. That is the deliverable. The 25 hours a week are just when I show up to enforce and improve it.'
               )}
             </motion.p>
           </motion.div>
@@ -600,7 +600,7 @@ export default function FractionalLeaderPartTimePage() {
               variants={itemVariants}
               className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
             >
-              {v('ctaHeadline', "Stop Picturing 'Two Days.' Start Picturing the System.")}
+              {v('ctaHeadline', "Stop Picturing '25 Hours.' Start Picturing the System.")}
             </motion.h2>
             <motion.p
               variants={itemVariants}

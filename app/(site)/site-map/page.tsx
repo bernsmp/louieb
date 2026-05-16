@@ -71,7 +71,7 @@ const FSL_PAGES = [
   { title: "How to Build a Sales System Without Hiring a Full-Time VP of Sales", url: "/how-to-build-sales-system-without-full-time-vp" },
   { title: "Fractional Sales Leadership for Series A Companies", url: "/fractional-sales-leadership-series-a" },
   { title: "Can Hiring a Fractional Sales Leader Relieve the Stress of Doing Everything?", url: "/can-hiring-a-fractional-sales-leader-relieve-some-of-the-stress-of-doing-everything" },
-  { title: "How Can a Fractional Sales Leader Lead My Team If They're Only Here Two Days a Week?", url: "/can-fractional-sales-leader-lead-team-part-time" },
+  { title: "How Can a Fractional Sales Leader Lead My Team If They're Only Here 25 Hours a Week?", url: "/can-fractional-sales-leader-lead-team-part-time" },
 ];
 
 const SALES_GUIDES = [

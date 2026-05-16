@@ -2,11 +2,11 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title:
-    "How Can a Fractional Sales Leader Lead My Team If They're Only Here Two Days a Week? | Louie Bernstein",
+    "How Can a Fractional Sales Leader Lead My Team If They're Only Here 25 Hours a Week? | Louie Bernstein",
   description:
-    "The objection is real — but it is pointed at the wrong thing. Leadership is not presence. Here is how a Fractional Sales Leader leads a team they see two days a week through cadence, accountability, playbook, and decision authority.",
+    "The objection is real — but it is pointed at the wrong thing. Leadership is not presence. Here is how a Fractional Sales Leader leads a team they see 25 hours a week through cadence, accountability, playbook, and decision authority.",
   keywords: [
-    "fractional sales leader two days a week",
+    "fractional sales leader 25 hours a week",
     "how does a fractional sales leader lead a team",
     "part-time sales leader",
     "fractional vs full-time sales manager",
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title:
-      "How Can a Fractional Sales Leader Lead My Team If They're Only Here Two Days a Week?",
+      "How Can a Fractional Sales Leader Lead My Team If They're Only Here 25 Hours a Week?",
     description:
-      "Leadership is not presence. It is the system that runs when no one is in the room. How a Fractional Sales Leader actually leads on two days — and the other five.",
+      "Leadership is not presence. It is the system that runs when no one is in the room. How a Fractional Sales Leader actually leads in 25 hours a week — and what they do the rest of the time.",
     type: "article",
     url: "https://louiebernstein.com/can-fractional-sales-leader-lead-team-part-time",
     siteName: "Louie Bernstein",
@@ -33,14 +33,14 @@ export const metadata: Metadata = {
         url: "https://louiebernstein.com/images/fractional-sales-leader-hero.png",
         width: 1920,
         height: 1080,
-        alt: "How Can a Fractional Sales Leader Lead My Team If They're Only Here Two Days a Week?",
+        alt: "How Can a Fractional Sales Leader Lead My Team If They're Only Here 25 Hours a Week?",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title:
-      "How Can a Fractional Sales Leader Lead My Team If They're Only Here Two Days a Week?",
+      "How Can a Fractional Sales Leader Lead My Team If They're Only Here 25 Hours a Week?",
     description:
       "Leadership is not presence. It is the system that runs when no one is in the room.",
     images: [
