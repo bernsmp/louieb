@@ -106,7 +106,7 @@ const pages = [
   { name: 'Is Your Sales Process Hurting Growth?', href: '/cms/seo-is-your-sales-process-actually-hurting-your-b2b-growth', icon: FileTextIcon },
   { name: 'Can a FSL Relieve Founder Stress?', href: '/cms/seo-can-hiring-fsl-relieve-stress', icon: FileTextIcon },
   { name: 'Design a Good Sales Comp Plan', href: '/cms/seo-sales-comp-plan-design', icon: FileTextIcon },
-  { name: 'FSL Leading Team Part-Time (2 days/wk)', href: '/cms/seo-fractional-leader-part-time', icon: FileTextIcon },
+  { name: 'FSL Leading Team Part-Time (25 hrs/wk)', href: '/cms/seo-fractional-leader-part-time', icon: FileTextIcon },
 ]
 
 const collections = [

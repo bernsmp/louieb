@@ -1,4 +1,4 @@
-# Social Posts: How Can a Fractional Sales Leader Lead My Team If They're Only Here Two Days a Week?
+# Social Posts: How Can a Fractional Sales Leader Lead My Team If They're Only Here 25 Hours a Week?
 
 Page URL: https://louiebernstein.com/can-fractional-sales-leader-lead-team-part-time
 
@@ -10,7 +10,7 @@ The objection I hear most about hiring a Fractional Sales Leader is the wrong ob
 
 It goes like this:
 
-"How can they lead my team if they're only here two days a week? I'll end up paying for a leader and still doing the managing myself."
+"How can they lead my team if they're only here 25 hours a week? I'll end up paying for a leader and still doing the managing myself."
 
 The concern is real. The framing is wrong.
 
@@ -34,7 +34,7 @@ A one-page decision authority map — who decides what, in writing, so deals do 
 
 That is leadership. Not desk hours.
 
-The two on-site days are when the high-leverage meetings happen — pipeline review, 1:1 coaching, deal strategy, hiring. The other five days, the team runs the cadence the leader built.
+The 25 on-site hours are when the high-leverage meetings happen — pipeline review, 1:1 coaching, deal strategy, hiring. The other five days, the team runs the cadence the leader built.
 
 By month two, you should feel less involved in sales than you did at week one. If you feel busier, the system was not installed correctly.
 
@@ -46,7 +46,7 @@ Full breakdown: https://louiebernstein.com/can-fractional-sales-leader-lead-team
 
 ## YouTube Script (30–50 seconds, 75–125 words)
 
-If you've thought a Fractional Sales Leader can't really lead your team because they're only there two days a week — you're focused on the wrong thing.
+If you've thought a Fractional Sales Leader can't really lead your team because they're only there 25 hours a week — you're focused on the wrong thing.
 
 Leadership is not desk hours. It is the cadence, the accountability document, the playbook, and the decision map that run when the leader is not in the room.
 

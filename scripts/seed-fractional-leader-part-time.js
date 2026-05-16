@@ -1,5 +1,5 @@
 /**
- * Seed script: How Can They Lead My Team If They're Only Here Two Days a Week?
+ * Seed script: How Can They Lead My Team If They're Only Here 25 Hours a Week?
  * - seoFractionalLeaderPartTime → /can-fractional-sales-leader-lead-team-part-time
  *
  * Run with:
@@ -18,19 +18,19 @@ const sections = {
     // Hero
     heroTag: 'Fractional Leadership Objections',
     heroLine1: 'How Can They Lead My Team',
-    heroAccent: "If They're Only Here Two Days a Week?",
+    heroAccent: "If They're Only Here 25 Hours a Week?",
     heroH2: "I'll End Up Paying for a Leader But Still Doing the Managing Myself",
     heroDescription:
-      "The objection is real — but it is pointed at the wrong thing. Leadership is not presence. It is the system that runs when no one is in the room. Here is how a Fractional Sales Leader actually leads a team they see two days a week — and why it often works better than a full-time manager who is always there.",
+      "The objection is real — but it is pointed at the wrong thing. Leadership is not presence. It is the system that runs when no one is in the room. Here is how a Fractional Sales Leader actually leads a team they see 25 hours a week — and why it often works better than a full-time manager who is always there.",
 
     // Key Takeaways
     takeawaysHeading: 'Key Takeaways',
     takeaway1:
-      "A 'two days a week' fractional leader is not part-time management — it is full-time systems. The team is led by the operating cadence, the playbook, and the accountability document, not by whether someone is sitting at the next desk.",
+      "A '25 hours a week' fractional leader is not part-time management — it is full-time systems. The team is led by the operating cadence, the playbook, and the accountability document, not by whether someone is sitting at the next desk.",
     takeaway2:
       "A full-time sales manager who is 'always available' is usually the symptom of the problem you are trying to solve. Constant availability means every decision routes through one person — and the team never builds independent judgment.",
     takeaway3:
-      'The two on-site days are structured deliberately: pipeline review, 1:1 coaching, deal strategy, hiring and ramping. The other five days, the team runs the cadence the fractional leader built — and the founder is no longer the manager.',
+      'The 25 on-site hours are structured deliberately: pipeline review, 1:1 coaching, deal strategy, hiring and ramping. The other five days, the team runs the cadence the fractional leader built — and the founder is no longer the manager.',
     takeaway4:
       "The fear of 'still doing the managing yourself' is valid only if you hire an advisor who shows up and leaves. A real fractional leader installs accountability that runs without them — and that is the deliverable, not the hours.",
     takeaway5:
@@ -79,7 +79,7 @@ const sections = {
     sectionCompareSubheading:
       'The full-time manager is on-site five days. The fractional leader is on-site two. Watch how each one handles the same problem.',
     compareColLeft: 'Full-Time Manager (5 days, always available)',
-    compareColRight: 'Fractional Sales Leader (2 days, fully systemized)',
+    compareColRight: 'Fractional Sales Leader (25 hours, fully systemized)',
     compare1Without: 'Reps interrupt with every question — the manager is the bottleneck',
     compare1With: 'Reps check the playbook first — the leader answers only the exceptions',
     compare2Without: 'Weekly 1:1s slip when the manager is busy; sometimes skipped for weeks',
@@ -93,10 +93,10 @@ const sections = {
     compare6Without: 'Manager leaves and the team is in chaos — everything was in their head',
     compare6With: 'Leader leaves and the system stays — playbook, cadence, accountability all remain',
 
-    // Sequence — What Two Days a Week Actually Looks Like
-    sectionSequenceHeading: 'What Two Days a Week Actually Looks Like',
+    // Sequence — What 25 Hours a Week Actually Looks Like
+    sectionSequenceHeading: 'What 25 Hours a Week Actually Looks Like',
     sectionSequenceSubheading:
-      "Most founders picture 'two days' as twelve hours of vague consulting. Here is how those hours are actually allocated — and what the leader is doing on the other five days.",
+      "Most founders picture '25 hours a week' as scattered, unstructured consulting time. Here is how those hours are actually allocated — and what the leader is doing the rest of the week.",
     phase1Title: 'Day One On-Site: The High-Leverage Day',
     phase1Detail:
       'The first on-site day is built around the meetings that only the leader can run. Pipeline review (60 to 90 minutes) — every rep walks through their top five deals against written stage criteria. 1:1 coaching (30 minutes per rep) — focused on the deals where the rep is stuck, against the playbook. Deal strategy (60 minutes) — the two or three deals where the leader has to be hands-on. Forecast roll-up (60 minutes) — what the team is going to close, with confidence levels by rep and stage. That is six to eight hours of structured meetings the rest of the week depends on.',
@@ -111,17 +111,17 @@ const sections = {
     aboutBio1:
       "I'm Louie Bernstein. I have 50 years in business experience, including 22 as a bootstrapped founder. My Fractional Sales Leadership business has been helping founders since 2017.",
     aboutBio2:
-      'Every engagement starts the same way: I install the operating cadence, the written accountability document, the playbook, and the decision authority map in the first 30 to 60 days. After that, the team runs whether I am on-site or not — and the founder is no longer the manager. That is the deliverable. The two days a week are just when I show up to enforce and improve it.',
+      'Every engagement starts the same way: I install the operating cadence, the written accountability document, the playbook, and the decision authority map in the first 30 to 60 days. After that, the team runs whether I am on-site or not — and the founder is no longer the manager. That is the deliverable. The 25 hours a week are just when I show up to enforce and improve it.',
 
     // FAQs
     faq1Question:
-      'How do you maintain credibility with the team when you are only on-site two days a week?',
+      'How do you maintain credibility with the team when you are only on-site 25 hours a week?',
     faq1Answer:
       'Credibility comes from outcomes and the quality of the systems you install — not from time in the chair. By the end of the first two weeks, the team is running a weekly cadence they did not have before, every rep has a written accountability document on their desk, and the playbook is being filled in. That is what builds credibility. The team sees a leader who is making their job clearer and easier, not someone who is around for show.',
 
     faq2Question: 'What happens when a rep has an urgent deal question on a day you are not on-site?',
     faq2Answer:
-      'Three things happen, in order. First, the rep checks the playbook — and 80 percent of recurring questions are already answered there. Second, if it is a real exception, the rep messages me, and I respond inside the same business day, usually inside an hour. Third, if it is a strategic call (a deal over a defined size, a non-standard term, a competitive escalation), I get on a quick call with the rep, and with the prospect if needed. Two days on-site does not mean five days unavailable.',
+      'Three things happen, in order. First, the rep checks the playbook — and 80 percent of recurring questions are already answered there. Second, if it is a real exception, the rep messages me, and I respond inside the same business day, usually inside an hour. Third, if it is a strategic call (a deal over a defined size, a non-standard term, a competitive escalation), I get on a quick call with the rep, and with the prospect if needed. 25 hours on-site does not mean five days unavailable.',
 
     faq3Question: 'How is this different from hiring a sales consultant who just advises and leaves?',
     faq3Answer:
@@ -137,7 +137,7 @@ const sections = {
       'You get a Friday written recap that documents the week: deals reviewed, decisions made, playbook updates, pipeline movement, hiring activity, and any items that need founder attention. You also have visibility into CRM activity, meeting recordings, and the playbook history. The off-site days are not a black box — they are documented at the same level of rigor as the on-site days. That is part of the deliverable.',
 
     // CTA
-    ctaHeadline: "Stop Picturing 'Two Days.' Start Picturing the System.",
+    ctaHeadline: "Stop Picturing '25 Hours.' Start Picturing the System.",
     ctaDescription:
       'In 30 minutes I can walk you through what the four artifacts — cadence, accountability, playbook, decision authority — would look like in your business, and how the engagement would be structured around your team. No slide deck. No vague promises.',
   },
