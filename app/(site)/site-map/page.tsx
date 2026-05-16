@@ -153,6 +153,7 @@ const SALES_GUIDES = [
   { title: "How to Set Up HubSpot for a Small Sales Team", url: "/how-to-set-up-hubspot-for-small-sales-team" },
   { title: "Sales Tech Stack for Small Business: The Minimum Setup", url: "/sales-tech-stack-for-small-business" },
   { title: "Key Benefits of Hiring a Fractional Sales Leader for Small Businesses", url: "/fractional-sales-leader-benefits-small-business" },
+  { title: "How Do I Jumpstart Revenue Acceleration and Get Quick Wins?", url: "/how-do-i-jumpstart-revenue-acceleration-and-get-quick-wins" },
 ];
 
 const FRAMEWORK_PAGES = [
