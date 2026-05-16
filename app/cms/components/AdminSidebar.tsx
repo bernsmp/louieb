@@ -108,6 +108,7 @@ const pages = [
   { name: 'Design a Good Sales Comp Plan', href: '/cms/seo-sales-comp-plan-design', icon: FileTextIcon },
   { name: 'FSL Leading Team Part-Time (25 hrs/wk)', href: '/cms/seo-fractional-leader-part-time', icon: FileTextIcon },
   { name: 'Jumpstart Revenue Acceleration & Quick Wins', href: '/cms/seo-jumpstart-revenue-acceleration', icon: FileTextIcon },
+  { name: 'Best Way to Exit Founder-Led Sales', href: '/cms/seo-best-way-to-exit-founder-led-sales', icon: FileTextIcon },
 ]
 
 const collections = [
