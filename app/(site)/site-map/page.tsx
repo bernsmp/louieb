@@ -154,6 +154,7 @@ const SALES_GUIDES = [
   { title: "Sales Tech Stack for Small Business: The Minimum Setup", url: "/sales-tech-stack-for-small-business" },
   { title: "Key Benefits of Hiring a Fractional Sales Leader for Small Businesses", url: "/fractional-sales-leader-benefits-small-business" },
   { title: "How Do I Jumpstart Revenue Acceleration and Get Quick Wins?", url: "/how-do-i-jumpstart-revenue-acceleration-and-get-quick-wins" },
+  { title: "What's the Best Way to Exit Founder-Led Sales?", url: "/what-is-the-best-way-to-exit-founder-led-sales" },
 ];
 
 const FRAMEWORK_PAGES = [
