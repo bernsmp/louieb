@@ -109,6 +109,7 @@ const pages = [
   { name: 'FSL Leading Team Part-Time (25 hrs/wk)', href: '/cms/seo-fractional-leader-part-time', icon: FileTextIcon },
   { name: 'Jumpstart Revenue Acceleration & Quick Wins', href: '/cms/seo-jumpstart-revenue-acceleration', icon: FileTextIcon },
   { name: 'Best Way to Exit Founder-Led Sales', href: '/cms/seo-best-way-to-exit-founder-led-sales', icon: FileTextIcon },
+  { name: 'One-Size-Fits-All Playbook? (Customization)', href: '/cms/seo-one-size-fits-all-playbook', icon: FileTextIcon },
 ]
 
 const collections = [
