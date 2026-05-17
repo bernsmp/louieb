@@ -72,6 +72,7 @@ const FSL_PAGES = [
   { title: "Fractional Sales Leadership for Series A Companies", url: "/fractional-sales-leadership-series-a" },
   { title: "Can Hiring a Fractional Sales Leader Relieve the Stress of Doing Everything?", url: "/can-hiring-a-fractional-sales-leader-relieve-some-of-the-stress-of-doing-everything" },
   { title: "How Can a Fractional Sales Leader Lead My Team If They're Only Here 25 Hours a Week?", url: "/can-fractional-sales-leader-lead-team-part-time" },
+  { title: "Will a Fractional Sales Leader Force a One-Size-Fits-All Playbook on My Unique Business?", url: "/will-fractional-sales-leader-force-one-size-fits-all-playbook" },
 ];
 
 const SALES_GUIDES = [

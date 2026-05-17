@@ -38,6 +38,8 @@ const PAGE_REGISTRY: { title: string; slug: string; editUrl: string }[] = [
   { title: 'Founder-Led Sales Not Scaling', slug: 'founder-led-sales-not-scaling', editUrl: '/cms/seo-founder-sales-not-scaling' },
   { title: "What's the Best Way to Exit Founder-Led Sales", slug: 'what-is-the-best-way-to-exit-founder-led-sales', editUrl: '/cms/seo-best-way-to-exit-founder-led-sales' },
   { title: 'Best Way to Exit Founder-Led Sales', slug: 'what-is-the-best-way-to-exit-founder-led-sales', editUrl: '/cms/seo-best-way-to-exit-founder-led-sales' },
+  { title: 'Will a Fractional Sales Leader Force a One-Size-Fits-All Playbook on My Unique Business', slug: 'will-fractional-sales-leader-force-one-size-fits-all-playbook', editUrl: '/cms/seo-one-size-fits-all-playbook' },
+  { title: 'One-Size-Fits-All Sales Playbook (Customization)', slug: 'will-fractional-sales-leader-force-one-size-fits-all-playbook', editUrl: '/cms/seo-one-size-fits-all-playbook' },
   // Sales leadership & process
   { title: 'Sales Leadership for $1M–$10M Companies', slug: 'sales-leadership-for-1m-10m-companies', editUrl: '/cms/seo-sales-leadership-1m-10m' },
   { title: 'How to Build a Sales Process After $1M ARR', slug: 'how-to-build-a-sales-process-after-1m-arr', editUrl: '/cms/seo-build-sales-process' },
@@ -190,6 +192,7 @@ const SECTION_URLS: Record<string, string> = {
   seoBestWayToExitFounderLedSales: '/cms/seo-best-way-to-exit-founder-led-sales',
   seoJumpstartRevenueAccelerationQuickWins: '/cms/seo-jumpstart-revenue-acceleration',
   seoFractionalLeaderPartTime: '/cms/seo-fractional-leader-part-time',
+  seoOneSizeFitsAllPlaybook: '/cms/seo-one-size-fits-all-playbook',
 }
 
 function extractSnippet(text: string, query: string, maxLen = 120): string {
