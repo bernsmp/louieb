@@ -17,6 +17,8 @@ const PAGE_REGISTRY: { title: string; slug: string; editUrl: string }[] = [
   { title: 'What Does a FSL Do Week to Week', slug: 'what-does-fractional-sales-leader-do', editUrl: '/cms/seo-what-fsl-does' },
   { title: 'Is Fractional Sales Leadership Worth It', slug: 'is-fractional-sales-leadership-worth-it', editUrl: '/cms/seo-fsl-worth-it' },
   { title: 'When to Hire a Fractional Sales Leader', slug: 'when-to-hire-a-fractional-sales-leader', editUrl: '/cms/seo-when-to-hire-fsl' },
+  { title: 'How Can a Fractional Sales Leader Lead My Team Part-Time', slug: 'can-fractional-sales-leader-lead-team-part-time', editUrl: '/cms/seo-fractional-leader-part-time' },
+  { title: 'FSL Leading Team Part-Time (25 hrs/wk)', slug: 'can-fractional-sales-leader-lead-team-part-time', editUrl: '/cms/seo-fractional-leader-part-time' },
   { title: 'Cost of Fractional VP of Sales', slug: 'cost-of-fractional-vp-sales', editUrl: '/cms/seo-cost-fractional-vp' },
   { title: 'Fractional VP of Sales for Small Businesses', slug: 'fractional-vp-of-sales-for-small-businesses', editUrl: '/cms/seo-cost-fractional-vp' },
   { title: 'Fractional VP Sales vs Full-Time VP', slug: 'fractional-vp-sales-vs-full-time-vp', editUrl: '/cms/seo-vp-sales-vs-full-time' },
@@ -34,9 +36,13 @@ const PAGE_REGISTRY: { title: string; slug: string; editUrl: string }[] = [
   { title: 'Transition Out of Founder-Led Sales', slug: 'transition-out-of-founder-led-sales', editUrl: '/cms/seo-transition-founder-led-sales' },
   { title: 'How to Replace Founder-Led Sales', slug: 'how-to-replace-founder-led-sales', editUrl: '/cms/seo-replace-founder-sales' },
   { title: 'Founder-Led Sales Not Scaling', slug: 'founder-led-sales-not-scaling', editUrl: '/cms/seo-founder-sales-not-scaling' },
+  { title: "What's the Best Way to Exit Founder-Led Sales", slug: 'what-is-the-best-way-to-exit-founder-led-sales', editUrl: '/cms/seo-best-way-to-exit-founder-led-sales' },
+  { title: 'Best Way to Exit Founder-Led Sales', slug: 'what-is-the-best-way-to-exit-founder-led-sales', editUrl: '/cms/seo-best-way-to-exit-founder-led-sales' },
   // Sales leadership & process
   { title: 'Sales Leadership for $1M–$10M Companies', slug: 'sales-leadership-for-1m-10m-companies', editUrl: '/cms/seo-sales-leadership-1m-10m' },
   { title: 'How to Build a Sales Process After $1M ARR', slug: 'how-to-build-a-sales-process-after-1m-arr', editUrl: '/cms/seo-build-sales-process' },
+  { title: 'How Do I Jumpstart Revenue Acceleration and Get Quick Wins', slug: 'how-do-i-jumpstart-revenue-acceleration-and-get-quick-wins', editUrl: '/cms/seo-jumpstart-revenue-acceleration' },
+  { title: 'Jumpstart Revenue Acceleration & Quick Wins', slug: 'how-do-i-jumpstart-revenue-acceleration-and-get-quick-wins', editUrl: '/cms/seo-jumpstart-revenue-acceleration' },
   { title: 'How to Build a Sales Process for SaaS', slug: 'how-to-build-a-sales-process-for-saas', editUrl: '/cms/seo-saas-sales-process' },
   { title: 'How to Build an Outbound Sales System', slug: 'how-to-build-outbound-sales-system', editUrl: '/cms/seo-outbound-sales-system' },
   { title: 'How to Build a Sales Pipeline', slug: 'how-to-build-a-sales-pipeline', editUrl: '/cms/seo-build-sales-pipeline' },
@@ -181,6 +187,9 @@ const SECTION_URLS: Record<string, string> = {
   seoFractionalSalesLeadershipRoi: '/cms/seo-fsl-roi',
   seoBuildGoToMarketStrategy: '/cms/seo-go-to-market-strategy',
   seoB2bSalesObjectionHandling: '/cms/seo-b2b-objection-handling',
+  seoBestWayToExitFounderLedSales: '/cms/seo-best-way-to-exit-founder-led-sales',
+  seoJumpstartRevenueAccelerationQuickWins: '/cms/seo-jumpstart-revenue-acceleration',
+  seoFractionalLeaderPartTime: '/cms/seo-fractional-leader-part-time',
 }
 
 function extractSnippet(text: string, query: string, maxLen = 120): string {

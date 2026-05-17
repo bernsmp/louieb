@@ -65,6 +65,7 @@ Every new SEO article page must match this spec. **Canonical reference:** `app/(
 ### Then register the article
 5. Add nav link in **`app/cms/components/AdminSidebar.tsx`** (`pages` array).
 6. Add public URL in **`app/(site)/site-map/page.tsx`** in the correct section (`SALES_GUIDES` or `FSL_PAGES`).
+7. Register in CMS search **`app/api/cms/search/route.ts`** — add 1–2 entries to `PAGE_REGISTRY` (title + slug + editUrl; include an alt title for recall) AND add the `CMS_SECTION` key → editUrl mapping to `SECTION_URLS`. Without this, the new page is not findable in `/cms/search`.
 
 ### Naming conventions
 - URL slug: kebab-case of the H1 question (e.g. `/why-does-my-revenue-feel-unpredictable-month-to-month`).
