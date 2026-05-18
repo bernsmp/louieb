@@ -49,6 +49,8 @@ interface FAQItem {
 interface PageData {
   headline: string;
   tagline: string;
+  badgeLeft: string;
+  badgeRight: string;
   introHook: string;
   introParagraph1: string;
   introParagraph2: string;
@@ -125,11 +127,19 @@ function HeroSection({ pageData }: { pageData: PageData }) {
 
       <div className="container relative mx-auto max-w-4xl px-6 lg:px-8">
         <div className="text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-neutral-600 bg-neutral-900/50 px-4 py-2">
-            <span className="text-sm font-semibold">LinkedIn Top Voice</span>
-            <span className="text-neutral-400">|</span>
-            <span className="text-sm text-neutral-300">9+ Years as Fractional Sales Leader</span>
-          </div>
+          {(pageData.badgeLeft || pageData.badgeRight) && (
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-neutral-600 bg-neutral-900/50 px-4 py-2">
+              {pageData.badgeLeft && (
+                <span className="text-sm font-semibold">{pageData.badgeLeft}</span>
+              )}
+              {pageData.badgeLeft && pageData.badgeRight && (
+                <span className="text-neutral-400">|</span>
+              )}
+              {pageData.badgeRight && (
+                <span className="text-sm text-neutral-300">{pageData.badgeRight}</span>
+              )}
+            </div>
+          )}
 
           <h1 className="text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
             {pageData.headline}

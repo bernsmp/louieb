@@ -46,6 +46,20 @@ export default function EditFSLPage() {
           placeholder: 'e.g., Experienced sales leadership. Fraction of the cost.',
         },
         {
+          name: 'badgeLeft',
+          label: 'Hero Badge — Left Text',
+          type: 'text',
+          placeholder: 'e.g., LinkedIn Top Voice',
+          hint: 'Left half of the small pill above the headline. Leave blank to hide the badge.',
+        },
+        {
+          name: 'badgeRight',
+          label: 'Hero Badge — Right Text',
+          type: 'text',
+          placeholder: 'e.g., 9+ Years as Fractional Sales Leader',
+          hint: 'Right half of the badge (after the divider).',
+        },
+        {
           name: 'introHook',
           label: 'Intro Hook',
           type: 'textarea',

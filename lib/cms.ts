@@ -120,6 +120,8 @@ interface ResultStat {
 interface FSLPageData {
   headline: string
   tagline: string
+  badgeLeft: string
+  badgeRight: string
   introHook: string
   introParagraph1: string
   introParagraph2: string
@@ -441,6 +443,8 @@ const defaultSettings: SiteSettings = {
   fslPage: {
     headline: 'Fractional Sales Leader',
     tagline: 'Experienced sales leadership. Fraction of the cost.',
+    badgeLeft: 'LinkedIn Top Voice',
+    badgeRight: '9+ Years as Fractional Sales Leader',
     introHook: "You built this company from nothing. Now you're stuck running sales calls when you should be running the business.",
     introParagraph1: "I get it. The jump from $1M to $10M in revenue is brutal. You know you need sales leadership, but the thought of gambling $250K+ on a VP of Sales makes your stomach turn. And those big consulting firms? They hand you a deck and disappear. That's not leadership—that's a transaction.",
     introParagraph2: "A Fractional Sales Leader is the middle path. You get an experienced sales executive—someone who's built teams, closed deals, and scaled companies—working with you part-time at a fraction of the full-time cost. I've spent 9+ years as a Fractional Sales Leader helping 50+ companies in the $1M-$10M ARR range. I've scaled a company from zero to the INC 500. I've seen what works and what doesn't.",
@@ -1263,6 +1267,8 @@ function mergeSettings(
     fslPage: {
       headline: (siteContent.fslPage?.headline as string) || defaults.fslPage.headline,
       tagline: (siteContent.fslPage?.tagline as string) || defaults.fslPage.tagline,
+      badgeLeft: (siteContent.fslPage?.badgeLeft as string) || defaults.fslPage.badgeLeft,
+      badgeRight: (siteContent.fslPage?.badgeRight as string) || defaults.fslPage.badgeRight,
       introHook: (siteContent.fslPage?.introHook as string) || defaults.fslPage.introHook,
       introParagraph1: (siteContent.fslPage?.introParagraph1 as string) || defaults.fslPage.introParagraph1,
       introParagraph2: (siteContent.fslPage?.introParagraph2 as string) || defaults.fslPage.introParagraph2,
