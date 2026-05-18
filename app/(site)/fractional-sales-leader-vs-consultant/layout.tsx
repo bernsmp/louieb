@@ -1,11 +1,10 @@
 import { Metadata } from "next";
-import { getFSLVsConsultantPageData } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title:
     "Fractional Sales Leader vs Consultant: Key Differences | Louie Bernstein",
   description:
-    "Understand the critical differences between a Fractional Sales Leader and a Consultant. Learn which option is right for your business growth, with side-by-side comparisons of scope, involvement, and impact.",
+    "A consultant hands you a strategy. A Fractional Sales Leader runs the team, builds the playbook, and is accountable for the number. Here's when each one is the right call at $1M–$10M ARR.",
   keywords: [
     "fractional sales leader vs consultant",
     "fractional sales leader",
@@ -18,14 +17,14 @@ export const metadata: Metadata = {
     "sales leadership options",
     "outsourced sales leadership",
     "part-time sales leader",
-    "sales consultant comparison",
+    "founder-led sales",
     "fractional CSO",
     "fractional chief sales officer",
   ],
   openGraph: {
     title: "Fractional Sales Leader vs Consultant: Key Differences Explained",
     description:
-      "Side-by-side comparison of Fractional Sales Leaders and Consultants. Discover which is right for your business growth strategy.",
+      "Why embedded leadership beats outside advice at $1M–$10M ARR — and when a consultant is still the right call.",
     type: "article",
     url: "https://louiebernstein.com/fractional-sales-leader-vs-consultant",
     siteName: "Louie Bernstein",
@@ -43,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Fractional Sales Leader vs Consultant: Key Differences",
     description:
-      "Understand the critical differences between hiring a Fractional Sales Leader and a Consultant for your sales growth.",
+      "A consultant hands you a strategy. A Fractional Sales Leader builds the team that hits the number. Here's when to hire which.",
     images: ["https://louiebernstein.com/images/fractional-sales-leader-hero.png"],
   },
   alternates: {
@@ -58,12 +57,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function FractionalSalesLeaderVsConsultantLayout({
+export default function FractionalSalesLeaderVsConsultantLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // Fetch CMS data server-side and pass to client component via context or props
-  // The page component will handle fetching via useEffect for now
   return <>{children}</>;
 }

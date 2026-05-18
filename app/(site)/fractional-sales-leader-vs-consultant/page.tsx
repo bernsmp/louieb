@@ -1,866 +1,527 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { BackgroundCells } from "@/components/ui/background-ripple-effect";
-import { Check, X, ArrowRight } from "lucide-react";
-import { useRef, useEffect, useState } from "react";
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { HeroBackground } from '@/components/ui/HeroBackground'
+import { useCmsSection } from '@/lib/useCmsSection'
 
-/**
- * CMS EDITABLE CONTENT
- * 
- * To make this page editable in Supabase CMS:
- * 1. Go to Supabase Dashboard > Table Editor > site_content
- * 2. Add a new row with:
- *    - section: 'fslVsConsultantPage'
- *    - content: { JSON object matching the structure in lib/cms.ts defaults.fslVsConsultantPage }
- * 
- * All content on this page can be edited via CMS:
- * - Hero section (headline, description, CTAs)
- * - Introduction text
- * - Comparison points (all 14 categories)
- * - Summary cards (FSL and Consultant)
- * - Final CTA section
- * 
- * Default values are defined in lib/cms.ts under fslVsConsultantPage
- */
+const CALENDLY = 'https://calendly.com/louiebernstein/30minutes?month=2026-03'
+const CMS_SECTION = 'fslVsConsultantPage'
 
-// Comparison data
-const comparisonPoints = [
-  {
-    category: "Discovery",
-    fsl: "Starts with a Sales Audit to understand the details",
-    consultant: "Speaks mostly with the CEO",
-    fslWins: true,
-  },
-  {
-    category: "Process Building",
-    fsl: "Builds Sales Processes and Systems",
-    consultant: "Offers advice",
-    fslWins: true,
-  },
-  {
-    category: "Team Management",
-    fsl: "Manages the Sales Team",
-    consultant: "Rarely manages teams",
-    fslWins: true,
-  },
-  {
-    category: "Engagement",
-    fsl: "Embedded in the business",
-    consultant: "Project based",
-    fslWins: true,
-  },
-  {
-    category: "Pipeline Assessment",
-    fsl: "Creates a sales pipeline based on reality",
-    consultant: "Takes the pipeline at face value",
-    fslWins: true,
-  },
-  {
-    category: "Leadership Role",
-    fsl: "Acts as part of leadership",
-    consultant: "Advice from the outside",
-    fslWins: true,
-  },
-  {
-    category: "Accountability",
-    fsl: "Accountable for results",
-    consultant: "Only accountable for the quality of their advice",
-    fslWins: true,
-  },
-  {
-    category: "Hiring Support",
-    fsl: "Helps in interviewing and hiring the sales team",
-    consultant: "Very rarely interviews any salespeople",
-    fslWins: true,
-  },
-  {
-    category: "Approach",
-    fsl: "Balances strategy with operational tactics",
-    consultant: "More strategy providing one-off expertise",
-    fslWins: true,
-  },
-  {
-    category: "Involvement",
-    fsl: "Front line activities with the salespeople",
-    consultant: "Hands off",
-    fslWins: true,
-  },
-  {
-    category: "Metrics",
-    fsl: "Develops relevant KPIs and metrics",
-    consultant: "Gives advice on what other companies do",
-    fslWins: true,
-  },
-  {
-    category: "Daily Operations",
-    fsl: "Implements a daily sales cadence",
-    consultant: "Does not get that granular. More high level",
-    fslWins: true,
-  },
-  {
-    category: "Tools & Technology",
-    fsl: "Familiar with most CRMs, sales tools including AI",
-    consultant: "Book knowledge",
-    fslWins: true,
-  },
-  {
-    category: "Growth Systems",
-    fsl: "Builds the Sales Playbook for consistent growth",
-    consultant: "Uses existing company knowledge they uncover",
-    fslWins: true,
-  },
-];
-
-// Stagger animation variants for premium feel
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-};
-
+  visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
+}
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.22, 1, 0.36, 1] as const, // Custom easing for premium feel
-    },
-  },
-};
-
-const wordVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.22, 1, 0.36, 1] as const,
-    },
-  },
-};
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const } },
+}
 
 export default function FractionalSalesLeaderVsConsultantPage() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  
-  // CMS data state - will be populated from Supabase if available
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [cmsContent, setCmsContent] = useState<Record<string, any> | null>(null);
+  const { v, cmsfaqs } = useCmsSection(CMS_SECTION)
 
-  useEffect(() => {
-    fetch('/api/cms/fsl-vs-consultant')
-      .then(res => res.json())
-      .then(data => { if (data && !data.error) setCmsContent(data); })
-      .catch(err => console.warn('CMS data not available, using defaults:', err));
-  }, []);
+  const takeaways = [
+    v('takeaway1', "A consultant gives you a report. A Fractional Sales Leader gives you a working sales function. If your gap is execution, a report will not close it."),
+    v('takeaway2', "Consultants are accountable for the quality of their advice. Fractional Sales Leaders are accountable for revenue — pipeline coverage, close rate, quota attainment."),
+    v('takeaway3', "A consultant interviews the CEO and writes a strategy. A Fractional Sales Leader runs a sales audit, builds the playbook, manages the reps, and rides every deal review."),
+    v('takeaway4', "At $1M–$10M ARR, your problem is rarely 'we don't know what to do.' It is 'no one is owning the doing.' Consultants do not solve that. Embedded leadership does."),
+    v('takeaway5', "When the engagement ends, a consultant leaves you with a slide deck. A Fractional Sales Leader leaves you with a documented playbook, a clean CRM, a trained team, and a forecast you can run a board meeting from."),
+  ]
 
-  // Use CMS data if available, otherwise fall back to hardcoded defaults
-  const comparisonData: typeof comparisonPoints = cmsContent?.comparison?.points || comparisonPoints;
-  const heroBadgeText: string = cmsContent?.hero?.badgeText || 'Making the Right Choice';
-  const heroBadgeSubtext: string = cmsContent?.hero?.badgeSubtext || 'Sales Leadership Guide';
-  const heroDescription: string = cmsContent?.hero?.description || 'Understanding the key differences can make or break your sales growth strategy';
-  const heroCtaPrimary: string = cmsContent?.hero?.ctaPrimary || 'See the Differences';
-  const heroCtaSecondary: string = cmsContent?.hero?.ctaSecondary || 'Schedule a Discussion';
-  const introText: string = cmsContent?.introduction?.text || 'These distinctions are based on common practices in business development, sales strategy, and organizational consulting. Note that these roles can sometimes overlap or vary by industry, but the core differences highlight their scope, involvement, and impact.';
-  const comparisonHeadline: string = cmsContent?.comparison?.headline || 'The Critical Differences';
-  const comparisonSubheadline: string = cmsContent?.comparison?.subheadline || 'A side-by-side comparison of what you actually get';
-  const summaryHeadline: string = cmsContent?.summary?.headline || 'The Bottom Line';
-  const fslCardBadge: string = cmsContent?.summary?.fslCard?.badge || 'Recommended';
-  const fslCardHeadline: string = cmsContent?.summary?.fslCard?.headline || 'Hire a Fractional Sales Leader';
-  const fslCardDescription: string = cmsContent?.summary?.fslCard?.description || 'If you need someone to run sales while you scale or search for a full-time executive.';
-  const fslCardBenefits: string[] = cmsContent?.summary?.fslCard?.benefits || ['Embedded leadership', 'Accountable for results', 'Builds systems that scale'];
-  const fslCardCtaText: string = cmsContent?.summary?.fslCard?.ctaText || 'Talk to a Fractional Sales Leader';
-  const consultantCardBadge: string = cmsContent?.summary?.consultantCard?.badge || 'Alternative';
-  const consultantCardHeadline: string = cmsContent?.summary?.consultantCard?.headline || 'Hire a Consultant';
-  const consultantCardDescription: string = cmsContent?.summary?.consultantCard?.description || 'If you need specialized insight, market validation, or a roadmap that your existing team can execute.';
-  const consultantCardBenefits: string[] = cmsContent?.summary?.consultantCard?.benefits || ['External perspective', 'Project-based engagement', 'Strategic advice'];
-  const finalCtaHeadline: string = cmsContent?.finalCta?.headline || 'Ready to Accelerate Your Sales?';
-  const finalCtaDescription: string = cmsContent?.finalCta?.description || "Let's discuss whether a Fractional Sales Leader is the right fit for your business.";
-  const finalCtaPrimary: string = cmsContent?.finalCta?.ctaPrimary || 'Schedule a Free Consultation';
-  const finalCtaSecondary: string = cmsContent?.finalCta?.ctaSecondary || 'Learn About FSL';
+  const differences = [
+    {
+      number: '01',
+      title: v('diff1Title', 'Discovery: Sales Audit vs. CEO Interview'),
+      detail: v('diff1Detail', "A Fractional Sales Leader starts with a Sales Audit — they read the CRM, sit on calls, interview every rep, and trace the last 50 closed and lost deals. They are looking for the actual gap, not the perceived one. A consultant typically starts with the CEO. They take the founder's mental model of the sales function and translate it into a strategy document. That document is only as accurate as the founder's view of a system they have admitted they are too close to. The audit beats the interview because it surfaces what is actually broken — not what the founder thinks is broken."),
+      outcome: v('diff1Outcome', "A diagnosis based on evidence — calls, CRM data, deal autopsies — not on a founder's self-report from inside the problem."),
+    },
+    {
+      number: '02',
+      title: v('diff2Title', 'Output: Built System vs. Written Recommendation'),
+      detail: v('diff2Detail', "Consultants deliver documents — a strategy deck, a playbook draft, a market assessment, a roadmap. The implementation is your problem. A Fractional Sales Leader delivers a working sales function: a playbook your team actually uses, a CRM that reflects reality, qualification criteria enforced in the pipeline, a forecast process that runs weekly, and reps trained to operate inside it. The difference is not effort. It is ownership. The consultant owns the document. The Fractional Sales Leader owns the result."),
+      outcome: v('diff2Outcome', "A sales machine you can hand to a future VP — not a 60-page PDF that sits on a shared drive."),
+    },
+    {
+      number: '03',
+      title: v('diff3Title', 'Accountability: Results vs. Advice'),
+      detail: v('diff3Detail', "A consultant is accountable for the quality of their advice. If you implement it badly, that is on you. If you do not implement it at all, that is also on you. A Fractional Sales Leader is accountable for outcomes — quota attainment, pipeline coverage, close rate, cycle length, ramp time on new reps. They sit in the same forecast review you do. They have skin in the same outcome you have. When the number is missed, they do not get to point at the document. They have to fix the system."),
+      outcome: v('diff3Outcome', "A partner whose reputation depends on your revenue growth — not on whether their deck was received well."),
+    },
+    {
+      number: '04',
+      title: v('diff4Title', 'Engagement: Embedded vs. Project-Based'),
+      detail: v('diff4Detail', "A consultant runs a project: scope, timeline, deliverable, invoice, exit. Four to eight weeks is typical. A Fractional Sales Leader is embedded — recurring weekly involvement, often two or three days a week, for six to twelve months. They show up in your standup. They run your pipeline review. They are in the room when a big deal is on the line. The work is not 'analyze and recommend.' It is 'operate alongside you until the function runs on its own.' Embedded leadership is what changes behavior. Project work, however well-scoped, almost never does."),
+      outcome: v('diff4Outcome', "A weekly rhythm of coaching, deal reviews, and team development — not a kickoff, a status meeting, and a final report."),
+    },
+    {
+      number: '05',
+      title: v('diff5Title', 'Team: Manages People vs. Talks About Them'),
+      detail: v('diff5Detail', "Consultants rarely manage anyone. They might recommend a hire, suggest a comp plan, or critique a rep's call recording, but they do not run a one-on-one, write a performance plan, or fire anyone who needs to go. A Fractional Sales Leader does all of it. They interview candidates. They onboard new reps. They coach in the moment. They hold weekly accountability conversations. They make the hard call when a rep is not going to make it. If your sales problem is partly a people problem — and it almost always is — a consultant cannot fix it. They can only describe it."),
+      outcome: v('diff5Outcome', "A functioning sales team, not a written assessment of the team you currently have."),
+    },
+  ]
+
+  const comparisonRows = [
+    {
+      consultant: v('compare1Consultant', "Speaks mostly with the CEO and writes a strategy"),
+      fsl: v('compare1Fsl', "Runs a full sales audit before recommending anything"),
+    },
+    {
+      consultant: v('compare2Consultant', "Project-based — 4 to 8 weeks, then disengaged"),
+      fsl: v('compare2Fsl', "Embedded — recurring weekly involvement for 6 to 12 months"),
+    },
+    {
+      consultant: v('compare3Consultant', "Accountable for the quality of the advice"),
+      fsl: v('compare3Fsl', "Accountable for revenue, pipeline, and team performance"),
+    },
+    {
+      consultant: v('compare4Consultant', "Recommends a hiring plan you have to execute"),
+      fsl: v('compare4Fsl', "Interviews, hires, onboards, and coaches the salespeople"),
+    },
+    {
+      consultant: v('compare5Consultant', "Hands off a playbook draft and a roadmap"),
+      fsl: v('compare5Fsl', "Builds the playbook, the CRM, and the daily cadence"),
+    },
+    {
+      consultant: v('compare6Consultant', "Leaves a slide deck on a shared drive"),
+      fsl: v('compare6Fsl', "Leaves a working sales function the next leader can run"),
+    },
+  ]
+
+  const whenToHire = [
+    {
+      number: '01',
+      title: v('when1Title', "Hire a Fractional Sales Leader When the Gap Is Execution"),
+      detail: v('when1Detail', "If you have already had the strategy conversation — maybe more than once — and the bottleneck is that no one is owning the rep coaching, the pipeline hygiene, the forecasting discipline, or the team accountability, a consultant will not help. You do not need another document. You need a leader who shows up every week, runs the operating cadence, and stays until it works without them. This is the most common reality at $1M–$10M ARR."),
+    },
+    {
+      number: '02',
+      title: v('when2Title', "Hire a Consultant When the Gap Is Strategic"),
+      detail: v('when2Detail', "If you have a capable internal sales leader, strong execution discipline, and a specific strategic question — repricing, repositioning, channel design, an objective audit before a board meeting — a consultant can be exactly the right fit. They bring outside pattern recognition, deliver a crisp recommendation, and exit. The trap is using a consultant when the real problem is implementation, because the strategy doc then becomes evidence of effort rather than progress."),
+    },
+    {
+      number: '03',
+      title: v('when3Title', "If You Are Unsure, the Audit Tells You"),
+      detail: v('when3Detail', "A Fractional Sales Leader's first deliverable is usually a 4-to-6 week Sales Audit. That audit alone will tell you whether the gap is strategic (in which case you may not need ongoing fractional leadership at all) or operational (in which case the engagement converts into a full build). Either way, you get an evidence-based diagnosis instead of a consultant's opinion, and you keep the option of fractional leadership without committing to it up front."),
+    },
+  ]
+
+  const defaultFaqs = [
+    {
+      q: "What is the main difference between a Fractional Sales Leader and a Consultant?",
+      a: "A consultant is accountable for the quality of their advice and the deliverable they hand over — usually a strategy document, audit, or playbook draft. A Fractional Sales Leader is accountable for revenue outcomes — quota attainment, pipeline coverage, close rate, and team performance — and is embedded weekly in your business until the sales function works without them. The consultant tells you what to do. The Fractional Sales Leader does it with you.",
+    },
+    {
+      q: "Why do consultants alone often fail to fix a sales problem?",
+      a: "Because at $1M–$10M ARR the gap is rarely strategic — it is operational. Most founders already know roughly what they should be doing. The hard part is the daily implementation: running pipeline reviews, coaching reps, enforcing CRM discipline, holding people accountable, making hire and fire decisions. A consultant produces a document. A document does not change rep behavior, does not run the cadence, and does not own the number. You can implement a great consultant's playbook badly — and most founders do, because they are still buried inside the deals.",
+    },
+    {
+      q: "When should I hire a consultant instead of a Fractional Sales Leader?",
+      a: "Hire a consultant when you have strong execution capacity and need an objective outside view on a specific strategic question — repricing, ICP redefinition, GTM channel strategy, M&A sales due diligence, or a sales audit before a board meeting. Hire a Fractional Sales Leader when your bottleneck is leadership and execution: nobody is owning the team, the forecast, the playbook, or the operating cadence at the depth and discipline the business needs.",
+    },
+    {
+      q: "Is a Fractional Sales Leader more expensive than a consultant?",
+      a: "Different cost profile, not necessarily more expensive. A consultant engagement is typically $15,000–$50,000 for a 4-to-8 week project — a one-time spend that produces a document. A Fractional Sales Leader is typically $6,000–$14,000 per month, ongoing for 6 to 12 months — recurring spend that produces a working sales function. The right way to compare is per dollar of revenue impact. A document that does not get implemented costs you the full project fee. A working sales system pays back the fractional fee inside the first one or two new deals.",
+    },
+    {
+      q: "Can a Fractional Sales Leader do both strategy and execution?",
+      a: "Yes, and most experienced ones do. The engagement typically opens with a 4-to-6 week Sales Audit that delivers a strategic diagnosis — what is broken, what is missing, what to fix first, and what it will cost. If you stop there, you have effectively bought a consulting engagement. If you continue, the Fractional Sales Leader stays embedded to install the system, run the team, and exit only when the function runs on its own. You get both the outside-view strategy and the inside-the-room execution from the same person.",
+    },
+  ]
+
+  const displayFaqs = cmsfaqs(5, defaultFaqs)
+
+  const schemaData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'FAQPage',
+        mainEntity: displayFaqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.q,
+          acceptedAnswer: { '@type': 'Answer', text: faq.a },
+        })),
+      },
+      {
+        '@type': 'Article',
+        headline: 'Fractional Sales Leader vs Consultant: Key Differences Explained',
+        author: { '@type': 'Person', name: 'Louie Bernstein', url: 'https://louiebernstein.com' },
+        url: 'https://louiebernstein.com/fractional-sales-leader-vs-consultant',
+        datePublished: '2026-05-17',
+        publisher: {
+          '@type': 'Organization',
+          name: 'Louie Bernstein',
+          logo: { '@type': 'ImageObject', url: 'https://louiebernstein.com/logo/og-image.png' },
+        },
+      },
+    ],
+  }
 
   return (
     <>
-      {/* JSON-LD Schema for SEO — single @graph block to avoid duplicate structured data */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@graph": [
-              {
-                "@type": "Article",
-                headline:
-                  "Fractional Sales Leader vs Consultant: Key Differences Explained",
-                description:
-                  "Understand the critical differences between hiring a Fractional Sales Leader and a Consultant for your business growth.",
-                author: {
-                  "@type": "Person",
-                  name: "Louie Bernstein",
-                  url: "https://louiebernstein.com",
-                },
-                publisher: {
-                  "@type": "Organization",
-                  name: "Louie Bernstein",
-                  url: "https://louiebernstein.com",
-                },
-                mainEntityOfPage: {
-                  "@type": "WebPage",
-                  "@id":
-                    "https://louiebernstein.com/fractional-sales-leader-vs-consultant",
-                },
-              },
-              {
-                "@type": "FAQPage",
-                mainEntity: [
-                  {
-                    "@type": "Question",
-                    name: "What is the main difference between a Fractional Sales Leader and a Consultant?",
-                    acceptedAnswer: {
-                      "@type": "Answer",
-                      text: "A Fractional Sales Leader is embedded in your business, manages the sales team, and is accountable for results. A Consultant provides external advice on specific projects but typically doesn't manage teams or take ownership of outcomes.",
-                    },
-                  },
-                  {
-                    "@type": "Question",
-                    name: "When should I hire a Fractional Sales Leader vs a Consultant?",
-                    acceptedAnswer: {
-                      "@type": "Answer",
-                      text: "Hire a Fractional Sales Leader if you need someone to run sales while you scale or search for a full-time executive. Hire a Consultant if you need specialized insight, market validation, or a roadmap that your existing team can execute.",
-                    },
-                  },
-                  {
-                    "@type": "Question",
-                    name: "Is a Fractional Sales Leader accountable for sales results?",
-                    acceptedAnswer: {
-                      "@type": "Answer",
-                      text: "Yes, a Fractional Sales Leader is accountable for results, unlike a consultant who is only accountable for the quality of their advice.",
-                    },
-                  },
-                ],
-              },
-            ],
-          }),
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />
 
-      <main className="bg-white">
-        {/* Hero Section */}
-        <section ref={heroRef} className="relative w-full overflow-hidden">
-          <BackgroundCells className="bg-slate-950">
-            <div className="text-center px-6 py-20 md:py-32">
-              <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-                className="space-y-8"
+      {/* Hero */}
+      <HeroBackground accentColor="#1d4ed8" fillColor="rgba(29,78,216,0.3)" className="bg-slate-950">
+        <div className="px-6 pb-20 pt-8 text-center">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="mx-auto max-w-4xl"
+          >
+            <motion.p
+              variants={itemVariants}
+              className="mb-4 text-sm font-semibold uppercase tracking-widest text-blue-400"
+            >
+              {v('heroTag', 'Choosing Sales Leadership That Sticks')}
+            </motion.p>
+            <motion.h1
+              variants={itemVariants}
+              className="mb-6 font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl"
+            >
+              {v('heroLine1', 'Fractional Sales Leader')}
+              <span className="block text-blue-400">{v('heroAccent', 'vs Consultant — What Actually Builds Revenue?')}</span>
+            </motion.h1>
+            <motion.p
+              variants={itemVariants}
+              className="mx-auto mb-4 max-w-2xl text-lg font-semibold text-blue-200 md:text-xl"
+            >
+              {v('heroH2', "Why Embedded Leadership Beats Outside Advice at $1M–$10M ARR")}
+            </motion.p>
+            <motion.p
+              variants={itemVariants}
+              className="mx-auto mb-8 max-w-2xl text-lg text-neutral-300 md:text-xl"
+            >
+              {v('heroDescription', "A consultant hands you a strategy. A Fractional Sales Leader runs the team, builds the playbook, and is accountable for the number. Here is when each one is the right call — and why founders stuck in founder-led sales almost always need the second.")}
+            </motion.p>
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+            >
+              <Link
+                href={CALENDLY}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block rounded-lg bg-blue-700 px-10 py-4 text-lg font-bold text-white shadow-xl transition-all hover:scale-105 hover:bg-blue-800"
               >
-                <motion.div variants={itemVariants} className="mb-6">
-                  <div className="inline-flex items-center gap-2 rounded-full border border-neutral-600/50 bg-neutral-900/50 backdrop-blur-sm px-4 py-2 shadow-lg">
-                    <span className="text-sm font-semibold text-white">
-                      {heroBadgeText}
-                    </span>
-                    <span className="text-neutral-400">|</span>
-                    <span className="text-sm text-neutral-300">
-                      {heroBadgeSubtext}
-                    </span>
-                  </div>
-                </motion.div>
+                Talk to Louie — 30 Minutes
+              </Link>
+              <Link
+                href="/fractional-sales-leader"
+                className="text-base font-semibold text-neutral-300 underline underline-offset-2 hover:text-white"
+              >
+                What a Fractional Sales Leader actually does →
+              </Link>
+            </motion.div>
+          </motion.div>
+        </div>
+      </HeroBackground>
 
-                <motion.h1 
-                  variants={itemVariants}
-                  className="text-4xl font-medium text-white md:text-5xl lg:text-6xl xl:text-7xl tracking-tight"
-                >
-                  <span className="inline-block">
-                    {"Fractional Sales Leader".split(" ").map((word, i) => (
-                      <motion.span
-                        key={i}
-                        variants={wordVariants}
-                        className="inline-block mr-2"
-                        style={{ transitionDelay: `${i * 0.05}s` }}
-                      >
-                        {word}
-                      </motion.span>
-                    ))}
-                  </span>
-                  <motion.span 
-                    variants={itemVariants}
-                    className="block mt-2 bg-gradient-to-r from-[#0966c2] via-[#0a7dd4] to-[#0966c2] bg-clip-text text-transparent"
-                  >
-                    vs Consultant
-                  </motion.span>
-                </motion.h1>
+      {/* Key Takeaways */}
+      <section className="bg-white py-14 md:py-16">
+        <div className="mx-auto max-w-3xl px-6">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="rounded-xl border-l-4 border-blue-700 bg-neutral-50 p-7"
+          >
+            <motion.h2
+              variants={itemVariants}
+              className="mb-5 text-sm font-bold uppercase tracking-widest text-blue-800"
+            >
+              {v('takeawaysHeading', 'Key Takeaways')}
+            </motion.h2>
+            <motion.ul variants={itemVariants} className="space-y-3">
+              {takeaways.map((t, i) => (
+                <li key={i} className="flex gap-3 text-neutral-700">
+                  <span className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-blue-700" />
+                  <span className="leading-relaxed">{t}</span>
+                </li>
+              ))}
+            </motion.ul>
+          </motion.div>
+        </div>
+      </section>
 
-                <motion.p
-                  variants={itemVariants}
-                  className="mx-auto max-w-3xl text-lg text-neutral-300 md:text-xl lg:text-2xl leading-relaxed"
-                >
-                  {heroDescription}
-                </motion.p>
-
+      {/* Five Differences */}
+      <section className="bg-neutral-50 py-16 md:py-20">
+        <div className="mx-auto max-w-4xl px-6">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <motion.h2
+              variants={itemVariants}
+              className="mb-4 text-center font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
+            >
+              {v('sectionDiffHeading', 'The Five Differences That Actually Matter')}
+            </motion.h2>
+            <motion.p variants={itemVariants} className="mb-10 text-center text-neutral-600">
+              {v('sectionDiffSubheading', "Both roles have a place. But at $1M–$10M ARR, these five gaps are where consultants quietly stop being useful — and embedded leadership starts.")}
+            </motion.p>
+            <div className="space-y-8">
+              {differences.map((item, i) => (
                 <motion.div
+                  key={i}
                   variants={itemVariants}
-                  className="mt-3 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6"
+                  className="rounded-xl border border-neutral-200 bg-white p-6"
                 >
-                  <motion.div
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                  >
-                    <Link
-                      href="#comparison"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        document
-                          .querySelector("#comparison")
-                          ?.scrollIntoView({ behavior: "smooth" });
-                      }}
-                      className="group relative inline-flex items-center justify-center rounded-lg bg-white px-8 py-3 text-base font-semibold text-slate-950 transition-all duration-300 hover:bg-blue-50 hover:shadow-xl hover:shadow-blue-500/20 md:px-10 md:py-4 md:text-lg overflow-hidden"
-                    >
-                      <span className="relative z-10">{heroCtaPrimary}</span>
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-blue-50 to-white opacity-0 group-hover:opacity-100"
-                        initial={false}
-                        transition={{ duration: 0.3 }}
-                      />
-                    </Link>
-                  </motion.div>
-                  <motion.div
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                  >
-                    <Link
-                      href="https://calendly.com/louiebernstein/30minutes"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group relative inline-flex items-center justify-center rounded-lg border-2 border-[#0966c2] bg-[#0966c2] px-8 py-3 text-base font-semibold text-white transition-all duration-300 hover:border-[#0855a3] hover:bg-[#0855a3] hover:shadow-xl hover:shadow-[#0966c2]/30 md:px-10 md:py-4 md:text-lg overflow-hidden"
-                    >
-                      <span className="relative z-10">{heroCtaSecondary}</span>
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-[#0855a3] to-[#0966c2] opacity-0 group-hover:opacity-100"
-                        initial={false}
-                        transition={{ duration: 0.3 }}
-                      />
-                    </Link>
-                  </motion.div>
-                </motion.div>
-              </motion.div>
-            </div>
-            
-            {/* Hero Image with Parallax */}
-            <motion.div 
-              style={{ y, opacity }}
-              className="mt-4 md:mt-6 px-6"
-            >
-              <motion.div
-                initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="relative mx-auto max-w-5xl"
-              >
-                <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl group">
-                  <motion.div
-                    className="w-full h-full relative"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.7 }}
-                  >
-                    <Image
-                      src="/images/fractional-sales-leader-hero.png"
-                      alt="Professional sales leadership team collaboration"
-                      fill
-                      className="object-cover"
-                      priority
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1280px"
-                    />
-                  </motion.div>
-                  {/* Gradient overlay for depth */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent pointer-events-none" />
-                  {/* Fallback gradient placeholder */}
-                  <div className="hidden absolute inset-0 bg-gradient-to-br from-[#0966c2]/20 via-transparent to-slate-800/40 flex items-center justify-center">
-                    <div className="text-center px-8">
-                      <p className="text-white/60 text-sm">Add hero image here</p>
-                      <p className="text-white/40 text-xs mt-2">Recommended: Professional team/leadership image</p>
-                    </div>
+                  <div className="mb-3 flex items-start gap-4">
+                    <div className="shrink-0 text-3xl font-bold text-blue-200">{item.number}</div>
+                    <h3 className="text-xl font-bold text-neutral-900">{item.title}</h3>
                   </div>
-                </div>
-              </motion.div>
-            </motion.div>
-          </BackgroundCells>
-        </section>
-
-        {/* Introduction */}
-        <section className="py-16 md:py-24 bg-neutral-50">
-          <div className="container mx-auto max-w-4xl px-6 lg:px-8">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
-              className="text-center"
-            >
-              {/<[a-z][\s\S]*?>/i.test(introText) ? (
-                <div className="text-lg leading-relaxed text-neutral-700 md:text-xl cms-html-content" dangerouslySetInnerHTML={{ __html: introText }} />
-              ) : (
-                <p className="text-lg leading-relaxed text-neutral-700 md:text-xl whitespace-pre-line">{introText}</p>
-              )}
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Comparison Table Section */}
-        <section id="comparison" className="py-16 md:py-24">
-          <div className="container mx-auto max-w-7xl px-6 lg:px-8">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl font-bold text-neutral-900 md:text-4xl lg:text-5xl tracking-tight">
-                {comparisonHeadline}
-              </h2>
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="mx-auto mt-4 max-w-2xl text-lg text-neutral-600"
-              >
-                {comparisonSubheadline}
-              </motion.p>
-            </motion.div>
-
-            {/* Desktop Table Header */}
-            <div className="hidden md:grid md:grid-cols-3 gap-6 mb-8">
-              <div className="p-6 rounded-2xl bg-neutral-100">
-                <h3 className="text-lg font-bold text-neutral-900">Category</h3>
-              </div>
-              <div className="p-6 rounded-2xl bg-gradient-to-br from-[#0966c2] to-[#0855a3] text-white shadow-lg">
-                <h3 className="text-lg font-bold">Fractional Sales Leader</h3>
-                <p className="text-sm text-blue-100 mt-1">
-                  Embedded Leadership
-                </p>
-              </div>
-              <div className="p-6 rounded-2xl bg-neutral-200/50 border border-neutral-300">
-                <h3 className="text-lg font-bold text-neutral-700">
-                  Consultant
-                </h3>
-                <p className="text-sm text-neutral-500 mt-1">External Advisor</p>
-              </div>
-            </div>
-
-            {/* Comparison Rows */}
-            <div className="space-y-4">
-              {comparisonData.map((point, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ 
-                    delay: index * 0.03,
-                    duration: 0.6,
-                    ease: [0.22, 1, 0.36, 1] as const
-                  }}
-                  className="group"
-                >
-                  {/* Mobile Card */}
-                  <motion.div 
-                    whileHover={{ y: -2 }}
-                    className="md:hidden rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm hover:shadow-xl transition-all duration-300"
-                  >
-                    <div className="text-sm font-semibold text-[#0966c2] mb-4">
-                      {point.category}
-                    </div>
-                    <div className="space-y-4">
-                      <div className="flex items-start gap-3">
-                        <motion.div 
-                          initial={{ scale: 0 }}
-                          whileInView={{ scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: index * 0.03 + 0.2, type: "spring" }}
-                          className="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 flex items-center justify-center"
-                        >
-                          <Check className="w-5 h-5 text-green-600" />
-                        </motion.div>
-                        <div>
-                          <div className="text-xs font-semibold text-green-600 mb-1">
-                            Fractional Sales Leader
-                          </div>
-                          <p className="text-neutral-900 font-medium">
-                            {point.fsl}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center">
-                          <X className="w-5 h-5 text-neutral-400" />
-                        </div>
-                        <div>
-                          <div className="text-xs font-semibold text-neutral-400 mb-1">
-                            Consultant
-                          </div>
-                          <p className="text-neutral-500">{point.consultant}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Desktop Row */}
-                  <div className="hidden md:grid md:grid-cols-3 gap-6 items-stretch">
-                    <motion.div 
-                      whileHover={{ scale: 1.02 }}
-                      className="p-6 rounded-2xl bg-neutral-50 flex items-center border border-neutral-100 transition-all duration-300"
-                    >
-                      <span className="font-bold text-neutral-900">
-                        {point.category}
-                      </span>
-                    </motion.div>
-                    <motion.div 
-                      whileHover={{ scale: 1.02, y: -4 }}
-                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                      className="p-6 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 group-hover:border-green-400 group-hover:shadow-xl group-hover:shadow-green-500/20 transition-all duration-300"
-                    >
-                      <div className="flex items-start gap-3">
-                        <motion.div 
-                          initial={{ scale: 0, rotate: -180 }}
-                          whileInView={{ scale: 1, rotate: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: index * 0.03 + 0.2, type: "spring" }}
-                          className="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center shadow-lg"
-                        >
-                          <Check className="w-5 h-5 text-white" />
-                        </motion.div>
-                        <p className="text-neutral-800 leading-relaxed">
-                          {point.fsl}
-                        </p>
-                      </div>
-                    </motion.div>
-                    <motion.div 
-                      whileHover={{ scale: 1.01 }}
-                      className="p-6 rounded-2xl bg-neutral-50 border border-neutral-200 group-hover:border-neutral-300 transition-all duration-300"
-                    >
-                      <div className="flex items-start gap-3">
-                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-neutral-200 flex items-center justify-center">
-                          <X className="w-5 h-5 text-neutral-400" />
-                        </div>
-                        <p className="text-neutral-500 leading-relaxed">
-                          {point.consultant}
-                        </p>
-                      </div>
-                    </motion.div>
+                  <p className="mb-4 text-neutral-700">{item.detail}</p>
+                  <div className="rounded-lg border border-blue-100 bg-blue-50 px-4 py-3">
+                    <span className="font-bold text-blue-800">What You Get: </span>
+                    <span className="text-blue-800">{item.outcome}</span>
                   </div>
                 </motion.div>
               ))}
             </div>
-          </div>
-        </section>
+          </motion.div>
+        </div>
+      </section>
 
-        {/* Video Callout */}
-        <section className="py-8 bg-white">
-          <div className="container mx-auto max-w-4xl px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
-              className="rounded-xl border border-[#0966c2]/20 bg-blue-50 p-6 text-center"
-            >
-              <p className="mb-1 text-sm font-semibold text-[#0966c2]">Before You Hire an FSL</p>
-              <p className="mb-3 text-neutral-700">
-                Now that you know the difference, here&apos;s the one question you must ask any candidate before signing.
-              </p>
-              <Link
-                href="/videos/ask-this-before-hiring-a-fractional-sales-leader"
-                className="font-semibold text-[#0966c2] underline underline-offset-2 hover:text-[#0855a3]"
-              >
-                Watch: Ask This Before Hiring A Fractional Sales Leader →
+      {/* SEO paragraphs */}
+      <section className="bg-white py-14 md:py-16">
+        <div className="mx-auto max-w-3xl px-6">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <motion.p variants={itemVariants} className="mb-5 text-lg leading-relaxed text-neutral-700">
+              {v('seoPara1', "Most founders stuck in founder-led sales have already hired at least one consultant. They have a strategy deck, an audit report, maybe a playbook draft. None of it changed the number. That is not because the consultant was wrong. It is because consulting is an information delivery system, and the gap at $1M–$10M ARR is not an information gap — it is an execution gap. A Fractional Sales Leader fills that gap by sitting inside the operation: in the deal reviews, in the one-on-ones, in the forecast meeting, on the calls. They do not hand you a document and leave. They run the function until it runs without them.")}
+            </motion.p>
+            <motion.p variants={itemVariants} className="text-lg leading-relaxed text-neutral-700">
+              {v('seoPara2', "If you are weighing the two, start with a clean diagnosis. Read")}{' '}
+              <Link href="/fractional-sales-leader" className="font-semibold text-blue-700 underline underline-offset-2 hover:text-blue-900">
+                What a Fractional Sales Leader Actually Does →
               </Link>
-            </motion.div>
-          </div>
-        </section>
+              {v('seoPara2b', " for the embedded-leadership picture, and")}{' '}
+              <Link href="/250k-mistake-vp-sales-hire-too-early" className="font-semibold text-blue-700 underline underline-offset-2 hover:text-blue-900">
+                The $250K Mistake: Hiring a VP of Sales Too Early →
+              </Link>
+              {v('seoPara2c', " for why founders skip past fractional too quickly and pay for it. The choice between consultant, fractional, and full-time VP is not about seniority. It is about whether the business needs analysis, embedded execution, or a permanent owner — and at this stage, almost always the middle one.")}
+            </motion.p>
+          </motion.div>
+        </div>
+      </section>
 
-        {/* Summary Section */}
-        <section className="py-16 md:py-24 bg-neutral-50">
-          <div className="container mx-auto max-w-6xl px-6 lg:px-8">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
-              className="text-center mb-16"
+      {/* Comparison Table */}
+      <section className="bg-neutral-50 py-16 md:py-20">
+        <div className="mx-auto max-w-5xl px-6">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <motion.h2
+              variants={itemVariants}
+              className="mb-4 text-center font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
             >
-              <h2 className="text-3xl font-bold text-neutral-900 md:text-4xl lg:text-5xl tracking-tight">
-                {summaryHeadline}
-              </h2>
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Fractional Sales Leader Card */}
-              <motion.div
-                initial={{ opacity: 0, x: -30, scale: 0.95 }}
-                whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                viewport={{ once: true, margin: "-50px" }}
-                whileHover={{ y: -8, scale: 1.02 }}
-                transition={{ 
-                  duration: 0.6,
-                  ease: [0.22, 1, 0.36, 1] as const,
-                  layout: { type: "spring", stiffness: 300, damping: 20 }
-                }}
-                className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0966c2] to-[#0855a3] p-8 md:p-10 text-white shadow-2xl cursor-pointer group"
-              >
-                <motion.div 
-                  className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"
-                  animate={{ 
-                    scale: [1, 1.2, 1],
-                    opacity: [0.1, 0.2, 0.1]
-                  }}
-                  transition={{ 
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
-                <div className="relative z-10">
-                  <motion.div 
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2, type: "spring" }}
-                    className="inline-flex items-center gap-2 rounded-full bg-white/20 backdrop-blur-sm px-4 py-2 mb-6"
-                  >
-                    <span className="text-sm font-semibold">{fslCardBadge}</span>
-                  </motion.div>
-                  <h3 className="text-2xl font-bold md:text-3xl">
-                    {fslCardHeadline}
-                  </h3>
-                  {/<[a-z][\s\S]*?>/i.test(fslCardDescription) ? (
-                    <div className="mt-4 text-lg text-blue-100 leading-relaxed cms-html-content" dangerouslySetInnerHTML={{ __html: fslCardDescription }} />
-                  ) : (
-                    <p className="mt-4 text-lg text-blue-100 leading-relaxed">{fslCardDescription}</p>
-                  )}
-                  <ul className="mt-6 space-y-3">
-                    {fslCardBenefits.map((item, i) => (
-                      <motion.li 
-                        key={i}
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.3 + i * 0.1 }}
-                        className="flex items-center gap-3"
-                      >
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          whileInView={{ scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.3 + i * 0.1, type: "spring" }}
-                        >
-                          <Check className="w-5 h-5 text-green-300 flex-shrink-0" />
-                        </motion.div>
-                        <span>{item}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Link
-                      href="https://calendly.com/louiebernstein/30minutes"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-8 inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-[#0966c2] font-semibold transition-all hover:shadow-xl hover:shadow-white/20 group-hover:bg-blue-50"
-                    >
-                      {fslCardCtaText}
-                      <motion.div
-                        animate={{ x: [0, 4, 0] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                      >
-                        <ArrowRight className="w-5 h-5" />
-                      </motion.div>
-                    </Link>
-                  </motion.div>
+              {v('sectionCompareHeading', 'Consultant vs. Fractional Sales Leader, Side by Side')}
+            </motion.h2>
+            <motion.p variants={itemVariants} className="mb-10 text-center text-neutral-600">
+              {v('sectionCompareSubheading', "Same engagement window, very different outputs. Read across each row and the pattern is hard to miss.")}
+            </motion.p>
+            <motion.div variants={itemVariants} className="overflow-hidden rounded-xl border border-neutral-200">
+              <div className="grid grid-cols-2 bg-neutral-900">
+                <div className="px-6 py-4 text-center text-sm font-bold uppercase tracking-wide text-red-400">
+                  {v('compareColLeft', 'Consultant')}
                 </div>
-              </motion.div>
-
-              {/* Consultant Card */}
-              <motion.div
-                initial={{ opacity: 0, x: 30, scale: 0.95 }}
-                whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                viewport={{ once: true, margin: "-50px" }}
-                whileHover={{ y: -4 }}
-                transition={{ 
-                  duration: 0.6,
-                  ease: [0.22, 1, 0.36, 1] as const,
-                  layout: { type: "spring", stiffness: 300, damping: 20 }
-                }}
-                className="relative overflow-hidden rounded-3xl bg-white border-2 border-neutral-200 p-8 md:p-10 shadow-lg group"
-              >
-                <motion.div 
-                  className="absolute top-0 right-0 w-64 h-64 bg-neutral-100 rounded-full -translate-y-1/2 translate-x-1/2"
-                  animate={{ 
-                    scale: [1, 1.1, 1],
-                    opacity: [0.3, 0.5, 0.3]
-                  }}
-                  transition={{ 
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
-                <div className="relative z-10">
-                  <div className="inline-flex items-center gap-2 rounded-full bg-neutral-100 px-4 py-2 mb-6">
-                    <span className="text-sm font-semibold text-neutral-600">
-                      {consultantCardBadge}
-                    </span>
+                <div className="border-l border-neutral-700 px-6 py-4 text-center text-sm font-bold uppercase tracking-wide text-blue-400">
+                  {v('compareColRight', 'Fractional Sales Leader')}
+                </div>
+              </div>
+              {comparisonRows.map((row, i) => (
+                <div
+                  key={i}
+                  className={`grid grid-cols-2 ${i % 2 === 0 ? 'bg-white' : 'bg-neutral-50'}`}
+                >
+                  <div className="flex items-center gap-3 px-6 py-4 text-sm text-neutral-700">
+                    <span className="shrink-0 text-red-500">✕</span>
+                    {row.consultant}
                   </div>
-                  <h3 className="text-2xl font-bold text-neutral-900 md:text-3xl">
-                    {consultantCardHeadline}
-                  </h3>
-                  {/<[a-z][\s\S]*?>/i.test(consultantCardDescription) ? (
-                    <div className="mt-4 text-lg text-neutral-600 leading-relaxed cms-html-content" dangerouslySetInnerHTML={{ __html: consultantCardDescription }} />
-                  ) : (
-                    <p className="mt-4 text-lg text-neutral-600 leading-relaxed">{consultantCardDescription}</p>
-                  )}
-                  <ul className="mt-6 space-y-3 text-neutral-600">
-                    {consultantCardBenefits.map((item, i) => (
-                      <motion.li 
-                        key={i}
-                        initial={{ opacity: 0, x: 10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.3 + i * 0.1 }}
-                        className="flex items-center gap-3"
-                      >
-                        <div className="w-5 h-5 rounded-full bg-neutral-200 flex items-center justify-center flex-shrink-0">
-                          <span className="w-2 h-2 rounded-full bg-neutral-400" />
-                        </div>
-                        <span>{item}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
+                  <div className="flex items-center gap-3 border-l border-neutral-200 px-6 py-4 text-sm text-neutral-700">
+                    <span className="shrink-0 text-green-600">✓</span>
+                    {row.fsl}
+                  </div>
                 </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
+              ))}
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
 
-        {/* Final CTA */}
-        <section className="relative bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 py-16 text-white md:py-24 overflow-hidden">
-          {/* Animated background elements */}
-          <div className="absolute inset-0">
-            <motion.div
-              className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#0966c2]/10 rounded-full blur-3xl"
-              animate={{
-                scale: [1, 1.2, 1],
-                x: [0, 50, 0],
-                y: [0, 30, 0],
-              }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-            <motion.div
-              className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#0966c2]/10 rounded-full blur-3xl"
-              animate={{
-                scale: [1, 1.3, 1],
-                x: [0, -50, 0],
-                y: [0, -30, 0],
-              }}
-              transition={{
-                duration: 10,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          </div>
-          <div className="container relative z-10 mx-auto max-w-4xl px-6 text-center lg:px-8">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-3xl font-bold md:text-4xl lg:text-5xl"
+      {/* When to Hire Which */}
+      <section className="bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-4xl px-6">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <motion.h2
+              variants={itemVariants}
+              className="mb-4 text-center font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
             >
-              {finalCtaHeadline}
+              {v('sectionWhenHeading', 'When to Hire Which')}
+            </motion.h2>
+            <motion.p variants={itemVariants} className="mb-10 text-center text-neutral-600">
+              {v('sectionWhenSubheading', "Both roles are real. The mistake is picking the wrong one for the gap you actually have.")}
+            </motion.p>
+            <div className="space-y-8">
+              {whenToHire.map((item, i) => (
+                <motion.div
+                  key={i}
+                  variants={itemVariants}
+                  className="rounded-xl border border-neutral-200 bg-neutral-50 p-6"
+                >
+                  <div className="mb-3 flex items-start gap-4">
+                    <div className="shrink-0 text-3xl font-bold text-blue-200">{item.number}</div>
+                    <h3 className="text-xl font-bold text-neutral-900">{item.title}</h3>
+                  </div>
+                  <p className="text-neutral-700">{item.detail}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* About */}
+      <section className="bg-neutral-50 py-16 md:py-20">
+        <div className="mx-auto max-w-3xl px-6">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="rounded-xl border border-neutral-200 bg-white p-8"
+          >
+            <motion.h2 variants={itemVariants} className="mb-4 font-serif text-2xl font-bold text-neutral-900">
+              About Louie Bernstein
+            </motion.h2>
+            <motion.p variants={itemVariants} className="mb-3 text-neutral-700">
+              {v('aboutBio1', "I'm Louie Bernstein. I have 50 years in business experience, including 22 as a bootstrapped founder. My Fractional Sales Leadership business has been helping founders since 2017.")}
+            </motion.p>
+            <motion.p variants={itemVariants} className="text-neutral-700">
+              {v('aboutBio2', "I have been on both sides of this comparison — hired as a consultant to write the strategy, and hired as a Fractional Sales Leader to build the function. The work that produces revenue is almost never the strategy work. It is the operating cadence, the deal reviews, the rep coaching, and the accountability conversations that happen every week with someone who owns the number alongside the founder.")}
+            </motion.p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-3xl px-6">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <motion.h2
+              variants={itemVariants}
+              className="mb-10 text-center font-serif text-3xl font-bold text-neutral-900"
+            >
+              Frequently Asked Questions
+            </motion.h2>
+            <div className="space-y-6">
+              {displayFaqs.map((faq, i) => (
+                <motion.div
+                  key={i}
+                  variants={itemVariants}
+                  className="rounded-xl border border-neutral-200 bg-neutral-50 p-6"
+                >
+                  <h3 className="mb-3 text-lg font-bold text-neutral-900">{faq.q}</h3>
+                  <p className="text-neutral-600">{faq.a}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Related Reading */}
+      <section className="bg-neutral-50 py-12 md:py-14">
+        <div className="mx-auto max-w-3xl px-6">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <motion.h2 variants={itemVariants} className="mb-6 font-serif text-xl font-bold text-neutral-900">
+              Related Reading
+            </motion.h2>
+            <motion.ul variants={itemVariants} className="space-y-3">
+              <li>
+                <Link href="/fractional-sales-leader-vs-sales-consultant" className="font-semibold text-blue-700 underline underline-offset-2 hover:text-blue-900">
+                  Fractional Sales Leader vs Sales Consultant: A Closer Look at the Sales-Specific Version of This Question →
+                </Link>
+              </li>
+              <li>
+                <Link href="/how-to-build-sales-system-without-full-time-vp" className="font-semibold text-blue-700 underline underline-offset-2 hover:text-blue-900">
+                  How Do I Build a Sales System Without Hiring a Full-Time VP of Sales? →
+                </Link>
+              </li>
+              <li>
+                <Link href="/videos/ask-this-before-hiring-a-fractional-sales-leader" className="font-semibold text-blue-700 underline underline-offset-2 hover:text-blue-900">
+                  Watch: The One Question to Ask Before Hiring a Fractional Sales Leader →
+                </Link>
+              </li>
+            </motion.ul>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 py-10 text-white md:py-14">
+        <div className="relative mx-auto max-w-3xl px-6 text-center">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <motion.h2
+              variants={itemVariants}
+              className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl"
+            >
+              {v('ctaHeadline', "Not Sure Which One You Need? Start With the Audit.")}
             </motion.h2>
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="mx-auto mt-6 max-w-2xl text-xl text-neutral-200"
+              variants={itemVariants}
+              className="mx-auto mb-8 max-w-xl text-lg text-neutral-300"
             >
-              {finalCtaDescription}
+              {v('ctaDescription', "In 30 minutes I can tell you whether your gap is strategic — in which case a consultant or a Sales Audit is the right call — or operational, in which case embedded fractional leadership is what actually moves the number.")}
             </motion.p>
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
-            >
-              <motion.div
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            <motion.div variants={itemVariants}>
+              <Link
+                href={CALENDLY}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block rounded-lg bg-white px-10 py-4 text-lg font-bold text-neutral-900 shadow-xl transition-all hover:scale-105 hover:bg-neutral-100"
               >
-                <Link
-                  href="https://calendly.com/louiebernstein/30minutes"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative inline-flex items-center justify-center rounded-lg bg-white px-10 py-4 text-lg font-semibold text-neutral-900 transition-all duration-300 hover:bg-neutral-100 hover:shadow-2xl hover:shadow-white/20 overflow-hidden"
-                >
-                  <span className="relative z-10">{finalCtaPrimary}</span>
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-neutral-50 to-white opacity-0 group-hover:opacity-100"
-                    initial={false}
-                    transition={{ duration: 0.3 }}
-                  />
-                </Link>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              >
-                <Link
-                  href="/fractional-sales-leader"
-                  className="group relative inline-flex items-center justify-center rounded-lg border-2 border-white px-10 py-4 text-lg font-semibold text-white transition-all duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-xl overflow-hidden"
-                >
-                  <span className="relative z-10">{finalCtaSecondary}</span>
-                  <motion.div
-                    className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100"
-                    initial={false}
-                    transition={{ duration: 0.3 }}
-                  />
-                </Link>
-              </motion.div>
+                Book a Free 30-Minute Call
+              </Link>
             </motion.div>
-          </div>
-        </section>
-      </main>
+          </motion.div>
+        </div>
+      </section>
     </>
-  );
+  )
 }
