@@ -110,6 +110,7 @@ const pages = [
   { name: 'Jumpstart Revenue Acceleration & Quick Wins', href: '/cms/seo-jumpstart-revenue-acceleration', icon: FileTextIcon },
   { name: 'Best Way to Exit Founder-Led Sales', href: '/cms/seo-best-way-to-exit-founder-led-sales', icon: FileTextIcon },
   { name: 'One-Size-Fits-All Playbook? (Customization)', href: '/cms/seo-one-size-fits-all-playbook', icon: FileTextIcon },
+  { name: 'Time With a Fractional Sales Leader', href: '/cms/seo-time-with-fractional-sales-leader', icon: FileTextIcon },
 ]
 
 const collections = [
