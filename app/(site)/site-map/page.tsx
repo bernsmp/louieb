@@ -74,6 +74,7 @@ const FSL_PAGES = [
   { title: "How Can a Fractional Sales Leader Lead My Team If They're Only Here 25 Hours a Week?", url: "/can-fractional-sales-leader-lead-team-part-time" },
   { title: "Will a Fractional Sales Leader Force a One-Size-Fits-All Playbook on My Unique Business?", url: "/will-fractional-sales-leader-force-one-size-fits-all-playbook" },
   { title: "How Much Time Do I Need to Spend With a Fractional Sales Leader?", url: "/how-much-time-do-i-need-to-spend-with-a-fractional-sales-leader" },
+  { title: "What Are the 5 Benefits of a Fractional Sales Leader for a Small Business? (Beyond Revenue)", url: "/5-benefits-fractional-sales-leader-beyond-revenue" },
 ];
 
 const SALES_GUIDES = [
