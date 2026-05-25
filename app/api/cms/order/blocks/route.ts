@@ -11,6 +11,7 @@ const BLOCK_TABLES: Record<string, string> = {
   services: 'services',
   'process-steps': 'process_steps',
   'video-categories': 'video_categories',
+  'newsletter-entries': 'newsletter_entries',
 }
 
 interface OrderItem {

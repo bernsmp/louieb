@@ -120,6 +120,7 @@ const collections = [
   { name: 'Testimonials', href: '/cms/testimonials', icon: QuoteIcon },
   { name: 'FAQ Items', href: '/cms/faq', icon: HelpCircleIcon },
   { name: 'Videos', href: '/cms/videos-list', icon: PlayIcon },
+  { name: 'Newsletter Entries', href: '/cms/newsletter-entries', icon: MailIcon },
   { name: 'Categories', href: '/cms/categories', icon: TagIcon },
   { name: 'Services', href: '/cms/services', icon: GridIcon },
   { name: 'Process Steps', href: '/cms/process', icon: ListIcon },
