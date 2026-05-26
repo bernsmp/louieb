@@ -57,6 +57,8 @@ const PAGE_REGISTRY: { title: string; slug: string; editUrl: string }[] = [
   { title: 'Sales Forecasting for Investors', slug: 'sales-forecasting-for-investors', editUrl: '/cms/seo-sales-forecasting-investors' },
   { title: 'What Is a Sales Audit', slug: 'what-is-a-sales-audit', editUrl: '/cms/seo-sales-audit' },
   { title: 'What Is a Sales Playbook', slug: 'what-is-a-sales-playbook', editUrl: '/cms/seo-sales-playbook' },
+  { title: 'Does My Sales Playbook Cover All the Essentials', slug: 'does-my-sales-playbook-cover-all-the-essentials', editUrl: '/cms/seo-does-my-sales-playbook-cover-all-the-essentials' },
+  { title: 'Sales Playbook Checklist Essentials', slug: 'does-my-sales-playbook-cover-all-the-essentials', editUrl: '/cms/seo-does-my-sales-playbook-cover-all-the-essentials' },
   { title: 'What Is a Sales Cadence', slug: 'what-is-a-sales-cadence', editUrl: '/cms/seo-what-is-a-sales-cadence' },
   { title: 'Sales Compensation Plan', slug: 'how-to-build-sales-compensation-plan', editUrl: '/cms/seo-sales-comp-plan' },
   { title: 'How to Build a Sales Compensation Plan', slug: 'how-to-build-sales-compensation-plan', editUrl: '/cms/seo-sales-comp-plan' },
@@ -199,6 +201,7 @@ const SECTION_URLS: Record<string, string> = {
   seoOneSizeFitsAllPlaybook: '/cms/seo-one-size-fits-all-playbook',
   seoTimeWithFractionalSalesLeader: '/cms/seo-time-with-fractional-sales-leader',
   seoFiveBenefitsFslBeyondRevenue: '/cms/seo-5-benefits-beyond-revenue',
+  seoSalesPlaybookChecklist: '/cms/seo-does-my-sales-playbook-cover-all-the-essentials',
 }
 
 function extractSnippet(text: string, query: string, maxLen = 120): string {

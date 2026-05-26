@@ -320,6 +320,7 @@ const SALES_GUIDES = [
   { title: "5 Warning Signs Your Sales Process Is Breaking", url: "/5-warning-signs-sales-process-breaking" },
   { title: "Is Your Sales Process Actually Hurting Your B2B Growth?", url: "/is-your-sales-process-actually-hurting-your-b2b-growth" },
   { title: "B2B Sales Process of Small Companies", url: "/b2b-sales-process-small-companies" },
+  { title: "Does My Sales Playbook Cover All the Essentials?", url: "/does-my-sales-playbook-cover-all-the-essentials" },
   // Outbound & Lead Gen
   { title: "How to Build an Outbound Sales System From Scratch", url: "/how-to-build-outbound-sales-system" },
   { title: "How to Write a Cold Email That Gets Replies", url: "/how-to-write-a-cold-email" },
