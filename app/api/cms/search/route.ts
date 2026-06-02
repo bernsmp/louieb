@@ -17,6 +17,8 @@ const PAGE_REGISTRY: { title: string; slug: string; editUrl: string }[] = [
   { title: 'What Does a FSL Do Week to Week', slug: 'what-does-fractional-sales-leader-do', editUrl: '/cms/seo-what-fsl-does' },
   { title: 'Is Fractional Sales Leadership Worth It', slug: 'is-fractional-sales-leadership-worth-it', editUrl: '/cms/seo-fsl-worth-it' },
   { title: 'When to Hire a Fractional Sales Leader', slug: 'when-to-hire-a-fractional-sales-leader', editUrl: '/cms/seo-when-to-hire-fsl' },
+  { title: 'How Do I Vet a Fractional Sales Leader', slug: 'how-do-i-vet-a-fractional-sales-leader', editUrl: '/cms/seo-vet-fractional-sales-leader' },
+  { title: '5 Things to Look For Before Hiring a Fractional Sales Leader', slug: 'how-do-i-vet-a-fractional-sales-leader', editUrl: '/cms/seo-vet-fractional-sales-leader' },
   { title: 'How Can a Fractional Sales Leader Lead My Team Part-Time', slug: 'can-fractional-sales-leader-lead-team-part-time', editUrl: '/cms/seo-fractional-leader-part-time' },
   { title: 'FSL Leading Team Part-Time (25 hrs/wk)', slug: 'can-fractional-sales-leader-lead-team-part-time', editUrl: '/cms/seo-fractional-leader-part-time' },
   { title: 'Cost of Fractional VP of Sales', slug: 'cost-of-fractional-vp-sales', editUrl: '/cms/seo-cost-fractional-vp' },
@@ -202,6 +204,7 @@ const SECTION_URLS: Record<string, string> = {
   seoTimeWithFractionalSalesLeader: '/cms/seo-time-with-fractional-sales-leader',
   seoFiveBenefitsFslBeyondRevenue: '/cms/seo-5-benefits-beyond-revenue',
   seoSalesPlaybookChecklist: '/cms/seo-does-my-sales-playbook-cover-all-the-essentials',
+  seoVetFractionalSalesLeader: '/cms/seo-vet-fractional-sales-leader',
 }
 
 function extractSnippet(text: string, query: string, maxLen = 120): string {
