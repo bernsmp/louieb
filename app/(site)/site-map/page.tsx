@@ -273,6 +273,7 @@ const FSL_PAGES = [
   { title: "When Are You Ready to Hire a Fractional CRO?", url: "/when-to-hire-a-fractional-cro" },
   { title: "What Does a Fractional Sales Leader Do Week to Week?", url: "/what-does-fractional-sales-leader-do" },
   { title: "How to Interview a Fractional Sales Leader", url: "/how-to-interview-a-fractional-sales-leader" },
+  { title: "How Do I Vet a Fractional Sales Leader? 5 Things to Look For", url: "/how-do-i-vet-a-fractional-sales-leader" },
   { title: "Fractional Sales Leadership for Private Equity", url: "/fractional-sales-leadership-for-private-equity" },
   { title: "VP of Sales vs. CRO: What's the Difference?", url: "/vp-sales-vs-cro-difference" },
   { title: "When Are You Ready to Hire a CRO?", url: "/when-to-hire-a-cro" },
