@@ -239,6 +239,7 @@ export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await getSiteMapPageData();
+  const ogImage = "https://louiebernstein.com/images/louie-bernstein.png";
   return {
     title: data.seoTitle,
     description: data.seoDescription,
@@ -247,7 +248,23 @@ export async function generateMetadata(): Promise<Metadata> {
       title: data.seoTitle,
       description: data.seoDescription,
       url: "https://louiebernstein.com/site-map",
+      siteName: "Louie Bernstein",
+      locale: "en_US",
       type: "website",
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 1200,
+          alt: "Louie Bernstein — Fractional Sales Leader",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: data.seoTitle,
+      description: data.seoDescription,
+      images: [ogImage],
     },
   };
 }
