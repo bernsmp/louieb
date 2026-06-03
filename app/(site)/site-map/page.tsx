@@ -239,6 +239,7 @@ export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await getSiteMapPageData();
+  const ogImage = "https://louiebernstein.com/images/louie-bernstein.png";
   return {
     title: data.seoTitle,
     description: data.seoDescription,
@@ -247,7 +248,23 @@ export async function generateMetadata(): Promise<Metadata> {
       title: data.seoTitle,
       description: data.seoDescription,
       url: "https://louiebernstein.com/site-map",
+      siteName: "Louie Bernstein",
+      locale: "en_US",
       type: "website",
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 1200,
+          alt: "Louie Bernstein — Fractional Sales Leader",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: data.seoTitle,
+      description: data.seoDescription,
+      images: [ogImage],
     },
   };
 }
@@ -273,6 +290,7 @@ const FSL_PAGES = [
   { title: "When Are You Ready to Hire a Fractional CRO?", url: "/when-to-hire-a-fractional-cro" },
   { title: "What Does a Fractional Sales Leader Do Week to Week?", url: "/what-does-fractional-sales-leader-do" },
   { title: "How to Interview a Fractional Sales Leader", url: "/how-to-interview-a-fractional-sales-leader" },
+  { title: "How Do I Vet a Fractional Sales Leader? 5 Things to Look For", url: "/how-do-i-vet-a-fractional-sales-leader" },
   { title: "Fractional Sales Leadership for Private Equity", url: "/fractional-sales-leadership-for-private-equity" },
   { title: "VP of Sales vs. CRO: What's the Difference?", url: "/vp-sales-vs-cro-difference" },
   { title: "When Are You Ready to Hire a CRO?", url: "/when-to-hire-a-cro" },
