@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   UserCheck,
@@ -506,9 +507,18 @@ export default async function SiteMapPage() {
       {/* Hero */}
       <div className="bg-white border-b border-neutral-200 py-12 mb-12">
         <div className="container mx-auto max-w-6xl px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 mb-5">
-            <Map className="h-4 w-4 text-primary" />
-            <span className="text-sm font-semibold text-primary uppercase tracking-wide">Site Map &amp; Library</span>
+          <div className="flex items-center justify-center gap-4 mb-5">
+            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5">
+              <Map className="h-4 w-4 text-primary" />
+              <span className="text-sm font-semibold text-primary uppercase tracking-wide">Site Map &amp; Library</span>
+            </div>
+            <Image
+              src="/images/louie-bernstein.png"
+              alt="Louie Bernstein"
+              width={48}
+              height={48}
+              className="rounded-full object-cover border-2 border-primary/20 shadow-sm"
+            />
           </div>
           <h1 className="text-4xl font-bold text-neutral-900 md:text-5xl lg:text-6xl">
             {pageData.pageHeadline}
