@@ -400,6 +400,29 @@ const TOOL_PAGES = [
   { title: "Fractional Sales Leader ROI Calculator", url: "/tools/roi-calculator" },
 ];
 
+const COURSE_STEPS = [
+  { title: "Step 1. Putting Together Your Sales Playbook", url: "https://www.youtube.com/watch?v=TlC353ew34o" },
+  { title: "Step 2. Defining Your Ideal Customer Profile (ICP)", url: "https://www.youtube.com/watch?v=RuC-3vjtl6s" },
+  { title: "Step 3. Hiring Your First Salespeople - The right way", url: "https://www.youtube.com/watch?v=Lh-iTnOT0kA" },
+  { title: "Step 4. The Sales Hiring System - Phase Two", url: "https://www.youtube.com/watch?v=WxyaNBgAzrE" },
+  { title: "Step 5. Hiring The Sales Manager - Time for Growth", url: "https://www.youtube.com/watch?v=de2PlUJo6QQ" },
+  { title: "Step 6. How to Set S.M.A.R.T. Goals as a Founder", url: "https://www.youtube.com/watch?v=iTdTet_-jLI" },
+  { title: "Step 7. The Sales Cadence and Cadence Calendar", url: "https://www.youtube.com/watch?v=AOajveUW_Bk" },
+  { title: "Step 8. Sales Prospecting: Cold Calls, Voicemails, Emails", url: "https://www.youtube.com/watch?v=Y8TO8oN3zMk" },
+  { title: "Step 9. Handling Sales Objections", url: "https://www.youtube.com/watch?v=kdx1JmHrMu0" },
+  { title: "Step 10. How To Deliver A Demo Or Presentation", url: "https://www.youtube.com/watch?v=2oZgozs_G5k" },
+  { title: "Step 11. The Simple Close Plan That Works", url: "https://www.youtube.com/watch?v=T0xW3uibr54" },
+  { title: "Step 12. From Chaos to Clarity: Your CRM System", url: "https://www.youtube.com/watch?v=vu6t6GA3KM0" },
+  { title: "Step 13. Creating Prospect Stages For An Accurate Pipeline and Easier Review", url: "https://www.youtube.com/watch?v=ZQPE6O_BuRY" },
+  { title: "Step 14. Sales Training and Role Playing", url: "https://www.youtube.com/watch?v=5gV3zPgY4Pw" },
+  { title: "Step 15. The Weekly Sales Meeting and KPIs", url: "https://www.youtube.com/watch?v=fqPcXLy4V2k" },
+  { title: "Step 16. An Effective Pipeline Review", url: "https://www.youtube.com/watch?v=E4E8iD0ZroE" },
+  { title: "Step 17. Having Meaningful One-on-Ones (1:1) Meetings", url: "https://www.youtube.com/watch?v=idH2pKlLgps" },
+  { title: "Step 18. Growing Your Sales and Business Using LinkedIn", url: "https://www.youtube.com/watch?v=O8PqBL3BR60" },
+  { title: "Step 19. Sales and Marketing Alignment: A Key to Revenue Growth", url: "https://www.youtube.com/watch?v=GXzijAXsIN4" },
+  { title: "Step 20. AI In Sales: The Train Has Left The Station", url: "https://www.youtube.com/watch?v=aw_7Df_iLXc" },
+];
+
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 function CategoryHeader({
@@ -497,6 +520,7 @@ export default async function SiteMapPage() {
     blogPosts.length +
     videos.length +
     newsletterEntries.length +
+    COURSE_STEPS.length +
     5 + // Learn section pages: /articles, /blog, /videos, /newsletter, /course
     1 + // FAQs
     FRAMEWORK_PAGES.length +
@@ -650,10 +674,13 @@ export default async function SiteMapPage() {
               icon={<GraduationCap className="h-5 w-5 text-indigo-600" />}
               title="Course"
               colorClass="border-indigo-600"
-              count={1}
+              count={1 + COURSE_STEPS.length}
             >
               <ul className="space-y-0.5">
                 <PageLink title="Sales Leadership Course" url="/course" />
+                {COURSE_STEPS.map((s) => (
+                  <PageLink key={s.url} title={s.title} url={s.url} />
+                ))}
               </ul>
             </Section>
 
