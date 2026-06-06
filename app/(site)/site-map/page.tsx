@@ -677,7 +677,7 @@ export default async function SiteMapPage() {
               count={1 + COURSE_STEPS.length}
             >
               <ul className="space-y-0.5">
-                <PageLink title="Sales Leadership Course" url="/course" />
+                <PageLink title="The Founder's and CEO's Sales System" url="/course" />
                 {COURSE_STEPS.map((s) => (
                   <PageLink key={s.url} title={s.title} url={s.url} />
                 ))}
