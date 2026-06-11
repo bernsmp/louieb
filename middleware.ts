@@ -10,7 +10,9 @@ const ALLOWED_ORIGINS = [
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
   const isCmsApi =
-    pathname.startsWith('/api/cms') || pathname.startsWith('/api/auth')
+    pathname.startsWith('/api/cms') ||
+    pathname.startsWith('/api/auth') ||
+    pathname.startsWith('/api/ai')
   const isStateChanging = ['POST', 'PUT', 'DELETE', 'PATCH'].includes(
     request.method
   )
@@ -28,5 +30,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/api/cms/:path*', '/api/auth/:path*'],
+  matcher: ['/api/cms/:path*', '/api/auth/:path*', '/api/ai/:path*'],
 }
