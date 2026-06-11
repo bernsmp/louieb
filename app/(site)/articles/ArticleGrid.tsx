@@ -3,10 +3,10 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import type { Article } from '@/lib/markdown'
+import type { ArticleMetadata } from '@/lib/markdown'
 
 interface ArticleGridProps {
-  articles: Article[]
+  articles: { metadata: ArticleMetadata }[]
 }
 
 export function ArticleGrid({ articles }: ArticleGridProps) {

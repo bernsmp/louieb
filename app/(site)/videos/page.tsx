@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { getVideosPageData, getAllVideosWithSlugs, getFeaturedShortsWithSlugs, getVideosPageSEO, getCategories } from "@/lib/cms";
 import VideoGrid from "./VideoGrid";
+import LiteYouTubeEmbed from "./LiteYouTubeEmbed";
 
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getVideosPageSEO();
@@ -67,7 +68,23 @@ export default async function VideosPage() {
   const featuredShorts = await getFeaturedShortsWithSlugs(); // For the grid (max 4)
   const allVideos = await getAllVideosWithSlugs(); // For video card grid
   const categories = await getCategories(); // For filter tabs
-  const videoSchema = generateVideoSchema(allVideos);
+
+  // JSON-LD only for the videos visible on initial load — schema for all 128
+  // videos made the HTML ~1.4MB and slowed tab navigation
+  const schemaVideos = [...featuredShorts, ...allVideos.slice(0, 6)].filter(
+    (v, i, arr) => arr.findIndex((x) => x.videoId === v.videoId) === i
+  );
+  const videoSchema = generateVideoSchema(schemaVideos);
+
+  // The grid only renders title/thumbnail/category — descriptions stay server-side
+  const gridVideos = allVideos.map((v) => ({
+    videoId: v.videoId,
+    title: v.title,
+    slug: v.slug,
+    categoryId: v.categoryId,
+    categoryName: v.categoryName,
+    categorySlug: v.categorySlug,
+  }));
 
   return (
     <>
@@ -100,13 +117,9 @@ export default async function VideosPage() {
                     className="group rounded-2xl border-2 border-[#0966c2] bg-card p-4 shadow-lg transition-all hover:shadow-xl"
                   >
                     <div className="aspect-[9/16] w-full overflow-hidden rounded-lg">
-                      <iframe
-                        src={`https://www.youtube-nocookie.com/embed/${video.videoId}`}
+                      <LiteYouTubeEmbed
+                        videoId={video.videoId}
                         title={video.title}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="h-full w-full"
-                        loading="lazy"
                       />
                     </div>
                     <div className="mt-4">
@@ -134,13 +147,9 @@ export default async function VideosPage() {
                 {pageData.playlistHeadline}
               </h2>
               <div className="aspect-video w-full overflow-hidden rounded-lg">
-                <iframe
-                  src={`https://www.youtube-nocookie.com/embed/videoseries?list=${pageData.playlistId}`}
+                <LiteYouTubeEmbed
+                  playlistId={pageData.playlistId}
                   title="Featured Sales Videos Playlist"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="h-full w-full"
-                  loading="lazy"
                 />
               </div>
             </div>
@@ -150,7 +159,7 @@ export default async function VideosPage() {
               <h3 className="mb-6 font-sans text-2xl font-bold text-foreground">
                 {pageData.individualVideosHeadline}
               </h3>
-              <VideoGrid videos={allVideos} categories={categories} />
+              <VideoGrid videos={gridVideos} categories={categories} />
             </div>
 
             {/* CTA Section */}
