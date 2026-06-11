@@ -1,10 +1,10 @@
 # louiebernstein.com — Claude Code Context
 
 ## What This Site Is
-Personal website for Louie Bernstein, Fractional Sales Leader. Built with Next.js 14, deployed automatically to Vercel via GitHub (push to `main` = live in ~60 seconds).
+Personal website for Louie Bernstein, Fractional Sales Leader. Built with Next.js 15, deployed automatically to Vercel via GitHub (push to `main` = live in ~60 seconds).
 
 ## Tech Stack
-- **Framework:** Next.js 14 (App Router)
+- **Framework:** Next.js 15 (App Router)
 - **Styling:** Tailwind CSS v4 (inline `@theme` in `app/globals.css`, no tailwind.config.ts)
 - **CMS:** Supabase (`site_content` table + `faq_items` table + `testimonials` table)
 - **Deployment:** Vercel (auto-deploys on every push to `main`)
@@ -15,6 +15,20 @@ B2B founders, **$1M–$10M ARR**, stuck in founder-led sales, not ready for a fu
 
 ## Critical Rule: CMS Overrides Code
 Content is stored in Supabase and **overrides** code defaults. If you change copy in a `.tsx` file but it doesn't update live, the Supabase database is overriding it. Always update Supabase directly for content changes.
+
+## Environment Variables
+Local vars live in `D:\louieb\.env.local` (Supabase URL/keys + `USE_SUPABASE_CMS`). Production (Vercel) additionally uses:
+| Var | Used by |
+|-----|---------|
+| `OPENROUTER_API_KEY` | `app/api/ai/suggest` — AI rewrite/alt-text buttons in the CMS |
+| `REVALIDATE_SECRET` | `app/api/revalidate` — webhook cache purge |
+| `GITHUB_TOKEN` / `GITHUB_REPO` | `app/api/cms/articles/*` — articles are edited via the GitHub Contents API |
+
+## Quality Checks
+- `npm run lint` — ESLint over `app components lib middleware.ts` (must exit 0)
+- `npm run typecheck` — `tsc --noEmit`
+- `npm test` — vitest suite in `lib/__tests__/`
+- CI (`.github/workflows/ci.yml`) runs all three plus `next build` on every push/PR
 
 ## How to Make Content Changes
 Use a Node.js script to update Supabase. Env vars live in `D:\louieb\.env.local`. Pattern:

@@ -9,7 +9,7 @@ import { cache } from 'react'
 import { supabaseAdmin, isSupabaseConfigured } from './supabase'
 
 /** Accepts a bare YouTube video ID or any youtube.com / youtu.be URL and returns just the ID. */
-function extractYouTubeId(value: string): string {
+export function extractYouTubeId(value: string): string {
   if (!value) return ''
   const trimmed = value.trim()
   // Already a bare ID (no slashes or dots)
