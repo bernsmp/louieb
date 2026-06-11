@@ -10,10 +10,20 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  // Global ignores: must be a standalone object with ONLY the `ignores` key,
+  // otherwise ESLint treats them as per-config ignores and still lints these paths.
   {
-    ignores: [".next/**", "out/**", "build/**"],
+    ignores: [
+      ".next/**",
+      "out/**",
+      "build/**",
+      ".claude/**",
+      ".clone/**",
+      "node_modules/**",
+      "scripts/**",
+    ],
   },
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     rules: {
       "react/no-unescaped-entities": "off",

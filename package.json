@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint app components lib src middleware.ts"
   },
   "dependencies": {
     "@eslint/eslintrc": "^3.3.1",
