@@ -31,7 +31,9 @@ export async function generateMetadata({
 
   const articleUrl = `${baseUrl}/articles/${slug}`;
   const imageUrl = article.metadata.image
-    ? `${baseUrl}${article.metadata.image}`
+    ? article.metadata.image.startsWith("http")
+      ? article.metadata.image
+      : `${baseUrl}${article.metadata.image}`
     : `${baseUrl}/logo/og-image.png`;
 
   return {
@@ -80,7 +82,9 @@ export default async function ArticlePage({ params }: PageProps) {
 
   const articleUrl = `${baseUrl}/articles/${slug}`;
   const imageUrl = article.metadata.image
-    ? `${baseUrl}${article.metadata.image}`
+    ? article.metadata.image.startsWith("http")
+      ? article.metadata.image
+      : `${baseUrl}${article.metadata.image}`
     : `${baseUrl}/logo/og-image.png`;
 
   // Article schema for rich search results
