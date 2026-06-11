@@ -42,7 +42,8 @@ export default async function ArticlesPage() {
           </p>
         </div>
 
-        <ArticleGrid articles={articles} />
+        {/* Pass metadata only — full article bodies must not be serialized into the page payload */}
+        <ArticleGrid articles={articles.map(({ metadata }) => ({ metadata }))} />
       </div>
     </main>
   );
