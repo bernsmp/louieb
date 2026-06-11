@@ -6,6 +6,7 @@ interface LiteYouTubeEmbedProps {
   videoId?: string
   playlistId?: string
   title: string
+  thumbnailUrl?: string
 }
 
 // Click-to-play facade: renders a thumbnail + play button and only loads the
@@ -14,6 +15,7 @@ export default function LiteYouTubeEmbed({
   videoId,
   playlistId,
   title,
+  thumbnailUrl,
 }: LiteYouTubeEmbedProps) {
   const [activated, setActivated] = useState(false)
 
@@ -39,9 +41,9 @@ export default function LiteYouTubeEmbed({
       aria-label={`Play ${title}`}
       className="group/play relative block h-full w-full cursor-pointer bg-black"
     >
-      {videoId ? (
+      {thumbnailUrl || videoId ? (
         <img
-          src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
+          src={thumbnailUrl || `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
           alt={title}
           loading="lazy"
           className="h-full w-full object-cover"

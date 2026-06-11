@@ -62,12 +62,34 @@ function generateVideoSchema(videos: Array<{ videoId: string; title: string; des
   };
 }
 
+// Resolve a playlist's thumbnail via YouTube oEmbed (playlists have no
+// img.youtube.com URL of their own). Falls back to undefined on any failure,
+// in which case the embed facade shows a dark placeholder.
+async function getPlaylistThumbnail(
+  playlistId: string
+): Promise<string | undefined> {
+  try {
+    const res = await fetch(
+      `https://www.youtube.com/oembed?url=${encodeURIComponent(
+        `https://www.youtube.com/playlist?list=${playlistId}`
+      )}&format=json`,
+      { next: { revalidate: 86400 } }
+    );
+    if (!res.ok) return undefined;
+    const data = (await res.json()) as { thumbnail_url?: string };
+    return data.thumbnail_url;
+  } catch {
+    return undefined;
+  }
+}
+
 export default async function VideosPage() {
   // Fetch videos page data from CMS
   const pageData = await getVideosPageData();
   const featuredShorts = await getFeaturedShortsWithSlugs(); // For the grid (max 4)
   const allVideos = await getAllVideosWithSlugs(); // For video card grid
   const categories = await getCategories(); // For filter tabs
+  const playlistThumbnail = await getPlaylistThumbnail(pageData.playlistId);
 
   // JSON-LD only for the videos visible on initial load — schema for all 128
   // videos made the HTML ~1.4MB and slowed tab navigation
@@ -150,6 +172,7 @@ export default async function VideosPage() {
                 <LiteYouTubeEmbed
                   playlistId={pageData.playlistId}
                   title="Featured Sales Videos Playlist"
+                  thumbnailUrl={playlistThumbnail}
                 />
               </div>
             </div>

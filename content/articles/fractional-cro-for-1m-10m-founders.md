@@ -11,7 +11,7 @@ author: Louie Bernstein
 date: '2026-04-06'
 image: >-
   https://ckffpnbnpvwmecwzovxf.supabase.co/storage/v1/object/public/media/articles/1775657679687_fractional_CRO.png
-category: fractional-sales-leadership
+category: Fractional Sales Leadership
 ---
 
 ## You Built a $1M Business—Closing Every Deal Yourself. That's the Problem.
