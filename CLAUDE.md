@@ -25,7 +25,7 @@ Local vars live in `D:\louieb\.env.local` (Supabase URL/keys + `USE_SUPABASE_CMS
 | `GITHUB_TOKEN` / `GITHUB_REPO` | `app/api/cms/articles/*` — articles are edited via the GitHub Contents API |
 
 ## Quality Checks
-- `npm run lint` — ESLint over `app components lib src middleware.ts` (must exit 0)
+- `npm run lint` — ESLint over `app components lib middleware.ts` (must exit 0)
 - `npm run typecheck` — `tsc --noEmit`
 - `npm test` — vitest suite in `lib/__tests__/`
 - CI (`.github/workflows/ci.yml`) runs all three plus `next build` on every push/PR
