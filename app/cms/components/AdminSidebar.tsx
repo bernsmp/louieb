@@ -114,6 +114,7 @@ const pages = [
   { name: 'One-Size-Fits-All Playbook? (Customization)', href: '/cms/seo-one-size-fits-all-playbook', icon: FileTextIcon },
   { name: 'Time With a Fractional Sales Leader', href: '/cms/seo-time-with-fractional-sales-leader', icon: FileTextIcon },
   { name: 'Sales Playbook Checklist (Essentials)', href: '/cms/seo-does-my-sales-playbook-cover-all-the-essentials', icon: FileTextIcon },
+  { name: 'Am I Ready to Hire a VP of Sales?', href: '/cms/seo-am-i-ready-to-hire-a-vp-of-sales-yet', icon: FileTextIcon },
 ]
 
 const collections = [
