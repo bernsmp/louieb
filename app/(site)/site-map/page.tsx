@@ -296,6 +296,7 @@ const FSL_PAGES = [
   { title: "VP of Sales vs. CRO: What's the Difference?", url: "/vp-sales-vs-cro-difference" },
   { title: "When Are You Ready to Hire a CRO?", url: "/when-to-hire-a-cro" },
   { title: "The $250K Mistake: Hiring a VP of Sales Too Early", url: "/250k-mistake-vp-sales-hire-too-early" },
+  { title: "Am I Ready to Hire a VP of Sales Yet? 5 Things to Complete First", url: "/am-i-ready-to-hire-a-vp-of-sales-yet" },
   { title: "How to Build a Sales System Without Hiring a Full-Time VP of Sales", url: "/how-to-build-sales-system-without-full-time-vp" },
   { title: "Fractional Sales Leadership for Series A Companies", url: "/fractional-sales-leadership-series-a" },
   { title: "Can Hiring a Fractional Sales Leader Relieve the Stress of Doing Everything?", url: "/can-hiring-a-fractional-sales-leader-relieve-some-of-the-stress-of-doing-everything" },
