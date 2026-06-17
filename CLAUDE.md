@@ -102,10 +102,11 @@ Every new SEO article page must match this spec. **Canonical reference:** `app/(
 Every section uses `variants={containerVariants}` + `initial="hidden"` + `whileInView="visible"` + `viewport={{ once: true }}`. The hero uses `animate="visible"` instead. Variants are defined at the top of the page component (see template for exact values).
 
 ### Colors
-- Primary blue (light bg): `text-blue-700`, `bg-blue-50`, `border-blue-100`, `text-blue-800`
-- Primary blue (dark bg / hero): `text-blue-400`, `text-blue-200`
-- Destructive accent: `text-red-500`, `bg-red-50`, `border-red-100`, `text-red-700`
-- Success accent: `text-green-600`
+- **Per-article accent (rotates):** new SEO articles pick a color family from `prompts/new-article-prompt.md` (emerald / teal / violet / rose / indigo / cyan / fuchsia). Blue is no longer the default — it is overused. Substitute the chosen family for every `blue-*` reference in the slots below.
+- Accent on light bg (substitute family): `text-{color}-700`, `bg-{color}-50`, `border-{color}-100`, `text-{color}-800`
+- Accent on dark bg / hero (substitute family): `text-{color}-400`, `text-{color}-200`
+- Destructive accent (never rotates): `text-red-500`, `bg-red-50`, `border-red-100`, `text-red-700`
+- Success accent (never rotates): `text-green-600`
 - Neutrals: `text-neutral-700` (body), `text-neutral-900` (headings), `bg-neutral-50` (subtle), `bg-white` (sections), `bg-slate-950` (hero), `from-slate-900 to-slate-800` (CTA)
 - Fonts: `font-serif` (Playfair — H1/H2), sans default (Outfit — body)
 
