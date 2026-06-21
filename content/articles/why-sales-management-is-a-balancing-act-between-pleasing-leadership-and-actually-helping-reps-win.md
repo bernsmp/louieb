@@ -1,7 +1,7 @@
 ---
 title: >-
   Why Is Sales Management a Balancing Act Between Pleasing Leadership and
-  Actually Helping Reps Win?
+  Helping Salespeople Win?
 description: >-
   Sales management means answering up to leadership and down to your reps, and
   the two rarely want the same thing. Here's how to hold the balance, why
