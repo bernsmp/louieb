@@ -72,6 +72,8 @@ const PAGE_REGISTRY: { title: string; slug: string; editUrl: string }[] = [
   { title: 'How to Write a Cold Email', slug: 'how-to-write-a-cold-email', editUrl: '/cms/seo-how-to-write-cold-email' },
   { title: 'How to Run a Discovery Call', slug: 'how-to-run-a-discovery-call', editUrl: '/cms/seo-how-to-run-discovery-call' },
   { title: 'Close Deals Without Discounting', slug: 'how-to-close-deals-without-discounting', editUrl: '/cms/seo-close-deals-no-discount' },
+  { title: 'The Most Expensive Mistake Founders Make in Sales Calls', slug: 'most-expensive-mistake-founders-make-in-sales-calls', editUrl: '/cms/seo-most-expensive-mistake-sales-calls' },
+  { title: 'Listening to Reply vs Listening to Understand on Sales Calls', slug: 'most-expensive-mistake-founders-make-in-sales-calls', editUrl: '/cms/seo-most-expensive-mistake-sales-calls' },
   { title: 'Sales Accountability Document', slug: 'sales-accountability-document', editUrl: '/cms/seo-sales-accountability-document' },
   // Hiring & team
   { title: 'How to Hire Your First Sales Rep', slug: 'how-to-hire-first-sales-rep', editUrl: '/cms/seo-hire-first-sales-rep' },
@@ -208,6 +210,7 @@ const SECTION_URLS: Record<string, string> = {
   seoSalesPlaybookChecklist: '/cms/seo-does-my-sales-playbook-cover-all-the-essentials',
   seoVetFractionalSalesLeader: '/cms/seo-vet-fractional-sales-leader',
   seoReadyToHireVpSales: '/cms/seo-am-i-ready-to-hire-a-vp-of-sales-yet',
+  seoExpensiveSalesCallMistake: '/cms/seo-most-expensive-mistake-sales-calls',
 }
 
 function extractSnippet(text: string, query: string, maxLen = 120): string {
