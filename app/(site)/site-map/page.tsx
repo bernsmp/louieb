@@ -348,6 +348,7 @@ const SALES_GUIDES = [
   { title: "How to Build a B2B Referral Program That Works", url: "/b2b-referral-program-sales" },
   { title: "B2B Sales Objection Handling: 7 Common Objections", url: "/b2b-sales-objection-handling" },
   { title: "How to Run a Sales Discovery Call That Moves Deals Forward", url: "/how-to-run-a-discovery-call" },
+  { title: "The Most Expensive Mistake Founders Make in Sales Calls", url: "/most-expensive-mistake-founders-make-in-sales-calls" },
   { title: "How to Close More Deals Without Discounting", url: "/how-to-close-deals-without-discounting" },
   { title: "How to Shorten Your B2B Sales Cycle", url: "/how-to-shorten-sales-cycle" },
   // Sales Leadership & Management
