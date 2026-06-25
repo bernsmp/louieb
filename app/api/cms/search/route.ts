@@ -65,6 +65,8 @@ const PAGE_REGISTRY: { title: string; slug: string; editUrl: string }[] = [
   { title: 'Sales Compensation Plan', slug: 'how-to-build-sales-compensation-plan', editUrl: '/cms/seo-sales-comp-plan' },
   { title: 'How to Build a Sales Compensation Plan', slug: 'how-to-build-sales-compensation-plan', editUrl: '/cms/seo-sales-comp-plan' },
   { title: 'How to Run a Sales Pipeline Review', slug: 'how-to-run-a-sales-pipeline-review', editUrl: '/cms/seo-run-sales-pipeline-review' },
+  { title: 'What Do Pipeline Stages Have to Do With Pipeline Velocity', slug: 'what-do-pipeline-stages-have-to-do-with-pipeline-velocity', editUrl: '/cms/seo-pipeline-stages-velocity' },
+  { title: 'Pipeline Stages and Pipeline Velocity', slug: 'what-do-pipeline-stages-have-to-do-with-pipeline-velocity', editUrl: '/cms/seo-pipeline-stages-velocity' },
   { title: 'Sales Tech Stack for Small Business', slug: 'sales-tech-stack-for-small-business', editUrl: '/cms/seo-sales-tech-stack' },
   { title: 'Sales KPIs for Small Business', slug: 'sales-kpis-for-small-business', editUrl: '/cms/seo-sales-kpis-small-business' },
   { title: 'How to Set Sales Quota', slug: 'how-to-set-sales-quota', editUrl: '/cms/seo-set-sales-quota' },
@@ -211,6 +213,7 @@ const SECTION_URLS: Record<string, string> = {
   seoVetFractionalSalesLeader: '/cms/seo-vet-fractional-sales-leader',
   seoReadyToHireVpSales: '/cms/seo-am-i-ready-to-hire-a-vp-of-sales-yet',
   seoExpensiveSalesCallMistake: '/cms/seo-most-expensive-mistake-sales-calls',
+  seoPipelineStagesVelocity: '/cms/seo-pipeline-stages-velocity',
 }
 
 function extractSnippet(text: string, query: string, maxLen = 120): string {

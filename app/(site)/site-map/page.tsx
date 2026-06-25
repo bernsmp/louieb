@@ -336,6 +336,7 @@ const SALES_GUIDES = [
   { title: "How to Build a Sales Pipeline That Fills Itself", url: "/how-to-build-a-sales-pipeline" },
   { title: "Sales Pipeline Stages: How to Define Them", url: "/sales-pipeline-stages" },
   { title: "How to Run a Sales Pipeline Review", url: "/how-to-run-a-sales-pipeline-review" },
+  { title: "What Do Pipeline Stages Have to Do With Pipeline Velocity?", url: "/what-do-pipeline-stages-have-to-do-with-pipeline-velocity" },
   { title: "No Pipeline: What to Do When Your Pipeline Is Empty", url: "/no-pipeline-what-to-do" },
   { title: "5 Warning Signs Your Sales Process Is Breaking", url: "/5-warning-signs-sales-process-breaking" },
   { title: "Is Your Sales Process Actually Hurting Your B2B Growth?", url: "/is-your-sales-process-actually-hurting-your-b2b-growth" },
