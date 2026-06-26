@@ -64,6 +64,13 @@ const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.
 3. Vercel auto-deploys in ~60 seconds
 4. Hard reload browser (`Cmd+Shift+R`) to bypass cache
 
+## Markdown Article Infographics → Hosted PNGs (standing rule)
+For markdown articles (`content/articles/<slug>.md`), the two in-article infographics must ship as **hosted PNGs**, never inline `<svg>`. Author each graphic as SVG as usual (palette-rotated, same layouts), then rasterize + upload and embed the returned URL via `<img>`. Reasons: Louie copies the PNGs straight into LinkedIn, and the CMS WYSIWYG mangles inline SVG on save.
+
+- **Helper:** `node scripts/svg-to-png.js <input.svg> <name> [scale]` — renders the SVG at 2× (default) via `sharp`, uploads to the Supabase `media/articles/` bucket, prints the public URL. Needs `.env.local` (loads it automatically).
+- **Embed:** `<img src="<url>" alt="<describe the graphic>" style="width:100%;display:block;border-radius:10px;" />` inside the same bordered/shadowed wrapper `<div>` the SVG used.
+- Keep the SVG source out of the committed `.md` — only the `<img>` ships.
+
 ════════════════════════════════════════════════════════════════
 ## Standing SEO Article Template Spec
 ════════════════════════════════════════════════════════════════
