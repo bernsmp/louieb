@@ -139,5 +139,5 @@ No pitch. No pressure. Just a real conversation about your sales situation.
 
 Louie Bernstein is a Fractional Sales Leader with 50 years in business experience, including 22 as a bootstrapped founder. Since 2016, he has been helping $1M–$10M ARR founders build repeatable sales systems, playbooks, and teams so they can escape founder-led sales.
 
-* [LinkedIn](https://www.linkedin.com/in/louiebernstein)
+* [LinkedIn](https://www.linkedin.com/in/sales-processes/)
 * [Subscribe to The Sunday Starter Newsletter](https://www.louiebernstein.com/newsletter)
