@@ -540,7 +540,7 @@ Either way, act now.&nbsp;<p><a href="https://louiebernstein.com/articles/what-i
 
 Louie Bernstein is a Fractional Sales Leader with 50 years of sales experience helping $1M-$10M ARR companies recover from failed VP hires and build scalable sales systems. He founded MindIQ (INC 500 company) and has helped dozens of founders navigate the painful transition from founder-led sales to professional sales leadership.
 
-* [LinkedIn](https://www.linkedin.com/in/louiebernstein)
+* [LinkedIn](https://www.linkedin.com/in/sales-processes/)
 * [Subscribe to The Sunday Starter Newsletter](https://www.louiebernstein.com/newsletter)
 * [My YouTube Channel](https://www.youtube.com/@LouieBernstein)
 

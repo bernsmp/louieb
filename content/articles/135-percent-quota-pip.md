@@ -285,7 +285,7 @@ Louie Bernstein is a Fractional Sales Leader and LinkedIn Top Voice with 9+ year
 
 Connect with Louie:
 
-*   [LinkedIn](https://www.linkedin.com/in/louiebernstein)
+*   [LinkedIn](https://www.linkedin.com/in/sales-processes/)
 *   [Schedule a Consultation](https://calendly.com/louiebernstein/30minutes)
 *   [Subscribe to The Sunday Starter Newsletter](https://www.louiebernstein.com/newsletter)
 
