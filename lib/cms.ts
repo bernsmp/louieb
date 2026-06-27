@@ -693,7 +693,7 @@ Whatever guarantees, warranties, testimonials, references, etc. you have, make s
 This is trust at its most basic and important level.
 
 Have you witnessed this?`,
-        linkedInUrl: 'https://www.linkedin.com/in/louiebernstein/',
+        linkedInUrl: 'https://www.linkedin.com/in/sales-processes/',
         publishedDate: '2025-01-15',
         author: 'Louie Bernstein',
         tags: ['sales psychology', 'buyer behavior', 'trust'],

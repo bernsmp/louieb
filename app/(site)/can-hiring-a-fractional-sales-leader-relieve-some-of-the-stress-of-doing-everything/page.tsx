@@ -684,7 +684,7 @@ export default function CanFslRelieveStressPage() {
             )}
           </p>
           <p className="text-sm">
-            <a href="https://www.linkedin.com/in/louiebernstein" target="_blank" rel="noopener noreferrer" className={linkClass}>
+            <a href="https://www.linkedin.com/in/sales-processes/" target="_blank" rel="noopener noreferrer" className={linkClass}>
               LinkedIn
             </a>
             <span className="mx-2 text-neutral-400">|</span>
