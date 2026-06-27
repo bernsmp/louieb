@@ -99,7 +99,7 @@ export default async function ArticlePage({ params }: PageProps) {
     author: {
       "@type": "Person",
       name: article.metadata.author,
-      url: "https://www.linkedin.com/in/louiebernstein",
+      url: "https://www.linkedin.com/in/sales-processes/",
       jobTitle: "Fractional Sales Leader",
     },
     publisher: {
