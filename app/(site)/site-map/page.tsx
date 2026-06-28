@@ -278,6 +278,7 @@ const FSL_PAGES = [
   { title: "Fractional Sales Leader vs. Sales Coach", url: "/fractional-sales-leader-vs-sales-coach" },
   { title: "Fractional Sales Leader vs. Sales Consultant", url: "/fractional-sales-leader-vs-sales-consultant" },
   { title: "What to Expect in the First 90 Days with a Fractional Sales Leader", url: "/fractional-sales-leader-first-90-days" },
+  { title: "What Does 90-Day Sales Planning Have to Do With Fractional Sales Management?", url: "/90-day-sales-planning-fractional-sales-management" },
   { title: "Fractional Sales Leadership ROI: What Does the Investment Return?", url: "/fractional-sales-leadership-roi" },
   { title: "Fractional CRO for $1M–$10M Founders", url: "/fractional-cro-for-1m-10m-founders" },
   { title: "Fractional CRO Pricing", url: "/fractional-cro-pricing" },
