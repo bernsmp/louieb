@@ -88,6 +88,8 @@ const PAGE_REGISTRY: { title: string; slug: string; editUrl: string }[] = [
   { title: 'The $250K Mistake: Hiring VP of Sales Too Early', slug: '250k-mistake-vp-sales-hire-too-early', editUrl: '/cms/seo-250k-vp-sales-mistake' },
   { title: 'Am I Ready to Hire a VP of Sales Yet', slug: 'am-i-ready-to-hire-a-vp-of-sales-yet', editUrl: '/cms/seo-am-i-ready-to-hire-a-vp-of-sales-yet' },
   { title: '5 Things to Complete Before Hiring a VP of Sales', slug: 'am-i-ready-to-hire-a-vp-of-sales-yet', editUrl: '/cms/seo-am-i-ready-to-hire-a-vp-of-sales-yet' },
+  { title: '90-Day Sales Planning & Fractional Sales Management', slug: '90-day-sales-planning-fractional-sales-management', editUrl: '/cms/seo-90-day-sales-planning' },
+  { title: 'What to Look For When Hiring a Fractional Sales Leader (90-Day Plan)', slug: '90-day-sales-planning-fractional-sales-management', editUrl: '/cms/seo-90-day-sales-planning' },
   // Sales team problems
   { title: 'Sales Team Not Hitting Quota', slug: 'sales-team-not-hitting-quota', editUrl: '/cms/seo-sales-team-not-hitting-quota' },
   { title: 'Why Your Sales Team Isn\'t Hitting Quota', slug: 'why-your-sales-team-isnt-hitting-quota', editUrl: '/cms/seo-sales-team-not-hitting-quota' },
@@ -214,6 +216,7 @@ const SECTION_URLS: Record<string, string> = {
   seoReadyToHireVpSales: '/cms/seo-am-i-ready-to-hire-a-vp-of-sales-yet',
   seoExpensiveSalesCallMistake: '/cms/seo-most-expensive-mistake-sales-calls',
   seoPipelineStagesVelocity: '/cms/seo-pipeline-stages-velocity',
+  seo90DaySalesPlanningFractional: '/cms/seo-90-day-sales-planning',
 }
 
 function extractSnippet(text: string, query: string, maxLen = 120): string {
