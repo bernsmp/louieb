@@ -176,11 +176,11 @@ export default function EditArticlePage({ params }: { params: Promise<{ slug: st
             onChange={(e) => setForm({ ...form, category: e.target.value })}
           >
             <option value="">No Category</option>
-            <option value="fractional-sales-leadership">Fractional Sales Leadership</option>
-            <option value="hiring">Hiring</option>
-            <option value="founder-growth">Founder Growth</option>
-            <option value="sales-management">Sales Management</option>
-            <option value="featured">Featured</option>
+            <option value="Fractional Sales Leadership">Fractional Sales Leadership</option>
+            <option value="Hiring">Hiring</option>
+            <option value="Founder Growth">Founder Growth</option>
+            <option value="Sales Management">Sales Management</option>
+            <option value="Featured">Featured</option>
           </select>
         </div>
 
