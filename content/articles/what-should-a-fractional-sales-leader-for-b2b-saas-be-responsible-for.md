@@ -13,7 +13,7 @@ keywords: >-
 author: Louie Bernstein
 date: '2026-07-04'
 image: >-
-  https://ckffpnbnpvwmecwzovxf.supabase.co/storage/v1/object/public/media/articles/1783209290410_fsl_responsibilities_hero.png
+  https://ckffpnbnpvwmecwzovxf.supabase.co/storage/v1/object/public/media/articles/1783211664639_fsl_responsibilities_thumb.png
 category: Fractional Sales Leadership
 palette: teal-amber
 ---
