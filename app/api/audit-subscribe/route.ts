@@ -56,8 +56,28 @@ export async function POST(request: Request) {
     const emailAddress = email.trim();
     const name = typeof firstName === "string" ? firstName.trim() : "";
 
-    // 1) Subscribe to the form. This is what triggers the double opt-in
-    //    confirmation email and the "joins form -> sequence" automation.
+    // 1) Create/upsert the subscriber. Kit v4 requires the subscriber to
+    //    exist before they can be added to a form (the form endpoint 404s
+    //    otherwise). Upserts on email_address, so retakes don't duplicate.
+    const createRes = await fetch(`${KIT_BASE}/subscribers`, {
+      method: "POST",
+      headers: kitHeaders(),
+      body: JSON.stringify({
+        email_address: emailAddress,
+        ...(name ? { first_name: name } : {}),
+        // Requires a custom field named exactly "audit_score" in Kit;
+        // Kit silently drops unknown fields if it doesn't exist yet.
+        fields: { audit_score: String(score ?? "") },
+      }),
+    });
+    if (!createRes.ok) {
+      const detail = await createRes.text().catch(() => "");
+      console.error("Kit subscriber create failed:", createRes.status, detail);
+      return NextResponse.json({ error: "Subscription failed." }, { status: 502 });
+    }
+
+    // 2) Add the subscriber to the form — this is what fires the
+    //    "joins form -> add to sequence" automation in Kit.
     const formRes = await fetch(
       `${KIT_BASE}/forms/${process.env.KIT_FORM_ID}/subscribers`,
       {
@@ -71,25 +91,6 @@ export async function POST(request: Request) {
       const detail = await formRes.text().catch(() => "");
       console.error("Kit form subscribe failed:", formRes.status, detail);
       return NextResponse.json({ error: "Subscription failed." }, { status: 502 });
-    }
-
-    // 2) Upsert the profile with first name + audit score. Kit upserts on
-    //    email_address, so this enriches the subscriber created in step 1.
-    //    Non-fatal: the subscription already succeeded.
-    const profileRes = await fetch(`${KIT_BASE}/subscribers`, {
-      method: "POST",
-      headers: kitHeaders(),
-      body: JSON.stringify({
-        email_address: emailAddress,
-        ...(name ? { first_name: name } : {}),
-        // Requires a custom field named exactly "audit_score" in Kit;
-        // Kit silently drops unknown fields if it doesn't exist yet.
-        fields: { audit_score: String(score ?? "") },
-      }),
-    });
-    if (!profileRes.ok) {
-      const detail = await profileRes.text().catch(() => "");
-      console.error("Kit profile upsert failed:", profileRes.status, detail);
     }
 
     // 3) Apply the band tag for segmentation (non-fatal if it fails).

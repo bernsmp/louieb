@@ -317,7 +317,7 @@ export default function FounderSalesTrapAudit() {
             <a className="fsta-cta" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
               Book your free 30-minute call
             </a>
-            <p className="fsta-check-email">Now check your email to confirm your subscription.</p>
+            <p className="fsta-check-email">Your results and next steps are on their way to your inbox.</p>
           </div>
         </div>
       )}
