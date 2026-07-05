@@ -18,7 +18,8 @@ const CALENDLY_URL = "https://calendly.com/louiebernstein/30minutes";
 
 type Answer = "yes" | "no";
 
-type Question = { id: number; text: string };
+// reverse: true means "No" is the healthy answer and earns the point.
+type Question = { id: number; text: string; reverse?: boolean };
 type Section = { title: string; questions: Question[] };
 
 const SECTIONS: Section[] = [
@@ -26,7 +27,7 @@ const SECTIONS: Section[] = [
     title: "Founder-Led Sales Dependency",
     questions: [
       { id: 1, text: "I could take a two week vacation right now and sales would keep closing without me." },
-      { id: 2, text: "I am not the person who closes most of our deals." },
+      { id: 2, text: "I am the person who closes most of our deals.", reverse: true },
       { id: 3, text: "My calendar has more strategy time than sales calls most weeks." },
       { id: 4, text: "If I got sick tomorrow, someone else could run my sales meetings." },
     ],
@@ -54,22 +55,23 @@ const SECTIONS: Section[] = [
     questions: [
       { id: 13, text: "I closed at least ten sales myself before I hired anyone." },
       { id: 14, text: "When I hire salespeople, I hire two at a time, not one." },
-      { id: 15, text: "Every sales role has a written Position Contract that spells out what success looks like." },
+      { id: 15, text: "Every sales role has a written Accountability Document that spells out what success looks like." },
       { id: 16, text: "I have an onboarding plan ready before a new hire's first day." },
     ],
   },
   {
     title: "Accountability and Systems",
     questions: [
-      { id: 17, text: "Every salesperson on my team has a written Accountabilities Document." },
-      { id: 18, text: "I hold pipeline reviews on a consistent schedule, not sporadically." },
+      { id: 17, text: "Every salesperson knows their closing percentage." },
+      { id: 18, text: "My salespeople hit their weekly activity targets without me chasing them." },
       { id: 19, text: "My CRM has more useful data in it than I can remember myself." },
       { id: 20, text: "I know my sales numbers cold without pulling a report." },
     ],
   },
 ];
 
-const TOTAL_QUESTIONS = SECTIONS.reduce((n, s) => n + s.questions.length, 0);
+const ALL_QUESTIONS = SECTIONS.flatMap((s) => s.questions);
+const TOTAL_QUESTIONS = ALL_QUESTIONS.length;
 
 type Band = { key: string; title: string; body: string };
 
@@ -108,7 +110,11 @@ export default function FounderSalesTrapAudit() {
   const answeredCount = Object.keys(answers).length;
   const allAnswered = answeredCount === TOTAL_QUESTIONS;
   const score = useMemo(
-    () => Object.values(answers).filter((a) => a === "yes").length,
+    () =>
+      ALL_QUESTIONS.filter((q) => {
+        const a = answers[q.id];
+        return a !== undefined && a === (q.reverse ? "no" : "yes");
+      }).length,
     [answers]
   );
   const band = useMemo(() => getBand(score), [score]);
