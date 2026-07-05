@@ -633,6 +633,12 @@ const defaultSettings: SiteSettings = {
         href: '/tools/assessment',
         icon: 'Target',
       },
+      {
+        name: 'The Founder Sales Trap Self-Audit',
+        description: 'Answer 20 yes/no questions to find out if you are the bottleneck holding back your own sales growth. Get your score and exactly which sales systems to build next.',
+        href: '/founder-sales-trap-audit',
+        icon: 'BarChart',
+      },
     ],
   },
   roiCalculatorPage: {

@@ -402,6 +402,7 @@ const TOOL_PAGES = [
   { title: "Tools Hub", url: "/tools" },
   { title: "Sales Readiness Assessment", url: "/tools/assessment" },
   { title: "Fractional Sales Leader ROI Calculator", url: "/tools/roi-calculator" },
+  { title: "The Founder Sales Trap Self-Audit", url: "/founder-sales-trap-audit" },
 ];
 
 const COURSE_STEPS = [
