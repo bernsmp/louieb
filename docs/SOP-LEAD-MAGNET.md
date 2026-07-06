@@ -170,7 +170,7 @@ Files per magnet (mirror the audit; canonical paths in parentheses):
 5. **Cross-promotion block.** Add a "Try the Self-Audit" CTA card to the 3–4
    highest-traffic articles; the audit's related topic pages are the cheapest
    traffic source available.
-6. **Draft the sequence with Claude.** The drip emails are still hand-built in
-   Kit. Next magnet: have Claude draft the full sequence (subject lines + body,
-   in Louie's voice from `.claude/reference/` writing samples) so Louie only
-   pastes and schedules.
+6. ~~Draft the sequence with Claude.~~ **Done for the audit** — see
+   `docs/kit-audit-drip-sequence.md` (10 emails / 26 days, paste-ready, Liquid
+   personalization). Do the same for every future magnet: Claude drafts from
+   the writing samples in `.claude/reference/`, Louie pastes and schedules.
