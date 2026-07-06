@@ -123,3 +123,4 @@ Every section uses `variants={containerVariants}` + `initial="hidden"` + `whileI
 - "Add a new FAQ question: [Q] / [A]"
 - "Update the About section copy to..."
 - "Write me a new SEO article titled..." — follow the Standing SEO Article Template Spec above.
+- "Build a new lead magnet / opt-in / self-audit / signup landing page..." — use the `new-lead-magnet` skill (`.claude/skills/new-lead-magnet/SKILL.md`); full SOP in `docs/SOP-LEAD-MAGNET.md`. Canonical example: `/founder-sales-trap-audit`.
