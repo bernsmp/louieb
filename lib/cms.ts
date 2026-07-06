@@ -639,6 +639,12 @@ const defaultSettings: SiteSettings = {
         href: '/founder-sales-trap-audit',
         icon: 'BarChart',
       },
+      {
+        name: 'The ICP Clarity Checklist',
+        description: '15 checks to find out if you actually know who your best customer is. Get your ICP Clarity Score and what to fix first.',
+        href: '/icp-checklist',
+        icon: 'Target',
+      },
     ],
   },
   roiCalculatorPage: {

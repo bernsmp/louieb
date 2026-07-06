@@ -403,6 +403,7 @@ const TOOL_PAGES = [
   { title: "Sales Readiness Assessment", url: "/tools/assessment" },
   { title: "Fractional Sales Leader ROI Calculator", url: "/tools/roi-calculator" },
   { title: "The Founder Sales Trap Self-Audit", url: "/founder-sales-trap-audit" },
+  { title: "The ICP Clarity Checklist", url: "/icp-checklist" },
 ];
 
 const COURSE_STEPS = [

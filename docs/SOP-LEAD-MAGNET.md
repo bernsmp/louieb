@@ -127,11 +127,9 @@ Files per magnet (mirror the audit; canonical paths in parentheses):
 
 ## Phase 5 — Ship
 
-1. Claude commits + pushes (Vercel auto-deploys in ~60s).
-2. **Louie:** Vercel → project → Settings → Environment Variables → **Add
-   Environment Variable** → paste all the `KEY=value` lines Claude provides at
-   once into the Key field (Vercel auto-splits) → Save → Deployments → ⋯ on the
-   newest → **Redeploy**. *The live site cannot reach Kit until this is done.*
+Claude commits + pushes (Vercel auto-deploys in ~60s). Since the shared-route
+refactor (July 2026), magnet config lives in code and the Kit API key is
+already in Vercel — **no Vercel steps for new magnets.**
 
 ## Phase 6 — Emails in Kit (Louie; Claude drafts copy on request)
 
@@ -155,18 +153,18 @@ Files per magnet (mirror the audit; canonical paths in parentheses):
 
 ## Improvements queued for next time
 
-1. **One generic subscribe route.** Today each magnet gets its own API route.
-   A single `/api/lead-magnet-subscribe` with a per-magnet config map (slug →
-   form ID + tags) would mean zero new backend code per magnet.
+1. ~~One generic subscribe route.~~ **Done (July 2026):**
+   `/api/lead-magnet-subscribe` + `components/LeadMagnetQuiz.tsx`. New magnets
+   = one MAGNETS config entry + a content wrapper. Zero env vars.
 2. **Thank-you redirect + conversion tracking.** Fire a GA4 event (or redirect
    to `/thanks-<slug>`) on successful signup so ad/LinkedIn traffic can be
    measured per magnet.
 3. **Custom OG image per magnet.** Louie shares these on LinkedIn; a branded
    1200×630 card (magnet name + score preview) will outperform the generic
    hero image. Use the existing `scripts/svg-to-png.js` pipeline.
-4. **Kit "source" field.** Add a `lead_source` custom field set to the magnet
-   slug, so when there are 5 magnets Louie can see which one acquired each
-   subscriber without relying on tags alone.
+4. ~~Kit "source" field.~~ **Done (July 2026):** every signup gets a
+   `lead_source` custom field (first touch wins) + a "Magnet: …" tag per
+   magnet taken. Compare magnets in Kit via tag counts or Grow → Forms.
 5. **Cross-promotion block.** Add a "Try the Self-Audit" CTA card to the 3–4
    highest-traffic articles; the audit's related topic pages are the cheapest
    traffic source available.

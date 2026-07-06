@@ -132,6 +132,8 @@ const PAGE_REGISTRY: { title: string; slug: string; editUrl: string }[] = [
   // Lead magnets
   { title: 'The Founder Sales Trap Self-Audit', slug: 'founder-sales-trap-audit', editUrl: '/cms/seo-founder-sales-trap-audit' },
   { title: 'Founder Sales Trap Audit (Lead Magnet)', slug: 'founder-sales-trap-audit', editUrl: '/cms/seo-founder-sales-trap-audit' },
+  { title: 'The ICP Clarity Checklist', slug: 'icp-checklist', editUrl: '/cms/seo-icp-checklist' },
+  { title: 'Ideal Customer Profile Checklist (Lead Magnet)', slug: 'icp-checklist', editUrl: '/cms/seo-icp-checklist' },
 ]
 
 // Maps site_content section keys → CMS edit URLs
@@ -221,6 +223,7 @@ const SECTION_URLS: Record<string, string> = {
   seoPipelineStagesVelocity: '/cms/seo-pipeline-stages-velocity',
   seo90DaySalesPlanningFractional: '/cms/seo-90-day-sales-planning',
   seoFounderSalesTrapAudit: '/cms/seo-founder-sales-trap-audit',
+  seoIcpChecklist: '/cms/seo-icp-checklist',
 }
 
 function extractSnippet(text: string, query: string, maxLen = 120): string {

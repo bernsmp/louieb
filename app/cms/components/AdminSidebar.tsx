@@ -62,6 +62,7 @@ const pages = [
   { name: 'The $250K VP of Sales Mistake', href: '/cms/seo-250k-vp-sales-mistake', icon: FileTextIcon },
   { name: 'Build Sales System Without Full-Time VP', href: '/cms/seo-build-sales-system-without-vp', icon: FileTextIcon },
   { name: 'Lead Magnet: Founder Sales Trap Audit', href: '/cms/seo-founder-sales-trap-audit', icon: FileTextIcon },
+  { name: 'Lead Magnet: ICP Clarity Checklist', href: '/cms/seo-icp-checklist', icon: FileTextIcon },
   { name: 'Hidden Costs of Founder-Led Sales', href: '/cms/seo-hidden-costs-founder-led-sales', icon: FileTextIcon },
   { name: 'Why Revenue Feels Unpredictable Monthly', href: '/cms/seo-revenue-unpredictable-monthly', icon: FileTextIcon },
   { name: 'When Ready to Hire First Sales Rep', href: '/cms/seo-when-ready-hire-sales-rep', icon: FileTextIcon },

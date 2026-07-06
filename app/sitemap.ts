@@ -26,6 +26,7 @@ const PRIORITY_OVERRIDES: Record<string, number> = {
   'tools/roi-calculator': 0.8,
   'tools/assessment': 0.7,
   'founder-sales-trap-audit': 0.8,
+  'icp-checklist': 0.8,
   course: 0.8,
   faqs: 0.8,
   newsletter: 0.7,

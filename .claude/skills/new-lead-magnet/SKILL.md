@@ -15,18 +15,21 @@ description: >-
 # New Lead Magnet: Landing Page + Kit Funnel
 
 The full human-readable SOP lives at `docs/SOP-LEAD-MAGNET.md` — read it if
-anything below needs more context. The canonical worked example is the Founder
-Sales Trap Self-Audit; when in doubt, mirror those files exactly:
+anything below needs more context. The canonical worked example is the ICP
+Clarity Checklist (second magnet, built on the shared architecture); when in
+doubt, mirror those files exactly:
 
 | Piece | Canonical file |
 |-------|----------------|
-| Interactive component | `components/FounderSalesTrapAudit.tsx` |
-| API route (Kit) | `app/api/audit-subscribe/route.ts` |
-| Landing page | `app/(site)/founder-sales-trap-audit/page.tsx` + `layout.tsx` |
-| CMS editor | `app/cms/seo-founder-sales-trap-audit/page.tsx` |
-| Seed script | `scripts/seed-founder-sales-trap-audit.js` |
-| Kit setup script | `scripts/kit-audit-setup.js` |
-| Tools-hub card script | `scripts/add-audit-tool-card.js` |
+| Quiz engine (shared, do not fork) | `components/LeadMagnetQuiz.tsx` |
+| Per-magnet content wrapper | `components/IcpClarityChecklist.tsx` |
+| Shared API route (Kit) — add a MAGNETS entry | `app/api/lead-magnet-subscribe/route.ts` |
+| Landing page | `app/(site)/icp-checklist/page.tsx` + `layout.tsx` |
+| CMS editor | `app/cms/seo-icp-checklist/page.tsx` |
+| Seed script | `scripts/seed-icp-checklist.js` |
+| Kit setup script | `scripts/kit-icp-setup.js` |
+| Tools-hub card script | `scripts/add-icp-tool-card.js` |
+| Drip sequence draft | `docs/kit-icp-drip-sequence.md` |
 
 ## Step 1 — Interview Louie (only what's missing)
 
@@ -43,12 +46,15 @@ match terminology to Louie's frameworks (grep `.claude/reference/`).
 1. Ask Louie to create a Form in Kit (it's never displayed — it's only the
    automation trigger) and paste the embed code. Extract the numeric ID:
    `curl -s <embed-js-url> | grep -oE 'forms/[0-9]+'`.
-2. `KIT_API_KEY` is already in `.env.local`. Copy `scripts/kit-audit-setup.js`
-   to `scripts/kit-<magnet>-setup.js`, adapt tag/field names, and run it — it
-   creates tags + custom fields idempotently and prints the env lines.
-3. Env naming for additional magnets: the audit owns the unsuffixed names
-   (`KIT_FORM_ID`, `KIT_TAG_*`); each new magnet uses a suffix
-   (`KIT_FORM_ID_ICP_CHECKLIST` etc.) and its own API route.
+2. `KIT_API_KEY` is already in `.env.local` AND Vercel. Copy
+   `scripts/kit-icp-setup.js` to `scripts/kit-<magnet>-setup.js`, adapt the
+   tag/field names (band tags + a `Magnet: <Name>` source tag + a
+   `<magnet>_score` custom field), and run it — idempotent; prints the tag IDs.
+3. Add one entry to `MAGNETS` in `app/api/lead-magnet-subscribe/route.ts`
+   (formId, scoreField, sourceTagId, bandTags). Form/tag IDs are not secrets —
+   they live in code, which is why new magnets need **zero env vars and zero
+   Vercel changes**. The route already handles `lead_source` (first touch
+   wins) and source tags for every magnet.
 
 ### Kit v4 API facts (violating these cost a debugging cycle each)
 
@@ -66,14 +72,15 @@ match terminology to Louie's frameworks (grep `.claude/reference/`).
 
 ## Step 3 — Build
 
-Create, mirroring the canonical files: component (self-contained styles, navy
-`#1B3A6B` / orange `#E8610A`, first name + email gate, **always show results
-even if the API call fails** — never lose the lead experience), API route
-(server-side only; the key never reaches the browser), landing page (dark
-`HeroBackground` hero, single CTA anchoring to the magnet, 3-card "what you
-get", component in a white rounded card; all copy through
-`useCmsSection('seo<PascalName>')`), `layout.tsx` metadata, CMS editor page,
-seed script — then **run the seed**.
+Create, mirroring the canonical files: a thin content wrapper around
+`LeadMagnetQuiz` (questions + `getBand` + copy only — the engine already
+handles the gate, reverse scoring, graceful Kit failure, and POSTs to the
+shared route with the magnet key), landing page (dark `HeroBackground` hero,
+single CTA anchoring to the magnet, 3-card "what you get", component in a
+white rounded card; all copy through `useCmsSection('seo<PascalName>')`),
+`layout.tsx` metadata, CMS editor page, seed script — then **run the seed**.
+Never fork LeadMagnetQuiz for one magnet's needs — extend it with an optional
+prop so every magnet benefits.
 
 **Register in all seven places** (each was made a rule after being forgotten
 once):
@@ -83,9 +90,9 @@ once):
 3. `app/(site)/site-map/page.tsx` → `TOOL_PAGES`
 4. `app/sitemap.ts` → `PRIORITY_OVERRIDES` (0.8)
 5. `lib/cms.ts` → `toolsPage.tools` default
-6. Supabase `toolsPage` row (adapt `scripts/add-audit-tool-card.js` — CMS
+6. Supabase `toolsPage` row (adapt `scripts/add-icp-tool-card.js` — CMS
    overrides code, so both 5 and 6 are required)
-7. `.env.local` → new env vars
+7. `MAGNETS` config in `app/api/lead-magnet-subscribe/route.ts` (no env vars)
 
 ## Step 4 — Verify (all of it, before pushing)
 
@@ -103,16 +110,16 @@ Commit and push (never ask permission — standing rule). Then give Louie, in
 plain non-technical language:
 
 1. The **full live URL** (`https://louiebernstein.com/<slug>`).
-2. The exact `KEY=value` block to paste into Vercel (Settings → Environment
-   Variables → Add Environment Variable → paste all lines at once into Key →
-   Save → Deployments → ⋯ → Redeploy). The live site cannot reach Kit until
-   he does this.
-3. Kit steps: Sequence (email #1 = welcome/deliver-the-value, **immediate**) +
-   Visual Automation *Joins form → Add to sequence* → on. Offer to draft the
-   sequence copy in his voice (`.claude/reference/` has samples).
-4. Personalization reminders: `{{ subscriber.first_name }}` and custom fields.
-5. Launch test: live signup with a fresh `louie+…` alias; email #1 within ~2
-   minutes; subscriber tagged in Kit.
+2. Kit steps (his ONLY manual work — Kit's API cannot create sequences or
+   automations): paste the drafted Sequence (email #1 = welcome/deliver-the-
+   value, **immediate**) + Visual Automation *Joins form → Add to sequence* →
+   on. Always draft the full drip sequence yourself
+   (`docs/kit-<magnet>-drip-sequence.md`, ~10 emails, Louie's voice from
+   `.claude/reference/`, Liquid personalization with first_name + score field,
+   no unverified stats, LinkedIn URL is /in/sales-processes/).
+3. Launch test: live signup with a fresh `louie+…` alias; email #1 within ~2
+   minutes; subscriber tagged in Kit. No Vercel steps — the API key is already
+   there and magnet config lives in code.
 
 Louie is non-technical: never tell him to run terminal commands — run them for
 him, and give click-by-click paths for anything in Kit or Vercel.
