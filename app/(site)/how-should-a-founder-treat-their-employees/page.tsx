@@ -256,7 +256,7 @@ export default function HowToTreatEmployeesPage() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://ckffpnbnpvwmecwzovxf.supabase.co/storage/v1/object/public/media/articles/1783905963819_circle_of_success_treat_employees.png"
+                src="https://ckffpnbnpvwmecwzovxf.supabase.co/storage/v1/object/public/media/articles/1783907168140_circle_of_success_treat_employees_v2.png"
                 alt="The Circle of Success, a 4-step loop: 1) Your People, 2) Your Customers, 3) Paying you, 4) Repeat. It starts with your people."
                 style={{ width: '100%', display: 'block', borderRadius: '10px' }}
               />
