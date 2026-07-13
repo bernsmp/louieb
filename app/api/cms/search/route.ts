@@ -77,6 +77,8 @@ const PAGE_REGISTRY: { title: string; slug: string; editUrl: string }[] = [
   { title: 'The Most Expensive Mistake Founders Make in Sales Calls', slug: 'most-expensive-mistake-founders-make-in-sales-calls', editUrl: '/cms/seo-most-expensive-mistake-sales-calls' },
   { title: 'Listening to Reply vs Listening to Understand on Sales Calls', slug: 'most-expensive-mistake-founders-make-in-sales-calls', editUrl: '/cms/seo-most-expensive-mistake-sales-calls' },
   { title: 'Sales Accountability Document', slug: 'sales-accountability-document', editUrl: '/cms/seo-sales-accountability-document' },
+  { title: 'How Should a Founder Treat Their Employees', slug: 'how-should-a-founder-treat-their-employees', editUrl: '/cms/seo-how-should-a-founder-treat-their-employees' },
+  { title: 'How to Treat Employees / Sales Culture Formula', slug: 'how-should-a-founder-treat-their-employees', editUrl: '/cms/seo-how-should-a-founder-treat-their-employees' },
   // Hiring & team
   { title: 'How to Hire Your First Sales Rep', slug: 'how-to-hire-first-sales-rep', editUrl: '/cms/seo-hire-first-sales-rep' },
   { title: 'When Ready to Hire First Sales Rep', slug: 'when-ready-hire-first-sales-rep', editUrl: '/cms/seo-when-ready-hire-sales-rep' },
@@ -224,6 +226,7 @@ const SECTION_URLS: Record<string, string> = {
   seo90DaySalesPlanningFractional: '/cms/seo-90-day-sales-planning',
   seoFounderSalesTrapAudit: '/cms/seo-founder-sales-trap-audit',
   seoIcpChecklist: '/cms/seo-icp-checklist',
+  seoHowToTreatEmployees: '/cms/seo-how-should-a-founder-treat-their-employees',
 }
 
 function extractSnippet(text: string, query: string, maxLen = 120): string {

@@ -120,6 +120,7 @@ const pages = [
   { name: 'Am I Ready to Hire a VP of Sales?', href: '/cms/seo-am-i-ready-to-hire-a-vp-of-sales-yet', icon: FileTextIcon },
   { name: 'Most Expensive Mistake in Sales Calls', href: '/cms/seo-most-expensive-mistake-sales-calls', icon: FileTextIcon },
   { name: '90-Day Sales Planning & Fractional Management', href: '/cms/seo-90-day-sales-planning', icon: FileTextIcon },
+  { name: 'How Should a Founder Treat Their Employees?', href: '/cms/seo-how-should-a-founder-treat-their-employees', icon: FileTextIcon },
 ]
 
 const collections = [
