@@ -38,6 +38,11 @@ const sections = {
     takeaway5:
       "This isn't the soft option. It's the most accountable system there is, because the standard is written down, it's fair, and it applies to you too.",
 
+    // Circle of Success graphic
+    circleHeading: 'The Circle of Success',
+    circleSubheading:
+      "It's a loop, and it starts with your people. Treat them well, they treat your customers well, your customers pay you, and that's what lets you reward your people. Then it repeats.",
+
     // The Formula — 5 rules
     sectionRulesHeading: 'The Formula, Step by Step',
     sectionRulesSubheading:

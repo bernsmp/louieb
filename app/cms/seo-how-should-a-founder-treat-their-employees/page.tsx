@@ -26,6 +26,10 @@ export default function SeoHowToTreatEmployeesPage() {
         { name: 'takeaway4', label: 'Key Takeaway 4', type: 'textarea', aiRewrite: true, rows: 3 },
         { name: 'takeaway5', label: 'Key Takeaway 5', type: 'textarea', aiRewrite: true, rows: 3 },
 
+        // Circle of Success graphic
+        { name: 'circleHeading', label: 'Circle of Success: Heading', type: 'text', aiRewrite: true },
+        { name: 'circleSubheading', label: 'Circle of Success: Subheading', type: 'textarea', aiRewrite: true, rows: 3 },
+
         // The Formula — section heading
         { name: 'sectionRulesHeading', label: 'The Formula: Section Heading', type: 'text', aiRewrite: true },
         { name: 'sectionRulesSubheading', label: 'The Formula: Section Subheading', type: 'textarea', rows: 2 },
