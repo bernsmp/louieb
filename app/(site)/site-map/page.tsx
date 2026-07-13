@@ -330,6 +330,7 @@ const SALES_GUIDES = [
   { title: "What Breaks First When a Founder Stops Selling?", url: "/what-breaks-first-when-founder-stops-selling" },
   { title: "Why Do My Salespeople Underperform Without Me Involved?", url: "/why-do-my-salespeople-underperform-without-me" },
   { title: "5 Signs You're Not Ready to Give Up Founder-Led Sales", url: "/5-signs-not-ready-to-give-up-founder-led-sales" },
+  { title: "How Should a Founder Treat Their Employees?", url: "/how-should-a-founder-treat-their-employees" },
   { title: "How Do I Step Out of Day-to-Day Sales Without Losing Revenue?", url: "/how-do-i-step-out-of-day-to-day-sales-without-losing-revenue" },
   // Sales Process & Pipeline
   { title: "How to Build a Sales Process After $1M ARR", url: "/how-to-build-a-sales-process-after-1m-arr" },
