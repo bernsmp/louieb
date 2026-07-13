@@ -231,6 +231,40 @@ export default function HowToTreatEmployeesPage() {
         </div>
       </section>
 
+      {/* Circle of Success graphic */}
+      <section className="bg-white pb-14 md:pb-16">
+        <div className="mx-auto max-w-3xl px-6">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <motion.h2
+              variants={itemVariants}
+              className="mb-3 font-serif text-3xl font-bold text-neutral-900 md:text-4xl"
+            >
+              {v('circleHeading', 'The Circle of Success')}
+            </motion.h2>
+            <motion.p variants={itemVariants} className="mx-auto mb-8 max-w-xl text-neutral-600">
+              {v('circleSubheading', "It's a loop, and it starts with your people. Treat them well, they treat your customers well, your customers pay you, and that's what lets you reward your people. Then it repeats.")}
+            </motion.p>
+            <motion.div
+              variants={itemVariants}
+              className="overflow-hidden rounded-xl border border-neutral-200 bg-white p-4 shadow-sm"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://ckffpnbnpvwmecwzovxf.supabase.co/storage/v1/object/public/media/articles/1783905963819_circle_of_success_treat_employees.png"
+                alt="The Circle of Success, a 4-step loop: 1) Your People, 2) Your Customers, 3) Paying you, 4) Repeat. It starts with your people."
+                style={{ width: '100%', display: 'block', borderRadius: '10px' }}
+              />
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* The Formula — 5 rules */}
       <section className="bg-neutral-50 py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-6">
