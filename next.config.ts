@@ -42,11 +42,6 @@ const nextConfig: NextConfig = {
       // Old-site URLs Google still has indexed — redirect to closest live equivalent
       // so Google replaces the dead entries with the canonical pages.
       {
-        source: '/ceo',
-        destination: '/about',
-        permanent: true,
-      },
-      {
         source: '/fractional',
         destination: '/fractional-sales-leader',
         permanent: true,
