@@ -24,7 +24,8 @@ export default function CeoLandingCmsPage() {
         { name: 'heroSubhead', label: 'Hero: Subhead', type: 'textarea', aiRewrite: true, rows: 3 },
         { name: 'heroAccent', label: 'Hero: Accent Line (orange)', type: 'text', aiRewrite: true },
         { name: 'heroMicrocopy', label: 'Hero: Microcopy under button', type: 'textarea', rows: 2 },
-        { name: 'heroProof', label: 'Hero: Proof Line', type: 'text', aiRewrite: true },
+        { name: 'heroProofQuote', label: 'Hero: Proof Quote (shown in italics)', type: 'text', aiRewrite: true },
+        { name: 'heroProofAttr', label: 'Hero: Proof Attribution', type: 'text' },
 
         // Maybe This Sounds Familiar
         { name: 'familiarHeading', label: 'Sounds Familiar: Heading', type: 'text', aiRewrite: true },

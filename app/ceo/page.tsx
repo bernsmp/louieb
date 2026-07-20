@@ -259,7 +259,8 @@ export default function CeoLandingPage() {
               {v('heroMicrocopy', 'A free 30-minute call. No pitch. We map where you are now and where you want to be. If it is not a fit, I will tell you.')}
             </p>
             <p className="mx-auto mt-5 max-w-2xl border-t border-white/15 pt-5 text-lg font-bold text-white">
-              {v('heroProof', '“You have put together a really powerful system for any small business that wants to grow.” — B2B Investor')}
+              <em>{v('heroProofQuote', '“You have put together a really powerful system for any small business that wants to grow.”')}</em>{' '}
+              {v('heroProofAttr', '— B2B Investor')}
             </p>
           </div>
         </section>

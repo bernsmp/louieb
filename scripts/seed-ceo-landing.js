@@ -41,8 +41,9 @@ const sections = {
     heroAccent: 'Grow and scale your company — for a fraction of the cost of a full-time VP of Sales.',
     heroMicrocopy:
       'A free 30-minute call. No pitch. We map where you are now and where you want to be. If it is not a fit, I will tell you.',
-    heroProof:
-      '“You have put together a really powerful system for any small business that wants to grow.” — B2B Investor',
+    heroProofQuote:
+      '“You have put together a really powerful system for any small business that wants to grow.”',
+    heroProofAttr: '— B2B Investor',
 
     // Maybe This Sounds Familiar
     familiarHeading: 'Maybe This Sounds Familiar',
