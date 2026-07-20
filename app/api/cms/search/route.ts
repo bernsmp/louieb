@@ -6,6 +6,9 @@ import { supabaseAdmin } from '@/lib/supabase'
 const PAGE_REGISTRY: { title: string; slug: string; editUrl: string }[] = [
   // Homepage
   { title: 'Homepage', slug: '', editUrl: '/cms/homepage' },
+  // Landing pages
+  { title: "The Founder's Corner", slug: 'ceo', editUrl: '/cms/ceo' },
+  { title: 'CEO Coaching Landing Page', slug: 'ceo', editUrl: '/cms/ceo' },
   // Core pages
   { title: 'Fractional Sales Leader', slug: 'fractional-sales-leader', editUrl: '/cms/fsl-page' },
   { title: 'Fractional Sales Leader vs Consultant', slug: 'fractional-sales-leader-vs-consultant', editUrl: '/cms/fsl-vs-consultant-page' },
@@ -140,6 +143,8 @@ const PAGE_REGISTRY: { title: string; slug: string; editUrl: string }[] = [
 
 // Maps site_content section keys → CMS edit URLs
 const SECTION_URLS: Record<string, string> = {
+  // Landing pages
+  ceoLanding: '/cms/ceo',
   // Homepage sections
   hero: '/cms/homepage/hero',
   credentials: '/cms/homepage/credentials',

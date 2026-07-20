@@ -11,6 +11,7 @@ interface AdminSidebarProps {
 
 const pages = [
   { name: 'Homepage', href: '/cms/homepage', icon: LayoutIcon },
+  { name: "The Founder's Corner™ (/ceo)", href: '/cms/ceo', icon: FileTextIcon },
   { name: 'FSL Page', href: '/cms/fsl-page', icon: FileTextIcon },
   { name: 'FSL vs Consultant', href: '/cms/fsl-vs-consultant-page', icon: FileTextIcon },
   { name: 'Salesperson Blueprint', href: '/cms/salesperson', icon: BookIcon },
