@@ -12,7 +12,8 @@ export default function CeoLandingCmsPage() {
       backLabel="Dashboard"
       fields={[
         // Shared CTA
-        { name: 'ctaButtonLabel', label: 'Button Label (hero + mid-page Book buttons)', type: 'text' },
+        { name: 'heroCtaButtonLabel', label: 'Button Label (hero / top button)', type: 'text' },
+        { name: 'ctaButtonLabel', label: 'Button Label ("What You Walk Away With" section)', type: 'text' },
         { name: 'finalCtaButtonLabel', label: 'Button Label (final section only)', type: 'text' },
         { name: 'investCtaButtonLabel', label: 'Button Label (Your Investment section only)', type: 'text' },
 

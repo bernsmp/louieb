@@ -72,6 +72,7 @@ export default function CeoLandingPage() {
   const ctaLabel = v('ctaButtonLabel', 'Book Your Discovery Call')
   const finalCtaLabel = v('finalCtaButtonLabel', 'Book My Founder Exit Call')
   const investCtaLabel = v('investCtaButtonLabel', 'Book a 30-Minute Investment in Your Company’s Future')
+  const heroCtaLabel = v('heroCtaButtonLabel', 'Book Your Growth Discovery Call')
 
   const breakItems = [
     v('breakItem1', 'Great reps leave.'),
@@ -253,7 +254,7 @@ export default function CeoLandingPage() {
             <p className="mx-auto mb-5 max-w-2xl text-base font-bold text-[#F6A46A] sm:text-lg">
               {v('heroAccent', 'Grow and scale your company — for a fraction of the cost of a full-time VP of Sales.')}
             </p>
-            <BookButton label={ctaLabel} />
+            <BookButton label={heroCtaLabel} />
             <p className="mx-auto mt-3 max-w-xl text-xs text-blue-200/80 sm:text-sm">
               {v('heroMicrocopy', 'A free 30-minute call. No pitch. We map where you are now and where you want to be. If it is not a fit, I will tell you.')}
             </p>
