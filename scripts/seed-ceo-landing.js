@@ -224,6 +224,7 @@ const sections = {
     priceItem3: 'I work with a small number of founders at a time, so each one gets my focus.',
     priceItem4:
       'Want me building it with you in the trenches, not just coaching? Ask about my full Fractional Sales Leadership Program on the call.',
+    investFootnote: 'Priced for companies where the budget is small but the need is big.',
 
     // When Sales Stops Depending on You
     stopHeading: 'What Happens When Sales Stops Depending on You?',
