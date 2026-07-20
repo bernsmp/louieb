@@ -41,7 +41,7 @@ function BookButton({ label, full = false }: { label: string; full?: boolean }) 
     <button
       type="button"
       onClick={open}
-      className={`inline-flex items-center justify-center rounded-lg bg-[#E8610A] px-8 py-4 text-lg font-bold text-white shadow-lg transition-all hover:scale-[1.03] hover:bg-[#cf560a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8610A] ${full ? 'w-full sm:w-auto' : ''}`}
+      className={`inline-flex max-w-full items-center justify-center rounded-lg bg-[#E8610A] px-8 py-4 text-center text-lg font-bold leading-snug text-white shadow-lg transition-all hover:scale-[1.03] hover:bg-[#cf560a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8610A] ${full ? 'w-full sm:w-auto' : ''}`}
     >
       {label}
     </button>
@@ -71,6 +71,7 @@ export default function CeoLandingPage() {
   const { v, cmsfaqs } = useCmsSection(CMS_SECTION)
   const ctaLabel = v('ctaButtonLabel', 'Book Your Discovery Call')
   const finalCtaLabel = v('finalCtaButtonLabel', 'Book My Founder Exit Call')
+  const investCtaLabel = v('investCtaButtonLabel', 'Book a 30-Minute Investment in Your Company’s Future')
 
   const breakItems = [
     v('breakItem1', 'Great reps leave.'),
@@ -607,7 +608,7 @@ export default function CeoLandingPage() {
             <p className="mb-8 text-lg font-semibold leading-relaxed text-[#1B3A6B]">
               {v('investFootnote', 'Priced for companies where the budget is small but the need is big.')}
             </p>
-            <BookButton label={ctaLabel} />
+            <BookButton label={investCtaLabel} />
           </div>
         </section>
 
