@@ -604,6 +604,9 @@ export default function CeoLandingPage() {
                 ))}
               </ul>
             </div>
+            <p className="mb-8 text-lg font-semibold leading-relaxed text-[#1B3A6B]">
+              {v('investFootnote', 'Priced for companies where the budget is small but the need is big.')}
+            </p>
             <BookButton label={ctaLabel} />
           </div>
         </section>

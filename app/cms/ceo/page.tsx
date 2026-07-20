@@ -186,6 +186,7 @@ export default function CeoLandingCmsPage() {
         { name: 'priceItem2', label: 'Investment: Item 2', type: 'text' },
         { name: 'priceItem3', label: 'Investment: Item 3', type: 'text' },
         { name: 'priceItem4', label: 'Investment: Item 4', type: 'textarea', rows: 2 },
+        { name: 'investFootnote', label: 'Investment: Footnote (below price box)', type: 'text', aiRewrite: true },
 
         // When Sales Stops Depending
         { name: 'stopHeading', label: 'Sales Stops Depending: Heading', type: 'text', aiRewrite: true },
