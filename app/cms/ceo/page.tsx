@@ -14,6 +14,7 @@ export default function CeoLandingCmsPage() {
         // Shared CTA
         { name: 'ctaButtonLabel', label: 'Button Label (hero + mid-page Book buttons)', type: 'text' },
         { name: 'finalCtaButtonLabel', label: 'Button Label (final section only)', type: 'text' },
+        { name: 'investCtaButtonLabel', label: 'Button Label (Your Investment section only)', type: 'text' },
 
         // Hero
         { name: 'heroKicker', label: 'Hero: Kicker (orange, uppercase)', type: 'text', aiRewrite: true },

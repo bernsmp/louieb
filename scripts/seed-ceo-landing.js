@@ -29,6 +29,7 @@ const sections = {
     // Shared CTA
     ctaButtonLabel: 'Book Your Discovery Call',
     finalCtaButtonLabel: 'Book My Founder Exit Call',
+    investCtaButtonLabel: 'Book a 30-Minute Investment in Your Company’s Future',
 
     // Hero
     heroKicker: 'The Founder’s Corner™ · In Your Corner to Help You Grow Your Business',
