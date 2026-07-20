@@ -311,7 +311,7 @@ export default function CeoLandingPage() {
         </section>
 
         {/* If Nothing Changes */}
-        <section className="bg-white px-6 py-14 md:py-20">
+        <section className="bg-white px-6 pt-14 pb-8 md:pt-20 md:pb-10">
           <div className="mx-auto max-w-3xl">
             <h2 className="mb-6 text-2xl font-extrabold text-[#1B3A6B] sm:text-3xl">{v('nothingHeading', 'If Nothing Changes')}</h2>
             <p className="mb-4 text-lg leading-relaxed text-neutral-700">
@@ -340,7 +340,7 @@ export default function CeoLandingPage() {
         </section>
 
         {/* Founder-Led Sales Eventually Breaks Every Company */}
-        <section className="bg-white px-6 py-14 md:py-20">
+        <section className="bg-white px-6 pb-14 pt-4 md:pb-20 md:pt-6">
           <div className="mx-auto max-w-3xl">
             <h2 className="mb-6 text-2xl font-extrabold text-[#1B3A6B] sm:text-3xl">
               {v('breakHeading', 'Founder-Led Sales Eventually Breaks Every Company.')}
@@ -354,8 +354,9 @@ export default function CeoLandingPage() {
                 </li>
               ))}
             </ul>
-            <p className="text-lg leading-relaxed text-neutral-700">{v('breakSlow', 'This happens slowly.')}</p>
-            <p className="mb-4 text-lg leading-relaxed text-neutral-700">{v('breakRealize', 'Until one day you realize:')}</p>
+            <p className="mb-4 text-lg leading-relaxed text-neutral-700">
+              {v('breakSlow', 'This happens slowly.')} {v('breakRealize', 'Until one day you realize:')}
+            </p>
             <p className="text-xl font-bold leading-relaxed text-[#1B3A6B]">{v('breakJob', 'You built yourself a job.')}</p>
             <p className="text-xl font-bold leading-relaxed text-[#1B3A6B]">{v('breakNotCompany', 'Not a company.')}</p>
           </div>
