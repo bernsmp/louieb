@@ -12,7 +12,8 @@ export default function CeoLandingCmsPage() {
       backLabel="Dashboard"
       fields={[
         // Shared CTA
-        { name: 'ctaButtonLabel', label: 'Button Label (all Book buttons)', type: 'text' },
+        { name: 'ctaButtonLabel', label: 'Button Label (hero + mid-page Book buttons)', type: 'text' },
+        { name: 'finalCtaButtonLabel', label: 'Button Label (final section only)', type: 'text' },
 
         // Hero
         { name: 'heroKicker', label: 'Hero: Kicker (orange, uppercase)', type: 'text', aiRewrite: true },
@@ -50,6 +51,21 @@ export default function CeoLandingCmsPage() {
         { name: 'nothingItem3', label: 'If Nothing Changes: Item 3', type: 'text' },
         { name: 'nothingItem4', label: 'If Nothing Changes: Item 4', type: 'text' },
         { name: 'nothingClosing', label: 'If Nothing Changes: Closing line', type: 'textarea', aiRewrite: true, rows: 2 },
+        { name: 'nothingTestimonial', label: 'If Nothing Changes: Testimonial quote', type: 'textarea', rows: 3 },
+        { name: 'nothingTestimonialAttr', label: 'If Nothing Changes: Testimonial attribution', type: 'text' },
+
+        // Founder-Led Sales Eventually Breaks Every Company
+        { name: 'breakHeading', label: 'Breaks Every Company: Heading', type: 'text', aiRewrite: true },
+        { name: 'breakIntro', label: 'Breaks Every Company: Intro line ("Because:")', type: 'text' },
+        { name: 'breakItem1', label: 'Breaks: Item 1', type: 'text' },
+        { name: 'breakItem2', label: 'Breaks: Item 2', type: 'text' },
+        { name: 'breakItem3', label: 'Breaks: Item 3', type: 'text' },
+        { name: 'breakItem4', label: 'Breaks: Item 4', type: 'text' },
+        { name: 'breakItem5', label: 'Breaks: Item 5', type: 'text' },
+        { name: 'breakSlow', label: 'Breaks: "This happens slowly." line', type: 'text' },
+        { name: 'breakRealize', label: 'Breaks: "Until one day you realize:" line', type: 'text' },
+        { name: 'breakJob', label: 'Breaks: "You built yourself a job." line', type: 'text' },
+        { name: 'breakNotCompany', label: 'Breaks: "Not a company." line', type: 'text' },
 
         // Today vs Could Be
         { name: 'compareHeading', label: 'Today vs. Future: Heading', type: 'text', aiRewrite: true },
@@ -129,6 +145,8 @@ export default function CeoLandingCmsPage() {
         { name: 'forYouItem1', label: 'For You: Item 1', type: 'textarea', rows: 2 },
         { name: 'forYouItem2', label: 'For You: Item 2', type: 'textarea', rows: 2 },
         { name: 'forYouItem3', label: 'For You: Item 3', type: 'textarea', rows: 2 },
+        { name: 'forYouItem4', label: 'For You: Item 4', type: 'textarea', rows: 2 },
+        { name: 'forYouFootnote', label: 'For You: Footnote line (bold, bottom of box)', type: 'text', aiRewrite: true },
         { name: 'notForYouHeading', label: 'Not For You Column: Heading', type: 'text' },
         { name: 'notForYouItem1', label: 'Not For You: Item', type: 'textarea', rows: 2 },
 
@@ -137,6 +155,16 @@ export default function CeoLandingCmsPage() {
         { name: 'guessingP1', label: 'Stop Guessing: Paragraph', type: 'textarea', aiRewrite: true, rows: 3 },
         { name: 'guessingQuote', label: 'Stop Guessing: Quote', type: 'textarea', rows: 2 },
         { name: 'guessingQuoteAttr', label: 'Stop Guessing: Quote Attribution', type: 'text' },
+
+        // Picture This: One Year From Now
+        { name: 'pictureHeading', label: 'Picture This: Heading', type: 'text', aiRewrite: true },
+        { name: 'pictureLine1', label: 'Picture This: Line 1', type: 'text' },
+        { name: 'pictureLine2', label: 'Picture This: Line 2', type: 'text' },
+        { name: 'pictureLine3', label: 'Picture This: Line 3', type: 'text' },
+        { name: 'pictureLine4', label: 'Picture This: Line 4', type: 'text' },
+        { name: 'pictureLine5', label: 'Picture This: Line 5', type: 'text' },
+        { name: 'pictureLine6', label: 'Picture This: Line 6', type: 'text' },
+        { name: 'pictureClosing', label: 'Picture This: Closing line (orange)', type: 'text', aiRewrite: true },
 
         // Why Founders Hire Me
         { name: 'whyHireHeading', label: 'Why Hire Me: Heading', type: 'text', aiRewrite: true },

@@ -28,6 +28,7 @@ const sections = {
   ceoLanding: {
     // Shared CTA
     ctaButtonLabel: 'Book Your Discovery Call',
+    finalCtaButtonLabel: 'Book My Founder Exit Call',
 
     // Hero
     heroKicker: 'The Founder’s Corner™ · In Your Corner to Help You Grow Your Business',
@@ -38,7 +39,8 @@ const sections = {
     heroAccent: 'Grow and scale your company — for a fraction of the cost of a full-time VP of Sales.',
     heroMicrocopy:
       'A free 30-minute call. No pitch. We map where you are now and where you want to be. If it is not a fit, I will tell you.',
-    heroProof: 'One founder grew sales 61% in a single year — without adding a single salesperson.',
+    heroProof:
+      '“You have put together a really powerful system for any small business that wants to grow.” — B2B Investor',
 
     // Maybe This Sounds Familiar
     familiarHeading: 'Maybe This Sounds Familiar',
@@ -72,6 +74,22 @@ const sections = {
     nothingItem4: 'Your growth is still capped by your calendar.',
     nothingClosing:
       'Businesses do not scale. Systems scale. The only question is whether you build one this year — or carry the company on your back for another.',
+    nothingTestimonial:
+      '“Louie came in and helped bring together all our sales efforts into a system with a Sales Playbook, realistic pipeline, and defined roles. We are better off from having Louie here.”',
+    nothingTestimonialAttr: '— Ted Alvarado',
+
+    // Founder-Led Sales Eventually Breaks Every Company
+    breakHeading: 'Founder-Led Sales Eventually Breaks Every Company.',
+    breakIntro: 'Because:',
+    breakItem1: 'Great reps leave.',
+    breakItem2: 'Forecasts become fiction.',
+    breakItem3: 'Revenue stalls.',
+    breakItem4: 'Company valuation suffers.',
+    breakItem5: 'You burn out.',
+    breakSlow: 'This happens slowly.',
+    breakRealize: 'Until one day you realize:',
+    breakJob: 'You built yourself a job.',
+    breakNotCompany: 'Not a company.',
 
     // Today vs Could Be
     compareHeading: 'Where You Are Today vs. Where You Could Be',
@@ -158,6 +176,8 @@ const sections = {
     forYouItem2: 'You are a founder at $1M to $10M in revenue, still closing most of the sales yourself.',
     forYouItem3:
       'You want a sounding board for big decisions from someone who has run the play for 50 years.',
+    forYouItem4: 'You are considering an exit, acquisition, or wealth creation.',
+    forYouFootnote: 'Companies dependent on the founder sell for less.',
     notForYouHeading: 'This is not for you if',
     notForYouItem1:
       'You want someone to make the calls for you. I build the system and coach you to run it. I do not sell your product for you.',
@@ -168,6 +188,16 @@ const sections = {
       'One founder was closing every deal himself. One year later, sales were up 61% and the business turned its first profit in years — built on a system, not more hustle.',
     guessingQuote: '“Our sales are far better than where they were a year ago. Great job.”',
     guessingQuoteAttr: '— Kevin Zhao, CEO, ZBSPOS.com',
+
+    // Picture This: One Year From Now
+    pictureHeading: 'Picture this: One Year From Now.',
+    pictureLine1: 'You take a vacation without reading your email.',
+    pictureLine2: 'Your phone doesn’t ring.',
+    pictureLine3: 'Sales meetings happen without you.',
+    pictureLine4: 'Pipeline reviews happen without you.',
+    pictureLine5: 'Revenue still comes in.',
+    pictureLine6: 'For the first time in years...',
+    pictureClosing: 'You feel like a CEO again.',
 
     // Why Founders Hire Me
     whyHireHeading: 'Why Founders Hire Me',

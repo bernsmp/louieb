@@ -70,6 +70,24 @@ export default function CeoLandingPage() {
   useCalendly()
   const { v, cmsfaqs } = useCmsSection(CMS_SECTION)
   const ctaLabel = v('ctaButtonLabel', 'Book Your Discovery Call')
+  const finalCtaLabel = v('finalCtaButtonLabel', 'Book My Founder Exit Call')
+
+  const breakItems = [
+    v('breakItem1', 'Great reps leave.'),
+    v('breakItem2', 'Forecasts become fiction.'),
+    v('breakItem3', 'Revenue stalls.'),
+    v('breakItem4', 'Company valuation suffers.'),
+    v('breakItem5', 'You burn out.'),
+  ]
+
+  const pictureLines = [
+    v('pictureLine1', 'You take a vacation without reading your email.'),
+    v('pictureLine2', 'Your phone doesn’t ring.'),
+    v('pictureLine3', 'Sales meetings happen without you.'),
+    v('pictureLine4', 'Pipeline reviews happen without you.'),
+    v('pictureLine5', 'Revenue still comes in.'),
+    v('pictureLine6', 'For the first time in years...'),
+  ]
 
   const costItems = [
     v('costItem1', 'The deals you miss because you were buried in other deals.'),
@@ -146,6 +164,7 @@ export default function CeoLandingPage() {
     v('forYouItem1', 'You are at an earlier stage, need a sales and business coach now, and cannot afford to hire one yet.'),
     v('forYouItem2', 'You are a founder at $1M to $10M in revenue, still closing most of the sales yourself.'),
     v('forYouItem3', 'You want a sounding board for big decisions from someone who has run the play for 50 years.'),
+    v('forYouItem4', 'You are considering an exit, acquisition, or wealth creation.'),
   ]
 
   const whyHireItems = [
@@ -238,7 +257,7 @@ export default function CeoLandingPage() {
               {v('heroMicrocopy', 'A free 30-minute call. No pitch. We map where you are now and where you want to be. If it is not a fit, I will tell you.')}
             </p>
             <p className="mx-auto mt-5 max-w-2xl border-t border-white/15 pt-5 text-lg font-bold text-white">
-              {v('heroProof', 'One founder grew sales 61% in a single year — without adding a single salesperson.')}
+              {v('heroProof', '“You have put together a really powerful system for any small business that wants to grow.” — B2B Investor')}
             </p>
           </div>
         </section>
@@ -309,6 +328,36 @@ export default function CeoLandingPage() {
             <p className="text-lg font-bold leading-relaxed text-[#1B3A6B]">
               {v('nothingClosing', 'Businesses do not scale. Systems scale. The only question is whether you build one this year — or carry the company on your back for another.')}
             </p>
+            <blockquote className="mt-10 border-l-4 border-[#E8610A] bg-[#F3F5F9] py-6 pl-6 pr-5">
+              <p className="text-lg italic leading-relaxed text-neutral-800">
+                {v('nothingTestimonial', '“Louie came in and helped bring together all our sales efforts into a system with a Sales Playbook, realistic pipeline, and defined roles. We are better off from having Louie here.”')}
+              </p>
+              <footer className="mt-3 text-sm font-semibold text-[#1B3A6B]">
+                {v('nothingTestimonialAttr', '— Ted Alvarado')}
+              </footer>
+            </blockquote>
+          </div>
+        </section>
+
+        {/* Founder-Led Sales Eventually Breaks Every Company */}
+        <section className="bg-white px-6 py-14 md:py-20">
+          <div className="mx-auto max-w-3xl">
+            <h2 className="mb-6 text-2xl font-extrabold text-[#1B3A6B] sm:text-3xl">
+              {v('breakHeading', 'Founder-Led Sales Eventually Breaks Every Company.')}
+            </h2>
+            <p className="mb-4 text-lg leading-relaxed text-neutral-700">{v('breakIntro', 'Because:')}</p>
+            <ul className="mb-8 space-y-3">
+              {breakItems.map((t, i) => (
+                <li key={i} className="flex gap-3 text-lg text-neutral-700">
+                  <span aria-hidden="true" className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#E8610A]" />
+                  <span className="leading-relaxed">{t}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="text-lg leading-relaxed text-neutral-700">{v('breakSlow', 'This happens slowly.')}</p>
+            <p className="mb-4 text-lg leading-relaxed text-neutral-700">{v('breakRealize', 'Until one day you realize:')}</p>
+            <p className="text-xl font-bold leading-relaxed text-[#1B3A6B]">{v('breakJob', 'You built yourself a job.')}</p>
+            <p className="text-xl font-bold leading-relaxed text-[#1B3A6B]">{v('breakNotCompany', 'Not a company.')}</p>
           </div>
         </section>
 
@@ -443,6 +492,9 @@ export default function CeoLandingPage() {
                     </li>
                   ))}
                 </ul>
+                <p className="mt-6 text-xl font-bold text-[#1B3A6B]">
+                  {v('forYouFootnote', 'Companies dependent on the founder sell for less.')}
+                </p>
               </div>
               <div className="rounded-xl border border-neutral-200 bg-white p-7">
                 <h3 className="mb-5 text-xl font-bold text-neutral-500">{v('notForYouHeading', 'This is not for you if')}</h3>
@@ -474,6 +526,23 @@ export default function CeoLandingPage() {
               </p>
               <footer className="mt-3 text-sm font-semibold text-[#1B3A6B]">{v('guessingQuoteAttr', '— Kevin Zhao, CEO, ZBSPOS.com')}</footer>
             </blockquote>
+          </div>
+        </section>
+
+        {/* Picture This: One Year From Now */}
+        <section className="bg-[#1B3A6B] px-6 py-16 text-center text-white md:py-20">
+          <div className="mx-auto max-w-2xl">
+            <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl">
+              {v('pictureHeading', 'Picture this: One Year From Now.')}
+            </h2>
+            <div className="space-y-3">
+              {pictureLines.map((line, i) => (
+                <p key={i} className="text-lg text-blue-100 sm:text-xl">{line}</p>
+              ))}
+            </div>
+            <p className="mt-8 text-2xl font-extrabold text-[#F6A46A] sm:text-3xl">
+              {v('pictureClosing', 'You feel like a CEO again.')}
+            </p>
           </div>
         </section>
 
@@ -608,14 +677,21 @@ export default function CeoLandingPage() {
               style={{ minWidth: '320px', height: '700px' }}
             />
             <div className="mt-6">
-              <BookButton label={ctaLabel} />
+              <BookButton label={finalCtaLabel} />
+            </div>
+            {/* Award badges — INC 500 (left) + LinkedIn Top Voice (right) */}
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-8">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/Inc500.jpg" alt="Inc. 500 Winner" className="h-[76px] w-auto rounded-lg" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/linkedin-top-voice.png" alt="LinkedIn Top Voice" className="h-[76px] w-auto" />
             </div>
           </div>
         </section>
       </main>
 
       {/* Footer — one link home */}
-      <footer className="bg-[#12294d] px-6 py-8 text-center text-sm text-blue-200/70">
+      <footer className="bg-[#12294d] px-6 py-8 text-center text-lg text-blue-200/70">
         <p>
           {v('footerText', '50 years in sales · Founder, INC 500 company ·')}{' '}
           <Link href="https://louiebernstein.com" className="font-semibold text-white underline underline-offset-2 hover:text-[#F6A46A]">
