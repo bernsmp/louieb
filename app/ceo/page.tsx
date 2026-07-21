@@ -48,6 +48,31 @@ function BookButton({ label, full = false }: { label: string; full?: boolean }) 
   )
 }
 
+// CMS fields are edited in a rich-text editor, so they can contain HTML
+// (bold, links, &nbsp;). Render them as HTML and force every link to open
+// in a new tab, so anything Louie formats in the CMS displays correctly.
+// FAQ answers may contain HTML; structured data wants plain text.
+function stripHtml(html: string) {
+  return html
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+function withBlankLinks(html: string) {
+  return html.replace(/<a\s+(?![^>]*\btarget=)/gi, '<a target="_blank" rel="noopener noreferrer" ')
+}
+
+function RichText({ html, className = '' }: { html: string; className?: string }) {
+  return (
+    <span
+      className={`[&_a]:font-semibold [&_a]:text-[#E8610A] [&_a]:underline [&_a]:underline-offset-2 ${className}`}
+      dangerouslySetInnerHTML={{ __html: withBlankLinks(html) }}
+    />
+  )
+}
+
 function Check() {
   return (
     <span
@@ -70,7 +95,7 @@ export default function CeoLandingPage() {
   useCalendly()
   const { v, cmsfaqs } = useCmsSection(CMS_SECTION)
   const ctaLabel = v('ctaButtonLabel', 'Book Your Discovery Call')
-  const finalCtaLabel = v('finalCtaButtonLabel', 'Book My Founder Exit Call')
+  const finalCtaLabel = v('finalCtaButtonLabel', 'Book Your Founder Exit Call')
   const investCtaLabel = v('investCtaButtonLabel', 'Book a 30-Minute Investment in Your Company’s Future')
   const heroCtaLabel = v('heroCtaButtonLabel', 'Book Your Growth Discovery Call')
 
@@ -126,7 +151,7 @@ export default function CeoLandingPage() {
   const walkItems = [
     v('walkItem1', 'A documented sales process that gives you consistency. No more winging it.'),
     v('walkItem2', 'Defined pipeline stages that help you forecast your cash flow.'),
-    v('walkItem3', 'Accountabilities Documents for every role. What and when defined. No surprises.'),
+    v('walkItem3', 'Accountabilities Documents for every role. <strong>What and When</strong> are defined. No surprises.'),
     v('walkItem4', 'A hiring and onboarding system that gets the best candidates, who can produce quickly.'),
     v('walkItem5', 'A strict qualifying standard based on your ICP. Keeps reps from chasing bad deals and wasting their time and YOUR money.'),
     v('walkItem6', 'A weekly operating cadence your team runs.'),
@@ -180,7 +205,7 @@ export default function CeoLandingPage() {
     v('priceItem1', 'One new deal can pay for months of coaching.'),
     v('priceItem2', 'We only start if our first call proves this is a fit.'),
     v('priceItem3', 'I work with a small number of founders at a time, so each one gets my focus.'),
-    v('priceItem4', 'Want me building it with you in the trenches, not just coaching? Ask about my full Fractional Sales Leadership Program on the call.'),
+    v('priceItem4', 'Want me embedded daily with your team building it out? Ask about my full <a href="https://louiebernstein.com/">Fractional Sales Leadership Program</a> on the call.'),
   ]
 
   const stopItems = [
@@ -206,7 +231,7 @@ export default function CeoLandingPage() {
     { q: 'How much of my time does it take?', a: 'One hour a week on our call, plus the work we agree on between sessions. It is built to give you time back, not take it.' },
     { q: 'What happens on the call?', a: 'We look at where your sales stand, name the one thing keeping sales stuck on you, and decide together if this is a fit. No pitch. If it is not right, I will tell you.' },
     { q: 'Can I cancel?', a: 'The first 12 weeks build the foundation, so I ask for that commitment. After that it is month to month.' },
-    { q: 'What if I want you more hands-on?', a: 'Ask about my full Fractional Sales Leadership Program, where I build it with you week to week.' },
+    { q: 'What if I want you more hands-on?', a: 'Ask about my full <a href="https://louiebernstein.com/">Fractional Sales Leadership Program</a>, where I embed and build it with you week to week.' },
   ]
   const displayFaqs = cmsfaqs(6, defaultFaqs)
 
@@ -216,7 +241,7 @@ export default function CeoLandingPage() {
     mainEntity: displayFaqs.map((faq) => ({
       '@type': 'Question',
       name: faq.q,
-      acceptedAnswer: { '@type': 'Answer', text: faq.a },
+      acceptedAnswer: { '@type': 'Answer', text: stripHtml(faq.a) },
     })),
   }
 
@@ -249,18 +274,18 @@ export default function CeoLandingPage() {
               </span>
             </h1>
             <p className="mx-auto mb-4 max-w-2xl text-base text-blue-100 sm:text-lg">
-              {v('heroSubhead', 'In 12 weeks, turn founder-led sales into a system your team can run — so revenue keeps coming when you step away, and you get your time, your focus, and your life back.')}
+              <RichText html={v('heroSubhead', 'In 12 weeks, turn founder-led sales into a system your team can run — so revenue keeps coming when you step away, and you get your time, your focus, and your life back.')} />
             </p>
             <p className="mx-auto mb-5 max-w-2xl text-base font-bold text-[#F6A46A] sm:text-lg">
               {v('heroAccent', 'Grow and scale your company — for a fraction of the cost of a full-time VP of Sales.')}
             </p>
             <BookButton label={heroCtaLabel} />
             <p className="mx-auto mt-3 max-w-xl text-xs text-blue-200/80 sm:text-sm">
-              {v('heroMicrocopy', 'A free 30-minute call. No pitch. We map where you are now and where you want to be. If it is not a fit, I will tell you.')}
+              <RichText html={v('heroMicrocopy', 'A free 30-minute call. No pitch. We map where you are now and where you want to be. If it is not a fit, I will tell you.')} />
             </p>
             <p className="mx-auto mt-5 max-w-2xl border-t border-white/15 pt-5 text-lg font-bold text-white">
               <em>{v('heroProofQuote', '“You have put together a really powerful system for any small business that wants to grow.”')}</em>{' '}
-              {v('heroProofAttr', '— B2B Investor')}
+              <RichText html={v('heroProofAttr', '— B2B Investor')} />
             </p>
           </div>
         </section>
@@ -270,20 +295,20 @@ export default function CeoLandingPage() {
           <div className="mx-auto max-w-3xl">
             <h2 className="mb-6 text-2xl font-extrabold text-[#1B3A6B] sm:text-3xl">{v('familiarHeading', 'Maybe This Sounds Familiar')}</h2>
             <p className="mb-4 text-lg leading-relaxed text-neutral-700">
-              {v('familiarP1', 'You wake up thinking about sales. You go to bed thinking about sales. You cannot remember the last vacation where you did not check your phone. You know you need systems. You do not know where to start.')}
+              <RichText html={v('familiarP1', 'You wake up thinking about sales. You go to bed thinking about sales. You cannot remember the last vacation where you did not check your phone. You know you need systems. You do not know where to start.')} />
             </p>
             <p className="mb-4 text-lg leading-relaxed text-neutral-700">
-              {v('familiarP2', 'And in the back of your mind, the same questions sit there. What happens if I get sick? What happens if I want to step away for a month? What happens if I want to sell this business someday?')}
+              <RichText html={v('familiarP2', 'And in the back of your mind, the same questions sit there. What happens if I get sick? What happens if I want to step away for a month? What happens if I want to sell this business someday?')} />
             </p>
             <p className="mb-8 text-lg leading-relaxed text-neutral-700">
-              {v('familiarP3', 'If that lands, you are not failing. You are still the system. Let us fix that.')}
+              <RichText html={v('familiarP3', 'If that lands, you are not failing. You are still the system. Let us fix that.')} />
             </p>
             <blockquote className="border-l-4 border-[#E8610A] bg-[#F3F5F9] py-5 pl-6 pr-5">
               <p className="text-lg italic leading-relaxed text-neutral-800">
-                {v('familiarQuote', '“We now had everyone working off the same playbook, and it gave us consistency. Results were much easier to measure.”')}
+                <RichText html={v('familiarQuote', '“We now had everyone working off the same playbook, and it gave us consistency. Results were much easier to measure.”')} />
               </p>
               <footer className="mt-3 text-sm font-semibold text-[#1B3A6B]">
-                {v('familiarQuoteAttr', '— Neal Reynolds, CEO, BankMarketingCenter.com')}
+                <RichText html={v('familiarQuoteAttr', '— Neal Reynolds, CEO, BankMarketingCenter.com')} />
               </footer>
             </blockquote>
           </div>
@@ -296,19 +321,19 @@ export default function CeoLandingPage() {
               {v('costHeading', 'Founder-Led Sales Is Costing You More Than You Think')}
             </h2>
             <p className="mb-4 text-lg leading-relaxed text-neutral-700">
-              {v('costP1', 'Do the math on your own time. If an hour of your time is worth $300, and you spend 20 hours a week running and closing sales, that is more than $300,000 a year — gone.')}
+              <RichText html={v('costP1', 'Do the math on your own time. If an hour of your time is worth $300, and you spend 20 hours a week running and closing sales, that is more than $300,000 a year — gone.')} />
             </p>
-            <p className="mb-4 text-lg leading-relaxed text-neutral-700">{v('costP2', 'And that is before the real costs:')}</p>
+            <p className="mb-4 text-lg leading-relaxed text-neutral-700"><RichText html={v('costP2', 'And that is before the real costs:')} /></p>
             <ul className="mb-6 space-y-3">
               {costItems.map((t, i) => (
                 <li key={i} className="flex gap-3 text-lg text-neutral-700">
                   <span aria-hidden="true" className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#E8610A]" />
-                  <span className="leading-relaxed">{t}</span>
+                  <RichText html={t} className="leading-relaxed" />
                 </li>
               ))}
             </ul>
             <p className="text-lg font-bold leading-relaxed text-[#1B3A6B]">
-              {v('costClosing', 'You are the most expensive salesperson in your company. And you cannot scale yourself.')}
+              <RichText html={v('costClosing', 'You are the most expensive salesperson in your company. And you cannot scale yourself.')} />
             </p>
           </div>
         </section>
@@ -318,25 +343,25 @@ export default function CeoLandingPage() {
           <div className="mx-auto max-w-3xl">
             <h2 className="mb-6 text-2xl font-extrabold text-[#1B3A6B] sm:text-3xl">{v('nothingHeading', 'If Nothing Changes')}</h2>
             <p className="mb-4 text-lg leading-relaxed text-neutral-700">
-              {v('nothingP1', 'Picture twelve months from now, with everything the same.')}
+              <RichText html={v('nothingP1', 'Picture twelve months from now, with everything the same.')} />
             </p>
             <ul className="mb-6 space-y-3">
               {nothingItems.map((t, i) => (
                 <li key={i} className="flex gap-3 text-lg text-neutral-700">
                   <span aria-hidden="true" className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#E8610A]" />
-                  <span className="leading-relaxed">{t}</span>
+                  <RichText html={t} className="leading-relaxed" />
                 </li>
               ))}
             </ul>
             <p className="text-lg font-bold leading-relaxed text-[#1B3A6B]">
-              {v('nothingClosing', 'Businesses do not scale. Systems scale. The only question is whether you build one this year — or carry the company on your back for another.')}
+              <RichText html={v('nothingClosing', 'Businesses do not scale. Systems scale. The only question is whether you build one this year — or carry the company on your back for another.')} />
             </p>
             <blockquote className="mt-10 border-l-4 border-[#E8610A] bg-[#F3F5F9] py-6 pl-6 pr-5">
               <p className="text-lg italic leading-relaxed text-neutral-800">
-                {v('nothingTestimonial', '“Louie came in and helped bring together all our sales efforts into a system with a Sales Playbook, realistic pipeline, and defined roles. We are better off from having Louie here.”')}
+                <RichText html={v('nothingTestimonial', '“Louie came in and helped bring together all our sales efforts into a system with a Sales Playbook, realistic pipeline, and defined roles. We are better off from having Louie here.”')} />
               </p>
               <footer className="mt-3 text-sm font-semibold text-[#1B3A6B]">
-                {v('nothingTestimonialAttr', '— Ted Alvarado')}
+                <RichText html={v('nothingTestimonialAttr', '— Ted Alvarado')} />
               </footer>
             </blockquote>
           </div>
@@ -348,20 +373,20 @@ export default function CeoLandingPage() {
             <h2 className="mb-6 text-2xl font-extrabold text-[#1B3A6B] sm:text-3xl">
               {v('breakHeading', 'Founder-Led Sales Eventually Breaks Every Company.')}
             </h2>
-            <p className="mb-4 text-lg leading-relaxed text-neutral-700">{v('breakIntro', 'Because:')}</p>
+            <p className="mb-4 text-lg leading-relaxed text-neutral-700"><RichText html={v('breakIntro', 'Because:')} /></p>
             <ul className="mb-8 space-y-3">
               {breakItems.map((t, i) => (
                 <li key={i} className="flex gap-3 text-lg text-neutral-700">
                   <span aria-hidden="true" className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#E8610A]" />
-                  <span className="leading-relaxed">{t}</span>
+                  <RichText html={t} className="leading-relaxed" />
                 </li>
               ))}
             </ul>
             <p className="mb-4 text-lg leading-relaxed text-neutral-700">
               {v('breakSlow', 'This happens slowly.')} {v('breakRealize', 'Until one day you realize:')}
             </p>
-            <p className="text-xl font-bold leading-relaxed text-[#1B3A6B]">{v('breakJob', 'You built yourself a job.')}</p>
-            <p className="text-xl font-bold leading-relaxed text-[#1B3A6B]">{v('breakNotCompany', 'Not a company.')}</p>
+            <p className="text-xl font-bold leading-relaxed text-[#1B3A6B]"><RichText html={v('breakJob', 'You built yourself a job.')} /></p>
+            <p className="text-xl font-bold leading-relaxed text-[#1B3A6B]"><RichText html={v('breakNotCompany', 'Not a company.')} /></p>
           </div>
         </section>
 
@@ -378,7 +403,7 @@ export default function CeoLandingPage() {
                   {todayItems.map((t, i) => (
                     <li key={i} className="flex gap-3 text-neutral-600">
                       <span aria-hidden="true" className="mt-0.5 shrink-0 font-bold text-neutral-400">✕</span>
-                      <span className="leading-relaxed">{t}</span>
+                      <RichText html={t} className="leading-relaxed" />
                     </li>
                   ))}
                 </ul>
@@ -389,7 +414,7 @@ export default function CeoLandingPage() {
                   {futureItems.map((t, i) => (
                     <li key={i} className="flex gap-3 text-neutral-800">
                       <Check />
-                      <span className="leading-relaxed">{t}</span>
+                      <RichText html={t} className="leading-relaxed" />
                     </li>
                   ))}
                 </ul>
@@ -408,12 +433,12 @@ export default function CeoLandingPage() {
               {walkItems.map((t, i) => (
                 <li key={i} className="flex gap-3 text-lg text-neutral-700">
                   <Check />
-                  <span className="leading-relaxed">{t}</span>
+                  <RichText html={t} className="leading-relaxed" />
                 </li>
               ))}
             </ul>
             <p className="mb-8 text-lg font-bold leading-relaxed text-[#1B3A6B]">
-              {v('walkClosing', 'These are the systems that give you your time back and let the company grow without you.')}
+              <RichText html={v('walkClosing', 'These are the systems that give you your time back and let the company grow without you.')} />
             </p>
             <BookButton label={ctaLabel} />
           </div>
@@ -425,12 +450,12 @@ export default function CeoLandingPage() {
             <h2 className="mb-8 text-2xl font-extrabold sm:text-3xl">
               {v('notSellingHeading', 'This Program Is Not About Becoming Better at Selling')}
             </h2>
-            <p className="mb-6 text-lg text-blue-100">{v('notSellingIntro', 'It is about:')}</p>
+            <p className="mb-6 text-lg text-blue-100"><RichText html={v('notSellingIntro', 'It is about:')} /></p>
             <ul className="space-y-4">
               {notSellingItems.map((t, i) => (
                 <li key={i} className="flex items-center gap-3 text-lg font-semibold">
                   <span aria-hidden="true" className="text-xl font-bold text-[#F6A46A]">✓</span>
-                  <span>{t}</span>
+                  <RichText html={t} />
                 </li>
               ))}
             </ul>
@@ -444,26 +469,26 @@ export default function CeoLandingPage() {
               {v('howHeading', 'How You Get There: The Founder’s Corner')}
             </h2>
             <p className="mb-4 text-lg leading-relaxed text-neutral-700">
-              {v('howP1', 'Imagine this — three months from now. You are no longer involved in every deal. Your team knows what to do. Your forecast finally feels real. And for the first time in years, you can focus on growing the business instead of carrying it.')}
+              <RichText html={v('howP1', 'Imagine this — three months from now. You are no longer involved in every deal. Your team knows what to do. Your forecast finally feels real. And for the first time in years, you can focus on growing the business instead of carrying it.')} />
             </p>
             <p className="mb-4 text-lg leading-relaxed text-neutral-700">
-              {v('howP2', 'One focused hour a week with me — a sales leader who has spent 50 years building sales teams and one INC 500 company. We work on your real sales problems. Your pipeline. Your deals. Your hires. Your numbers. Between calls, you have me on email when something needs a fast read.')}
+              <RichText html={v('howP2', 'One focused hour a week with me — a sales leader who has spent 50 years building sales teams and one INC 500 company. We work on your real sales problems. Your pipeline. Your deals. Your hires. Your numbers. Between calls, you have me on email when something needs a fast read.')} />
             </p>
             <p className="mb-4 text-lg leading-relaxed text-neutral-700">
-              {v('howP3', 'But you are not paying for calls and emails. You are paying to stop being the bottleneck. Here is what that buys you:')}
+              <RichText html={v('howP3', 'But you are not paying for calls and emails. You are paying to stop being the bottleneck. Here is what that buys you:')} />
             </p>
             <ul className="mb-10 space-y-3">
               {howBuys.map((t, i) => (
                 <li key={i} className="flex gap-3 text-lg text-neutral-700">
                   <span aria-hidden="true" className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#E8610A]" />
-                  <span className="leading-relaxed">{t}</span>
+                  <RichText html={t} className="leading-relaxed" />
                 </li>
               ))}
             </ul>
 
             <h3 className="mb-4 text-xl font-bold text-[#1B3A6B]">{v('pathHeading', 'The 12-week path')}</h3>
             <p className="mb-8 text-lg leading-relaxed text-neutral-700">
-              {v('pathIntro', 'Here is the ground we cover. How we tailor each piece to your business is what we map out on your call.')}
+              <RichText html={v('pathIntro', 'Here is the ground we cover. How we tailor each piece to your business is what we map out on your call.')} />
             </p>
             <ol className="mb-10 space-y-4">
               {weeks.map((w) => (
@@ -476,7 +501,7 @@ export default function CeoLandingPage() {
               ))}
             </ol>
             <p className="text-lg font-bold leading-relaxed text-[#1B3A6B]">
-              {v('howClosing', 'Twelve weeks. One hour each. A sales engine that no longer depends on you.')}
+              <RichText html={v('howClosing', 'Twelve weeks. One hour each. A sales engine that no longer depends on you.')} />
             </p>
           </div>
         </section>
@@ -492,12 +517,12 @@ export default function CeoLandingPage() {
                   {forYouItems.map((t, i) => (
                     <li key={i} className="flex gap-3 text-neutral-800">
                       <Check />
-                      <span className="leading-relaxed">{t}</span>
+                      <RichText html={t} className="leading-relaxed" />
                     </li>
                   ))}
                 </ul>
                 <p className="mt-6 text-xl font-bold text-[#1B3A6B]">
-                  {v('forYouFootnote', 'Companies dependent on the founder sell for less.')}
+                  <RichText html={v('forYouFootnote', 'Companies dependent on the founder sell for less.')} />
                 </p>
               </div>
               <div className="rounded-xl border border-neutral-200 bg-white p-7">
@@ -505,9 +530,10 @@ export default function CeoLandingPage() {
                 <ul className="space-y-3">
                   <li className="flex gap-3 text-neutral-600">
                     <span aria-hidden="true" className="mt-0.5 shrink-0 font-bold text-neutral-400">✕</span>
-                    <span className="leading-relaxed">
-                      {v('notForYouItem1', 'You want someone to make the calls for you. I build the system and coach you to run it. I do not sell your product for you.')}
-                    </span>
+                    <RichText
+                      className="leading-relaxed"
+                      html={v('notForYouItem1', 'You want someone to embed with your team daily, and do the work. That is my <a href="https://louiebernstein.com/">Fractional Sales Leadership service</a>. With this 12-week program, I build the system and coach you to run it.')}
+                    />
                   </li>
                 </ul>
               </div>
@@ -522,13 +548,13 @@ export default function CeoLandingPage() {
               {v('guessingHeading', 'Founders Stop Guessing and Start Measuring')}
             </h2>
             <p className="mb-8 text-lg leading-relaxed text-neutral-700">
-              {v('guessingP1', 'One founder was closing every deal himself. One year later, sales were up 61% and the business turned its first profit in years — built on a system, not more hustle.')}
+              <RichText html={v('guessingP1', 'One founder was closing every deal himself. One year later, sales were up 61% and the business turned its first profit in years — built on a system, not more hustle.')} />
             </p>
             <blockquote className="border-l-4 border-[#E8610A] bg-[#F3F5F9] py-5 pl-6 pr-5">
               <p className="text-lg italic leading-relaxed text-neutral-800">
-                {v('guessingQuote', '“Our sales are far better than where they were a year ago. Great job.”')}
+                <RichText html={v('guessingQuote', '“Our sales are far better than where they were a year ago. Great job.”')} />
               </p>
-              <footer className="mt-3 text-sm font-semibold text-[#1B3A6B]">{v('guessingQuoteAttr', '— Kevin Zhao, CEO, ZBSPOS.com')}</footer>
+              <footer className="mt-3 text-sm font-semibold text-[#1B3A6B]"><RichText html={v('guessingQuoteAttr', '— Kevin Zhao, CEO, ZBSPOS.com')} /></footer>
             </blockquote>
           </div>
         </section>
@@ -541,11 +567,13 @@ export default function CeoLandingPage() {
             </h2>
             <div className="space-y-3">
               {pictureLines.map((line, i) => (
-                <p key={i} className="text-lg text-blue-100 sm:text-xl">{line}</p>
+                <p key={i} className="text-lg text-blue-100 sm:text-xl">
+                  <RichText html={line} />
+                </p>
               ))}
             </div>
             <p className="mt-8 text-2xl font-extrabold text-[#F6A46A] sm:text-3xl">
-              {v('pictureClosing', 'You feel like a CEO again.')}
+              <RichText html={v('pictureClosing', 'You feel like a CEO again.')} />
             </p>
           </div>
         </section>
@@ -565,18 +593,18 @@ export default function CeoLandingPage() {
                 />
                 <div>
                   <p className="mb-4 text-lg leading-relaxed text-neutral-700">
-                    {v('whyHireP1', 'Because I’ve been exactly where you are. I bootstrapped and ran a company for 22 years. INC 500 Winner. I know what it feels like to:')}
+                    <RichText html={v('whyHireP1', 'Because I’ve been exactly where you are. I bootstrapped and ran a company for 22 years. INC 500 Winner. I know what it feels like to:')} />
                   </p>
                   <ul className="mb-4 space-y-2">
                     {whyHireItems.map((t, i) => (
                       <li key={i} className="flex gap-3 text-neutral-700">
                         <span aria-hidden="true" className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#E8610A]" />
-                        <span>{t}</span>
+                        <RichText html={t} />
                       </li>
                     ))}
                   </ul>
                   <p className="text-lg font-semibold leading-relaxed text-[#1B3A6B]">
-                    {v('whyHireClosing', 'I’ve made the mistakes. Now I help founders avoid them.')}
+                    <RichText html={v('whyHireClosing', 'I’ve made the mistakes. Now I help founders avoid them.')} />
                   </p>
                 </div>
               </div>
@@ -589,7 +617,7 @@ export default function CeoLandingPage() {
           <div className="mx-auto max-w-3xl">
             <h2 className="mb-6 text-2xl font-extrabold text-[#1B3A6B] sm:text-3xl">{v('investHeading', 'Your Investment')}</h2>
             <p className="mb-8 text-lg leading-relaxed text-neutral-700">
-              {v('investP1', 'You are not buying coaching. You are buying your time back, a pipeline you can trust, and a company that runs without you — on a small monthly investment, with no big hire and no big overhead.')}
+              <RichText html={v('investP1', 'You are not buying coaching. You are buying your time back, a pipeline you can trust, and a company that runs without you — on a small monthly investment, with no big hire and no big overhead.')} />
             </p>
             <div className="mb-8 rounded-xl border-2 border-[#E8610A] bg-[#FBEEE3] p-7 sm:p-8">
               <p className="mb-3 text-lg leading-relaxed text-neutral-800">
@@ -602,13 +630,13 @@ export default function CeoLandingPage() {
                 {priceItems.map((t, i) => (
                   <li key={i} className="flex gap-3 text-neutral-800">
                     <Check />
-                    <span className="leading-relaxed">{t}</span>
+                    <RichText html={t} className="leading-relaxed" />
                   </li>
                 ))}
               </ul>
             </div>
             <p className="mb-8 text-lg font-semibold leading-relaxed text-[#1B3A6B]">
-              {v('investFootnote', 'Priced for companies where the budget is small but the need is big.')}
+              <RichText html={v('investFootnote', 'Priced for companies where the budget is small but the need is big.')} />
             </p>
             <BookButton label={investCtaLabel} />
           </div>
@@ -624,11 +652,11 @@ export default function CeoLandingPage() {
               {stopItems.map((t, i) => (
                 <li key={i} className="flex gap-3 text-lg text-neutral-700">
                   <Check />
-                  <span className="leading-relaxed">{t}</span>
+                  <RichText html={t} className="leading-relaxed" />
                 </li>
               ))}
             </ul>
-            <p className="text-lg font-bold leading-relaxed text-[#1B3A6B]">{v('stopClosing', 'That is the real transformation.')}</p>
+            <p className="text-lg font-bold leading-relaxed text-[#1B3A6B]"><RichText html={v('stopClosing', 'That is the real transformation.')} /></p>
           </div>
         </section>
 
@@ -640,12 +668,12 @@ export default function CeoLandingPage() {
               {waitItems.map((t, i) => (
                 <li key={i} className="flex gap-3 text-lg text-neutral-700">
                   <span aria-hidden="true" className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#E8610A]" />
-                  <span className="leading-relaxed">{t}</span>
+                  <RichText html={t} className="leading-relaxed" />
                 </li>
               ))}
             </ul>
             <p className="text-lg font-bold leading-relaxed text-[#1B3A6B]">
-              {v('waitClosing', 'Your competitors are building systems. Do not carry the company on your back for another year.')}
+              <RichText html={v('waitClosing', 'Your competitors are building systems. Do not carry the company on your back for another year.')} />
             </p>
           </div>
         </section>
@@ -663,7 +691,9 @@ export default function CeoLandingPage() {
                     <h3 className="text-lg font-bold">{f.q}</h3>
                     <span aria-hidden="true" className="shrink-0 text-2xl font-normal text-[#E8610A] transition-transform group-open:rotate-45">+</span>
                   </summary>
-                  <p className="mt-4 leading-relaxed text-neutral-700">{f.a}</p>
+                  <p className="mt-4 leading-relaxed text-neutral-700">
+                    <RichText html={f.a} />
+                  </p>
                 </details>
               ))}
             </div>
@@ -676,7 +706,7 @@ export default function CeoLandingPage() {
             <h2 className="mb-3 text-3xl font-extrabold sm:text-4xl">{v('finalHeading', 'Would Your Sales Survive Without You?')}</h2>
             <p className="mb-4 text-xl font-bold text-[#F6A46A]">{v('finalSubhead', 'Let’s Find Out. Book Your Call.')}</p>
             <p className="mx-auto mb-8 max-w-xl text-lg text-blue-100">
-              {v('finalLine', 'Book a free 30-minute call and we’ll walk through what happens each week.')}
+              <RichText html={v('finalLine', 'Book a free 30-minute call and we’ll walk through what happens each week.')} />
             </p>
             <div
               className="calendly-inline-widget mx-auto overflow-hidden rounded-xl bg-white"

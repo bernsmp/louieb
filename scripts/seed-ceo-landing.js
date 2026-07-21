@@ -2,8 +2,16 @@
  * Seed script: The Founder's Corner™ landing page
  * - ceoLanding → /ceo
  *
- * Run with (loads .env.local automatically via -r dotenv/config if desired):
+ * Run with (loads .env.local automatically):
  * node scripts/seed-ceo-landing.js
+ *
+ * WARNING: this REPLACES the whole ceoLanding row with the values below, so
+ * re-running it discards any edits made in the CMS at /cms/ceo. To change a
+ * few fields without losing CMS edits, fetch the row, merge your keys, and
+ * upsert the merged object instead.
+ *
+ * Field values may contain HTML (<strong>, <a href>) — the page renders these
+ * fields as rich text, and links are forced to open in a new tab.
  */
 
 const { createClient } = require('@supabase/supabase-js')
@@ -29,7 +37,7 @@ const sections = {
     // Shared CTA
     ctaButtonLabel: 'Book Your Discovery Call',
     heroCtaButtonLabel: 'Book Your Growth Discovery Call',
-    finalCtaButtonLabel: 'Book My Founder Exit Call',
+    finalCtaButtonLabel: 'Book Your Founder Exit Call',
     investCtaButtonLabel: 'Book a 30-Minute Investment in Your Company’s Future',
 
     // Hero
@@ -114,7 +122,8 @@ const sections = {
     walkHeading: 'What You Walk Away With in 12 Weeks',
     walkItem1: 'A documented sales process that gives you consistency. No more winging it.',
     walkItem2: 'Defined pipeline stages that help you forecast your cash flow.',
-    walkItem3: 'Accountabilities Documents for every role. What and when defined. No surprises.',
+    walkItem3:
+      'Accountabilities Documents for every role. <strong>What and When</strong> are defined. No surprises.',
     walkItem4: 'A hiring and onboarding system that gets the best candidates, who can produce quickly.',
     walkItem5:
       'A strict qualifying standard based on your ICP. Keeps reps from chasing bad deals and wasting their time and YOUR money.',
@@ -183,7 +192,7 @@ const sections = {
     forYouFootnote: 'Companies dependent on the founder sell for less.',
     notForYouHeading: 'This is not for you if',
     notForYouItem1:
-      'You want someone to make the calls for you. I build the system and coach you to run it. I do not sell your product for you.',
+      'You want someone to embed with your team daily, and do the work. That is my <a href="https://louiebernstein.com/">Fractional Sales Leadership service</a>. With this 12-week program, I build the system and coach you to run it.',
 
     // Founders Stop Guessing
     guessingHeading: 'Founders Stop Guessing and Start Measuring',
@@ -226,7 +235,7 @@ const sections = {
     priceItem2: 'We only start if our first call proves this is a fit.',
     priceItem3: 'I work with a small number of founders at a time, so each one gets my focus.',
     priceItem4:
-      'Want me building it with you in the trenches, not just coaching? Ask about my full Fractional Sales Leadership Program on the call.',
+      'Want me embedded daily with your team building it out? Ask about my full <a href="https://louiebernstein.com/">Fractional Sales Leadership Program</a> on the call.',
     investFootnote: 'Priced for companies where the budget is small but the need is big.',
 
     // When Sales Stops Depending on You
@@ -268,7 +277,7 @@ const sections = {
       'The first 12 weeks build the foundation, so I ask for that commitment. After that it is month to month.',
     faq6Question: 'What if I want you more hands-on?',
     faq6Answer:
-      'Ask about my full Fractional Sales Leadership Program, where I build it with you week to week.',
+      'Ask about my full <a href="https://louiebernstein.com/">Fractional Sales Leadership Program</a>, where I embed and build it with you week to week.',
 
     // Final band
     finalHeading: 'Would Your Sales Survive Without You?',
