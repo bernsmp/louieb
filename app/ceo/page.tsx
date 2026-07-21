@@ -8,6 +8,13 @@ import { useCmsSection } from '@/lib/useCmsSection'
 const CALENDLY = 'https://calendly.com/louiebernstein/30minutes'
 const CMS_SECTION = 'ceoLanding'
 
+// Hero video (720p H.264, faststart) hosted in Supabase storage rather than
+// the repo, so the 14MB file never ships in the git bundle.
+const VIDEO_URL =
+  'https://ckffpnbnpvwmecwzovxf.supabase.co/storage/v1/object/public/media/video/founders-corner.mp4'
+const VIDEO_POSTER =
+  'https://ckffpnbnpvwmecwzovxf.supabase.co/storage/v1/object/public/media/video/founders-corner-poster.jpg'
+
 // Load Calendly assets after mount so they never block first paint (LCP).
 function useCalendly() {
   useEffect(() => {
@@ -249,24 +256,10 @@ export default function CeoLandingPage() {
     <div className="font-sans text-[#1f2937]" style={{ fontFamily: 'var(--font-inter), Inter, Arial, sans-serif' }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      {/* Header — logo only, links home */}
-      <header className="bg-[#1B3A6B]">
-        <div className="mx-auto flex h-16 max-w-6xl items-center px-6">
-          <Link href="https://louiebernstein.com" className="group flex items-center gap-3 transition-opacity hover:opacity-80" aria-label="Louie Bernstein — home">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo/LB Logo.png" alt="" aria-hidden="true" className="h-9 w-auto brightness-0 invert" />
-            <span className="text-lg font-bold tracking-tight text-white">Louie Bernstein</span>
-          </Link>
-        </div>
-      </header>
-
       <main>
-        {/* HERO */}
-        <section className="bg-[#1B3A6B] px-6 pb-14 pt-6 text-center text-white md:pb-20 md:pt-14">
+        {/* HERO — starts at the H1 so the video sits above the fold */}
+        <section className="bg-[#1B3A6B] px-6 pb-14 pt-6 text-center text-white md:pb-20 md:pt-10">
           <div className="mx-auto max-w-3xl">
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.15em] text-[#F6A46A] sm:text-sm">
-              {v('heroKicker', 'The Founder’s Corner™ · In Your Corner to Help You Grow Your Business')}
-            </p>
             <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl md:text-5xl">
               {v('heroH1Line1', 'Are YOU the Real Sales Department?')}
               <span className="mt-1 block text-2xl font-bold text-white/90 sm:text-3xl md:text-4xl">
@@ -279,6 +272,16 @@ export default function CeoLandingPage() {
             <p className="mx-auto mb-5 max-w-2xl text-base font-bold text-[#F6A46A] sm:text-lg">
               {v('heroAccent', 'Grow and scale your company — for a fraction of the cost of a full-time VP of Sales.')}
             </p>
+            <div className="mx-auto mb-6 w-full max-w-2xl overflow-hidden rounded-xl border border-white/15 shadow-2xl">
+              <video
+                className="aspect-video h-auto w-full bg-black"
+                src={VIDEO_URL}
+                poster={VIDEO_POSTER}
+                controls
+                preload="metadata"
+                playsInline
+              />
+            </div>
             <BookButton label={heroCtaLabel} />
             <p className="mx-auto mt-3 max-w-xl text-xs text-blue-200/80 sm:text-sm">
               <RichText html={v('heroMicrocopy', 'A free 30-minute call. No pitch. We map where you are now and where you want to be. If it is not a fit, I will tell you.')} />
