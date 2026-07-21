@@ -41,7 +41,6 @@ const sections = {
     investCtaButtonLabel: 'Book a 30-Minute Investment in Your Company’s Future',
 
     // Hero
-    heroKicker: 'The Founder’s Corner™ · In Your Corner to Help You Grow Your Business',
     heroH1Line1: 'Are YOU the Real Sales Department?',
     heroH1Line2: 'Build a Company That Grows Without You.',
     heroSubhead:

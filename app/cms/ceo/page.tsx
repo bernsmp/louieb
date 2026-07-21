@@ -18,7 +18,6 @@ export default function CeoLandingCmsPage() {
         { name: 'investCtaButtonLabel', label: 'Button Label (Your Investment section only)', type: 'text' },
 
         // Hero
-        { name: 'heroKicker', label: 'Hero: Kicker (orange, uppercase)', type: 'text', aiRewrite: true },
         { name: 'heroH1Line1', label: 'Hero: Headline Line 1', type: 'text', aiRewrite: true },
         { name: 'heroH1Line2', label: 'Hero: Headline Line 2', type: 'text', aiRewrite: true },
         { name: 'heroSubhead', label: 'Hero: Subhead', type: 'textarea', aiRewrite: true, rows: 3 },
