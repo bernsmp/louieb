@@ -261,7 +261,9 @@ export default function CeoLandingPage() {
         <section className="bg-[#1B3A6B] px-6 pb-14 pt-6 text-center text-white md:pb-20 md:pt-10">
           <div className="mx-auto max-w-3xl">
             <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl md:text-5xl">
-              <RichText html={v('heroH1Line1', 'Are <em>YOU</em> the Real Sales Department?')} />
+              {/* Italic glyphs slant into the following word, so give <em> a
+                  little trailing room — the space alone isn't enough at this size. */}
+              <RichText className="[&_em]:mr-[0.14em]" html={v('heroH1Line1', 'Are <em>YOU</em> the Real Sales Department?')} />
               <span className="mt-1 block text-2xl font-bold text-white/90 sm:text-3xl md:text-4xl">
                 {v('heroH1Line2', 'Build a Company That Grows Without You.')}
               </span>
