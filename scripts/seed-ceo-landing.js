@@ -41,7 +41,7 @@ const sections = {
     investCtaButtonLabel: 'Book a 30-Minute Investment in Your Company’s Future',
 
     // Hero
-    heroH1Line1: 'Are YOU the Real Sales Department?',
+    heroH1Line1: 'Are <em>YOU</em> the Real Sales Department?',
     heroH1Line2: 'Build a Company That Grows Without You.',
     heroSubhead:
       'In 12 weeks, turn founder-led sales into a system your team can run — so revenue keeps coming when you step away, and you get your time, your focus, and your life back.',
