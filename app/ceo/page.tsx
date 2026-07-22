@@ -11,9 +11,9 @@ const CMS_SECTION = 'ceoLanding'
 // Hero video (720p H.264, faststart) hosted in Supabase storage rather than
 // the repo, so the 14MB file never ships in the git bundle.
 const VIDEO_URL =
-  'https://ckffpnbnpvwmecwzovxf.supabase.co/storage/v1/object/public/media/video/founders-corner.mp4'
+  'https://ckffpnbnpvwmecwzovxf.supabase.co/storage/v1/object/public/media/video/founders-corner-v2.mp4'
 const VIDEO_POSTER =
-  'https://ckffpnbnpvwmecwzovxf.supabase.co/storage/v1/object/public/media/video/founders-corner-poster.jpg'
+  'https://ckffpnbnpvwmecwzovxf.supabase.co/storage/v1/object/public/media/video/founders-corner-v2-poster.jpg'
 
 // Load Calendly assets after mount so they never block first paint (LCP).
 function useCalendly() {
