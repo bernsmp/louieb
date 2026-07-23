@@ -8,6 +8,7 @@ export interface ArticleMetadata {
   keywords?: string;
   author: string;
   date: string;
+  dateModified?: string;
   slug: string;
   image?: string;
   category?: string;
@@ -51,6 +52,7 @@ export function getArticleBySlug(slug: string): Article | null {
         keywords: data.keywords || '',
         author: data.author || 'Louie Bernstein',
         date: data.date || new Date().toISOString(),
+        dateModified: data.dateModified || data.date || undefined,
         slug,
         image: data.image,
         category: data.category || '',

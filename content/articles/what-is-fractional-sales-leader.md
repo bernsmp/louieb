@@ -7,11 +7,13 @@ description: >-
   build a sales machine but aren't ready for a C-Level hire. Learn how
   fractional leadership works.
 keywords: >-
-  fractional sales leader, fractional sales leadership, founder-led sales, sales
-  executive, B2B sales scaling, revenue operations, sales infrastructure,
-  part-time VP sales
+  what is a fractional sales leader, fractional sales leader, fractional sales
+  leadership, fractional VP of sales, fractional sales leader vs VP, founder-led
+  sales, sales executive, B2B sales scaling, revenue operations, sales
+  infrastructure, part-time VP sales
 author: Louie Bernstein
 date: '2025-12-21'
+dateModified: '2026-07-23'
 image: /images/articles/what-is-fsl-thumbnail.png
 category: Fractional Sales Leadership
 ---
@@ -33,7 +35,7 @@ Fractional Sales Leadership is an operational model where a senior sales executi
 
 ---
 
-## The $3M ARR Trap: The Founder as the Bottleneck
+## The Founder Bottleneck: Why Growth Stalls Between $1M and $10M ARR
 
 If you are reading this, you are likely the founder of a B2B company doing between $1M and $10M in ARR. You are also likely the best sales rep in the company.
 
@@ -43,15 +45,32 @@ This is the "Founder Trap." You built the product, you know the market, and you 
 *The endless cycle that caps your growth: demos, follow-ups, pipeline, close, repeat.*
 
 * **Promote a Junior Rep:** They lack the strategic experience to build a department.
-* **Hire a Big-Ticket VP of Sales:** This costs $250k–$300k (plus equity). If they fail—and 70% of first VP hires do—you burn a massive hole in your runway and lose 12 months of growth.
+* **Hire a Big-Ticket VP of Sales:** This costs $250k–$300k (plus equity). And it's a gamble: the average VP of Sales lasts just ~19 months (Gong). Hire the wrong first VP and you burn a massive hole in your runway, lose 6–12 months of momentum, and start the search over.
 
 There is a third path: **The Fractional Sales Leader.**
 
 ---
 
+## Fractional Sales Leader vs. VP of Sales vs. Sales Consultant
+
+The fastest way to understand the model is to see it next to the two alternatives founders usually weigh.
+
+| | Fractional Sales Leader | Full-Time VP of Sales | Sales Consultant |
+|---|---|---|---|
+| **What they do** | Build and run the sales system | Manage an existing sales org | Advise and recommend |
+| **Deliverable** | Playbook, CRM, hired reps | Ongoing team leadership | A report or slide deck |
+| **Hands on the wheel?** | Yes — they execute | Yes | No — you execute |
+| **Annual cost** | ~$70k–$144k | ~$400k all-in | Varies; project-based |
+| **Time commitment** | 10–20 hrs/week, 3–12 months | 40 hrs/week, permanent | Sporadic |
+| **Best when** | $1M–$10M ARR, escaping founder-led sales | You already have 10+ reps to manage | You need a second opinion, not a builder |
+
+The consultant tells you what to do. The VP is a full-time bet you may not be ready to afford or manage. The Fractional Sales Leader builds the machine and hands it to you. (If you're weighing seniority levels, see [Fractional Sales Leader vs. Fractional VP of Sales vs. Fractional CRO](/articles/fractional-sales-leader-vs-fractional-vp-of-sales-vs-fractional-cro-which-one-do-you-actually-need).)
+
+---
+
 ## Buying Experience, Not Hours
 
-&gt; "You get their experience, judgment, and systems, but you only pay for the slice of their time you need."
+> "You get their experience, judgment, and systems, but you only pay for the slice of their time you need."
 
 This distinction is critical. When you hire a full-time employee, you pay 40 hours a week for their presence. When you hire a Fractional Leader, you pay for outcomes and systems.
 
@@ -70,8 +89,8 @@ Most founders sell on instinct. You know what to say because you experienced the
 
 A Fractional Leader extracts this knowledge and builds a **Sales Playbook**. This includes:
 
-* Defining the Ideal Customer Profile (ICP) with rigid constraints.
-* Scripting the discovery call framework.
+* Defining the [Ideal Customer Profile (ICP)](/how-to-create-an-ideal-customer-profile) with rigid constraints.
+* Scripting the [discovery call framework](/how-to-run-a-discovery-call).
 * Documenting the objection handling matrix.
 
 ---
@@ -119,6 +138,26 @@ A: Typically, a fractional leader spends 10–20 hours per week focused on high-
 
 A: The goal of a Fractional Leader is to make themselves obsolete. By the end of the engagement, you should have a documented playbook, a functioning CRM, and a performing sales team. Often, the Fractional Leader helps you hire their full-time replacement (a Sales Manager or VP) to run the machine they built.
 
+**Q: What does a Fractional Sales Leader actually do?**
+
+A: They own three things: (1) codifying your "founder magic" into a repeatable [sales playbook](/articles/what-fractional-sales-leader-does), (2) installing the infrastructure and RevOps (CRM, pipeline, forecasting) that lets sales run without you, and (3) hiring and ramping the first scalable reps. In short—they build the sales system, then hand you the keys.
+
+**Q: How much does a Fractional Sales Leader cost?**
+
+A: Most engagements run **$70k–$144k per year**, versus roughly $400k all-in for a full-time VP of Sales. You're buying 10–20 focused hours a week from someone who has built this system before, not 40 hours of presence. See a full breakdown in [what a fractional sales leader costs](/cost-of-fractional-vp-sales).
+
+**Q: Is a Fractional Sales Leader the same as a fractional VP of Sales or fractional CRO?**
+
+A: They overlap but differ in altitude. A Fractional Sales Leader (or fractional VP of Sales) builds the front-line sales engine for a $1M–$10M ARR company. A fractional CRO operates one level up—aligning sales, marketing, and customer success across the whole revenue org, usually at a later stage. Most founders escaping founder-led sales need the builder, not the executive layer.
+
+---
+
+## Related Reading
+
+* [What a Fractional Sales Leader Actually Does](/articles/what-fractional-sales-leader-does) — a day-in-the-life look at the role.
+* [How to Get Out of Founder-Led Sales](/how-to-get-out-of-founder-led-sales) — the transition, step by step.
+* [What to Expect in the First 90 Days](/articles/what-to-expect-first-90-days-fractional-sales-leader) — what the build actually looks like.
+
 ---
 
 ## Stop Guessing. Start Scaling.
@@ -127,13 +166,13 @@ You don't need another sales book, and you don't need a bloated payroll. You nee
 
 If you are ready to transition out of founder-led sales and want to install a proven revenue engine without the risk of a full-time executive hire, we should talk.
 
-[Schedule a 30-minute consultation call](https://calendly.com/louiebernstein/30minutes) to discuss your specific situation.&nbsp;<p><a href="https://louiebernstein.com/articles/what-fractional-sales-leader-does" target="_self">Here's What A Fractional Sales Leader Actually Does</a></p><p>&nbsp;---
+[Schedule a 30-minute consultation call](https://calendly.com/louiebernstein/30minutes) to discuss your specific situation.
+
+---
 
 **About the Author**
 
-Louie Bernstein is a Fractional Sales Leader and LinkedIn Top Voice with 9+ years of experience helping $1M-$10M ARR companies build repeatable sales systems.
+Louie Bernstein is a Fractional Sales Leader and LinkedIn Top Voice with 50 years in sales and business. He founded and bootstrapped MindIQ—an INC 500 company—for 22 years, and since 2016 has helped $1M–$10M ARR founders build repeatable sales systems, playbooks, and teams so they can escape founder-led sales.
 
 * [LinkedIn](https://www.linkedin.com/in/sales-processes/)
 * [Subscribe to The Sunday Starter Newsletter](https://www.louiebernstein.com/newsletter)
-
-</p>

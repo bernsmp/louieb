@@ -95,7 +95,7 @@ export default async function ArticlePage({ params }: PageProps) {
     description: article.metadata.description,
     image: imageUrl,
     datePublished: article.metadata.date,
-    dateModified: article.metadata.date,
+    dateModified: article.metadata.dateModified || article.metadata.date,
     author: {
       "@type": "Person",
       name: article.metadata.author,
