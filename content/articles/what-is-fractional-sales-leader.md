@@ -12,7 +12,7 @@ keywords: >-
   sales, sales executive, B2B sales scaling, revenue operations, sales
   infrastructure, part-time VP sales
 author: Louie Bernstein
-date: '2025-12-21'
+date: '2026-07-23'
 dateModified: '2026-07-23'
 image: /images/articles/what-is-fsl-thumbnail.png
 category: Fractional Sales Leadership

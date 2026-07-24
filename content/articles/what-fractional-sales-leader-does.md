@@ -12,7 +12,7 @@ keywords: >-
   leadership execution, sales consultant vs operator, sales playbook, position
   contract, revenue operations, B2B sales management
 author: Louie Bernstein
-date: '2025-12-21'
+date: '2026-07-23'
 dateModified: '2026-07-23'
 image: /images/articles/what-fsl-does-thumbnail.png
 category: Fractional Sales Leadership

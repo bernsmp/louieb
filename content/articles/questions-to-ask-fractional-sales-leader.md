@@ -5,10 +5,12 @@ description: >-
   just a consultant. Learn the three questions that separate high-impact
   fractional leaders from passive advisors.
 keywords: >-
-  fractional sales leader, hiring sales leader, sales interview questions,
-  vetting sales executive, sales leadership hiring, B2B sales management
+  questions to ask a fractional sales leader, hiring a fractional sales leader,
+  fractional sales leader interview questions, vetting sales executive, sales
+  leadership hiring, red flags fractional sales leader, B2B sales management
 author: Louie Bernstein
-date: '2025-12-21'
+date: '2026-07-23'
+dateModified: '2026-07-23'
 image: /images/articles/questions-thumbnail.png
 category: Hiring
 ---
@@ -24,7 +26,13 @@ category: Hiring
 
 ## What is a Fractional Sales Leader?
 
-A Fractional Sales Leader is an experienced executive who takes ownership of the sales function for a company on a part-time, contract basis. Unlike a consultant who only advises, a Fractional Sales Leader is an operator who builds strategy, manages the team, installs infrastructure (CRM, playbooks), and is accountable for revenue targets, typically for businesses between $1M and $10M in ARR.&nbsp;<p><a href="https://louiebernstein.com/articles/what-fractional-sales-leader-does" target="_self">For a deeper dive on What a Fractional Sales Leader does, go here.</a>&nbsp;</p><!--StartFragment--><!--EndFragment--><!--StartFragment--><!--EndFragment--><!--StartFragment--><!--EndFragment--><h3>The Founder's Dilemma: Hiring for Impact, Not Just Advice<!--EndFragment-->&nbsp;&nbsp;&nbsp;</h3><p>You are at a revenue plateau. You have reached $2M or $5M in ARR through sheer force of will, founder-led sales, and perhaps a few early hires. But the system is breaking. You are the bottleneck.
+A Fractional Sales Leader is an experienced executive who takes ownership of the sales function for a company on a part-time, contract basis. Unlike a consultant who only advises, a Fractional Sales Leader is an operator who builds strategy, manages the team, installs infrastructure (CRM, playbooks), and is accountable for revenue targets, typically for businesses between $1M and $10M in ARR. For a deeper dive, see [what a Fractional Sales Leader does](/articles/what-fractional-sales-leader-does).
+
+---
+
+## The Founder's Dilemma: Hiring for Impact, Not Just Advice
+
+You are at a revenue plateau. You have reached $2M or $5M in ARR through sheer force of will, founder-led sales, and perhaps a few early hires. But the system is breaking. You are the bottleneck.
 
 You know you need senior leadership, but a full-time VP of Sales commands a $250k+ base salary plus equity—a risk your P&amp;L might not be ready to absorb. The logical bridge is a Fractional Sales Leader.
 
@@ -34,6 +42,14 @@ To distinguish between a high-impact operator and a passive advisor, you need to
 
 ![The 3 Critical Questions Vetting Framework](/images/articles/questions-vetting-framework.png)
 *The three questions that separate operators from advisors.*
+
+### The 3 Questions At a Glance
+
+| Question | Green-Flag Answer (Operator) | Red-Flag Answer (Advisor) |
+|---|---|---|
+| **1. Have you done this for a company our size?** | Describes defining pipeline stages, CAC:LTV baselines, and daily rhythm at a $1M–$10M founder-led company | "I ran a 500-rep division at Oracle" |
+| **2. How much time will you spend with our team?** | Daily Slack triage, weekly pipeline review + training, monthly metric deep-dive | "I check in once a week to review the numbers" |
+| **3. How will you know where to start?** | A structured audit (team interviews, CRM, call shadowing) then a 30/60/90-day roadmap | "I'll just come in and shake things up immediately" |
 
 ---
 
@@ -53,7 +69,7 @@ Ask them to describe a specific scenario where they entered a company with:
 
 If they start talking about "brand alignment" or "corporate synergy," run. If they talk about defining entry/exit criteria for pipeline stages, establishing CAC:LTV baselines, and implementing a daily standup rhythm, you have found an operator.
 
-&gt; **The "Red Flag" Answer:** "I ran a division of 500 reps at Oracle." Great, but that person has likely forgotten how to build a comp plan or configure a HubSpot pipeline. You need a builder, not a maintainer.
+> **The "Red Flag" Answer:** "I ran a division of 500 reps at Oracle." Great, but that person has likely forgotten how to build a [comp plan](/how-to-build-sales-compensation-plan) or configure a HubSpot pipeline. You need a builder, not a maintainer.
 
 ---
 
@@ -68,7 +84,7 @@ If they start talking about "brand alignment" or "corporate synergy," run. If th
 **The Operational Rhythm:** A competent Fractional Leader should describe a rhythm that looks like this:
 
 * **Daily:** Available via Slack/Teams for urgent deal triage.
-* **Weekly:** Running the Monday pipeline review and Friday training session.
+* **Weekly:** Running the Monday [pipeline review](/how-to-run-a-sales-pipeline-review) and Friday training session.
 * **Monthly:** Deep-dive metric analysis (conversion rates, Pipeline Velocity).
 
 ![Operational Rhythm: Daily, Weekly, Monthly Cadence](/images/articles/questions-operational-rhythm.png)
@@ -76,7 +92,7 @@ If they start talking about "brand alignment" or "corporate synergy," run. If th
 
 They must be embedded in the communication flow. If a rep hangs up the phone after a tough objection, they need to be able to ping their leader for immediate feedback. If the leader is "unavailable" until next week, the learning moment is lost.
 
-&gt; **The "Red Flag" Answer:** "I check in once a week to review the numbers." That is a dashboard monitor, not a sales manager. You can check the numbers yourself. You are paying for active management and coaching.
+> **The "Red Flag" Answer:** "I check in once a week to review the numbers." That is a dashboard monitor, not a sales manager. You can check the numbers yourself. You are paying for active management and coaching.
 
 ---
 
@@ -94,17 +110,17 @@ Before they change a single thing, a high-quality candidate will want to:
 * **Audit the CRM:** Look at historical data, win/loss ratios, and data integrity.
 * **Shadow calls:** Listen to actual sales conversations to hear the "voice of the customer."
 
-**The Deliverable:** They should promise you a roadmap. For example: "First 30 days we fix the CRM and define the stages. Days 30-60 we implement the new script and train. Days 60-90 we hire two new SDRs."
+**The Deliverable:** They should promise you a [30/60/90-day roadmap](/articles/what-does-a-90-day-sales-plan-look-like). For example: "First 30 days we fix the CRM and define the stages. Days 30-60 we implement the new script and train. Days 60-90 we hire two new SDRs."
 
 If they cannot articulate how they diagnose problems, they will likely waste the first three months throwing spaghetti at the wall.
 
-&gt; **The "Red Flag" Answer:** "I'll just come in and shake things up immediately." Chaos added to chaos does not equal order.
+> **The "Red Flag" Answer:** "I'll just come in and shake things up immediately." Chaos added to chaos does not equal order.
 
 ---
 
 ## Why This Matters: The Cost of Getting It Wrong
 
-Hiring a Fractional Sales Leader is a strategic investment. It is often the first time a founder truly lets go of the revenue engine.
+Hiring a Fractional Sales Leader is a strategic investment. It is often the first time a founder truly lets go of the revenue engine. The stakes are real: the average VP of Sales lasts just ~19 months (Gong), and a mis-hire at the leadership level costs you far more than a salary.
 
 If you hire the wrong person, you lose more than just their retainer fee. You lose:
 
@@ -130,19 +146,35 @@ A: Yes. In fact, management is a core responsibility. They should run your weekl
 
 A: Most engagements last 6 to 18 months. The goal is for the Fractional Leader to build the infrastructure (CRM, playbooks, hiring process) and grow revenue to a point where the company can justify and afford a full-time VP of Sales. Often, the Fractional Leader helps hire their full-time replacement.
 
+**Q: What questions should I ask before hiring a Fractional Sales Leader?**
+
+A: Ask three: (1) *Have you done this before for a company our size?*—you want stage-relevant experience building from chaos, not big-logo tenure; (2) *How much time will you spend with our team?*—you want daily availability and a weekly rhythm, not a once-a-week check-in; and (3) *How will you know where to start?*—you want a structured audit and a 30/60/90-day roadmap, not a plug-and-play playbook.
+
+**Q: What are the red flags when hiring a Fractional Sales Leader?**
+
+A: Watch for advisor language instead of operator language: talking about "brand alignment" or "corporate synergy" rather than pipeline stages and CAC baselines; promising to "check in once a week to review the numbers" (that's a dashboard monitor, not a manager); or offering to "shake things up immediately" with no diagnosis. You want someone who installs Revenue Operations and manages the team—not someone who advises from the sidelines.
+
+---
+
+## Related Reading
+
+* [What a Fractional Sales Leader Actually Does](/articles/what-fractional-sales-leader-does) — the execution behind the answers you're vetting for.
+* [What Is a Fractional Sales Leader?](/articles/what-is-fractional-sales-leader) — the model, economics, and when to hire one.
+* [What a 90-Day Sales Plan Looks Like](/articles/what-does-a-90-day-sales-plan-look-like) — the roadmap a strong candidate should promise.
+
 ---
 
 ## Ready to Build Your Sales Machine?
 
 You don't have to guess if your sales leadership is working. If you want to see how a structured audit and action plan can transform your revenue trajectory, let's talk.
 
-[Schedule a 30-minute consultation call](https://calendly.com/louiebernstein/30minutes) to discuss your specific situation.&nbsp;</p><p>If you got the correct answers to these questions, let's&nbsp;<a href="https://louiebernstein.com/articles/what-is-fractional-sales-leader" target="_self">look at what a Fractional Sales Leader should do for you.</a></p><p>&nbsp;---
+[Schedule a 30-minute consultation call](https://calendly.com/louiebernstein/30minutes) to discuss your specific situation.
+
+---
 
 **About the Author**
 
-Louie Bernstein is a Fractional Sales Leader and LinkedIn Top Voice with 9+ years of experience helping $1M-$10M ARR companies build repeatable sales systems.
+Louie Bernstein is a Fractional Sales Leader and LinkedIn Top Voice with 50 years in sales and business. He founded and bootstrapped MindIQ—an INC 500 company—for 22 years, and since 2016 has helped $1M–$10M ARR founders build repeatable sales systems, playbooks, and teams so they can escape founder-led sales.
 
 * [LinkedIn](https://www.linkedin.com/in/sales-processes/)
 * [Subscribe to The Sunday Starter Newsletter](https://www.louiebernstein.com/newsletter)
-
-</p>
